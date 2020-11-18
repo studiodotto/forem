@@ -146,6 +146,13 @@ group :development, :test do
   gem "rubocop-rspec", "~> 1.44", require: false # Code style checking for RSpec files
   gem "spring", "~> 2.1" # Preloads your application so things like console, rake and tests run faster
   gem "spring-commands-rspec", "~> 1.0" # rspec command for spring
+  # capistrano for deployment
+  gem "capistrano"
+  gem "capistrano-bundler", require: false
+  gem "capistrano-passenger", "~> 0.2.0"
+  gem "capistrano-rails", require: false
+  gem "capistrano-rbenv", "~> 2.2"
+  gem "capistrano-sidekiq", "~> 0.5.4"
 end
 
 group :test do

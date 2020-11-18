@@ -22,6 +22,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   connect_timeout: 2
   checkout_timeout: 2
+  username: forem_latest
   variables:
       statement_timeout: <%= ENV.fetch('STATEMENT_TIMEOUT', 2500).to_i %>
 
