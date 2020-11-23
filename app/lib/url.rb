@@ -3,14 +3,14 @@ module URL
   SERVICE_WORKER = "/serviceworker.js".freeze
 
   def self.protocol
-    ApplicationConfig["APP_PROTOCOL"]
+    ApplicationConfig["APP_PROTOCOL"] || "http://"
   end
 
   def self.domain
     if Rails.application&.initialized? && SiteConfig.respond_to?(:app_domain)
       SiteConfig.app_domain
     else
-      ApplicationConfig["APP_DOMAIN"]
+      ApplicationConfig["APP_DOMAIN"] || "ec2-13-235-90-33.ap-south-1.compute.amazonaws.com"
     end
   end
 
