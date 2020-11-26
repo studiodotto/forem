@@ -15,7 +15,8 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
+  # if Rails.root.join("tmp/caching-dev.txt").exist?
+  if Rails.env.development?
     config.action_controller.perform_caching = true
 
     DEFAULT_EXPIRATION = 1.hour.to_i.freeze
