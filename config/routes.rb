@@ -504,7 +504,7 @@ Rails.application.routes.draw do
 
     get "/top/:timeframe" => "stories#index"
 
-    get "/:timeframe" => "stories#index", :constraints => { timeframe: /latest/ }
+    get "/:timeframe" => "stories#index", :constraints => { timeframe: /feed_articles|latest/ }
 
     get "/:username/series" => "collections#index", :as => "user_series"
     get "/:username/series/:id" => "collections#show"
@@ -537,7 +537,8 @@ Rails.application.routes.draw do
         :constraints => { format: /xml/, sitemap: /sitemap-.+/ }
     get "/:username" => "stories#index", :as => "user_profile"
 
-    root "stories#index"
+    # root "stories#index"
+    root to: redirect("/latest")
   end
 end
 

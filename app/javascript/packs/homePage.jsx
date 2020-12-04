@@ -4,7 +4,7 @@ import { TagsFollowed } from '../leftSidebar/TagsFollowed';
 /* global userData */
 // This logic is similar to that in initScrolling.js.erb
 const frontPageFeedPathNames = new Map([
-  ['/', ''],
+  ['/feed_articles', ''],
   ['/top/week', 'week'],
   ['/top/month', 'month'],
   ['/top/year', 'year'],

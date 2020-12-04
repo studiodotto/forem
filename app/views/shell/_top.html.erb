@@ -24,6 +24,74 @@
           margin: auto;
           max-width: 1250px;
         }
+        .codeland-banner {
+          background: repeating-radial-gradient(#a960ee, #ff333d, #62d2fd, #ff7d57, #ffcb57, #00b0e3);
+          background-size: 1000% 1000%;
+          -webkit-animation: AnimationName 30s ease infinite;
+          -moz-animation: AnimationName 30s ease infinite;
+          -o-animation: AnimationName 30s ease infinite;
+          animation: AnimationName 30s ease infinite;
+          color: white !important;
+          position: relative;
+          box-sizing: border-box;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-column-gap: var(--su-4);
+          font-size: 34px;
+        }
+
+        @-webkit-keyframes AnimationName {
+          0%{background-position:0% 73%}
+          50%{background-position:100% 28%}
+          100%{background-position:0% 73%}
+        }
+        @-moz-keyframes AnimationName {
+          0%{background-position:0% 73%}
+          50%{background-position:100% 28%}
+          100%{background-position:0% 73%}
+        }
+        @-o-keyframes AnimationName {
+          0%{background-position:0% 73%}
+          50%{background-position:100% 28%}
+          100%{background-position:0% 73%}
+        }
+        @keyframes AnimationName {
+          0%{background-position:0% 73%}
+          50%{background-position:100% 28%}
+          100%{background-position:0% 73%}
+        }
+        @media screen and (min-width: 640px) {
+          .codeland-banner {
+            min-height: 320px;
+            border-radius: var(--radius);
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .codeland-banner__logo {
+          display: flex;
+          align-items: center;
+        }
+
+        .codeland-banner__logo img {
+          max-width: 100%;
+          /* transform: rotateZ(-3deg); */
+        }
+
+        .codeland-banner__description {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          color: white;
+        }
+
+        .codeland-banner__close-btn {
+          position: absolute;
+          top: var(--su-3);
+          right: var(--su-3);
+          width: 40px;
+          height: 40px;
+        }
       </style>
       <% unless user_signed_in? %>
         <%= javascript_packs_with_chunks_tag "Search", defer: true %>
