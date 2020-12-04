@@ -246,7 +246,7 @@ function insertArticles(articles) {
     var existingEl = document.getElementById('article-link-' + article.id);
     if (
       ![
-        '/',
+        '/feed_articles',
         '/top/week',
         '/top/month',
         '/top/year',

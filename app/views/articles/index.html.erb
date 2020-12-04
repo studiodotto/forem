@@ -25,6 +25,18 @@
 <% end %>
 
 <%= javascript_packs_with_chunks_tag "homePage", defer: true %>
+<div id="hero-html-wrapper" class="codeland-banner-container">
+  <section class="crayons-layout">
+    <div class="codeland-banner p-4 h-auto">
+      <div class="codeland-banner__description">
+        <h1 class="lh-tight fw-large mb-3 fs-3xl s:fs-5xl">
+          UnitedBits: music, fashion, and code
+        </h1>
+        <!--          <a href="/top/infinity" class="crayons-btn w-100 s:w-max">View our hottest content</a>-->
+      </div>
+    </div>
+  </section>
+</div>
 <% cache(release_adjusted_cache_key("main-stories-index-#{params}-#{user_signed_in?}"), expires_in: 90.seconds) do %>
   <div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left" id="index-container"
       data-params="<%= params.merge(sort_by: "hotness_score", sort_direction: "desc").to_json(only: %i[tag username q sort_by sort_direction]) %>" data-which="<%= @list_of %>"
