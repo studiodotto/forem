@@ -128,8 +128,8 @@ Rails.application.configure do
     address: "smtp.sendgrid.net",
     port: "587",
     authentication: :plain,
-    user_name: ENV["SENDGRID_USERNAME_ACCEL"],
-    password: ENV["SENDGRID_PASSWORD_ACCEL"], # ENV["SENDGRID_API_KEY"]
+    user_name: "apikey",
+    password: ENV["SENDGRID_API_KEY"], # ENV["SENDGRID_API_KEY"]
     domain: ENV["APP_DOMAIN"],
     enable_starttls_auto: true
   }
