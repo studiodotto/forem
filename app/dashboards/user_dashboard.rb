@@ -31,6 +31,7 @@ class UserDashboard < Administrate::BaseDashboard
     text_color_hex: Field::String,
     feed_url: Field::String,
     facebook_url: Field::String,
+    google_url: Field::String,
     youtube_url: Field::String,
     behance_url: Field::String,
     dribbble_url: Field::String,

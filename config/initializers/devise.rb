@@ -15,6 +15,12 @@ FACEBOOK_OMNIAUTH_SETUP = lambda do |env|
   env["omniauth.strategy"].options[:token_params][:parse] = :json
 end
 
+GOOGLE_OMNIAUTH_SETUP = lambda do |env|
+  env["omniauth.strategy"].options[:client_id] = SiteConfig.google_key
+  env["omniauth.strategy"].options[:client_secret] = SiteConfig.google_secret
+  env["omniauth.strategy"].options[:token_params][:parse] = :json
+end
+
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -303,6 +309,7 @@ Devise.setup do |config|
   # Fun fact, unless Twitter is last, it doesn't work for some reason.
   config.omniauth :facebook, setup: FACEBOOK_OMNIAUTH_SETUP
   config.omniauth :github, setup: GITHUB_OMNIUATH_SETUP
+  config.omniauth :google_oauth2, setup: GOOGLE_OMNIAUTH_SETUP
   config.omniauth :twitter, setup: TWITTER_OMNIAUTH_SETUP
 
   # ==> Warden configuration

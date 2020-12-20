@@ -11,6 +11,9 @@ module Authentication
   module Providers
     # Retrieves a provider that is both available and enabled
     def self.get!(provider_name)
+      if provider_name.to_s.downcase.include?("google")
+        provider_name = "google"
+      end
       name = provider_name.to_s.titleize
 
       unless available?(provider_name)

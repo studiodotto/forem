@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_151157) do
+ActiveRecord::Schema.define(version: 2020_12_19_150656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -810,6 +810,7 @@ ActiveRecord::Schema.define(version: 2020_11_14_151157) do
     t.integer "unspent_credits_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.string "url"
+    t.text "processed_story_html"
     t.index ["secret"], name: "index_organizations_on_secret", unique: true
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
@@ -1324,6 +1325,9 @@ ActiveRecord::Schema.define(version: 2020_11_14_151157) do
     t.boolean "welcome_notifications", default: true, null: false
     t.datetime "workshop_expiration"
     t.string "youtube_url"
+    t.datetime "google_created_at"
+    t.string "google_url"
+    t.string "google_username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true

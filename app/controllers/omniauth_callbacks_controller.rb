@@ -4,8 +4,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # Each available authentication method needs a related action that will be called
   # as a callback on successful redirect from the upstream OAuth provider
   Authentication::Providers.available.each do |provider_name|
-    define_method(provider_name) do
-      callback_for(provider_name)
+    if provider_name.to_s == "google"
+      define_method("google_oauth2") do
+        callback_for("google")
+      end
+    else
+      define_method(provider_name) do
+        callback_for(provider_name)
+      end
     end
   end
 

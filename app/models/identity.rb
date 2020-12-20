@@ -25,7 +25,7 @@ class Identity < ApplicationRecord
     payload = provider.payload
 
     identity = find_or_initialize_by(
-      provider: payload.provider,
+      provider: payload.provider.to_s.downcase.include?("google") ? "google" : payload.provider,
       uid: payload.uid,
     )
 

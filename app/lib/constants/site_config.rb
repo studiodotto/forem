@@ -109,6 +109,16 @@ module Constants
           "The \"App Secret\" portion of the Basic Settings section of the App page on the Facebook Developer Portal",
         placeholder: ""
       },
+      google_key: {
+        description:
+            "The \"App ID\" portion of the Basic Settings section of the App page on the Google Developer Console",
+        placeholder: ""
+      },
+      google_secret: {
+        description:
+            "The \"App Secret\" portion of the Basic Settings section of the App page on the Google Developer Console",
+        placeholder: ""
+      },
       favicon_url: {
         description: "Used as the site favicon",
         placeholder: IMAGE_PLACEHOLDER

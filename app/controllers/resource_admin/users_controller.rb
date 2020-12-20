@@ -56,6 +56,7 @@ module ResourceAdmin
         dribbble_url
         medium_url
         gitlab_url
+        google_url
         linkedin_url
         twitch_url
         instagram_url
