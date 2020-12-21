@@ -31,7 +31,8 @@ class ApplicationController < ActionController::Base
                           confirmations
                           invitations
                           passwords
-                          health_checks].freeze
+                          health_checks
+                          audios].freeze
   private_constant :PUBLIC_CONTROLLERS
 
   def verify_private_forem

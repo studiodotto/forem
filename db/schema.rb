@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_19_150656) do
+ActiveRecord::Schema.define(version: 2020_12_21_134837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -165,6 +165,15 @@ ActiveRecord::Schema.define(version: 2020_12_19_150656) do
     t.index ["published_at"], name: "index_articles_on_published_at"
     t.index ["slug", "user_id"], name: "index_articles_on_slug_and_user_id", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "audios", force: :cascade do |t|
+    t.string "name"
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_audios_on_user_id"
   end
 
   create_table "audit_logs", force: :cascade do |t|
@@ -1379,6 +1388,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_150656) do
   add_foreign_key "articles", "collections", on_delete: :nullify
   add_foreign_key "articles", "organizations", on_delete: :nullify
   add_foreign_key "articles", "users", on_delete: :cascade
+  add_foreign_key "audios", "users"
   add_foreign_key "audit_logs", "users"
   add_foreign_key "badge_achievements", "badges"
   add_foreign_key "badge_achievements", "users"

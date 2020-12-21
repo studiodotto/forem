@@ -1,0 +1,74 @@
+<%= javascript_include_tag 'application' %>
+<style>
+  .alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+  }
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+</style>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="crayons-card p-6" data-controller="image-upload">
+  <h2 class="crayons-title mb-4">Upload an Audio</h2>
+  <% # Multipart, remote forms are tricky, the data is actually sent in the Stimulus controller. %>
+  <%= form_with(url: audio_upload_path, multipart: true, id: "audio-form") do |f| %>
+    <div class="form-group">
+      <%= f.label(:audio, "Select audio") %>
+      <%= f.file_field "audio", class: "form-control", required: true %>
+    </div>
+    <br>
+    <%= f.submit 'Upload', class: "crayons-btn crayons-btn--primary mt-4", style: 'width: 120px'%>
+    <i style="display: none; right: 30px; position: relative; color: white" class="fa fa-circle-o-notch fa-spin" id="loader"></i>
+    <div id="audio-error" style="display: none" class="alert alert-danger mt-5"></div>
+    <div id="audio-success" style="display: none" class="alert alert-success mt-5"></div>
+  <% end %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function (){
+    $("#submit-btn").click(function (){
+      $('#loader').show();
+      $(this).prop('disabled', true);
+      $("#audio-form").submit();
+    })
+    $(document).on('submit',"#audio-form",function (e){
+      e.preventDefault();
+      $('#loader').show();
+      $.ajax({
+        url: '<%= audio_upload_path %>',
+        data: new FormData(this),
+        type: 'POST',
+        processData: false, // important
+        contentType: false, // important
+        dataType : 'json',
+        success:function(data){
+          $('#loader').hide();
+          if(data && data.link){
+            $("#audio-error").hide();
+            $("#audio-success").text('successfully uploaded file! reload page to see link').show();
+          }else{
+            $("#audio-error").text('Audio upload error').show();
+            $("#audio-success").hide();
+          }
+        },
+        error:function (err){
+          $('#loader').hide();
+          $("#audio-error").text(err.error).show();
+          $("#audio-success").hide();
+        }
+      });
+    })
+  })
+</script>

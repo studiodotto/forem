@@ -304,6 +304,7 @@ Rails.application.routes.draw do
     resources :profile_field_groups, only: %i[index], defaults: { format: :json }
 
     resources :liquid_tags, only: %i[index], defaults: { format: :json }
+    resources :audios, only: %i[new]
 
     get "/verify_email_ownership", to: "email_authorizations#verify", as: :verify_email_authorizations
     get "/search/tags" => "search#tags"
@@ -343,6 +344,7 @@ Rails.application.routes.draw do
     get "/internal/:path", to: redirect("/admin/%{path}")
 
     post "/pusher/auth" => "pusher#auth"
+    post "/audio_upload" => "audios#audio_upload", defaults: { format: :json }
 
     # Chat channel
     patch "/chat_channels/update_channel/:id" => "chat_channels#update_channel"
@@ -451,6 +453,7 @@ Rails.application.routes.draw do
     get "dashboard/following_organizations" => "dashboards#following_organizations"
     get "dashboard/following_podcasts" => "dashboards#following_podcasts"
     get "/dashboard/subscriptions" => "dashboards#subscriptions"
+    get "/dashboard/audio_upload" => "dashboards#audio_upload"
     get "/dashboard/:which" => "dashboards#followers", :constraints => { which: /user_followers/ }
     get "/dashboard/:which/:org_id" => "dashboards#show",
         :constraints => {
