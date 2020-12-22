@@ -1,9 +1,23 @@
+<style>
+  .crayons-table thead th {
+    width: 10%;
+  }
+  .crayons-table tbody td {
+    width: 10%;
+  }
+  .width-40 {
+    width: 40% !important;
+  }
+  .width-5 {
+    width: 5% !important;
+  }
+</style>
 <table class="crayons-table" width="100%">
   <thead>
   <tr>
-    <th scope="col">ID</th>
+    <th scope="col" class="width-5">ID</th>
     <th scope="col">User</th>
-    <th scope="col">Link</th>
+    <th scope="col" class="width-40">Link</th>
     <th scope="col">Status</th>
     <th scope="col">Action</th>
   </tr>
@@ -11,9 +25,9 @@
   <tbody class="crayons-card">
   <% @audios.each do |audio| %>
     <tr>
-      <td><%= audio.id %></td>
+      <td class="width-5"><%= audio.id %></td>
       <td><%= audio.user.name %></td>
-      <td><a href="<%= audio.link %>"><%= audio.link %></a></td>
+      <td class="width-40"><a href="<%= audio.link %>"><%= audio.link %></a></td>
       <td><%= audio.status.present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Rejected</span>".html_safe %></td>
       <td>
         <% if audio.status.present? %>
