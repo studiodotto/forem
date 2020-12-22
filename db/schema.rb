@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_134837) do
+ActiveRecord::Schema.define(version: 2020_12_22_122505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_134837) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
     t.index ["user_id"], name: "index_audios_on_user_id"
   end
 

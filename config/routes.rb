@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       end
 
       resources :articles, only: %i[index show update]
+      resources :audios, only: %i[index update]
       resources :broadcasts
       resources :buffer_updates, only: %i[create update]
       resources :listings, only: %i[index edit update destroy]

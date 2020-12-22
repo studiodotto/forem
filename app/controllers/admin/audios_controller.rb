@@ -1,0 +1,24 @@
+module Admin
+  class AudiosController < Admin::ApplicationController
+    layout "admin"
+
+    def index
+      @audios = Audio
+               .order(created_at: :desc)
+      # @audios = @audio.result.page(params[:page] || 1).per(15)
+    end
+
+    def update
+      audio = Audio.find(params[:id])
+      status = params[:status] == 'reject' ? false : true
+      update = audio.update(status: status)
+      if update
+        flash[:notice] = 'record updated successfully'
+        redirect_to admin_audios_path
+      else
+        flash[:alert] = 'cannot update record'
+        redirect_to admin_audios_path
+      end
+    end
+  end
+end

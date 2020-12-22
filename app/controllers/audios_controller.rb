@@ -4,7 +4,7 @@ class AudiosController < ApplicationController
 
   def new
     @user = current_user
-    @audios = current_user.audios
+    @audios = current_user.audios.where(status: true)
   end
 
   def audio_upload
