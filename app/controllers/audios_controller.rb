@@ -30,6 +30,7 @@ class AudiosController < ApplicationController
           podcast_episode.slug = slug
           podcast_episode.media_url = links[0]
           podcast_episode.podcast_id = podcast.id
+          podcast_episode.guid = "<guid>"+SecureRandom.uuid+"</guid>"
           if podcast_episode.save
             render json: { link: links[0] }, status: :ok and return
           else

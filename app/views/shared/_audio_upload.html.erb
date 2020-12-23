@@ -23,13 +23,13 @@
 <div class="crayons-card p-6" data-controller="image-upload">
   <h2 class="crayons-title mb-4">Upload an Audio</h2>
   <% # Multipart, remote forms are tricky, the data is actually sent in the Stimulus controller. %>
-  <%= form_with(url: audio_upload_path, multipart: true, id: "audio-form") do |f| %>
-    <div class="form-group">
-      <%= f.label(:audio, "Select audio") %>
-      <%= f.file_field "audio", class: "form-control", required: true %>
-    </div>
-    <br>
-    <% if @podcasts.present? %>
+  <% if @podcasts.present? %>
+    <%= form_with(url: audio_upload_path, multipart: true, id: "audio-form") do |f| %>
+      <div class="form-group">
+        <%= f.label(:audio, "Select audio") %>
+        <%= f.file_field "audio", class: "form-control", required: true %>
+      </div>
+      <br>
       <div class="form-group">
         <label for="selected-podcast">Select podcast</label>
         <select class="crayons-select" name="podcast" id="selected-podcast" style="width: 300px">
@@ -38,12 +38,14 @@
           <% end %>
         </select>
       </div>
+      <br>
+      <%= f.submit 'Upload', class: "crayons-btn crayons-btn--primary mt-4", style: 'width: 120px'%>
+      <i style="display: none; right: 30px; position: relative; color: white" class="fa fa-circle-o-notch fa-spin" id="loader"></i>
+      <div id="audio-error" style="display: none" class="alert alert-danger mt-5"></div>
+      <div id="audio-success" style="display: none" class="alert alert-success mt-5"></div>
     <% end %>
-    <br>
-    <%= f.submit 'Upload', class: "crayons-btn crayons-btn--primary mt-4", style: 'width: 120px'%>
-    <i style="display: none; right: 30px; position: relative; color: white" class="fa fa-circle-o-notch fa-spin" id="loader"></i>
-    <div id="audio-error" style="display: none" class="alert alert-danger mt-5"></div>
-    <div id="audio-success" style="display: none" class="alert alert-success mt-5"></div>
+  <% else %>
+    <div class="alert alert-danger mt-5">Please create podcast first to upload audios</div>
   <% end %>
 </div>
 
