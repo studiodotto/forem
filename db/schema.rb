@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_122505) do
+ActiveRecord::Schema.define(version: 2020_12_22_144913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -910,9 +910,11 @@ ActiveRecord::Schema.define(version: 2020_12_22_122505) do
     t.boolean "unique_website_url?", default: true
     t.datetime "updated_at", null: false
     t.string "website_url"
+    t.integer "user_id"
     t.index ["creator_id"], name: "index_podcasts_on_creator_id"
     t.index ["feed_url"], name: "index_podcasts_on_feed_url", unique: true
     t.index ["slug"], name: "index_podcasts_on_slug", unique: true
+    t.index ["user_id"], name: "index_podcasts_on_user_id"
   end
 
   create_table "poll_options", force: :cascade do |t|

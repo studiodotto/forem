@@ -1,0 +1,7 @@
+class AddUsersToPodcasts < ActiveRecord::Migration[6.0]
+  disable_ddl_transaction!
+  def change
+    add_column :podcasts, :user_id, :integer
+    add_index :podcasts, :user_id, algorithm: :concurrently
+  end
+end
