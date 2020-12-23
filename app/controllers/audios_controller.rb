@@ -23,14 +23,15 @@ class AudiosController < ApplicationController
       if uploaded_audio
         podcast = Podcast.find_by(id: params[:podcast])
         if podcast.present?
-          slug = links[0].split('/').last
-          title = slug.gsub(".mp3",'').gsub('-',' ').gsub('_',' ').capitalize
+          slug = links[0].split('/').last.split('.')[0]
+          title = slug.gsub('-',' ').gsub('_',' ').capitalize
           podcast_episode = PodcastEpisode.new
           podcast_episode.title = title
           podcast_episode.slug = slug
           podcast_episode.media_url = links[0]
           podcast_episode.podcast_id = podcast.id
           podcast_episode.guid = "<guid>"+SecureRandom.uuid+"</guid>"
+          podcast_episode.published_at = Time.now.utc
           if podcast_episode.save
             render json: { link: links[0] }, status: :ok and return
           else
