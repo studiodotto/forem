@@ -5,6 +5,7 @@ class AudiosController < ApplicationController
   def new
     @user = current_user
     @audios = current_user.audios.where(status: true)
+    @podcasts = Podcast.where(creator_id: current_user.id, published: true)
   end
 
   def audio_upload
@@ -15,12 +16,26 @@ class AudiosController < ApplicationController
       links = uploaders.map(&:url)
 
       if links.length.zero? || !links[0].include?('studioappbucket')
-        render json: { error: 'bucket is not responding' }, status: :unprocessable_entity
+        render json: { error: 'bucket is not responding' }, status: :unprocessable_entity and return
       end
       uploaded_audio = current_user.audios.create(link: links[0])
 
       if uploaded_audio
-        render json: { link: links[0] }, status: :ok
+        podcast = Podcast.find_by(id: params[:podcast])
+        if podcast.present?
+          slug = links[0].split('/').last
+          title = slug.gsub(".mp3",'').gsub('-',' ').gsub('_',' ').capitalize
+          podcast_episode = PodcastEpisode.new
+          podcast_episode.title = title
+          podcast_episode.slug = slug
+          podcast_episode.media_url = links[0]
+          podcast_episode.podcast_id = podcast.id
+          if podcast_episode.save
+            render json: { link: links[0] }, status: :ok and return
+          else
+            render json: { error: podcast_episode.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
+          end
+        end
       else
         render json: { error: 'cannot upload audio to database' }, status: :unprocessable_entity
       end

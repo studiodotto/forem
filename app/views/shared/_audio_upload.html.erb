@@ -29,6 +29,17 @@
       <%= f.file_field "audio", class: "form-control", required: true %>
     </div>
     <br>
+    <% if @podcasts.present? %>
+      <div class="form-group">
+        <label for="selected-podcast">Select podcast</label>
+        <select class="crayons-select" name="podcast" id="selected-podcast" style="width: 300px">
+          <% @podcasts.each do |podcast| %>
+            <option value="<%= podcast.id %>"><%= podcast.title %></option>
+          <% end %>
+        </select>
+      </div>
+    <% end %>
+    <br>
     <%= f.submit 'Upload', class: "crayons-btn crayons-btn--primary mt-4", style: 'width: 120px'%>
     <i style="display: none; right: 30px; position: relative; color: white" class="fa fa-circle-o-notch fa-spin" id="loader"></i>
     <div id="audio-error" style="display: none" class="alert alert-danger mt-5"></div>
@@ -65,7 +76,7 @@
         },
         error:function (err){
           $('#loader').hide();
-          $("#audio-error").text(err.error).show();
+          $("#audio-error").text(err.responseJSON.error).show();
           $("#audio-success").hide();
         }
       });
