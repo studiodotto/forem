@@ -1,0 +1,32 @@
+<% if @music_release && @music_release.persisted? %>
+  <% title @music_release.title %>
+
+  <%= content_for :page_meta do %>
+    <link rel="canonical" href="<%= app_url(@music_release.slug) %>" />
+    <meta name="description" content="<%= @music_release.description %>">
+    <%= meta_keywords_default %>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<%= app_url(@music_release.slug) %>" />
+    <meta property="og:title" content="<%= @music_release.title %>" />
+    <meta property="og:image" content="https://res.cloudinary.com/practicaldev/image/fetch/c_scale,h_300,w_300,r_max/u_listennow_kjml1x,y_45/<%= optimized_image_url(@music_release.image_url, width: 300) %>">
+
+    <meta property="og:description" content="<%= @music_release.description %>" />
+    <meta property="og:site_name" content="<%= community_qualified_name %>" />
+     <% end %>
+<% else %>
+  <% title "Music releases" %>
+  <%= content_for :page_meta do %>
+    <link rel="canonical" href="<%= app_url(music_releases_path) %>" />
+    <meta name="description" content="Discover technical music releases for <%= community_members_label %>">
+    <%= meta_keywords_default %>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<%= app_url(music_releases_path) %>" />
+    <meta property="og:title" content="Music releases on <%= community_qualified_name %>" />
+    <meta property="og:image" content="http://i.imgur.com/e5tJ9L9.png">
+
+    <meta property="og:description" content="Discover technical music releases for <%= community_members_label %>" />
+    <meta property="og:site_name" content="<%= community_qualified_name %>" />
+  <% end %>
+<% end %>

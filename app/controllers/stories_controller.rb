@@ -44,10 +44,13 @@ class StoriesController < ApplicationController
       handle_article_show
     elsif (@article = Article.find_by(slug: params[:slug])&.decorate)
       handle_possible_redirect
-    else
-      @podcast = Podcast.available.find_by!(slug: params[:username])
+    elsif (@podcast = Podcast.available.find_by(slug: params[:username]))
       @episode = PodcastEpisode.available.find_by!(slug: params[:slug])
       handle_podcast_show
+    else
+      @music_release = MusicRelease.published.find_by!(slug: params[:username])
+      @track = MusicTrack.published.find_by!(slug: params[:slug])
+      handle_music_release_show
     end
   end
 
@@ -99,11 +102,15 @@ class StoriesController < ApplicationController
 
   def handle_user_or_organization_or_podcast_or_page_index
     @podcast = Podcast.available.find_by(slug: params[:username])
+    @music_release = MusicRelease.published.find_by(slug: params[:username])
     @organization = Organization.find_by(slug: params[:username])
     @page = Page.find_by(slug: params[:username], is_top_level_path: true)
     if @podcast
       Honeycomb.add_field("stories_route", "podcast")
       handle_podcast_index
+    elsif @music_release
+      Honeycomb.add_field("stories_route", "music_release")
+      handle_music_release_index
     elsif @organization
       Honeycomb.add_field("stories_route", "org")
       handle_organization_index
@@ -197,6 +204,15 @@ class StoriesController < ApplicationController
     render template: "podcast_episodes/index"
   end
 
+  def handle_music_release_index
+    @music_release_index = true
+    @list_of = "music_release-tracks"
+    @music_tracks = @music_release.music_tracks
+                            .published.order(published_at: :desc).limit(30).decorate
+    set_surrogate_key_header "music_tracks"
+    render template: "music_tracks/index"
+  end
+
   def handle_organization_index
     @user = @organization
     @stories = ArticleDecorator.decorate_collection(@organization.articles.published
@@ -248,6 +264,16 @@ class StoriesController < ApplicationController
     @comments_to_show_count = 25
     @comment = Comment.new
     render template: "podcast_episodes/show"
+    nil
+  end
+
+  def handle_music_release_show
+    set_surrogate_key_header @track.record_key
+    @track = @track.decorate
+    @music_track_show = true
+    @comments_to_show_count = 25
+    @comment = Comment.new
+    render template: "music_tracks/show"
     nil
   end
 

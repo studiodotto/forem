@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_144913) do
+ActiveRecord::Schema.define(version: 2020_12_26_073623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -679,6 +679,36 @@ ActiveRecord::Schema.define(version: 2020_12_22_144913) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "music_releases", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "slug"
+    t.string "image"
+    t.string "pattern_image"
+    t.string "main_color_hex"
+    t.boolean "published"
+    t.text "status_notice"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_music_releases_on_user_id"
+  end
+
+  create_table "music_tracks", force: :cascade do |t|
+    t.string "title"
+    t.string "summary"
+    t.text "body"
+    t.string "slug"
+    t.string "guid"
+    t.string "image"
+    t.string "media_url"
+    t.datetime "published_at"
+    t.bigint "music_release_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["music_release_id"], name: "index_music_tracks_on_music_release_id"
+  end
+
   create_table "navigation_links", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.boolean "display_only_when_signed_in", default: false
@@ -914,7 +944,6 @@ ActiveRecord::Schema.define(version: 2020_12_22_144913) do
     t.index ["creator_id"], name: "index_podcasts_on_creator_id"
     t.index ["feed_url"], name: "index_podcasts_on_feed_url", unique: true
     t.index ["slug"], name: "index_podcasts_on_slug", unique: true
-    t.index ["user_id"], name: "index_podcasts_on_user_id"
   end
 
   create_table "poll_options", force: :cascade do |t|
@@ -1431,6 +1460,8 @@ ActiveRecord::Schema.define(version: 2020_12_22_144913) do
   add_foreign_key "mentions", "users", on_delete: :cascade
   add_foreign_key "messages", "chat_channels"
   add_foreign_key "messages", "users"
+  add_foreign_key "music_releases", "users"
+  add_foreign_key "music_tracks", "music_releases"
   add_foreign_key "notes", "users", column: "author_id", on_delete: :nullify
   add_foreign_key "notification_subscriptions", "users", on_delete: :cascade
   add_foreign_key "notifications", "organizations", on_delete: :cascade

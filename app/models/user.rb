@@ -139,6 +139,7 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :nullify
   has_many :webhook_endpoints, class_name: "Webhook::Endpoint", inverse_of: :user, dependent: :delete_all
   has_many :audios
+  has_many :music_releases
   mount_uploader :profile_image, ProfileImageUploader
 
   devise :invitable, :omniauthable, :registerable, :database_authenticatable, :confirmable, :rememberable,

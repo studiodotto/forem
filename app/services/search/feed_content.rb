@@ -6,7 +6,7 @@ module Search
     DEFAULT_PAGE = 0
     DEFAULT_PER_PAGE = 60
 
-    INCLUDED_CLASS_NAMES = %w[Article Comment PodcastEpisode].freeze
+    INCLUDED_CLASS_NAMES = %w[Article Comment PodcastEpisode MusicTrack].freeze
 
     class << self
       INCLUDED_CLASS_NAMES.each do |class_name|
@@ -32,6 +32,11 @@ module Search
           "slug" => source["slug"],
           "image_url" => source["main_image"],
           "title" => source["title"]
+        }
+        source["music_release"] = {
+            "slug" => source["slug"],
+            "image_url" => source["main_image"],
+            "title" => source["title"]
         }
         source["_score"] = hit["_score"]
 

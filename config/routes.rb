@@ -83,6 +83,7 @@ Rails.application.routes.draw do
           delete :remove_admin
         end
       end
+      resources :music_releases, only: %i[index edit update destroy]
 
       # NOTE: @citizen428 The next two resources have a temporary constraint
       # while profile generalization is still WIP
@@ -169,6 +170,7 @@ Rails.application.routes.draw do
         resources :comments, only: %i[index show]
         resources :videos, only: [:index]
         resources :podcast_episodes, only: [:index]
+        resources :music_tracks, only: [:index]
         resources :users, only: %i[show] do
           collection do
             get :me
@@ -286,6 +288,7 @@ Rails.application.routes.draw do
     resources :badges, only: [:index]
     resources :user_blocks, param: :blocked_id, only: %i[show create destroy]
     resources :podcasts, only: %i[new create]
+    resources :music_releases, only: %i[new create]
     resources :article_approvals, only: %i[create]
     resources :video_chats, only: %i[show]
     resources :user_subscriptions, only: %i[create] do
@@ -486,6 +489,7 @@ Rails.application.routes.draw do
 
     get "/pod", to: "podcast_episodes#index"
     get "/podcasts", to: redirect("pod")
+    get "/music_releases", to: "music_tracks#index"
     get "/readinglist" => "reading_list_items#index"
     get "/readinglist/:view" => "reading_list_items#index", :constraints => { view: /archive/ }
 

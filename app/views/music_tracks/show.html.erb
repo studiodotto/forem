@@ -1,0 +1,105 @@
+<% title @track.title %>
+
+<%= content_for :page_meta do %>
+  <link rel="canonical" href="<%= app_url("/#{@music_release.slug}/#{@track.slug}") %>" />
+  <meta name="description" content="<%= truncate(strip_tags(@track.body), length: 140) %>">
+  <%= meta_keywords_default %>
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<%= app_url("/#{@music_release.slug}/#{@track.slug}") %>" />
+  <meta property="og:title" content="<%= @track.title %>" />
+  <meta property="og:description" content="<%= truncate(strip_tags(@track.body), length: 140) %>" />
+  <meta property="og:site_name" content="<%= community_qualified_name %>" />
+
+  <meta name="twitter:site" content="@<%= SiteConfig.social_media_handles["twitter"] %>">
+  <meta name="twitter:creator" content="@software_daily">
+  <meta name="twitter:title" content="<%= @track.title %>">
+  <meta name="twitter:description" content="<%= truncate(strip_tags(@track.body), length: 140) %>" />
+
+  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="<%= @track.image_url || @music_release.image_url %>">
+  <meta name="twitter:image:src" content="<%= @track.image_url || @music_release.image_url %>">
+
+<% end %>
+
+<div class="podcast-episode-container" data-meta="<%= @track.decorate.mobile_player_metadata.to_json %>">
+  <div class="hero">
+    <% image_url = Images::Optimizer.call(@music_release.pattern_image_url || "https://i.imgur.com/fKYKgo4.png", fetch_format: "jpg", crop: nil) %>
+    <div class="title" style="background:#<%= @music_release.main_color_hex %> url(<%= image_url %>)">
+      <h2>
+        <a href="/<%= @music_release.slug %>">
+          <img alt="<%= @music_release.title %>" src="<%= optimized_image_url(@music_release.image_url, width: 60, quality: 80) %>" /><%= @music_release.title %>
+        </a>
+        <button id="user-follow-butt" class="crayons-btn follow-action-button" data-info='{"id":<%= @music_release.id %>,"className":"<%= @music_release.class.name %>"}'>&nbsp;</button>
+      </h2>
+      <% if @track.title.size > 60 %>
+        <h1 class="smaller"><%= @track.title %></h1>
+      <% else %>
+        <h1><%= @track.title %></h1>
+      <% end %>
+      <% if @track.published_at? %>
+        <time class="published-at" datetime="<%= @track.published_timestamp %>">
+          <%= @track.readable_publish_date %>
+        </time>
+      <% end %>
+    </div>
+    <div id="record-<%= @track.slug %>" class="record-wrapper" data-podcast="<%= @music_release.slug %>" data-episode="<%= @track.slug %>">
+      <div class="record" id="record">
+        <%= optimized_image_tag(@music_release.image_url,
+                                optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                image_options: { class: "main-image", alt: @music_release.title }) %>
+        <img alt="Play Button" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+        <img alt="Pause Button" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+        <div class="status-message" id="status-message-<%= @track.slug %>">
+          play
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# checking both podcast_episode and podcast status for now  %>
+  <% if false %>
+    <center>
+      <h1 style="color: #e05252;">
+        <%= I18n.t "podcasts.statuses.unplayable" %>
+      </h1>
+      <p>
+        <a href="<%= @track.media_url %>">Click here to download/listen</a>
+      </p>
+    </center>
+  <% end %>
+<!--  <p>-->
+<!--    <a href="<%#= @track.media_url %>">Click here to download/listen</a>-->
+<!--  </p>-->
+<!--  <div class="container">-->
+<!--    <div class="body">-->
+      <%# if @track.podcast.feed_url.include?("soundcloud") %>
+        <%#= simple_format((@track.processed_html || @track.body), sanitize: true) %>
+      <%# else %>
+<!--        <%#= sanitize (@track.processed_html || ""),-->
+<!--                     tags: %w[strong br em a table tbody thead tfoot th tr td col colgroup del p h1 h2 h3 h4 h5 h6 blockquote time div span i em u b ul ol li dd dl dt q code pre img sup cite center small],-->
+                     attributes: %w[href strong em class ref rel src title alt colspan height width size rowspan span value start data-conversation data-lang id] %>
+      <%# end %>
+      <p style="font-size:16px;">-->
+<!--        <a href="<%#= @track.website_url %>">Episode source</a>-->
+<!--      </p>-->
+<!--    </div>-->
+<!--    <div-->
+<!--      class="comments-container"-->
+<!--      id="comments-container"-->
+<!--      data-commentable-id="<%#= @track.id %>"-->
+<!--      data-commentable-type="PodcastEpisode">-->
+<!--      <%# render "/comments/form",-->
+<!--                 commentable: @track,-->
+                 commentable_type: "PodcastEpisode" %>
+      <div class="comment-trees" id="comment-trees-container">-->
+        <%# Comment.tree_for(@track, 12).each do |comment, sub_comments| %>
+          <%# cache ["comment_root_#{user_signed_in?}", comment] do %>
+            <%#= tree_for(comment, sub_comments, @track) %>
+          <%# end %>
+        <%# end %>
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+
+<%= render "music_tracks/podcast_bar" %>

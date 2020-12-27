@@ -312,6 +312,10 @@ function fetchNextPodcastPage(el) {
   fetchNext(el, '/api/podcast_episodes', insertArticles);
 }
 
+function fetchNextMusicReleasePage(el) {
+  fetchNext(el, '/api/music_tracks', insertArticles);
+}
+
 function paginate(tag, params, requiresApproval) {
   const searchHash = {
     ...{ per_page: 15, page: nextPage },
@@ -387,6 +391,11 @@ function fetchNextPageIfNearBottom() {
     scrollableElemId = 'articles-list';
     fetchCallback = function fetch() {
       fetchNextPodcastPage(indexContainer);
+    };
+  } else if (indexWhich === 'music_release-tracks') {
+    scrollableElemId = 'articles-list';
+    fetchCallback = function fetch() {
+      fetchNextMusicReleasePage(indexContainer);
     };
   } else if (indexWhich === 'videos') {
     scrollableElemId = 'video-collection';

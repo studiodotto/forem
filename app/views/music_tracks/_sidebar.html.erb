@@ -1,0 +1,29 @@
+<div id="sidebar-wrapper-left" class="sidebar-wrapper sidebar-wrapper-left">
+  <div class="sidebar-bg" id="sidebar-bg-left"></div>
+  <div class="side-bar">
+    <% if @music_release_index && @music_releases %>
+      <div class="widget music_release-pic-widget">
+        <header>
+          <a href="/music_releases"><h4>music releases</h4></a>
+        </header>
+        <div class="widget-body">
+          <% @music_releases.each do |music_release| %>
+            <a href="/<%= music_release.slug %>">
+              <div class="music_release-pic" id="music_release-pic-<%= music_release.slug %>">
+                <img src="<%= Images::Optimizer.call(music_release.image_url, crop: "fill", width: 100, height: 100) %>"
+                     alt="<%= music_release.title %>" />
+                <div class="music_release-name">
+                  <div class="music_release-name-inner">
+                    <%= music_release.title %>
+                  </div>
+                </div>
+              </div>
+            </a>
+          <% end %>
+          <p><%= link_to "Suggest a music release", new_music_release_path, class: "suggest-music_release" %></p>
+        </div>
+      </div>
+    <% elsif @music_release %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<% image_url = Images::Optimizer.call(music_release.pattern_image_url || "https://i.imgur.com/fKYKgo4.png", crop: nil, fetch_format: "jpg") %>
+
+<div class="music_releaseliquidtag" style="background: #<%= music_release.main_color_hex %> url(<%= image_url %>)" data-meta="<%= music_track.decorate.mobile_player_metadata.to_json %>">
+  <div class="music_releaseliquidtag__info">
+    <a href="/<%= music_release.slug %>/<%= music_track.slug %>">
+      <h1 class="music_releaseliquidtag__info__music_tracktitle"><%= music_track.title %></h1>
+    </a>
+    <a href="/<%= music_release.slug %>" style="display:block">
+      <h2 class="music_releaseliquidtag__info__music_releasetitle">
+        <%= music_release.title %> <button class="crayons-btn follow-action-button" data-info='{"id":<%= music_release.id %>,"className":"<%= music_release.class.name %>"}'>&nbsp;</button>
+
+      </h2>
+    </a>
+  </div>
+  <div id="record-<%= music_track.slug %>" data-music_release="<%= music_release.slug %>" data-music_track="<%= music_track.slug %>" class="music_releaseliquidtag__record">
+    <img class="button play-butt" id="play-butt-<%= music_track.slug %>" src="/assets/playbutt.png" alt="play">
+    <img class="button pause-butt" id="pause-butt-<%= music_track.slug %>" src="/assets/pausebutt.png" alt="pause">
+    <%= optimized_image_tag(music_release.image_url,
+                            optimizer_options: { crop: "fill" },
+                            image_options: { class: "music_releaseliquidtag__music_releaseimage", id: "music_releaseimage-#{music_track.slug}", alt: music_release.title }) %>
+  </div>
+  <div class="hidden-audio" id="hidden-audio-<%= music_track.slug %>" style="display:none" data-music_track="<%= music_track.slug %>" data-music_release="<%= music_release.slug %>">
+    <audio id="audio" data-music_track="<%= music_track.slug %>" data-music_release="<%= music_release.slug %>">
+      <source src="<%= music_track.media_url %>" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div id="progressBar" class="audio-player-display">
+      <a href="/<%= music_release.slug + "/" + music_track.slug %>">
+        <%= optimized_image_tag(music_track.image_url || music_release.image_url,
+                                optimizer_options: { crop: "fill", width: 420, height: 420 },
+                                image_options: { id: "music_track-profile-image", alt: music_track.title }) %>
+        <img id="animated-bars" src="/assets/animated-bars.gif" alt="animated volume bars">
+      </a>
+      <span id="barPlayPause">
+        <img class="butt play-butt" src="/assets/playbutt.png" alt="play">
+        <img class="butt pause-butt" src="/assets/pausebutt.png" alt="pause">
+      </span>
+      <span id="volume">
+        <span id="volumeindicator" class="volume-icon-wrapper showing">
+          <span id="volbutt">
+            <%= image_tag("/assets/volume.png", alt: "volume", class: "icon-img", height: 16, width: 16) %>
+          </span>
+          <span class="range-wrapper">
+            <input type="range" name="points" id="volumeslider" value="50" min="0" max="100" data-show-value="true">
+          </span>
+        </span>
+        <span id="mutebutt" class="volume-icon-wrapper hidden">
+          <%= image_tag("/assets/volume-mute.png", alt: "mute", class: "icon-img", height: 16, width: 16) %>
+        </span>
+        <span class="speed" id="speed" data-speed=1>1x</span>
+      </span>
+      <span class="buffer-wrapper" id="bufferwrapper">
+        <span id="buffer"></span>
+        <span id="progress"></span>
+        <span id="time">initializing...</span>
+        <span id="closebutt">×</span>
+      </span>
+    </div>
+  </div>
+</div>

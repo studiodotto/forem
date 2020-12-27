@@ -13,7 +13,12 @@ export const articlePropTypes = PropTypes.shape({
   cloudinary_video_url: PropTypes.string,
   video_duration_in_minutes: PropTypes.number,
   type_of: PropTypes.oneOf(['podcast_episodes']),
-  class_name: PropTypes.oneOf(['PodcastEpisode', 'User', 'Article']),
+  class_name: PropTypes.oneOf([
+    'PodcastEpisode',
+    'User',
+    'Article',
+    'MusicTrack',
+  ]),
   flare_tag: tagPropTypes,
   tag_list: PropTypes.arrayOf(PropTypes.string),
   cached_tag_list_array: PropTypes.arrayOf(PropTypes.string),

@@ -80,6 +80,50 @@
       }
     }
   }
+  &.music_release-pic-widget {
+    a {
+      color: var(--body-color);
+    }
+    .widget-body {
+      padding-bottom: 10px;
+    }
+    .music_release-pic {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 5px 0px;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      img {
+        width: 23px;
+        height: 23px;
+        border-radius: 100px;
+        vertical-align: -7px;
+        margin-left: 3px;
+      }
+      .music_release-name {
+        width: calc(100% - 55px);
+        display: inline-block;
+        padding-left: 4px;
+        font-weight: bold;
+        .music_release-name-inner {
+          font-size: 14px;
+          line-height: 15px;
+          display: block;
+          padding-left: 2px;
+        }
+      }
+      &:hover {
+        @include themeable(
+          background,
+          theme-container-background-hover,
+          $light-gray
+        );
+      }
+    }
+  }
   hr {
     opacity: 0.2;
   }

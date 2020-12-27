@@ -1727,7 +1727,7 @@ components:
         location: New York
         joined_at: '2019-10-24T13:41:29Z'
         tech_stack: Ruby
-        tag_line: 
+        tag_line:
         story:
         profile_image: https://res.cloudinary.com/...jpeg
 
@@ -1746,6 +1746,8 @@ tags:
     description: Users can create and join organizations
   - name: podcast-episodes
     description: Podcast episodes
+  - name: music_release-tracks
+    description: Music tracks
   - name: readinglist
     description: User's reading list
   - name: tags

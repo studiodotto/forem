@@ -22,6 +22,12 @@ export const Default = () => (
       Podcasts
     </a>
     <a href="/" className="crayons-nav-block">
+      <span className="crayons-icon" role="img" aria-label="MusicReleases">
+        📻
+      </span>
+      Music Releases
+    </a>
+    <a href="/" className="crayons-nav-block">
       <span className="crayons-icon" role="img" aria-label="Tags">
         🏷
       </span>

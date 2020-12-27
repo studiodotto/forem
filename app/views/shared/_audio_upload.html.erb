@@ -23,7 +23,7 @@
 <div class="crayons-card p-6" data-controller="image-upload">
   <h2 class="crayons-title mb-4">Upload an Audio</h2>
   <% # Multipart, remote forms are tricky, the data is actually sent in the Stimulus controller. %>
-  <% if @podcasts.present? %>
+  <% if @music_releases.present? %>
     <%= form_with(url: audio_upload_path, multipart: true, id: "audio-form") do |f| %>
       <div class="form-group">
         <%= f.label(:audio, "Select audio", class: "crayons-field__label") %>
@@ -41,10 +41,10 @@
       </div>
       <br>
       <div class="form-group">
-        <label for="selected-podcast" class="crayons-field__label">Select podcast</label>
-        <select class="crayons-select" name="podcast" id="selected-podcast" style="width: 300px; display: block; margin-top: 5px">
-          <% @podcasts.each do |podcast| %>
-            <option value="<%= podcast.id %>"><%= podcast.title %></option>
+        <label for="selected-podcast" class="crayons-field__label">Select music release</label>
+        <select class="crayons-select" name="music_release" id="selected-podcast" style="width: 300px; display: block; margin-top: 5px">
+          <% @music_releases.each do |music_release| %>
+            <option value="<%= music_release.id %>"><%= music_release.title %></option>
           <% end %>
         </select>
       </div>
@@ -55,7 +55,7 @@
       <div id="audio-success" style="display: none" class="alert alert-success mt-5"></div>
     <% end %>
   <% else %>
-    <div class="alert alert-danger mt-5">Please create podcast first to upload audios</div>
+    <div class="alert alert-danger mt-5">Please create music release first to upload audios</div>
   <% end %>
 </div>
 

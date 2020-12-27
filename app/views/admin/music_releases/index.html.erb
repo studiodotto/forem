@@ -1,0 +1,33 @@
+<%= form_tag("/admin/music_releases", method: "get", class: "mb-6") do %>
+  <div class="form-group">
+    <%= text_field_tag(:search, params[:search], aria: { label: "Search" }) %>
+    <%= submit_tag("Search") %>
+  </div>
+<% end %>
+
+<%= paginate @music_releases %>
+
+<table class="crayons-table" width="100%">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">Tracks</th>
+    <th scope="col">Published</th>
+    <th scope="col">Artist</th>
+  </tr>
+  </thead>
+  <tbody class="crayons-card">
+  <% @music_releases.each do |music_release| %>
+    <tr>
+      <td><%= music_release.id %></td>
+      <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
+      <td><%= music_release.tracks_count %></td>
+      <td><%= music_release.published.present? ? 'true' : 'false' %></td>
+      <td><%= link_to "@#{music_release.user.username}", "/#{music_release.user.username}" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @music_releases %>

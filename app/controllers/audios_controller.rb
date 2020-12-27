@@ -5,7 +5,7 @@ class AudiosController < ApplicationController
   def new
     @user = current_user
     @audios = current_user.audios.where(status: true)
-    @podcasts = Podcast.where(creator_id: current_user.id, published: true)
+    @music_releases = MusicRelease.where(user_id: current_user.id, published: true)
   end
 
   def audio_upload
@@ -21,19 +21,19 @@ class AudiosController < ApplicationController
       uploaded_audio = current_user.audios.create(link: links[0])
 
       if uploaded_audio
-        podcast = Podcast.find_by(id: params[:podcast])
-        if podcast.present?
-          podcast_episode = PodcastEpisode.new
-          podcast_episode.title = params[:title]
-          podcast_episode.slug = params[:slug]
-          podcast_episode.media_url = links[0]
-          podcast_episode.podcast_id = podcast.id
-          podcast_episode.guid = "<guid>"+SecureRandom.uuid+"</guid>"
-          podcast_episode.published_at = Time.now.utc
-          if podcast_episode.save
+        music_release = MusicRelease.find_by(id: params[:music_release])
+        if music_release.present?
+          music_track = MusicTrack.new
+          music_track.title = params[:title]
+          music_track.slug = params[:slug]
+          music_track.media_url = links[0]
+          music_track.music_release_id = music_release.id
+          music_track.guid = "<guid>"+SecureRandom.uuid+"</guid>"
+          music_track.published_at = Time.now.utc
+          if music_track.save
             render json: { link: links[0] }, status: :ok and return
           else
-            render json: { error: podcast_episode.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
+            render json: { error: music_track.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
           end
         end
       else

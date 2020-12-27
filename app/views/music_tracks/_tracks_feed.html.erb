@@ -1,0 +1,25 @@
+<% @music_tracks.each_with_index do |music_track, i| %>
+  <a href="<%= music_track.path %>" class="small-pic-link-wrapper" id="article-link-<%= music_track.id %>">
+    <div class="single-article single-article-small-pic single-article-single-music_release">
+      <div class="small-pic">
+        <%= optimized_image_tag(music_track.image_url || music_track.music_release.image_url,
+                                optimizer_options: { crop: "imagga_scale", width: 240, height: 240 },
+                                image_options: { alt: music_track.title }) %>
+      </div>
+      <div class="content">
+        <h3><span class="tag-identifier">music_release</span><%= music_track.title %></h3>
+      </div>
+      <h4>
+        <a href="/<%= music_track.music_release.slug %>">
+          <%= music_track.music_release.title %>
+          <% if music_track.published_at? %>
+            ・<time class="published-at" datetime="<%= music_track.published_timestamp %>">
+          <%= music_track.readable_publish_date %>
+        </time>
+            <span class="time-ago-indicator-initial-placeholder" data-seconds="<%= music_track.published_at_int %>"></span>
+          <% end %>
+        </a>
+      </h4>
+    </div>
+  </a>
+<% end %>

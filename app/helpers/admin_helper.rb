@@ -35,6 +35,7 @@ module AdminHelper
     { name: "webhooks",              controller: "webhook_endpoints" },
     { name: "welcome",               controller: "welcome" },
     { name: "audios",               controller: "audios" },
+    { name: "music_releases",               controller: "music_releases" },
   ].sort_by { |menu_item| menu_item[:name] }
 
   PROFILE_ADMIN = { name: "config: profile setup", controller: "profile_fields" }.freeze

@@ -152,6 +152,21 @@ module CacheBuster
     podcast_episode.purge_all
   end
 
+  def self.bust_music_track(music_track, path, music_release_slug)
+    music_track.purge
+    music_track.purge_all
+    begin
+      bust(path)
+      bust("/#{music_release_slug}")
+      bust("/music_releases")
+      bust(path)
+    rescue StandardError => e
+      Rails.logger.warn(e)
+    end
+    music_track.purge
+    music_track.purge_all
+  end
+
   def self.bust_listings(listing)
     # we purge all listings as it's the wanted behavior with the following URL purging
     listing.purge_all
