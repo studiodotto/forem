@@ -2,8 +2,8 @@ class MusicRelease < ApplicationRecord
   resourcify
 
   belongs_to :user
-  has_many :music_tracks
-  has_many :audios
+  has_many :music_tracks, dependent: :destroy
+  has_many :audios, dependent: :destroy
 
   mount_uploader :image, ProfileImageUploader
   mount_uploader :pattern_image, ProfileImageUploader
