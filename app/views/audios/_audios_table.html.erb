@@ -1,0 +1,25 @@
+<% if audios.present? %>
+  <table class="crayons-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>link</th>
+      <th>Music release</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% audios.each do |audio| %>
+      <tr>
+        <td><%= audio.id %></td>
+        <td><%= audio.name %></td>
+        <td><a href="<%= audio.link %>"><%= audio.link %></a></td>
+        <td><%= audio.music_release.try(:title) || 'NA' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <hr />
+<% else %>
+  <p>No tracks yet..</p>
+<% end %>

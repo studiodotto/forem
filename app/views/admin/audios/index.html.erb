@@ -25,7 +25,7 @@
   <tbody class="crayons-card">
   <% @audios.each do |audio| %>
     <tr>
-      <td class="width-5"><%= audio.id %></td>
+      <td class="width-5"><%= link_to audio.id, edit_admin_audio_path(audio) %></td>
       <td><%= audio.user.name %></td>
       <td class="width-40"><a href="<%= audio.link %>"><%= audio.link %></a></td>
       <td><%= audio.status.present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Rejected</span>".html_safe %></td>

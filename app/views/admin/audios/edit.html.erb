@@ -1,0 +1,24 @@
+<header class="flex items-center mb-6">
+  <h2 class="crayons-title mb-6">Edit <%= @audio.name %></h2>
+  <div class="ml-auto">
+    <%= link_to "View", "/#{@audio.slug}", class: "btn btn-primary" %>
+  </div>
+</header>
+
+<div class="grid gap-6">
+  <div class="crayons-card p-6">
+    <h4 class="mb-4">Edit music release</h4>
+    <%= form_for [:admin, @audio] do |f| %>
+      <div class="form-group">
+        <%= f.label :title, for: "audio_name" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :slug, for: "audio_slug" %>
+        <%= f.text_field :slug, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

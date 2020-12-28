@@ -4,7 +4,8 @@ class AudiosController < ApplicationController
 
   def new
     @user = current_user
-    @audios = current_user.audios.where(status: true)
+    @audios = current_user.audios.where(status: true).order(id: :desc)
+    @pending_audios = current_user.audios.where(status: false).order(id: :desc)
     @music_releases = MusicRelease.where(user_id: current_user.id, published: true)
   end
 
@@ -18,10 +19,10 @@ class AudiosController < ApplicationController
       if links.length.zero? || !links[0].include?('studioappbucket')
         render json: { error: 'bucket is not responding' }, status: :unprocessable_entity and return
       end
-      uploaded_audio = current_user.audios.create(link: links[0])
+      music_release = MusicRelease.find_by(id: params[:music_release])
+      uploaded_audio = current_user.audios.create(name: params[:title], link: links[0], slug: params[:slug], music_release_id: music_release.id)
 
       if uploaded_audio
-        music_release = MusicRelease.find_by(id: params[:music_release])
         if music_release.present?
           music_track = MusicTrack.new
           music_track.title = params[:title]

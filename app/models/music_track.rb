@@ -14,7 +14,7 @@ class MusicTrack < ApplicationRecord
 
   validates :guid, presence: true, uniqueness: true
   validates :media_url, presence: true
-  validates :slug, presence: true
+  validates :slug, presence: true, uniqueness: true
   validates :title, presence: true
 
   after_commit :index_to_elasticsearch, on: %i[update create]

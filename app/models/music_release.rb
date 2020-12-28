@@ -3,6 +3,7 @@ class MusicRelease < ApplicationRecord
 
   belongs_to :user
   has_many :music_tracks
+  has_many :audios
 
   mount_uploader :image, ProfileImageUploader
   mount_uploader :pattern_image, ProfileImageUploader
