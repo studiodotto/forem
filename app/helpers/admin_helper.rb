@@ -34,8 +34,9 @@ module AdminHelper
     { name: "vault secrets",         controller: "secrets" },
     { name: "webhooks",              controller: "webhook_endpoints" },
     { name: "welcome",               controller: "welcome" },
-    { name: "audios",               controller: "audios" },
-    { name: "music_releases",               controller: "music_releases" },
+    { name: "audios",                controller: "audios" },
+    { name: "music_releases",        controller: "music_releases" },
+    { name: "artist_applications",   controller: "artist_applications" },
   ].sort_by { |menu_item| menu_item[:name] }
 
   PROFILE_ADMIN = { name: "config: profile setup", controller: "profile_fields" }.freeze

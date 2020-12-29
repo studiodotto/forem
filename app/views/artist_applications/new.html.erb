@@ -1,0 +1,209 @@
+<%= javascript_include_tag 'application' %>
+
+<div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left">
+  <div class="sidebar-wrapper sidebar-wrapper-left crayons-layout__sidebar-left">
+  </div>
+  <% unless flash[:notice].present? %>
+    <div class="articles-list crayons-layout__content">
+      <h1 class="application-heading">
+        Apply to join UnitedBits and Sell Your Music Online
+      </h1>
+      <p class="application-text">
+        Compose and perform music-paying commissions online. Apply to join the UnitedBits. We'll be in touch within 72 hours
+      </p>
+      <br>
+
+      <%= form_with model: @artist_application, url: artist_applications_path(@artist_application), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
+        <!-- Basic fields -->
+        <div class="fields-div">
+          <h1>
+            The Basics
+          </h1>
+          <div class="form-group">
+            <%= f.label "First Name ", class: "d-block fields-label" %>
+            <%= f.text_field :first_name, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Last Name ", class: "d-block fields-label" %>
+            <%= f.text_field :last_name, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Date of Birth ", class: "d-block fields-label" %>
+            <%= f.date_field :date_of_birth, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Email ", class: "d-block fields-label" %>
+            <%= f.text_field :email, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Telephone number ", class: "d-block field-label-normal" %>
+            <%= f.text_field :telephone, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Location ", class: "d-block field-label-normal" %>
+            <%= f.select(:location_id, options_for_select(@locations, @locations.first), {}, { class: "crayons-select" }) %>
+          </div>
+        </div>
+        <br><br>
+        <!-- About fields -->
+        <div class="fields-div">
+          <h1>
+            About you
+          </h1>
+          <div class="form-group">
+            <%= f.label "Composers and Performers ", class: "d-block fields-label" %>
+            <%= f.select(:composer_id, options_for_select(@composers, @composers.first), {}, { class: "crayons-select" }) %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Industry Pro ", class: "d-block fields-label" %>
+            <%= f.select(:industry_id, options_for_select(@industries, @industries.first), {}, { class: "crayons-select" }) %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Song Language ", class: "d-block fields-label" %>
+            <%= f.select(:song_language_id, options_for_select(@languages, @languages.first), {}, { class: "crayons-select" }) %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Genre ", class: "d-block fields-label" %>
+            <%= f.select(:genre_id, options_for_select(@genres, @genres.first), {}, { class: "crayons-select" }) %>
+          </div>
+        </div>
+        <br><br>
+        <!-- Commission fields -->
+        <div class="fields-div">
+          <h1>
+            Available for music work commissions?
+          </h1>
+          <p>
+            Accept music—paying commissions to write a new piece for a specific purpose or event
+          </p>
+          <span class="field-span">
+            <%= f.check_box :commission_accepted, class: "crayons-checkbox commission-checkbox" %>
+            <span style="position: relative; top: 1px; left: 3px">
+              Available for Music Work Commissions:
+            </span>
+          </span>
+          <p class="fields-description-text">
+            Select the services you want to offer
+          </p>
+          <div class="services-box services-select" data-type="treat">
+            <span>A treat</span>
+            <input type="hidden" name="services[]" id='treat' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="wedding">
+            <span>Wedding</span>
+            <input type="hidden" name="services[]" id='wedding' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="family">
+            <span>Family</span>
+            <input type="hidden" name="services[]" id='family' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/family.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="anniversary">
+            <span style="margin-left: -7px !important;">Anniversary</span>
+            <input type="hidden" name="services[]" id='anniversary' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="ceremony">
+            <span>Ceremony</span>
+            <input type="hidden" name="services[]" id='ceremony' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="birthday">
+            <span>Birthday</span>
+            <input type="hidden" name="services[]" id='birthday' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+          </div>
+          <div class="services-box services-select" data-type="relegion">
+            <span>Relegion</span>
+            <input type="hidden" name="services[]" id='religion' value=""/>
+            <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png" class="services-icon-unselected" alt="">
+          </div>
+        </div>
+        <br><br>
+        <!-- Limited Edition Fields -->
+        <div class="fields-div">
+          <h1>Sell Limited Edition Music, tracks and albums?</h1>
+          <span class="field-span">
+            <%= f.check_box :sell_tracks, class: "crayons-checkbox commission-checkbox" %>
+            <span style="position: relative; top: 1px; left: 3px">
+              Yes I want to sell limited edition music tracks and albums
+            </span>
+          </span>
+          <span class="field-span">
+            <%= f.check_box :sell_campaigns, class: "crayons-checkbox commission-checkbox" %>
+            <span style="position: relative; top: 1px; left: 3px">
+              Yes I want to start pre-order campaigns
+            </span>
+          </span>
+        </div>
+        <br><br>
+        <!-- Basic fields -->
+        <div class="fields-div">
+          <h1>
+            Social presence
+          </h1>
+          <div class="form-group">
+            <%= f.label "Spotify URL ", class: "d-block fields-label" %>
+            <%= f.text_field :spotify_url, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Soundcloud URL ", class: "d-block fields-label" %>
+            <%= f.text_field :soundcloud_url, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Itunes URL ", class: "d-block fields-label" %>
+            <%= f.text_field :itunes_url, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Facebook URL ", class: "d-block fields-label" %>
+            <%= f.text_field :facebook_url, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Twitter URL ", class: "d-block field-label-normal" %>
+            <%= f.text_field :twitter_url, class: "form-control fields-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Add Website URL ", class: "d-block field-label-normal" %>
+            <%= f.text_field :website_url, class: "form-control fields-input" %>
+          </div>
+        </div>
+        <%= f.submit "Apply to UnitedBits", class: "crayons-btn application-submit-btn" %>
+        <br><br>
+        <p>
+          <strong>
+            Note:
+          </strong>
+          you are not automatically enrolled on UnitedBits. If you meet the eligibility requirements, a talent representative will contact you within a few days to finish onboarding.
+        </p>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="thank-you-div">
+      <h1>
+        Thank you
+      </h1>
+      <p>
+        We are processing your application. We will get back to you within the next 72 hours
+      </p>
+    </div>
+  <% end %>
+  <div class="sidebar-wrapper sidebar-wrapper-right crayons-layout__sidebar-right"></div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function (){
+    $('.services-select').click(function (){
+      var type = $(this).data('type')
+      if($(this).hasClass('services-box')){
+        $(this).removeClass('services-box');
+        $(this).addClass('services-box-selected');
+        $("#"+type).val(type)
+      } else {
+        $(this).removeClass('services-box-selected');
+        $(this).addClass('services-box');
+        $("#"+type).val('');
+      }
+    })
+  })
+</script>

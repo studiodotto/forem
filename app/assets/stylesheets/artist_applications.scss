@@ -1,0 +1,189 @@
+.artist_applications-new {
+  background: #fed853 !important;
+}
+.application-heading {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 140%;
+  letter-spacing: 0.1px;
+  color: #000000;
+}
+.application-text {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 145%;
+  color: #000000;
+}
+.fields-div {
+  background: #fed852;
+  border: 3px solid #ffffff;
+  border-radius: 13px;
+  padding: 53px 63px;
+}
+.fields-div h1 {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 35px;
+  letter-spacing: 0.1px;
+  color: #000000;
+  margin-bottom: 30px !important;
+}
+.fields-div p {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.1px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.field-span {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 154.69%;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-top: 5px;
+  display: block;
+}
+.commission-checkbox {
+  background: #ffffff;
+  border-radius: 2px;
+}
+.fields-label {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+}
+.field-label-normal {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #2c2c2c;
+}
+.fields-description-text {
+  //font-family: Roboto;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  letter-spacing: 0.1px !important;
+  color: #000000 !important;
+  margin-top: 10px !important;
+}
+.fields-input {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-sizing: border-box;
+  width: 100% !important;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}
+.services-box {
+  padding: 17px 20px;
+  cursor: pointer;
+  width: 128px;
+  height: 136px;
+  background: #ffffff;
+  border: 1px solid black;
+  display: inline-block;
+  margin-left: 35px !important;
+  margin-top: 10px;
+  text-align: center;
+}
+.services-box-selected {
+  span {
+    color: white;
+  }
+  cursor: pointer;
+  padding: 17px 20px;
+  width: 128px;
+  height: 136px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid white;
+  display: inline-block;
+  margin-left: 35px !important;
+  margin-top: 10px;
+  text-align: center;
+}
+.services-box:hover {
+  span {
+    color: white;
+  }
+  background: #000000;
+  color: white;
+  border: 2px solid white;
+}
+.services-icon-unselected {
+  display: block;
+  margin: auto;
+  margin-top: 25px;
+}
+.services-box span {
+  //font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 3px;
+}
+
+.application-submit-btn {
+  background: #454545 !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+  margin-top: 20px;
+}
+.thank-you-div {
+  h1 {
+    //font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #ffffff;
+  }
+  p {
+    //font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
+  }
+  width: 369px;
+  /* text-align: center; */
+  /* height: 327px; */
+  /* left: 535px; */
+  /* top: 383px; */
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(47px);
+  border-radius: 17px;
+  margin: auto;
+  padding: 35px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}

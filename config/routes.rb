@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
       resources :articles, only: %i[index show update]
       resources :audios, only: %i[index update edit]
+      resources :artist_applications, only: %i[index update edit]
       resources :broadcasts
       resources :buffer_updates, only: %i[create update]
       resources :listings, only: %i[index edit update destroy]
@@ -247,6 +248,7 @@ Rails.application.routes.draw do
     resources :feedback_messages, only: %i[index create]
     resources :organizations, only: %i[update create destroy]
     resources :followed_articles, only: [:index]
+    resources :artist_applications, only: %i[new create]
     resources :follows, only: %i[show create update] do
       collection do
         get "/bulk_show", to: "follows#bulk_show"

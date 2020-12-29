@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_28_144621) do
+ActiveRecord::Schema.define(version: 2020_12_29_162123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -165,6 +165,31 @@ ActiveRecord::Schema.define(version: 2020_12_28_144621) do
     t.index ["published_at"], name: "index_articles_on_published_at"
     t.index ["slug", "user_id"], name: "index_articles_on_slug_and_user_id", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "artist_applications", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "email"
+    t.string "telephone"
+    t.integer "location_id"
+    t.integer "composer_id"
+    t.integer "industry_id"
+    t.integer "song_language_id"
+    t.integer "genre_id"
+    t.boolean "commission_accepted"
+    t.boolean "sell_tracks"
+    t.boolean "sell_campaigns"
+    t.string "spotify_url"
+    t.string "soundcloud_url"
+    t.string "itunes_url"
+    t.string "facebook_url"
+    t.string "twitter_url"
+    t.string "website_url"
+    t.boolean "accept_terms"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "audios", force: :cascade do |t|
@@ -1080,6 +1105,17 @@ ActiveRecord::Schema.define(version: 2020_12_28_144621) do
     t.index ["name"], name: "index_roles_on_name"
   end
 
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.string "currency"
+    t.bigint "artist_application_id", null: false
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_application_id"], name: "index_services_on_artist_application_id"
+  end
+
   create_table "site_configs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1491,6 +1527,7 @@ ActiveRecord::Schema.define(version: 2020_12_28_144621) do
   add_foreign_key "rating_votes", "users", on_delete: :nullify
   add_foreign_key "reactions", "users", on_delete: :cascade
   add_foreign_key "response_templates", "users"
+  add_foreign_key "services", "artist_applications"
   add_foreign_key "sponsorships", "organizations"
   add_foreign_key "sponsorships", "users"
   add_foreign_key "tag_adjustments", "articles", on_delete: :cascade
