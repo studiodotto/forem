@@ -39,8 +39,8 @@ module Admin
       password = Devise.friendly_token(20)
       resource = User.new
       resource.email = artist_application.email
-      resource.password = password
-      resource.password_confirmation = password
+      resource.password = 'Bits@870'
+      resource.password_confirmation = 'Bits@870'
       resource.name = artist_application.first_name + artist_application.last_name
       resource.first_name = artist_application.first_name
       resource.last_name = artist_application.last_name
