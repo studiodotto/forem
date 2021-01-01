@@ -1,4 +1,4 @@
 class Service < ApplicationRecord
    belongs_to :artist_application
-   belongs_to :user
+   belongs_to :user, optional: true
 end
