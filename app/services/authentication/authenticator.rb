@@ -99,6 +99,9 @@ module Authentication
       existing_user = User.where(
         provider.user_username_field => provider.user_nickname,
       ).take
+      unless existing_user.has_role?(:customer)
+        existing_user.add_role(:customer)
+      end
       return existing_user if existing_user
 
       User.new.tap do |user|
@@ -110,6 +113,7 @@ module Authentication
         # The user must be saved in the database before
         # we assign the user to a new identity.
         user.save!
+        user.add_role(:customer)
       end
     end
 
@@ -127,6 +131,9 @@ module Authentication
     end
 
     def update_user(user)
+      unless user.has_role?(:customer)
+        user.add_role(:customer)
+      end
       user.tap do |model|
         user.unlock_access! if user.access_locked?
         user.assign_attributes(provider.existing_user_data)

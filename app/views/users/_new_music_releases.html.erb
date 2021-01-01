@@ -1,0 +1,11 @@
+<%= content_for :page_meta do %>
+  <%= render "music_tracks/meta" %>
+<% end %>
+<div class="home">
+  <div class="music_releases-form" id="music_releases-form">
+    <%= render "music_releases/form", music_release: @music_release %>
+  </div>
+  <%= render "music_tracks/sidebar_additional" %>
+</div>
+
+<%= render "stories/stories_list_script" %>

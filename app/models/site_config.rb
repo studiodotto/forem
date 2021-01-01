@@ -197,6 +197,9 @@ class SiteConfig < RailsSettings::Base
     xlarge: 250
   }
 
+  field :connect_key, type: :string
+
+
   # Returns true if we are operating on a local installation, false otherwise
   def self.local?
     app_domain.include?("localhost")

@@ -67,6 +67,10 @@ class UserPolicy < ApplicationPolicy
     current_user?
   end
 
+  def artist_edit?
+    true
+  end
+
   def onboarding_update?
     true
   end

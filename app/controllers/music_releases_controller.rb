@@ -24,13 +24,17 @@ class MusicReleasesController < ApplicationController
 
     if @music_release.save
       flash[:global_notice] = "Music release suggested"
+      # flash[:settings_notice] = "Music release suggested! Wait for admin approval"
 
-      redirect_to music_releases_path
+      # redirect_to music_releases_path
+      return redirect_to artist_settings_path
     else
-      @music_releases = MusicRelease.published.order(title: :asc)
-      @music_releases_index = true
-
-      render :new
+      # @music_releases = MusicRelease.published.order(title: :asc)
+      # @music_releases_index = true
+      #
+      # render :new
+      flash[:error] = "Cannot suggest music release. Please fill all information correctly"
+      return redirect_to artist_settings_path
     end
   end
 

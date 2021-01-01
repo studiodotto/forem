@@ -64,6 +64,9 @@ class User < ApplicationRecord
   acts_as_follower
 
   has_one :profile, dependent: :destroy
+  has_one :user_document, dependent: :destroy
+  has_one :payment_provider, dependent: :destroy
+  accepts_nested_attributes_for   :user_document
 
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant", foreign_key: :resource_owner_id,
                            inverse_of: :resource_owner, dependent: :delete_all
@@ -122,6 +125,7 @@ class User < ApplicationRecord
 
   has_many :poll_skips, dependent: :destroy
   has_many :poll_votes, dependent: :destroy
+  has_many :services, dependent: :destroy
   has_many :profile_pins, as: :profile, inverse_of: :profile, dependent: :delete_all
 
   # we keep rating votes as they belong to the article, not to the user who viewed it

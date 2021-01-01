@@ -2,29 +2,493 @@ locations:
   - :id: 1
     :label: Afghanistan
   - :id: 2
-    :label: Albania
+    :label: Aland Islands
   - :id: 3
-    :label: Algeria
+    :label: Albania
   - :id: 4
-    :label: American Samoa
+    :label: Algeria
   - :id: 5
-    :label: Andorra
+    :label: American Samoa
   - :id: 6
-    :label: Angola
+    :label: Andorra
   - :id: 7
-    :label: Anguilla
+    :label: Angola
   - :id: 8
-    :label: Antigua & Barbuda
+    :label: Anguilla
   - :id: 9
-    :label: Argentina
+    :label: Antarctica
   - :id: 10
-    :label: Armenia
+    :label: Antigua And Barbuda
   - :id: 11
-    :label: Aruba
+    :label: Argentina
   - :id: 12
-    :label: Australia
+    :label: Armenia
   - :id: 13
+    :label: Aruba
+  - :id: 14
+    :label: Australia
+  - :id: 15
     :label: Austria
+  - :id: 16
+    :label: Azerbaijan
+  - :id: 17
+    :label: Bahamas
+  - :id: 18
+    :label: Bahrain
+  - :id: 19
+    :label: Bangladesh
+  - :id: 20
+    :label: Barbados
+  - :id: 21
+    :label: Belarus
+  - :id: 22
+    :label: Belgium
+  - :id: 23
+    :label: Belize
+  - :id: 24
+    :label: Benin
+  - :id: 25
+    :label: Bermuda
+  - :id: 26
+    :label: Bhutan
+  - :id: 27
+    :label: Bolivia
+  - :id: 28
+    :label: Bosnia and Herzegowina
+  - :id: 29
+    :label: Botswana
+  - :id: 30
+    :label: Bouvet Island
+  - :id: 31
+    :label: Brazil
+  - :id: 32
+    :label: British Indian Ocean Territory
+  - :id: 33
+    :label: Brunei Darussalam
+  - :id: 34
+    :label: Bulgaria
+  - :id: 35
+    :label: Burkina Faso
+  - :id: 36
+    :label: Burundi
+  - :id: 37
+    :label: Cambodia
+  - :id: 38
+    :label: Cameroon
+  - :id: 39
+    :label: Canada
+  - :id: 40
+    :label: Cape Verde
+  - :id: 41
+    :label: Cayman Islands
+  - :id: 42
+    :label: Central African Republic
+  - :id: 43
+    :label: Chad
+  - :id: 44
+    :label: Chile
+  - :id: 45
+    :label: China
+  - :id: 46
+    :label: Christmas Island
+  - :id: 47
+    :label: Cocos (Keeling) Islands
+  - :id: 48
+    :label: Colombia
+  - :id: 49
+    :label: Comoros
+  - :id: 50
+    :label: Congo
+  - :id: 51
+    :label: Congo, the Democratic Republic of the
+  - :id: 52
+    :label: Cook Islands
+  - :id: 53
+    :label: Costa Rica
+  - :id: 54
+    :label: Cote d'Ivoire
+  - :id: 55
+    :label: Croatia
+  - :id: 56
+    :label: Cuba
+  - :id: 57
+    :label: Cyprus
+  - :id: 58
+    :label: Czech Republic
+  - :id: 59
+    :label: Denmark
+  - :id: 60
+    :label: Djibouti
+  - :id: 61
+    :label: Dominica
+  - :id: 62
+    :label: Dominican Republic
+  - :id: 63
+    :label: Ecuador
+  - :id: 64
+    :label: Egypt
+  - :id: 65
+    :label: El Salvador
+  - :id: 66
+    :label: Equatorial Guinea
+  - :id: 67
+    :label: Eritrea
+  - :id: 68
+    :label: Estonia
+  - :id: 69
+    :label: Ethiopia
+  - :id: 70
+    :label: Falkland Islands (Malvinas)
+  - :id: 71
+    :label: Faroe Islands
+  - :id: 72
+    :label: Fiji
+  - :id: 73
+    :label: Finland
+  - :id: 74
+    :label: France
+  - :id: 75
+    :label: French Guiana
+  - :id: 76
+    :label: French Polynesia
+  - :id: 77
+    :label: French Southern Territories
+  - :id: 78
+    :label: Gabon
+  - :id: 79
+    :label: Gambia
+  - :id: 80
+    :label: Georgia
+  - :id: 81
+    :label: Germany
+  - :id: 82
+    :label: Ghana
+  - :id: 83
+    :label: Gibraltar
+  - :id: 84
+    :label: Greece
+  - :id: 85
+    :label: Greenland
+  - :id: 86
+    :label: Grenada
+  - :id: 87
+    :label: Guadeloupe
+  - :id: 88
+    :label: Guam
+  - :id: 89
+    :label: Guatemala
+  - :id: 90
+    :label: Guernsey
+  - :id: 91
+    :label: Guinea
+  - :id: 92
+    :label: Guinea-Bissau
+  - :id: 93
+    :label: Guyana
+  - :id: 94
+    :label: Haiti
+  - :id: 95
+    :label: Heard and McDonald Islands
+  - :id: 96
+    :label: Holy See (Vatican City State)
+  - :id: 97
+    :label: Honduras
+  - :id: 98
+    :label: Hong Kong
+  - :id: 99
+    :label: Hungary
+  - :id: 100
+    :label: Iceland
+  - :id: 101
+    :label: India
+  - :id: 102
+    :label: Indonesia
+  - :id: 103
+    :label: Iran, Islamic Republic of
+  - :id: 104
+    :label: Iraq
+  - :id: 105
+    :label: Ireland
+  - :id: 106
+    :label: Isle of Man
+  - :id: 107
+    :label: Israel
+  - :id: 108
+    :label: Italy
+  - :id: 109
+    :label: Jamaica
+  - :id: 110
+    :label: Japan
+  - :id: 111
+    :label: Jersey
+  - :id: 112
+    :label: Jordan
+  - :id: 113
+    :label: Kazakhstan
+  - :id: 114
+    :label: Kenya
+  - :id: 115
+    :label: Kiribati
+  - :id: 116
+    :label: Korea, Democratic People's Republic of
+  - :id: 117
+    :label: Korea, Republic of
+  - :id: 118
+    :label: Kuwait
+  - :id: 119
+    :label: Kyrgyzstan
+  - :id: 120
+    :label: Lao People's Democratic Republic
+  - :id: 121
+    :label: Latvia
+  - :id: 122
+    :label: Lebanon
+  - :id: 123
+    :label: Lesotho
+  - :id: 124
+    :label: Liberia
+  - :id: 125
+    :label: Libyan Arab Jamahiriya
+  - :id: 126
+    :label: Liechtenstein
+  - :id: 127
+    :label: Lithuania
+  - :id: 128
+    :label: Luxembourg
+  - :id: 129
+    :label: Macao
+  - :id: 130
+    :label: Macedonia, The Former Yugoslav Republic Of
+  - :id: 131
+    :label: Madagascar
+  - :id: 132
+    :label: Malawi
+  - :id: 133
+    :label: Malaysia
+  - :id: 134
+    :label: Maldives
+  - :id: 135
+    :label: Mali
+  - :id: 136
+    :label: Malta
+  - :id: 137
+    :label: Marshall Islands
+  - :id: 138
+    :label: Martinique
+  - :id: 139
+    :label: Mauritania
+  - :id: 140
+    :label: Mauritius
+  - :id: 141
+    :label: Mayotte
+  - :id: 142
+    :label: Mexico
+  - :id: 143
+    :label: Micronesia, Federated States of
+  - :id: 144
+    :label: Moldova, Republic of
+  - :id: 145
+    :label: Monaco
+  - :id: 146
+    :label: Mongolia
+  - :id: 147
+    :label: Montenegro
+  - :id: 148
+    :label: Montserrat
+  - :id: 149
+    :label: Morocco
+  - :id: 150
+    :label: Mozambique
+  - :id: 151
+    :label: Myanmar
+  - :id: 152
+    :label: Namibia
+  - :id: 153
+    :label: Nauru
+  - :id: 154
+    :label: Nepal
+  - :id: 155
+    :label: Netherlands
+  - :id: 156
+    :label: Netherlands Antilles
+  - :id: 157
+    :label: New Caledonia
+  - :id: 158
+    :label: New Zealand
+  - :id: 159
+    :label: Nicaragua
+  - :id: 160
+    :label: Niger
+  - :id: 161
+    :label: Nigeria
+  - :id: 162
+    :label: Niue
+  - :id: 163
+    :label: Norfolk Island
+  - :id: 164
+    :label: Northern Mariana Islands
+  - :id: 165
+    :label: Norway
+  - :id: 166
+    :label: Oman
+  - :id: 167
+    :label: Pakistan
+  - :id: 168
+    :label: Palau
+  - :id: 169
+    :label: Palestinian Territory, Occupied
+  - :id: 170
+    :label: Panama
+  - :id: 171
+    :label: Papua New Guinea
+  - :id: 172
+    :label: Paraguay
+  - :id: 173
+    :label: Peru
+  - :id: 174
+    :label: Philippines
+  - :id: 175
+    :label: Pitcairn
+  - :id: 176
+    :label: Poland
+  - :id: 177
+    :label: Portugal
+  - :id: 178
+    :label: Puerto Rico
+  - :id: 179
+    :label: Qatar
+  - :id: 180
+    :label: Reunion
+  - :id: 181
+    :label: Romania
+  - :id: 182
+    :label: Russian Federation
+  - :id: 183
+    :label: Rwanda
+  - :id: 184
+    :label: Saint Barthelemy
+  - :id: 185
+    :label: Saint Helena
+  - :id: 186
+    :label: Saint Kitts and Nevis
+  - :id: 187
+    :label: Saint Lucia
+  - :id: 188
+    :label: Saint Pierre and Miquelon
+  - :id: 189
+    :label: Saint Vincent and the Grenadines
+  - :id: 190
+    :label: Samoa
+  - :id: 191
+    :label: San Marino
+  - :id: 192
+    :label: Sao Tome and Principe
+  - :id: 193
+    :label: Saudi Arabia
+  - :id: 194
+    :label: Senegal
+  - :id: 195
+    :label: Serbia
+  - :id: 196
+    :label: Seychelles
+  - :id: 197
+    :label: Sierra Leone
+  - :id: 198
+    :label: Singapore
+  - :id: 199
+    :label: Slovakia
+  - :id: 200
+    :label: Slovenia
+  - :id: 201
+    :label: Solomon Islands
+  - :id: 202
+    :label: Somalia
+  - :id: 203
+    :label: South Africa
+  - :id: 204
+    :label: South Georgia and the South Sandwich Islands
+  - :id: 205
+    :label: Spain
+  - :id: 206
+    :label: Sri Lanka
+  - :id: 207
+    :label: Sudan
+  - :id: 208
+    :label: Suriname
+  - :id: 209
+    :label: Svalbard and Jan Mayen
+  - :id: 210
+    :label: Swaziland
+  - :id: 211
+    :label: Sweden
+  - :id: 212
+    :label: Switzerland
+  - :id: 213
+    :label: Syrian Arab Republic
+  - :id: 214
+    :label: Taiwan, Province of China
+  - :id: 215
+    :label: Tajikistan
+  - :id: 216
+    :label: Tanzania, United Republic of
+  - :id: 217
+    :label: Thailand
+  - :id: 218
+    :label: Timor-Leste
+  - :id: 219
+    :label: Togo
+  - :id: 220
+    :label: Tokelau
+  - :id: 221
+    :label: Tonga
+  - :id: 222
+    :label: Trinidad and Tobago
+  - :id: 223
+    :label: Tunisia
+  - :id: 224
+    :label: Turkey
+  - :id: 225
+    :label: Turkmenistan
+  - :id: 226
+    :label: Turks and Caicos Islands
+  - :id: 227
+    :label: Tuvalu
+  - :id: 228
+    :label: Uganda
+  - :id: 229
+    :label: Ukraine
+  - :id: 230
+    :label: United Arab Emirates
+  - :id: 231
+    :label: United Kingdom
+  - :id: 232
+    :label: United States
+  - :id: 233
+    :label: United States Minor Outlying Islands
+  - :id: 234
+    :label: Uruguay
+  - :id: 235
+    :label: Uzbekistan
+  - :id: 236
+    :label: Vanuatu
+  - :id: 237
+    :label: Venezuela
+  - :id: 238
+    :label: Viet Nam
+  - :id: 239
+    :label: Virgin Islands, British
+  - :id: 240
+    :label: Virgin Islands, U.S.
+  - :id: 241
+    :label: Wallis and Futuna
+  - :id: 242
+    :label: Western Sahara
+  - :id: 243
+    :label: Yemen
+  - :id: 244
+    :label: Zambia
+  - :id: 245
+    :label: Zimbabwe
 industries:
   - :id: 1
     :label: Audio Engineer
@@ -40,15 +504,373 @@ industries:
     :label: Writer
 languages:
   - :id: 1
-    :label: Afrikaans
+    :label: Abkhazian
   - :id: 2
-    :label: Albanian
+    :label: Afar
   - :id: 3
-    :label: Shqip
+    :label: Afrikaans
   - :id: 4
-    :label: Amharic
+    :label: Akan
   - :id: 5
+    :label: Albanian
+  - :id: 6
+    :label: Amharic
+  - :id: 7
     :label: Arabic
+  - :id: 8
+    :label: Aragonese
+  - :id: 9
+    :label: Armenian
+  - :id: 10
+    :label: Assamese
+  - :id: 11
+    :label: Avaric
+  - :id: 12
+    :label: Avestan
+  - :id: 13
+    :label: Aymara
+  - :id: 14
+    :label: Azerbaijani
+  - :id: 15
+    :label: Bambara
+  - :id: 16
+    :label: Bashkir
+  - :id: 17
+    :label: Basque
+  - :id: 18
+    :label: Belarusian
+  - :id: 19
+    :label: Bengali
+  - :id: 20
+    :label: Bihari languages
+  - :id: 21
+    :label: Bislama
+  - :id: 22
+    :label: Bosnian
+  - :id: 23
+    :label: Breton
+  - :id: 24
+    :label: Bulgarian
+  - :id: 25
+    :label: Burmese
+  - :id: 26
+    :label: Catalan, Valencian
+  - :id: 27
+    :label: Central Khmer
+  - :id: 28
+    :label: Chamorro
+  - :id: 29
+    :label: Chechen
+  - :id: 30
+    :label: Chichewa, Chewa, Nyanja
+  - :id: 31
+    :label: Chinese
+  - :id: 32
+    :label: Church Slavonic, Old Bulgarian, Old Church Slavonic
+  - :id: 33
+    :label: Chuvash
+  - :id: 34
+    :label: Cornish
+  - :id: 35
+    :label: Corsican
+  - :id: 36
+    :label: Cree
+  - :id: 37
+    :label: Croatian
+  - :id: 38
+    :label: Czech
+  - :id: 39
+    :label: Danish
+  - :id: 40
+    :label: Divehi, Dhivehi, Maldivian
+  - :id: 41
+    :label: Dutch, Flemish
+  - :id: 42
+    :label: Dzongkha
+  - :id: 43
+    :label: English
+  - :id: 44
+    :label: Esperanto
+  - :id: 45
+    :label: Estonian
+  - :id: 46
+    :label: Ewe
+  - :id: 47
+    :label: Faroese
+  - :id: 48
+    :label: Fijian
+  - :id: 49
+    :label: Finnish
+  - :id: 50
+    :label: French
+  - :id: 51
+    :label: Fulah
+  - :id: 52
+    :label: Gaelic, Scottish Gaelic
+  - :id: 53
+    :label: Galician
+  - :id: 54
+    :label: Ganda
+  - :id: 55
+    :label: Georgian
+  - :id: 56
+    :label: German
+  - :id: 57
+    :label: Gikuyu, Kikuyu
+  - :id: 58
+    :label: Greek (Modern)
+  - :id: 59
+    :label: Greenlandic, Kalaallisut
+  - :id: 60
+    :label: Guarani
+  - :id: 61
+    :label: Gujarati
+  - :id: 62
+    :label: Haitian, Haitian Creole
+  - :id: 63
+    :label: Hausa
+  - :id: 64
+    :label: Hebrew
+  - :id: 65
+    :label: Herero
+  - :id: 66
+    :label: Hindi
+  - :id: 67
+    :label: Hiri Motu
+  - :id: 68
+    :label: Hungarian
+  - :id: 69
+    :label: Icelandic
+  - :id: 70
+    :label: Ido
+  - :id: 71
+    :label: Igbo
+  - :id: 72
+    :label: Indonesian
+  - :id: 73
+    :label: Interlingua (International Auxiliary Language Association)
+  - :id: 74
+    :label: Interlingue
+  - :id: 75
+    :label: Inuktitut
+  - :id: 76
+    :label: Inupiaq
+  - :id: 77
+    :label: Irish
+  - :id: 78
+    :label: Italian
+  - :id: 79
+    :label: Japanese
+  - :id: 80
+    :label: Javanese
+  - :id: 81
+    :label: Kannada
+  - :id: 82
+    :label: Kanuri
+  - :id: 83
+    :label: Kashmiri
+  - :id: 84
+    :label: Kazakh
+  - :id: 85
+    :label: Kinyarwanda
+  - :id: 86
+    :label: Komi
+  - :id: 87
+    :label: Kongo
+  - :id: 88
+    :label: Korean
+  - :id: 89
+    :label: Kwanyama, Kuanyama
+  - :id: 90
+    :label: Kurdish
+  - :id: 91
+    :label: Kyrgyz
+  - :id: 92
+    :label: Lao
+  - :id: 93
+    :label: Latin
+  - :id: 94
+    :label: Latvian
+  - :id: 95
+    :label: Letzeburgesch, Luxembourgish
+  - :id: 96
+    :label: Limburgish, Limburgan, Limburger
+  - :id: 97
+    :label: Lingala
+  - :id: 98
+    :label: Lithuanian
+  - :id: 99
+    :label: Luba-Katanga
+  - :id: 100
+    :label: Macedonian
+  - :id: 101
+    :label: Malagasy
+  - :id: 102
+    :label: Malay
+  - :id: 103
+    :label: Malayalam
+  - :id: 104
+    :label: Maltese
+  - :id: 105
+    :label: Manx
+  - :id: 106
+    :label: Maori
+  - :id: 107
+    :label: Marathi
+  - :id: 108
+    :label: Marshallese
+  - :id: 109
+    :label: Moldovan, Moldavian, Romanian
+  - :id: 110
+    :label: Mongolian
+  - :id: 111
+    :label: Nauru
+  - :id: 112
+    :label: Navajo, Navaho
+  - :id: 113
+    :label: Northern Ndebele
+  - :id: 114
+    :label: Ndonga
+  - :id: 115
+    :label: Nepali
+  - :id: 116
+    :label: Northern Sami
+  - :id: 117
+    :label: Norwegian
+  - :id: 118
+    :label: Norwegian Bokmål
+  - :id: 119
+    :label: Norwegian Nynorsk
+  - :id: 120
+    :label: Nuosu, Sichuan Yi
+  - :id: 121
+    :label: Occitan (post 1500)
+  - :id: 122
+    :label: Ojibwa
+  - :id: 123
+    :label: Oriya
+  - :id: 124
+    :label: Oromo
+  - :id: 125
+    :label: Ossetian, Ossetic
+  - :id: 126
+    :label: Pali
+  - :id: 127
+    :label: Panjabi, Punjabi
+  - :id: 128
+    :label: Pashto, Pushto
+  - :id: 129
+    :label: Persian
+  - :id: 130
+    :label: Polish
+  - :id: 131
+    :label: Portuguese
+  - :id: 132
+    :label: Quechua
+  - :id: 133
+    :label: Romansh
+  - :id: 134
+    :label: Rundi
+  - :id: 135
+    :label: Russian
+  - :id: 136
+    :label: Samoan
+  - :id: 137
+    :label: Sango
+  - :id: 138
+    :label: Sanskrit
+  - :id: 139
+    :label: Sardinian
+  - :id: 140
+    :label: Serbian
+  - :id: 141
+    :label: Shona
+  - :id: 142
+    :label: Sindhi
+  - :id: 143
+    :label: Sinhala, Sinhalese
+  - :id: 144
+    :label: Slovak
+  - :id: 145
+    :label: Slovenian
+  - :id: 146
+    :label: Somali
+  - :id: 147
+    :label: Sotho, Southern
+  - :id: 148
+    :label: South Ndebele
+  - :id: 149
+    :label: Spanish, Castilian
+  - :id: 150
+    :label: Sundanese
+  - :id: 151
+    :label: Swahili
+  - :id: 152
+    :label: Swati
+  - :id: 153
+    :label: Swedish
+  - :id: 154
+    :label: Tagalog
+  - :id: 155
+    :label: Tahitian
+  - :id: 156
+    :label: Tajik
+  - :id: 157
+    :label: Tamil
+  - :id: 158
+    :label: Tatar
+  - :id: 159
+    :label: Telugu
+  - :id: 160
+    :label: Thai
+  - :id: 161
+    :label: Tibetan
+  - :id: 162
+    :label: Tigrinya
+  - :id: 163
+    :label: Tonga (Tonga Islands)
+  - :id: 164
+    :label: Tsonga
+  - :id: 165
+    :label: Tswana
+  - :id: 166
+    :label: Turkish
+  - :id: 167
+    :label: Turkmen
+  - :id: 168
+    :label: Twi
+  - :id: 169
+    :label: Uighur, Uyghur
+  - :id: 170
+    :label: Ukrainian
+  - :id: 171
+    :label: Urdu
+  - :id: 172
+    :label: Uzbek
+  - :id: 173
+    :label: Venda
+  - :id: 174
+    :label: Vietnamese
+  - :id: 175
+    :label: Volap_k
+  - :id: 176
+    :label: Walloon
+  - :id: 177
+    :label: Welsh
+  - :id: 178
+    :label: Western Frisian
+  - :id: 179
+    :label: Wolof
+  - :id: 180
+    :label: Xhosa
+  - :id: 181
+    :label: Yiddish
+  - :id: 182
+    :label: Yoruba
+  - :id: 183
+    :label: Zhuang, Chuang
+  - :id: 184
+    :label: Zulu
 composers:
   - :id: 1
     :label: Arranger

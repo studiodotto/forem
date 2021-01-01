@@ -1,0 +1,9 @@
+<% title("Dashboard - #{community_name}") %>
+
+    <%= render "shared/audio_upload" %>
+    <div class="crayons-card p-6" data-controller="image-upload">
+      <h2 class="crayons-title mb-4">Approved tracks</h2>
+      <%= render partial: 'audios/audios_table', locals: {audios: @audios} %>
+      <h2 class="crayons-title mb-4">Pending tracks</h2>
+      <%= render partial: 'audios/audios_table', locals: {audios: @pending_audios} %>
+    </div>

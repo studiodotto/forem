@@ -12,5 +12,16 @@ module Constants
       Account
       Misc
     ].freeze
+
+    ARTIST_TAB_LIST = %w[
+      Incoming\ Notifications
+      Commission\ Monitor
+      Audio\ Uploads
+      New\ Music\ Releases
+      Account\ and\ Banking
+      Analytics
+      Profile\ and\ services
+      Posts
+    ].freeze
   end
 end

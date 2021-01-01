@@ -21,6 +21,7 @@
     <th scope="col">Email</th>
     <th scope="col">Status</th>
     <th scope="col">Services</th>
+    <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody class="crayons-card">
@@ -38,6 +39,12 @@
         <%# else %>
           <%#= link_to "Approve", admin_application_path(id: application.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
         <%# end %>
+      </td>
+      <td>
+        <% unless application.status.present? %>
+          <%= link_to "Approve", approve_admin_artist_application_path(id: application.id), method: :post, class: 'btn btn-success' %>
+      <% else %>
+        <% end %>
       </td>
     </tr>
   <% end %>

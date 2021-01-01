@@ -60,7 +60,11 @@ Rails.application.routes.draw do
 
       resources :articles, only: %i[index show update]
       resources :audios, only: %i[index update edit]
-      resources :artist_applications, only: %i[index update edit]
+      resources :artist_applications, only: %i[index update edit] do
+        member do
+          post :approve
+        end
+      end
       resources :broadcasts
       resources :buffer_updates, only: %i[create update]
       resources :listings, only: %i[index edit update destroy]
@@ -249,6 +253,12 @@ Rails.application.routes.draw do
     resources :organizations, only: %i[update create destroy]
     resources :followed_articles, only: [:index]
     resources :artist_applications, only: %i[new create]
+    resources :user_documents, only: %i[new create] do
+      collection do
+        get '/connect', to: "user_documents#connect"
+        get '/verified', to: "user_documents#verified"
+      end
+    end
     resources :follows, only: %i[show create update] do
       collection do
         get "/bulk_show", to: "follows#bulk_show"
@@ -449,6 +459,7 @@ Rails.application.routes.draw do
     get "/settings/(:tab)" => "users#edit", :as => :user_settings
     get "/settings/:tab/:org_id" => "users#edit", :constraints => { tab: /organization/ }
     get "/settings/:tab/:id" => "users#edit", :constraints => { tab: /response-templates/ }
+    get "/artist_settings/(:tab)" => "users#artist_edit", :as => :artist_settings
     get "/signout_confirm" => "users#signout_confirm"
     get "/dashboard" => "dashboards#show"
     get "/dashboard/pro", to: "dashboards#pro"

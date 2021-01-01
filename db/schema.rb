@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_162123) do
+ActiveRecord::Schema.define(version: 2020_12_31_130930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
     t.boolean "accept_terms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
   end
 
   create_table "audios", force: :cascade do |t|
@@ -914,6 +915,17 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
+  create_table "payment_providers", force: :cascade do |t|
+    t.string "external_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.string "descriptor"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_payment_providers_on_user_id"
+  end
+
   create_table "podcast_episodes", force: :cascade do |t|
     t.boolean "any_comments_hidden", default: false
     t.text "body"
@@ -1249,6 +1261,23 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
     t.index ["blocked_id", "blocker_id"], name: "index_user_blocks_on_blocked_id_and_blocker_id", unique: true
   end
 
+  create_table "user_documents", force: :cascade do |t|
+    t.string "government_id"
+    t.string "card_last_4"
+    t.string "exp_year"
+    t.string "exp_month"
+    t.string "cvc"
+    t.string "iban_number"
+    t.string "ethereum_address"
+    t.string "bitcoin_address"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
+    t.string "bank_account"
+    t.index ["user_id"], name: "index_user_documents_on_user_id"
+  end
+
   create_table "user_subscriptions", force: :cascade do |t|
     t.bigint "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -1407,6 +1436,22 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
     t.datetime "google_created_at"
     t.string "google_url"
     t.string "google_username"
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "telephone"
+    t.integer "location_id"
+    t.integer "composer_id"
+    t.integer "industry_id"
+    t.integer "song_language_id"
+    t.string "genre_id"
+    t.boolean "commission_accepted", default: false
+    t.boolean "sell_tracks", default: false
+    t.boolean "sell_campaigns", default: false
+    t.string "spotify_url"
+    t.string "soundcloud_url"
+    t.string "itunes_url"
+    t.string "twitter_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -1512,6 +1557,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
   add_foreign_key "organization_memberships", "users", on_delete: :cascade
   add_foreign_key "page_views", "articles", on_delete: :cascade
   add_foreign_key "page_views", "users", on_delete: :nullify
+  add_foreign_key "payment_providers", "users"
   add_foreign_key "podcast_episodes", "podcasts", on_delete: :cascade
   add_foreign_key "podcasts", "users", column: "creator_id"
   add_foreign_key "poll_options", "polls", on_delete: :cascade
@@ -1539,6 +1585,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_162123) do
   add_foreign_key "tweets", "users", on_delete: :nullify
   add_foreign_key "user_blocks", "users", column: "blocked_id"
   add_foreign_key "user_blocks", "users", column: "blocker_id"
+  add_foreign_key "user_documents", "users"
   add_foreign_key "user_subscriptions", "users", column: "author_id"
   add_foreign_key "user_subscriptions", "users", column: "subscriber_id"
   add_foreign_key "users_roles", "roles", on_delete: :cascade

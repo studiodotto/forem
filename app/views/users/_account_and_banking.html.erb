@@ -1,0 +1,13 @@
+<div class="crayons-card p-6">
+  <h2 class="crayons-title mb-4">Accounting and Banking</h2>
+  <label class="crayons-field__label">Account id</label>
+  <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
+  <br><br>
+  <label class="crayons-field__label">Secret token</label>
+  <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.access_token %>" disabled>
+  <br><br>
+  <label class="crayons-field__label">Refresh token</label>
+  <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.refresh_token %>" disabled>
+  <br><br>
+  <a href="<%= @payment_provider.dashboard_link %>"><button class="crayons-btn" style="width: 100%">Visit Dashboard</button></a>
+</div>

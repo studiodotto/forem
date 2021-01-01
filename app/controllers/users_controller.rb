@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_no_cache_header
   before_action :raise_suspended, only: %i[update]
   before_action :set_user, only: %i[
-    update update_language_settings confirm_destroy request_destroy full_delete remove_identity
+    update update_language_settings confirm_destroy request_destroy full_delete remove_identity artist_edit
   ]
   after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org]
   before_action :authenticate_user!, only: %i[onboarding_update onboarding_checkbox_update]
@@ -33,6 +33,17 @@ class UsersController < ApplicationController
     set_user
     set_current_tab(params["tab"] || "profile")
     handle_settings_tab
+  end
+
+  # GET /artist_settings/@tab
+  def artist_edit
+    unless current_user
+      skip_authorization
+      return redirect_to sign_up_path
+    end
+    set_user
+    set_current_tab(params["tab"] || "incoming-notifications")
+    handle_artist_settings_tab
   end
 
   # PATCH/PUT /users/:id.:format
@@ -245,6 +256,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def handle_artist_settings_tab
+    return @tab = "incoming-notifications" if @tab.blank?
+
+    case @tab
+    when "commission-monitor"
+      # handle_organization_tab
+    when "audio-uploads"
+      handle_audio_uploads_tab
+    when "new-music-releases"
+      handle_music_release_tab
+    when "account-and-banking"
+      handle_account_and_banking
+    when "analytics"
+      # handle_response_templates_tab
+    when "profile-and-services"
+      # handle_response_templates_tab
+    when "posts"
+      # handle_response_templates_tab
+    else
+      not_found unless @tab.in?(Constants::Settings::ARTIST_TAB_LIST.map { |t| t.downcase.tr(" ", "-") })
+    end
+  end
+
   private
 
   def sanitize_user_params
@@ -276,6 +310,22 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json { render json: { outcome: outcome } }
     end
+  end
+
+  def handle_audio_uploads_tab
+    @audios = @user.audios.where(status: true).order(id: :desc)
+    @pending_audios = @user.audios.where(status: false).order(id: :desc)
+    @music_releases = MusicRelease.where(user_id: @user.id, published: true)
+  end
+
+  def handle_music_release_tab
+    @music_release = MusicRelease.new
+    @music_releases = MusicRelease.published.order(title: :asc)
+    @music_release_index = true
+  end
+
+  def handle_account_and_banking
+    @payment_provider = @user.payment_provider
   end
 
   def handle_organization_tab

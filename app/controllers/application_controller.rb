@@ -88,21 +88,25 @@ class ApplicationController < ActionController::Base
   # This method is used by Devise to decide which is the path to redirect
   # the user to after a successful log in
   def after_sign_in_path_for(resource)
-    if current_user.saw_onboarding
-      path = stored_location_for(resource) || request.env["omniauth.origin"] || root_path(signin: "true")
-      signin_param = { "signin" => "true" } # the "signin" param is used by the service worker
+    if current_user && (current_user.has_role?(:admin) || current_user.has_role?(:customer) || current_user.has_role?(:super_admin) || current_user.has_role?(:single_resource_admin))
+      if current_user.saw_onboarding
+        path = stored_location_for(resource) || request.env["omniauth.origin"] || root_path(signin: "true")
+        signin_param = { "signin" => "true" } # the "signin" param is used by the service worker
 
-      uri = Addressable::URI.parse(path)
-      uri.query_values = if uri.query_values
-                           uri.query_values.merge(signin_param)
-                         else
-                           signin_param
-                         end
+        uri = Addressable::URI.parse(path)
+        uri.query_values = if uri.query_values
+                             uri.query_values.merge(signin_param)
+                           else
+                             signin_param
+                           end
 
-      uri.to_s
+        return uri.to_s
+      else
+        referrer = request.env["omniauth.origin"] || "none"
+        return onboarding_path(referrer: referrer)
+      end
     else
-      referrer = request.env["omniauth.origin"] || "none"
-      onboarding_path(referrer: referrer)
+      return artist_settings_path
     end
   end
 
