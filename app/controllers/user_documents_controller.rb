@@ -28,10 +28,11 @@ class UserDocumentsController < ApplicationController
   def send_to_stripe(payment_provider_id)
     url = "https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=#{SiteConfig.connect_key}&scope=read_write"
     if Rails.env.production?
-      cookies.permanent[:connect] = {
-          value: "#{current_customer.id}:#{ApiBase.auth_token}:#{request.host}:#{@payment_provider.id}",
-          domain: :all
-      }
+      # cookies.permanent[:connect] = {
+      #     value: "#{current_customer.id}:#{ApiBase.auth_token}:#{request.host}:#{@payment_provider.id}",
+      #     domain: :all
+      # }
+      cookies.permanent[:connect] = payment_provider_id
     else
       cookies.permanent[:connect] = payment_provider_id
     end
