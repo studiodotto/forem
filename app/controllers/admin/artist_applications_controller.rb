@@ -73,7 +73,7 @@ module Admin
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
           flash[:success] = "Approved successfully! User Documents mail has been sent"
-          redirect_back(fallback_location: admin_artist_applications_path)
+          redirect_to :admin_artist_applications_path
         else
           flash[:danger] = "Failed to approve application"
           redirect_to :admin_artist_applications_path
