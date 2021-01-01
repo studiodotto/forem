@@ -73,16 +73,16 @@ module Admin
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
           flash[:success] = "Approved successfully! User Documents mail has been sent"
-          redirect_to :admin_artist_applications_path
+          redirect_to admin_artist_applications_path
         else
           flash[:danger] = "Failed to approve application"
-          redirect_to :admin_artist_applications_path
+          redirect_to admin_artist_applications_path
         end
       else
         error = "Failed to approve application"
         error = resource.errors.full_messages.to_sentence if resource.errors.any?
         flash[:danger] = error
-        redirect_to :admin_artist_applications_path
+        redirect_to admin_artist_applications_path
       end
     end
 
