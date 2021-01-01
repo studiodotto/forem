@@ -1,0 +1,7 @@
+Hey <%= @user.name %>!
+
+We're sending this email to inform you that your first step verification has been approved.
+
+Please fill the form below and provide us with the required details to get full access of your account
+
+Form link:  <strong><%= link_to "click here", app_url(new_user_document_path(user_id: @user.id)) %></strong> to fill the information.
