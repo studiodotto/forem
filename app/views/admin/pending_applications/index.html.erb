@@ -19,33 +19,30 @@
     <th scope="col">First name</th>
     <th scope="col">Last name</th>
     <th scope="col">Email</th>
-<!--    <th scope="col">Status</th>-->
+    <!--    <th scope="col">Status</th>-->
     <th scope="col">Services</th>
-<!--    <th scope="col">Action</th>-->
+    <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody class="crayons-card">
-  <% @applications.each do |application| %>
+  <% @applicants.each do |application| %>
     <tr>
       <td><%= application.id %></td>
       <td><%= application.first_name %></td>
       <td><%= application.last_name %></td>
       <td><%= application.email %></td>
-<!--      <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
+      <!--      <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
       <td>
         <%= application.services.pluck(:name).to_sentence %>
         <%# if application.status.present? %>
-          <%#= link_to "Reject", admin_application_path(id: application.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
+        <%#= link_to "Reject", admin_application_path(id: application.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
         <%# else %>
-          <%#= link_to "Approve", admin_application_path(id: application.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
+        <%#= link_to "Approve", admin_application_path(id: application.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
         <%# end %>
       </td>
-<!--      <td>-->
-        <%# unless application.status.present? %>
-          <%#= link_to "Approve", approve_admin_artist_application_path(id: application.id), method: :post, class: 'btn btn-success' %>
-      <%# else %>
-        <%# end %>
-<!--      </td>-->
+      <td>
+        <%= link_to "Approve", admin_pending_application_approve_path(id: application.id), method: :post, class: 'btn btn-success' %>
+      </td>
     </tr>
   <% end %>
   </tbody>

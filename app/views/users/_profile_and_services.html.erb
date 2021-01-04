@@ -1,0 +1,118 @@
+<%= javascript_include_tag 'application' %>
+
+<div class="crayons-card p-6">
+  <h2 class="crayons-title mb-4">Accounting and Banking</h2>
+  <%= form_with model: @user, url: user_artist_update_path(@user), method: :put, html: { class: "mb-2" }, local: true  do |f| %>
+    <div class="fields-div">
+      <input type="hidden" name="id" value="<%= @user.id %>">
+      <div class="form-group">
+        <%= f.label "First Name ", class: "d-block fields-label" %>
+        <%= f.text_field :first_name, class: "form-control fields-input", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Last Name ", class: "d-block fields-label" %>
+        <%= f.text_field :last_name, class: "form-control fields-input", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Date of Birth ", class: "d-block fields-label" %>
+        <%= f.date_field :date_of_birth, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Email ", class: "d-block fields-label" %>
+        <%= f.text_field :email, class: "form-control fields-input", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Telephone number ", class: "d-block field-label-normal" %>
+        <%= f.text_field :telephone, class: "form-control fields-input", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Location ", class: "d-block field-label-normal" %>
+        <%= f.select(:location_id, options_for_select(@locations, @locations.first), {}, { class: "crayons-select" }) %>
+      </div>
+    </div>
+    <br><br>
+    <!-- About fields -->
+    <div class="fields-div">
+      <h1>
+        About you
+      </h1>
+      <div class="form-group">
+        <%= f.label "Composers and Performers ", class: "d-block fields-label" %>
+        <%= f.select(:composer_id, options_for_select(@composers, @composers.first), {}, { class: "crayons-select" }) %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Industry Pro ", class: "d-block fields-label" %>
+        <%= f.select(:industry_id, options_for_select(@industries, @industries.first), {}, { class: "crayons-select" }) %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Song Language ", class: "d-block fields-label" %>
+        <%= f.select(:song_language_id, options_for_select(@languages, @languages.first), {}, { class: "crayons-select" }) %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Genre ", class: "d-block fields-label" %>
+        <%= f.select(:genre_id, options_for_select(@genres, @genres.first), {}, { class: "crayons-select" }) %>
+      </div>
+    </div>
+    <br><br>
+    <!-- Commission fields -->
+    <div class="fields-div">
+      <h1>
+        Available for music work commissions?
+      </h1>
+      <p>
+        Accept music—paying commissions to write a new piece for a specific purpose or event
+      </p>
+      <span class="field-span">
+            <%= f.check_box :commission_accepted, class: "crayons-checkbox commission-checkbox" %>
+        <span style="position: relative; top: 1px; left: 3px">
+              Available for Music Work Commissions:
+            </span>
+          </span>
+      <p class="fields-description-text">
+        Select the services you want to offer
+      </p>
+      <% @user.services.order(created_at: 'asc').each do |service| %>
+        <div class="form-group" style="margin-bottom: 10px">
+          <input type="hidden" name="service[][id]" value="<%= service.id %>">
+          <input type="text" name="service[][name]" style="padding: 10px" value="<%= service.name %>">
+          <input type="text" name="service[][price]" style="padding: 10px" value="<%= service.price %>">
+        </div>
+      <% end %>
+    </div>
+    <br><br>
+    <!-- Basic fields -->
+    <div class="fields-div">
+      <h1>
+        Social presence
+      </h1>
+      <div class="form-group">
+        <%= f.label "Spotify URL ", class: "d-block fields-label" %>
+        <%= f.text_field :spotify_url, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Soundcloud URL ", class: "d-block fields-label" %>
+        <%= f.text_field :soundcloud_url, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Itunes URL ", class: "d-block fields-label" %>
+        <%= f.text_field :itunes_url, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Facebook URL ", class: "d-block fields-label" %>
+        <%= f.text_field :facebook_url, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Twitter URL ", class: "d-block field-label-normal" %>
+        <%= f.text_field :twitter_url, class: "form-control fields-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Add Website URL ", class: "d-block field-label-normal" %>
+        <%= f.text_field :website_url, class: "form-control fields-input" %>
+      </div>
+    </div>
+    <%= f.submit "Apply to UnitedBits", class: "crayons-btn application-submit-btn" %>
+    <br><br>
+    </div>
+  <% end %>
+</div>
+

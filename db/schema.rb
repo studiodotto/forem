@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_130930) do
+ActiveRecord::Schema.define(version: 2021_01_03_132057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1452,6 +1452,7 @@ ActiveRecord::Schema.define(version: 2020_12_31_130930) do
     t.string "soundcloud_url"
     t.string "itunes_url"
     t.string "twitter_url"
+    t.boolean "is_verified", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true

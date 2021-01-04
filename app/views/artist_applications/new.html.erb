@@ -3,6 +3,9 @@
 <div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left">
   <div class="sidebar-wrapper sidebar-wrapper-left crayons-layout__sidebar-left">
   </div>
+  <% if flash[:alert].present? %>
+    <p><%= flash[:alert] %></p>
+  <% end %>
   <% unless flash[:notice].present? %>
     <div class="articles-list crayons-layout__content">
       <h1 class="application-heading">
@@ -21,23 +24,28 @@
           </h1>
           <div class="form-group">
             <%= f.label "First Name ", class: "d-block fields-label" %>
-            <%= f.text_field :first_name, class: "form-control fields-input" %>
+            <%= f.text_field :first_name, class: "form-control fields-input", required: true %>
           </div>
           <div class="form-group">
             <%= f.label "Last Name ", class: "d-block fields-label" %>
-            <%= f.text_field :last_name, class: "form-control fields-input" %>
+            <%= f.text_field :last_name, class: "form-control fields-input", required: true %>
           </div>
           <div class="form-group">
             <%= f.label "Date of Birth ", class: "d-block fields-label" %>
-            <%= f.date_field :date_of_birth, class: "form-control fields-input" %>
+            <%= f.date_field :date_of_birth, class: "form-control fields-input", required: true %>
           </div>
           <div class="form-group">
             <%= f.label "Email ", class: "d-block fields-label" %>
-            <%= f.text_field :email, class: "form-control fields-input" %>
+            <%= f.text_field :email, class: "form-control fields-input", required: true %>
+          </div>
+          <div class="form-group">
+            <label class="d-block fields-label">Password</label>
+            <input class="form-control fields-input" type="password" name='password' required>
+            <p>Must be at least 6 characters</p>
           </div>
           <div class="form-group">
             <%= f.label "Telephone number ", class: "d-block field-label-normal" %>
-            <%= f.text_field :telephone, class: "form-control fields-input" %>
+            <%= f.text_field :telephone, class: "form-control fields-input", required: true %>
           </div>
           <div class="form-group">
             <%= f.label "Location ", class: "d-block field-label-normal" %>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[
     update update_language_settings confirm_destroy request_destroy full_delete remove_identity artist_edit
   ]
-  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org]
+  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org artist_update]
   before_action :authenticate_user!, only: %i[onboarding_update onboarding_checkbox_update]
   before_action :set_suggested_users, only: %i[index]
   before_action :initialize_stripe, only: %i[edit]
@@ -74,6 +74,25 @@ class UsersController < ApplicationController
         flash[:error] = @user.errors.full_messages.join(", ")
         redirect_to "/settings"
       end
+    end
+  end
+
+  def artist_update
+    @artist = User.find(params[:id])
+    if @artist.update(artist_update_params)
+      params[:service].each do |service_param|
+        service = Service.find(service_param[:id])
+        service.name = service_param[:name]
+        service.price = service_param[:price]
+        service.save
+      end
+      flash[:global_notice] = 'Successfully updated information'
+      return redirect_to '/artist_settings/profile-and-services'
+    else
+      error = "Cannot update information"
+      error = @artist.errors.full_messages.to_sentence if @artist.errors.any?
+      flash[:error] = error
+      return redirect_to '/artist_settings/profile-and-services'
     end
   end
 
@@ -271,6 +290,12 @@ class UsersController < ApplicationController
     when "analytics"
       # handle_response_templates_tab
     when "profile-and-services"
+      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
       # handle_response_templates_tab
     when "posts"
       # handle_response_templates_tab
@@ -302,6 +327,12 @@ class UsersController < ApplicationController
     ).suggest
 
     recent_suggestions.presence || default_suggested_users
+  end
+
+  def artist_update_params
+    params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location_id, :composer_id, :industry_id,
+                                 :song_language_id, :genre_id, :industry_id, :commission_accepted, :sell_tracks, :sell_campaigns, :spotify_url,
+                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url)
   end
 
   def render_update_response

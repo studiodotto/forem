@@ -48,7 +48,8 @@ Rails.application.routes.draw do
 
     namespace :admin do
       get "/" => "admin_portals#index"
-
+      get "/pending_applications" => "pending_applications#index", as: :pending_applications_index
+      post "pending_applications/approve", to: "pending_applications#approve", as: :pending_application_approve
       authenticate :user, ->(user) { user.tech_admin? } do
         mount Blazer::Engine, at: "blazer"
 
@@ -246,7 +247,9 @@ Rails.application.routes.draw do
     end
     resources :comment_mutes, only: %i[update]
     resources :users, only: %i[index], defaults: { format: :json } # internal API
-    resources :users, only: %i[update]
+    resources :users, only: %i[update] do
+      put "artist_update"
+    end
     resources :reactions, only: %i[index create]
     resources :response_templates, only: %i[index create edit update destroy]
     resources :feedback_messages, only: %i[index create]

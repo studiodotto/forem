@@ -18,7 +18,9 @@ class UserDocumentsController < ApplicationController
     provider_id = cookies[:connect]
     payment_provider = PaymentProvider.find(provider_id)
     payment_provider.update(external_id: data["stripe_user_id"], access_token: data["access_token"], refresh_token: data["refresh_token"])
-    VerificationMailer.with(user_id: payment_provider.user.id).artist_verified.deliver_now
+    user = payment_provider.user
+    # user.update(is_verified: true)
+    # VerificationMailer.with(user_id: payment_provider.user.id).artist_verified.deliver_now
     redirect_to verified_user_documents_path
   end
 
