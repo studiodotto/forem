@@ -10,7 +10,11 @@
     <label class="crayons-field__label">Refresh token</label>
     <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.refresh_token %>" disabled>
     <br><br>
-    <a href="<%= @payment_provider.dashboard_link %>"><button class="crayons-btn" style="width: 100%">Visit Dashboard</button></a>
+    <% if @payment_provider.try(:dashboard_link) %>
+      <a href="<%= @payment_provider.dashboard_link %>"><button class="crayons-btn" style="width: 100%">Visit Dashboard</button></a>
+    <% else %>
+      <a href="#"><button class="crayons-btn" style="width: 100%">Can't generate link</button></a>
+    <% end %>
   <% else %>
     <div>Please enter banking information from mail</div>
   <% end %>
