@@ -51,9 +51,9 @@
   </div>
 
   <div class="crayons-layout__content">
-    <% if current_user.email.blank? %>
-      <div class="crayons-notice crayons-notice--warning mb-6">
-        <h3 class="mb-2">Confirm your email to complete your profile.</h3>
+    <% unless @user.confirmed? %>
+      <div class="crayons-notice crayons-notice--warning mb-6" style="background: #0000009c; color: white; text-align: center">
+        <h3 class="mb-2">Please confirm your email within 1 hour to avoid any inconvinience.</h3>
       </div>
     <% end %>
 

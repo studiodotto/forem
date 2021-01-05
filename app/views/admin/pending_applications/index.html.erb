@@ -16,9 +16,9 @@
   <thead>
   <tr>
     <th scope="col">ID</th>
-    <th scope="col">First name</th>
-    <th scope="col">Last name</th>
+    <th scope="col">Name</th>
     <th scope="col">Email</th>
+    <th scope="col">Email confirmation</th>
     <!--    <th scope="col">Status</th>-->
     <th scope="col">Services</th>
     <th scope="col">Action</th>
@@ -28,9 +28,9 @@
   <% @applicants.each do |application| %>
     <tr>
       <td><%= application.id %></td>
-      <td><%= application.first_name %></td>
-      <td><%= application.last_name %></td>
+      <td><%= application.first_name %> <%= application.last_name %></td>
       <td><%= application.email %></td>
+      <td><%= application.confirmed_at.present? ? "<span class ='badge badge-success'>Verified</span".html_safe : "<span class ='badge badge-danger'>Pending</span".html_safe %></td>
       <!--      <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
       <td>
         <%= application.services.pluck(:name).to_sentence %>

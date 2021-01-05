@@ -43,7 +43,7 @@ class ArtistApplicationsController < ApplicationController
       resource.registered_at = Time.current
       resource.editor_version = "v2"
       resource.username = artist_application.first_name + SecureRandom.rand(999).to_s
-      resource.skip_confirmation!
+      # resource.skip_confirmation!
       resource.is_verified = false
       if resource.save
         resource.add_role(:applicant)
@@ -55,12 +55,13 @@ class ArtistApplicationsController < ApplicationController
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
           flash[:notice] = "Application received successfully"
+          sign_in_and_redirect(resource, event: :authentication)
         else
           flash[:alert] = "Failed to send verification mail"
+          @artist_application = ArtistApplication.new
+          set_data
+          return redirect_to new_artist_application_path
         end
-        @artist_application = ArtistApplication.new
-        set_data
-        return redirect_to new_artist_application_path
       else
         @artist_application = ArtistApplication.new
         set_data
