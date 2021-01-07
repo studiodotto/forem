@@ -2,7 +2,12 @@ class UserDocumentsController < ApplicationController
 
   def new
     @user_id = params[:user_id]
-    payment_provider = PaymentProvider.create(user_id: @user_id)
+    db_provider = PaymentProvider.find_by(user_id: @user_id)
+    unless db_provider.present?
+      payment_provider = PaymentProvider.create(user_id: @user_id)
+    else
+      payment_provider = db_provider
+    end
     send_to_stripe(payment_provider.id)
   end
 
