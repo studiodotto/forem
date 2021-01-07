@@ -52,6 +52,7 @@ class ArtistApplicationsController < ApplicationController
           service.save
         end
         artist_application.status = true
+        artist_application.user_id = resource.id
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
           flash[:notice] = "Application received successfully"

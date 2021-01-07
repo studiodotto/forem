@@ -66,6 +66,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_one :user_document, dependent: :destroy
   has_one :payment_provider, dependent: :destroy
+  has_one :artist_application, dependent: :destroy
   accepts_nested_attributes_for   :user_document
 
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant", foreign_key: :resource_owner_id,
