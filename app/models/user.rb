@@ -349,6 +349,10 @@ class User < ApplicationRecord
     has_role?(:tech_admin) || has_role?(:super_admin)
   end
 
+  def customer?
+    has_role?(:customer)
+  end
+
   def pro?
     Rails.cache.fetch("user-#{id}/has_pro_role", expires_in: 200.hours) do
       has_role?(:pro)

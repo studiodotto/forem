@@ -45,6 +45,10 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    if current_user.customer?
+      flash[:error] = "you're not authorized to perform this action"
+      redirect_to root_path
+    end
     base_editor_assigments
 
     @article, needs_authorization = Articles::Builder.call(@user, @tag, @prefill)

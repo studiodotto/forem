@@ -8,11 +8,11 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    !user_customer?
   end
 
   def create?
-    !user_is_banned?
+    !user_is_banned? && !user_customer?
   end
 
   def delete_confirm?
@@ -54,5 +54,9 @@ class ArticlePolicy < ApplicationPolicy
 
   def user_org_admin?
     user.org_admin?(record.organization_id)
+  end
+
+  def user_customer?
+    user.customer?
   end
 end

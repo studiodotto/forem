@@ -1,6 +1,6 @@
 class OrganizationPolicy < ApplicationPolicy
   def create?
-    !user.banned
+    !user.banned && !user.customer?
   end
 
   def update?

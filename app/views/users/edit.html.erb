@@ -44,17 +44,21 @@
   <div class="crayons-layout__left-sidebar">
     <nav class="hidden m:block">
       <% Constants::Settings::TAB_LIST.each do |possible_tab| %>
-        <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-          <%= possible_tab %>
-        </a>
+        <% if !(@user.customer? && possible_tab == "Organization") %>
+          <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/settings/<%= possible_tab.downcase.tr(" ", "-") %>">
+            <%= possible_tab %>
+          </a>
+        <% end %>
       <% end %>
     </nav>
     <div class="m:hidden p-2 pt-0">
       <select id="mobile-page-selector" class="crayons-select">
         <% Constants::Settings::TAB_LIST.each do |possible_tab| %>
-          <option value="/settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
-            <%= possible_tab %>
-          </option>
+          <% if !(@user.customer? && possible_tab == "Organization") %>
+            <option value="/settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
+              <%= possible_tab %>
+            </option>
+          <% end %>
         <% end %>
       </select>
     </div>

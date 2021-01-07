@@ -1,8 +1,12 @@
 import { h } from 'preact';
 import PropTypes from 'prop-types';
 import { Button } from '../../crayons/Button';
-
 export const CommentsCount = ({ count, articlePath }) => {
+  const userString = localStorage.getItem('current_user');
+  let user = null;
+  if (userString && userString.length > 0) {
+    user = JSON.parse(userString);
+  }
   const commentsSVG = () => (
     <svg
       className="crayons-icon"
@@ -14,7 +18,7 @@ export const CommentsCount = ({ count, articlePath }) => {
     </svg>
   );
 
-  if (count > 0) {
+  if (count > 0 && (!user || (user && (!user['customer'] || user['admin'])))) {
     return (
       <Button
         variant="ghost"
@@ -25,7 +29,7 @@ export const CommentsCount = ({ count, articlePath }) => {
         tagName="a"
       >
         <span title="Number of comments">
-          {count} 
+          {count}
           <span className="hidden s:inline">
             &nbsp;
             {`${count > 1 ? 'comments' : 'comment'}`}
@@ -34,7 +38,10 @@ export const CommentsCount = ({ count, articlePath }) => {
       </Button>
     );
   }
-  if (count === 0) {
+  if (
+    count === 0 &&
+    (!user || (user && (!user['customer'] || user['admin'])))
+  ) {
     return (
       <Button
         variant="ghost"
