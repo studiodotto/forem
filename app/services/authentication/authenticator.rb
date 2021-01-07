@@ -99,9 +99,11 @@ module Authentication
       existing_user = User.where(
         provider.user_username_field => provider.user_nickname,
       ).take
-      unless existing_user.has_role?(:customer)
-        existing_user.add_role(:customer)
-      end
+      if existing_user
+        unless existing_user.has_role?(:customer)
+          existing_user.add_role(:customer)
+        end
+      end  
       return existing_user if existing_user
 
       User.new.tap do |user|

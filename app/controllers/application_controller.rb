@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
   # the user to after a successful log in
   def after_sign_in_path_for(resource)
     if current_user && (current_user.has_role?(:artist) || current_user.has_role?(:applicant))
-      return artist_settings_path
+      return artist_settings_path(tab: 'profile-and-services')
     else
       if current_user.saw_onboarding
         path = stored_location_for(resource) || request.env["omniauth.origin"] || root_path(signin: "true")
