@@ -42,7 +42,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_for(provider)
     auth_payload = request.env["omniauth.auth"]
     cta_variant = request.env["omniauth.params"]["state"].to_s
-
+    provider_response = load_authentication_provider(auth_payload)
+    # Check if artist is using social login
+    if provider_response && provider_response.new_user_data && provider_response.new_user_data[:email].present?
+      artist = User.find_by(email: provider_response.new_user_data[:email])
+      if artist.present? && (artist.has_role?(:artist) || artist.has_role?(:applicant))
+        flash[:alert] = "Artist already exists with this information! social login is not allowed for artists"
+        return redirect_to new_user_registration_url
+      end
+    end
     @user = Authentication::Authenticator.call(
       auth_payload,
       current_user: current_user,
@@ -101,5 +109,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def user_persisted_but_username_taken?
     @user.persisted? && @user.errors_as_sentence.include?("username has already been taken")
+  end
+
+  def load_authentication_provider(auth_payload)
+    provider_class = Authentication::Providers.get!(auth_payload.provider)
+    provider_class.new(auth_payload)
   end
 end
