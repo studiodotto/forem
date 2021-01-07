@@ -75,7 +75,8 @@ module Admin
     def full_delete
       @user = User.find(params[:id])
       begin
-        Moderator::DeleteUser.call(user: @user)
+        # Moderator::DeleteUser.call(user: @user)
+        Users::Delete.call(@user)
         message = "@#{@user.username} (email: #{@user.email.presence || 'no email'}, user_id: #{@user.id}) " \
           "has been fully deleted." \
           "If this is a GDPR delete, delete them from Mailchimp & Google Analytics."
