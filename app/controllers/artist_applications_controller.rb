@@ -5,6 +5,13 @@ class ArtistApplicationsController < ApplicationController
   end
 
   def create
+    user = User.find_by(email: artist_application_params[:email])
+    if user.present?
+      @artist_application = ArtistApplication.new
+      set_data
+      flash[:artist_error] = "User already exists with same email"
+      return redirect_to new_artist_application_path
+    end
     artist_application = ArtistApplication.new(artist_application_params)
     # services = params[:services].reject! { |s| s.empty? }
     # services = params[:services]
@@ -55,10 +62,10 @@ class ArtistApplicationsController < ApplicationController
         artist_application.user_id = resource.id
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
-          flash[:notice] = "Application received successfully"
+          flash[:artist_success] = "Application received successfully"
           sign_in_and_redirect(resource, event: :authentication)
         else
-          flash[:alert] = "Failed to send verification mail"
+          flash[:artist_error] = "Failed to send verification mail"
           @artist_application = ArtistApplication.new
           set_data
           return redirect_to new_artist_application_path
@@ -66,13 +73,13 @@ class ArtistApplicationsController < ApplicationController
       else
         @artist_application = ArtistApplication.new
         set_data
-        flash[:alert] = resource.errors.full_messages.to_sentence
+        flash[:artist_error] = resource.errors.full_messages.to_sentence
         return redirect_to new_artist_application_path
       end
     else
       @artist_application = ArtistApplication.new
       set_data
-      flash[:alert] = artist_application.errors.full_messages.to_sentence
+      flash[:artist_error] = artist_application.errors.full_messages.to_sentence
       return redirect_to new_artist_application_path
     end
   end

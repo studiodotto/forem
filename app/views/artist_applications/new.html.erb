@@ -1,12 +1,11 @@
 <%= javascript_include_tag 'application' %>
-
+<% if flash[:artist_error].present? %>
+  <div class="alert alert-danger" style="text-align: center"><%= flash[:artist_error] %></div>
+<% end %>
 <div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left">
   <div class="sidebar-wrapper sidebar-wrapper-left crayons-layout__sidebar-left">
   </div>
-  <% if flash[:alert].present? %>
-    <p><%= flash[:alert] %></p>
-  <% end %>
-  <% unless flash[:notice].present? %>
+  <% unless flash[:artist_success].present? %>
     <div class="articles-list crayons-layout__content">
       <h1 class="application-heading">
         Apply to join UnitedBits and Sell Your Music Online
