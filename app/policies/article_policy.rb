@@ -8,11 +8,11 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def new?
-    !user_customer?
+    !user_customer? || minimal_admin?
   end
 
   def create?
-    !user_is_banned? && !user_customer?
+    !user_is_banned? && (!user_customer? || minimal_admin?)
   end
 
   def delete_confirm?

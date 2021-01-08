@@ -4,7 +4,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    !user_is_banned? && !user_is_comment_banned? && !user_is_blocked? && !user_is_customer?
+    !user_is_banned? && !user_is_comment_banned? && !user_is_blocked? && (!user_is_customer? || minimal_admin?)
   end
 
   def update?

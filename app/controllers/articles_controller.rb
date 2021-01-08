@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    if current_user.customer?
+    if current_user.customer? && !current_user.any_admin?
       flash[:error] = "you're not authorized to perform this action"
       redirect_to root_path
     end
