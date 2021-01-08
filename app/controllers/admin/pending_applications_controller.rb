@@ -15,6 +15,7 @@ module Admin
       user.articles.update_all(published: true, published_at: Time.now.utc)
       user.remove_role(:applicant)
       user.add_role(:artist)
+      user.artist_application.update_column(:status, true)
       VerificationMailer.with(user_id: user.id).artist_verified.deliver_now
       flash[:success] = "Application has been approved successfully"
       redirect_to admin_pending_applications_index_path

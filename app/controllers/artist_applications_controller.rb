@@ -58,7 +58,7 @@ class ArtistApplicationsController < ApplicationController
           service.user_id = resource.id
           service.save
         end
-        artist_application.status = true
+        artist_application.status = false
         artist_application.user_id = resource.id
         artist_application.save
         if VerificationMailer.with(user_id: resource.id).user_documents_email.deliver_now
