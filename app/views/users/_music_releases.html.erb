@@ -1,0 +1,65 @@
+<%= form_with model: object, url: create_organizations_music_release_path(object), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
+  <div class="container" style="padding: 0px">
+
+    <div class="row" style="padding: 20px; background: white">
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #000000;"><%= header %></p>
+      <br>
+      <div class="form-group">
+        <p class="track-labels">Track</p>
+        <%= f.hidden_field :organization_id, value: organization&.id %>
+        <%= f.hidden_field :user_id, value: current_user&.id %>
+        <%= f.hidden_field :music_release_type %>
+        <%= f.text_field :title, class: "form-control track-fields", required: true, placeholder: "Enter title"%>
+      </div>
+      <div class="crayons-layout" style="padding: 0px; grid-template-columns: 1fr 1fr 1fr !important;">
+        <div class="form-group">
+          <p class="track-labels">Price</p>
+          <%= f.text_field :price, class: "form-control track-fields", required: true, placeholder: "Enter price" %>
+        </div>
+        <div class="form-group">
+          <p class="track-labels">Length</p>
+          <%= f.text_field :length, class: "form-control track-fields", required: true, placeholder: "Enter length" %>
+        </div>
+        <% if f.object.present? && f.object.music_release_type != "ninty_second" %>
+          <div class="form-group">
+            <p class="track-labels">Number of limited editions copies</p>
+            <%= f.text_field :copies, class: "form-control track-fields", required: true, placeholder: "Enter copies" %>
+          </div>
+        <%end %>
+      </div>
+      <div class="form-group">
+        <p class="track-labels">Project Details</p>
+        <%= f.text_field :description, class: "form-control track-fields", placeholder: "Enter Details" %>
+      </div>
+      <div class="form-group">
+        <p class="track-labels">Slug</p>
+        <%= f.text_field :slug, class: "form-control track-fields", placeholder: "This is the web address of your project" %>
+      </div>
+    </div>
+
+    <div class="row" style="padding: 20px; background: white">
+      <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Cover image</p>
+      <br>
+      <div class="form-group">
+        <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose a great image for your project</p>
+        <%= f.file_field :image, class: "form-control track-fields", required: true, placeholder: "Enter title name" %>
+      </div>
+    </div>
+
+    <div class="row" style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px; background: white">
+      <div class="form-group">
+        <%# if @organization&.id.present? %>
+          <%= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}" %>
+        <%# else %>
+          <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}", disabled: true %>
+        <%# end %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

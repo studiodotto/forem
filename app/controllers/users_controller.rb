@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_no_cache_header
+  before_action :set_no_cache_header, except: :artist_edit
   before_action :raise_suspended, only: %i[update]
   before_action :set_user, only: %i[
     update update_language_settings confirm_destroy request_destroy full_delete remove_identity artist_edit
@@ -297,6 +297,40 @@ class UsersController < ApplicationController
       @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
       @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
       # handle_response_templates_tab
+    when "unreleased-music-project"
+      @orangization = current_user.artist_organizations.unreleased.first_or_initialize
+      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
+      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
+      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
+      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+    when "online-music-services-page"
+      @orangization = current_user.artist_organizations.online_music_service.first_or_initialize
+      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
+      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
+      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
+      @ninty_second = @orangization.music_releases.ninty_second.first || MusicRelease.new(music_release_type: "ninty_second")
+      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+    when "deejaying-services"
+      @orangization = current_user.artist_organizations.deejaying.first_or_initialize
+      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
+      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
+      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
+      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
     when "posts"
       # handle_response_templates_tab
     else

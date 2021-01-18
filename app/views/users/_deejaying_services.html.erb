@@ -1,0 +1,287 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+<style>
+  .pointer-none {
+    pointer-events: none;
+  }
+  .font-2rem{
+    font-size: 2rem;
+  }
+  .color-gray{
+    font-family: 'Roboto', sans-serif;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 137.19%;
+    color: #64707D;
+  }
+  .container{
+    background: #fed852;
+    padding: 15px;
+    border: 1px solid white !important;
+  }
+  .organization-fields{
+    width: 100% !important;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    background: #F9FAFA;
+    border: 2px solid #B5BDC4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  .track-fields{
+    background: #ffffff;
+    width: 100% !important;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    border: 2px solid #B5BDC4;
+    box-sizing: border-box;
+    border-radius: 5px
+  }
+  .track-labels{
+    font-family: 'Roboto', sans-serif; margin-top: 1rem;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.1px;
+  }
+  .single_track_btn{
+    background: rgba(253, 0, 84, 0.13) !important;
+    border: 2px solid #FD0054 !important;
+    box-sizing: border-box !important;
+    font-size: 17px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    letter-spacing: 0.1px !important;
+    color: #000000 !important;
+    border-radius: 0px !important;
+    font-weight: 300 !important;
+  }
+  .album_btn{
+    background: rgba(167, 209, 41, 0.13) !important;
+    border: 2px solid #A7D129 !important;
+    box-sizing: border-box !important;
+    font-size: 17px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    letter-spacing: 0.1px !important;
+    color: #000000 !important;
+    border-radius: 0px !important;
+    font-weight: 300 !important;
+  }
+  .music_set_btn{
+    background: rgba(164, 168, 255, 0.24) !important;
+    border: 2px solid #A4A8FF !important;
+    box-sizing: border-box !important;
+    font-size: 17px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    letter-spacing: 0.1px !important;
+    color: #000000 !important;
+    border-radius: 0px !important;
+    font-weight: 300 !important;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.1px;
+  }
+  .organization-submit-btn{
+    height: 60px !important;
+    background: #454545 !important;
+    border-radius: 10px !important;
+    flex: none !important;
+    order: 1 !important;
+    flex-grow: 0 !important;
+  }
+</style>
+<div class="row" >
+  <%= form_with model: @orangization, url: create_organization_path(@orangization), method: :post, html: { class: "mb-2" }, local: true do |f| %>
+    <div class="container">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 24px;color: #08090A;
+          line-height: 36px;">Get new Deejaying Work, build your community </p>
+      </div>
+
+      <div class="row">
+        <p class="color-gray">This service is designed to bring you an easy-to-use form to launch your online music business, offer products and services and accept new music work commissions.</p>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">1. Artist Name</p>
+        <p class="color-gray">Pick a brand name for your services, your project, or your band. You can always just use your name.</p>
+        <div class="form-group">
+          <input type="hidden" name="organization[organization_type]" value="unreleased">
+          <%= f.hidden_field :id%>
+          <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
+          <%= f.text_field :name, class: "form-control organization-fields", required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #08090A;
+          flex: none;
+          order: 0;
+          flex-grow: 0;">About you and your music </p>
+      </div>
+      <div class="row">
+        <p class="color-gray">Tell your fans about you, and the collaborations you are available for. Access different kinds of projects, from concert music and jazz to dance and video games</p>
+      </div>
+      <br>
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          color: #08090A;
+          flex: none;
+          order: 2;
+          flex-grow: 0;">Starred fields are required</p>
+        <br>
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Deejaying Music Production</p>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Song Language*</p>
+        <p class="color-gray">Select the languages you perform. You can choose up to four. If you want more shoot us a mail.</p>
+        <div class="form-group">
+          <%= f.select(:song_language_id, options_for_select(@languages, @languages.first), {}, { class: "crayons-select" }) %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select Genre*</p>
+        <p class="color-gray">You can select up to four genres*</p>
+        <div class="form-group">
+          <%= f.select(:genre_id, options_for_select(@genres, @genres.first), {}, { class: "crayons-select" }) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">2. Your project and services*</p>
+        <p class="color-gray">Tell your fans a few things about this project and the services you are offering.</p>
+        <div class="form-group">
+          <%= f.text_area :summary, class: "form-control organization-fields", required: true, row: 5 %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">3. Awards and Nominations_1</p>
+        <p class="color-gray">In online tell your fans about your greates awards and nominatons</p>
+        <div class="form-group">
+          <%= f.text_field :tag_line, class: "form-control organization-fields" %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">4. Awards and Nominations_2</p>
+        <p class="color-gray">In online what’s your greatest achievement in your music career</p>
+        <div class="form-group">
+          <%= f.text_field :tech_stack, class: "form-control organization-fields" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">5. Cover Image</p>
+        <p class="color-gray">Choose a great image for your project</p>
+        <div class="form-group">
+          <%= f.file_field :profile_image, class: "form-control fields-input" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="    font-family: 'Roboto', sans-serif;
+          text-align: center;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 154.69%;
+          letter-spacing: 0.01em;
+          color: #000000;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+          margin: 0px 0px;">Note: you are not automatically enrolled on UnitedBits marketplace. If you meet the eligibility requirements, a talent representative will contact you within a few days to finish onboarding.</p>
+        <div class="form-group">
+          <% btn_text = f.object.id.present? ? "Update your online business" : "Create your online business" %>
+          <%= f.submit btn_text, class: "crayons-btn application-submit-btn organization-submit-btn" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="container" style="background: #feb34a; border: 1px solid #ff9242 !important;">
+    <div class="row">
+      <p style="font-family: 'Roboto', sans-serif;    font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #000000;
+        flex: none;
+        order: 0;
+        flex-grow: 0;">SELL A BUNDLE OF PRODUCTS AND SERVICES</p>
+      <p style="font-family: 'Roboto', sans-serif; margin-top: 0.5rem;font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        color: #000000;">Select the type of products and services you offer. If you don’t find what you need, shoot me a mail at phaethon@unitedbits.io. </p>
+    </div>
+  </div>
+
+  <%= render partial: 'project_events', locals: {type: "ninty_second"} %>
+  <%= render partial: 'music_releases', locals: {type: 'ninty_second', header: "90 sec tune", submit_btn: "Create tune", btn_class: "single_track_btn", object: @ninty_second, organization: @organization } %>
+
+
+  <div class="container">
+    <div class="row">
+      <p style="font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #000000;">SINGLE TRACKS, ALBUMS, MUSIC SETS</p>
+      <p class="color-gray">Creat a bundle of products to sell</p>
+    </div>
+  </div>
+
+  <%= render partial: 'project_events', locals: {type: "all"} %>
+
+  <%= render partial: 'music_releases', locals: {type: 'single_track', header: "Single track project", submit_btn: "Launch Single Track", btn_class: "single_track_btn", object: @single, organization: @organization } %>
+  <%= render partial: 'music_releases', locals: {type: 'album', header: "Album with mulitple tracks", submit_btn: "Launch Album", btn_class: "album_btn", object: @album, organization: @organization } %>
+  <%= render partial: 'music_releases', locals: {type: 'music_set', header: "Music Set", submit_btn: "Launch Music Set", btn_class: "music_set_btn", object: @music_set, organization: @organization } %>
+
+
+</div>

@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  after_action :verify_authorized
+  after_action :verify_authorized, except: [:create_organization, :create_organizations_music_release]
 
   def create
     rate_limit!(:organization_creation)
@@ -22,6 +22,33 @@ class OrganizationsController < ApplicationController
       redirect_to "/settings/organization/#{@organization.id}"
     else
       render template: "users/edit"
+    end
+  end
+
+  def create_organization
+    begin
+      raise StandardError.new "Invalid Image" unless valid_image?
+      @organization = Organization.new(organization_params)
+      @organization.save(validate: false)
+      raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
+    rescue => exc
+      flash[:settings_notice] = exc.message
+    ensure
+      redirect_to artist_settings_path(tab: tabs(organization_params[:organization_type]))
+    end
+  end
+
+  def create_organizations_music_release
+    begin
+      raise StandardError.new "Invalid Image" unless valid_image?
+      @organization_music_release = MusicRelease.new(organization_music_release_params)
+      binding.pry
+      @organization_music_release.save(validate: false)
+      raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
+    rescue => exc
+      flash[:settings_notice] = exc.message
+    ensure
+      redirect_to artist_settings_path(tab: tabs(organization_params[:organization_type]))
     end
   end
 
@@ -100,6 +127,17 @@ class OrganizationsController < ApplicationController
       cta_button_text
       cta_button_url
       cta_body_markdown
+      artist_id
+      composer_id
+      song_language_id
+      genre_id
+      industry_id
+      location_id
+      insta_url
+      spotify_url
+      soundcloud_url
+      itunes_url
+      organization_type
     ]
   end
 
@@ -114,6 +152,10 @@ class OrganizationsController < ApplicationController
       end
   end
 
+  def organization_music_release_params
+    params.require(:music_release).permit(:music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length)
+  end
+
   def set_organization
     @organization = Organization.find_by(id: organization_params[:id])
     not_found unless @organization
@@ -121,7 +163,7 @@ class OrganizationsController < ApplicationController
   end
 
   def valid_image?
-    image = params.dig("organization", "profile_image")
+    image = params.dig("organization", "profile_image") || params.dig("music_release", "pimage")
 
     return true unless image
 
@@ -149,5 +191,12 @@ class OrganizationsController < ApplicationController
     @organization.errors.add(:profile_image, FILENAME_TOO_LONG_MESSAGE)
 
     false
+  end
+
+  def tabs(tab)
+    case tab
+    when "unreleased"
+      return "unreleased-music-project"
+    end
   end
 end

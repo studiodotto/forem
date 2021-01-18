@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_135511) do
+ActiveRecord::Schema.define(version: 2021_01_16_133221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -720,6 +720,12 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "price"
+    t.integer "copies"
+    t.float "length"
+    t.string "music_release_type"
+    t.integer "organization_id"
+    t.string "url"
     t.index ["user_id"], name: "index_music_releases_on_user_id"
   end
 
@@ -735,6 +741,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.bigint "music_release_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "audio_id"
     t.index ["music_release_id"], name: "index_music_tracks_on_music_release_id"
   end
 
@@ -835,6 +842,24 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.datetime "delivery_date"
+    t.integer "organization_id"
+    t.string "status"
+    t.float "total_amount"
+    t.string "credits_count"
+    t.string "language"
+    t.text "instruction"
+    t.string "email"
+    t.integer "seller_id"
+    t.integer "buyer_id"
+    t.integer "release_id"
+    t.string "event_type"
+    t.string "order_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "organization_memberships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "organization_id", null: false
@@ -859,7 +884,6 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.string "email"
     t.string "github_username"
     t.datetime "last_article_at", default: "2017-01-01 05:00:00"
-    t.string "location"
     t.string "name"
     t.string "nav_image"
     t.string "old_old_slug"
@@ -880,6 +904,18 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.datetime "updated_at", null: false
     t.string "url"
     t.text "processed_story_html"
+    t.integer "artist_id"
+    t.integer "composer_id"
+    t.integer "song_language_id"
+    t.integer "genre_id"
+    t.integer "industry_id"
+    t.integer "location_id"
+    t.string "insta_url"
+    t.string "spotify_url"
+    t.string "soundcloud_url"
+    t.string "itunes_url"
+    t.string "twitter_handle"
+    t.string "organization_type"
     t.index ["secret"], name: "index_organizations_on_secret", unique: true
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
@@ -1064,6 +1100,15 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
+
+  create_table "project_events", force: :cascade do |t|
+    t.string "title"
+    t.string "icon"
+    t.string "organization_id"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rating_votes", force: :cascade do |t|
@@ -1441,18 +1486,9 @@ ActiveRecord::Schema.define(version: 2021_01_07_135511) do
     t.string "last_name"
     t.date "date_of_birth"
     t.string "telephone"
-    t.integer "location_id"
-    t.integer "composer_id"
-    t.integer "industry_id"
-    t.integer "song_language_id"
-    t.string "genre_id"
     t.boolean "commission_accepted", default: false
     t.boolean "sell_tracks", default: false
     t.boolean "sell_campaigns", default: false
-    t.string "spotify_url"
-    t.string "soundcloud_url"
-    t.string "itunes_url"
-    t.string "twitter_url"
     t.boolean "is_verified", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["created_at"], name: "index_users_on_created_at"

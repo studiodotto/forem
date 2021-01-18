@@ -2,8 +2,11 @@ class MusicRelease < ApplicationRecord
   resourcify
 
   belongs_to :user
+  belongs_to :organization
   has_many :music_tracks, dependent: :destroy
   has_many :audios, dependent: :destroy
+  has_many :orders
+  enum music_release_type: {"album"=>"album", "single"=>"single", "music_set"=>"music_set", "ninty_second"=>"ninty_second"}
 
   mount_uploader :image, ProfileImageUploader
   mount_uploader :pattern_image, ProfileImageUploader

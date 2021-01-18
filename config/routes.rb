@@ -463,6 +463,8 @@ Rails.application.routes.draw do
     get "/settings/:tab/:org_id" => "users#edit", :constraints => { tab: /organization/ }
     get "/settings/:tab/:id" => "users#edit", :constraints => { tab: /response-templates/ }
     get "/artist_settings/(:tab)" => "users#artist_edit", :as => :artist_settings
+    post "/create_organization" => "organizations#create_organization", :as => :create_organization
+    post "/create_organizations_music_release" => "organizations#create_organizations_music_release", :as => :create_organizations_music_release
     get "/signout_confirm" => "users#signout_confirm"
     get "/dashboard" => "dashboards#show"
     get "/dashboard/pro", to: "dashboards#pro"

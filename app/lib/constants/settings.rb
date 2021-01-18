@@ -20,6 +20,9 @@ module Constants
       New\ Music\ Releases
       Account\ and\ Banking
       Analytics
+      Online\ Music\ Services\ Page
+      Deejaying\ Services
+      Unreleased\ Music\ Project
       Profile\ and\ services
       Posts
     ].freeze

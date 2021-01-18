@@ -23,6 +23,12 @@ class Organization < ApplicationRecord
   has_many :unspent_credits, -> { where spent: false }, class_name: "Credit", inverse_of: :organization
   has_many :users, through: :organization_memberships
 
+  has_many :project_events
+  has_many :orders
+  has_many :music_releases
+
+  enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service"}
+
   validates :articles_count, presence: true
   validates :bg_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
   validates :company_size, format: { with: INTEGER_REGEXP, message: MESSAGES[:integer_only], allow_blank: true }
@@ -32,7 +38,7 @@ class Organization < ApplicationRecord
   validates :cta_button_text, length: { maximum: 20 }
   validates :cta_button_url, length: { maximum: 150 }, url: { allow_blank: true, no_local: true }
   validates :github_username, length: { maximum: 50 }
-  validates :location, :email, length: { maximum: 64 }
+  validates :email, length: { maximum: 64 }
   validates :name, :summary, :url, :profile_image, presence: true
   validates :name, length: { maximum: 50 }
   validates :proof, length: { maximum: 1500 }
@@ -48,7 +54,7 @@ class Organization < ApplicationRecord
   validates :text_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
   validates :twitter_username, length: { maximum: 15 }
   validates :unspent_credits_count, presence: true
-  validates :url, length: { maximum: 200 }, url: { allow_blank: true, no_local: true }
+  # validates :url, length: { maximum: 200 }, url: { allow_blank: true, no_local: true }
 
   validate :unique_slug_including_users_and_podcasts, if: :slug_changed?
 

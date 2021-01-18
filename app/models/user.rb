@@ -67,6 +67,7 @@ class User < ApplicationRecord
   has_one :user_document, dependent: :destroy
   has_one :payment_provider, dependent: :destroy
   has_one :artist_application, dependent: :destroy
+  has_many :artist_organizations, class_name: 'Organization', foreign_key: :artist_id
   accepts_nested_attributes_for   :user_document
 
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant", foreign_key: :resource_owner_id,
@@ -175,7 +176,7 @@ class User < ApplicationRecord
   validates :following_users_count, presence: true
   validates :inbox_guidelines, length: { maximum: 250 }, allow_nil: true
   validates :inbox_type, inclusion: { in: INBOXES }
-  validates :name, length: { in: 1..100 }
+  # validates :name, length: { in: 1..100 }
   validates :password, length: { in: 8..100 }, allow_nil: true
   validates :rating_votes_count, presence: true
   validates :reactions_count, presence: true
@@ -218,6 +219,8 @@ class User < ApplicationRecord
 
   scope :eager_load_serialized_data, -> { includes(:roles) }
   scope :registered, -> { where(registered: true) }
+  scope :verified, -> { where(is_verified: true) }
+  scope :un_verified, -> { where(is_verified: false) }
   scope :with_feed, -> { where.not(feed_url: [nil, ""]) }
 
   before_validation :check_for_username_change

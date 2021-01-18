@@ -714,7 +714,7 @@ class Article < ApplicationRecord
   end
 
   def unpublish_post_if_applicant
-    if self.user && self.user.has_role?(:applicant)
+    if self.user && self.user.has_role?(:artist) && !self.user.is_verfied
       self.published_at = nil
       self.published = false
     end

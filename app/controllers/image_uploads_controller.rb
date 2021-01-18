@@ -55,7 +55,7 @@ class ImageUploadsController < ApplicationController
     nil
   end
 
-  def valid_image_files?(images)
+  def   valid_image_files?(images)
     images.none? { |image| !file?(image) }
   end
 

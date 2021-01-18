@@ -100,7 +100,7 @@ module Authentication
         provider.user_username_field => provider.user_nickname,
       ).take
       if existing_user
-        if !existing_user.has_role?(:customer)  && !existing_user.has_role?(:applicant) && !existing_user.has_role?(:artist)
+        if !existing_user.has_role?(:customer) && !existing_user.has_role?(:artist)
           existing_user.add_role(:customer)
         end
       end
@@ -133,7 +133,7 @@ module Authentication
     end
 
     def update_user(user)
-      if !user.has_role?(:customer) && !user.has_role?(:applicant) && !user.has_role?(:artist)
+      if !user.has_role?(:customer) && !user.has_role?(:artist)
         user.add_role(:customer)
       end
       user.tap do |model|

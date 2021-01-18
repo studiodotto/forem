@@ -1,0 +1,239 @@
+<%= javascript_include_tag 'application' %>
+<% if type == "ninty_second" %>
+  <div class="container">
+    <div class="row">
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #000000;">90 SEC MUSIC TUNES</p>
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.1px;
+        color: #000000;
+        margin-top: 2rem">Create 90 sec music tunes for your fans</p>
+      <p class="color-gray">Compose and perform short music cues and songs of 90 sec or less such as a brthday song. Select multiple types, if you like </p>
+      <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Birthday Song</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Item 1</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Item 2</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Item 3</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png" class="services-icon-unselected" alt="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% else %>
+  <div class="container">
+    <div class="row">
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #000000;">First select the type of events and activities </p>
+      <p class="color-gray">Select the type of events and activities you want to make music for. Select multiple type of occassions, if you like.</p>
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.1px;
+        color: #000000;
+        margin-top: 2rem">Events</p>
+      <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Religion</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Coctail hour</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Wedding</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Party</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+        </div>
+      </div>
+
+      <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Background music</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Family event</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Special event</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png" class="services-icon-unselected" alt="">
+        </div>
+      </div>
+
+      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.1px;
+        color: #000000;
+        margin-top: 2rem">Sports</p>
+      <p class="color-gray">Select multiple types of sports activities. If you like or none.</p>
+      <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Running</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Yoga</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Gym</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png" class="services-icon-unselected" alt="">
+        </div>
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Training</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png" class="services-icon-unselected" alt="">
+        </div>
+      </div>
+
+      <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
+        <div class="services-box services-select" data-type="treat" style="margin: 0 auto !important; padding-left: 3px !important; padding-right: 3px !important;">
+        <span style="font-family: Roboto; font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 21px;
+          text-align: center;
+          color: #000000;">Other</span>
+          <input type="hidden" name="services[]" id='treat' value=""/>
+          <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png" class="services-icon-unselected" alt="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function (){
+    $('.services-select').click(function (){
+      var type = $(this).data('type')
+      if($(this).hasClass('services-box')){
+        $(this).removeClass('services-box');
+        $(this).addClass('services-box-selected');
+        $("#"+type).val(type)
+      } else {
+        $(this).removeClass('services-box-selected');
+        $(this).addClass('services-box');
+        $("#"+type).val('');
+      }
+    })
+  })
+</script>

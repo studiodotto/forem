@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   # This method is used by Devise to decide which is the path to redirect
   # the user to after a successful log in
   def after_sign_in_path_for(resource)
-    if current_user && (current_user.has_role?(:artist) || current_user.has_role?(:applicant))
+    if current_user && current_user.has_role?(:artist)
       return artist_settings_path(tab: 'profile-and-services')
     else
       if current_user.saw_onboarding
