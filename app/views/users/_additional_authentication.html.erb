@@ -6,12 +6,14 @@
           href="<%= provider.sign_in_path(state: "profile") %>"
           class="crayons-btn crayons-btn--icon-left crayons-btn--brand-<%= provider.provider_name %> m-1"
           data-no-instant>
-          <%= inline_svg_tag(
-                "#{provider.provider_name}.svg",
-                aria: true,
-                class: "crayons-icon",
-                title: provider.official_name,
-              ) %>
+          <% unless provider.official_name == 'Google' %>
+            <%= inline_svg_tag(
+                  "#{provider.provider_name}.svg",
+                  aria: true,
+                  class: "crayons-icon",
+                  title: provider.official_name,
+                ) %>
+          <% end %>
           Connect <%= provider.official_name %> Account
         </a>
       <% end %>

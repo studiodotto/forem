@@ -11,8 +11,8 @@ class MusicRelease < ApplicationRecord
   mount_uploader :image, ProfileImageUploader
   mount_uploader :pattern_image, ProfileImageUploader
 
-  validates :main_color_hex, :title, :description, :image, presence: true
-  validates :main_color_hex, format: /\A([a-fA-F]|[0-9]){6}\Z/
+  # validates :main_color_hex, :title, :description, :image, presence: true
+  # validates :main_color_hex, format: /\A([a-fA-F]|[0-9]){6}\Z/
   validates :slug,
             presence: true,
             uniqueness: true,

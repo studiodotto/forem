@@ -94,6 +94,27 @@
       if (currentUser && navProfilePic) {
         navProfilePic.src = JSON.parse(currentUser).profile_image_90;
       }
+      //showing settings
+      setTimeout(function (){
+        setSettings();
+      }, 1000)
+
+      function setSettings(){
+        var parsedUser = JSON.parse(localStorage.getItem('current_user'));
+        if (parsedUser){
+          if (parsedUser.admin){
+            document.getElementById('user_settings').style.display = 'block'
+            document.getElementById('artist_settings').style.display = 'block'
+            document.getElementById('artist_settings').href = '/artist_settings/profile-and-services'
+            document.getElementById('artist_settings').style.cursor = 'pointer'
+          } else if (parsedUser.customer){
+            document.getElementById('user_settings').style.display = 'block'
+          } else {
+            document.getElementById('user_settings').style.display = 'block'
+            document.getElementById('artist_settings').style.display = 'block'
+          }
+        }
+      }
 
       // Load notifications count as quickly as it's available.
       // Not if we're on the notifications page itself

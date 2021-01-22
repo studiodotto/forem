@@ -123,11 +123,12 @@
 }
 .services-box:hover {
   span {
-    color: white;
+    color: white !important;;
   }
   background: #000000;
-  color: white;
-  border: 2px solid white;
+  opacity: 0.5 !important;
+  color: white !important;
+  border: 2px solid white !important;
 }
 .services-icon-unselected {
   display: block;
@@ -186,4 +187,10 @@
   padding: 35px;
   margin-top: 100px;
   margin-bottom: 100px;
+}
+.basics_info_box{
+  background: #fed852;
+  border: 1px solid #ffffff !important;
+  border-radius: 7px !important;
+  padding: 33px 38px !important;
 }

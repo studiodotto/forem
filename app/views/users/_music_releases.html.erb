@@ -1,4 +1,4 @@
-<%= form_with model: object, url: create_organizations_music_release_path(object), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
+<%= form_with model: object, url: create_organizations_music_release_path(object), method: :post, html: { class: "mb-2"}, :multipart => true, local: true  do |f| %>
   <div class="container" style="padding: 0px">
 
     <div class="row" style="padding: 20px; background: white">
@@ -11,8 +11,10 @@
       <br>
       <div class="form-group">
         <p class="track-labels">Track</p>
+        <input type="hidden" name="organization_type" value="<%= organization_type %>">
         <%= f.hidden_field :organization_id, value: organization&.id %>
         <%= f.hidden_field :user_id, value: current_user&.id %>
+        <%= f.hidden_field :id %>
         <%= f.hidden_field :music_release_type %>
         <%= f.text_field :title, class: "form-control track-fields", required: true, placeholder: "Enter title"%>
       </div>
@@ -47,17 +49,29 @@
       <br>
       <div class="form-group">
         <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose a great image for your project</p>
-        <%= f.file_field :image, class: "form-control track-fields", required: true, placeholder: "Enter title name" %>
+        <div class="org_image_preview display-inline">
+          <img id="previewImg_<%= type %>" class="<%= f.object&.image.present? ? "" : "display-none" %>" src="<%= f.object&.image&.url %>" alt="Placeholder" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); width: 108px; height: 108px">
+        </div>
+        <div class="display-inline">
+          <button class="crayons-btn crayons-btn--outlined mr-2">
+            <label for="cover-image-input" id="upload_img_label_<%= type %>">
+              <%= f.object&.image.present? ? "Change" : "Upload Image" %>
+            </label>
+            <input id="cover-image-input_<%= type %>" type="file" data-img_id="previewImg_<%= type %>" data-label_id="upload_img_label_<%= type %>" data-rmv_btn_id="rmv_org_img_<%= type %>" onchange="previewFile(this);" name="music_release[image]" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" data-max-file-size-mb="25">
+          </button>
+          <button class="crayons-btn crayons-btn--ghost-danger <%= f.object&.image.present? ? "" : "display-none" %>" data-file_field="cover-image-input_<%= type %>" data-img_id="previewImg_<%= type %>" data-label_id="upload_img_label_<%= type %>" data-rmv_btn_id="rmv_org_img_<%= type %>" onclick="removeFile(this);" id="rmv_org_img_<%= type %>" type="button">Remove</button>
+        </div>
+        <%#= f.file_field :image, class: "form-control track-fields", required: true, placeholder: "Enter title name" %>
       </div>
     </div>
 
     <div class="row" style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px; background: white">
       <div class="form-group">
-        <%# if @organization&.id.present? %>
+        <% if organization&.id.present? %>
           <%= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}" %>
-        <%# else %>
-          <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}", disabled: true %>
-        <%# end %>
+        <% else %>
+          <%= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}", disabled: true %>
+        <% end %>
       </div>
     </div>
 

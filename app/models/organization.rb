@@ -22,7 +22,7 @@ class Organization < ApplicationRecord
   has_many :sponsorships, dependent: :destroy
   has_many :unspent_credits, -> { where spent: false }, class_name: "Credit", inverse_of: :organization
   has_many :users, through: :organization_memberships
-
+  belongs_to :artist, class_name: "User", foreign_key: 'artist_id'
   has_many :project_events
   has_many :orders
   has_many :music_releases

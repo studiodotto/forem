@@ -91,7 +91,7 @@ class Article < ApplicationRecord
   before_save :fetch_video_duration
   before_save :set_caches
   before_create :create_password
-  before_create :unpublish_post_if_applicant
+  # before_create :unpublish_post_if_applicant
   before_destroy :before_destroy_actions, prepend: true
 
   after_save :create_conditional_autovomits
@@ -713,10 +713,10 @@ class Article < ApplicationRecord
     Slack::Messengers::ArticlePublished.call(article: self)
   end
 
-  def unpublish_post_if_applicant
-    if self.user && self.user.has_role?(:artist) && !self.user.is_verfied
-      self.published_at = nil
-      self.published = false
-    end
-  end
+  # def unpublish_post_if_applicant
+  #   if self.user && self.user.has_role?(:artist) && !self.user.is_verified
+  #     self.published_at = nil
+  #     self.published = false
+  #   end
+  # end
 end

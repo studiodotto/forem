@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       skip_authorization
       return redirect_to sign_up_path
     end
+    return redirect_to sign_up_path if !current_user.any_admin?
     set_user
     set_current_tab(params["tab"] || "incoming-notifications")
     handle_artist_settings_tab
@@ -298,39 +299,14 @@ class UsersController < ApplicationController
       @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
       # handle_response_templates_tab
     when "unreleased-music-project"
-      @orangization = current_user.artist_organizations.unreleased.first_or_initialize
-      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
-      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
-      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
-      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
-      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
-      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
-      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
-      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
-      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+      @organization = current_user.artist_organizations.unreleased.first_or_initialize
+      organizations_assoiations
     when "online-music-services-page"
-      @orangization = current_user.artist_organizations.online_music_service.first_or_initialize
-      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
-      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
-      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
-      @ninty_second = @orangization.music_releases.ninty_second.first || MusicRelease.new(music_release_type: "ninty_second")
-      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
-      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
-      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
-      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
-      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
-      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+      @organization = current_user.artist_organizations.online_music_service.first_or_initialize
+      organizations_assoiations
     when "deejaying-services"
-      @orangization = current_user.artist_organizations.deejaying.first_or_initialize
-      @single = @orangization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
-      @album = @orangization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
-      @music_set = @orangization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
-      artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
-      @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
-      @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
-      @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
-      @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
-      @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+      @organization = current_user.artist_organizations.deejaying.first_or_initialize
+      organizations_assoiations
     when "posts"
       # handle_response_templates_tab
     else
@@ -339,6 +315,23 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def organizations_assoiations
+    @single = @organization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
+    @album = @organization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
+    @music_set = @organization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
+    @ninty_second = @organization.music_releases.ninty_second.first || MusicRelease.new(music_release_type: "ninty_second")
+    @organization_events = @organization.project_events
+    artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+    @ninty_second_events = artists_data['ninty_second_events'].map{|ninty_second_event| [ninty_second_event[:label], ninty_second_event[:url]]}
+    @events = artists_data['events'].map{|event| [event[:label], event[:url]]}
+    @sport_events = artists_data['sports_events'].map{|sport_event| [sport_event[:label], sport_event[:url]]}
+    @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+    @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+    @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+    @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+    @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+  end
 
   def sanitize_user_params
     params[:user].delete_if { |_k, v| v.blank? }

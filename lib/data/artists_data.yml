@@ -1434,3 +1434,38 @@ genres:
   -  zeuhl
   -  zouk
   -  zydeco
+ninty_second_events:
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png
+    :label: Birthday Song
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png
+    :label: Item 1
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png
+    :label: Item 2
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/birthday.png
+    :label: Item 3
+events:
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png
+    :label: Religion
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png
+    :label: Coctail hour
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png
+    :label: Wedding
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png
+    :label: Party
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png
+    :label: Background music
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png
+    :label: Family event
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png
+    :label: Special event
+sports_events:
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/relegion.png
+    :label: Running
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png
+    :label: Yoga
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png
+    :label: Gym
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/ceremony.png
+    :label: Training
+  - :url: https://studioappbucket.s3.ap-south-1.amazonaws.com/icons/wedding.png
+    :label: Other

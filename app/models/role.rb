@@ -18,7 +18,6 @@ class Role < ApplicationRecord
     warned
     workshop_pass
     customer
-    applicant
     artist
   ].freeze
 

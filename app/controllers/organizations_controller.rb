@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  after_action :verify_authorized, except: [:create_organization, :create_organizations_music_release]
+  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event]
 
   def create
     rate_limit!(:organization_creation)
@@ -28,7 +28,8 @@ class OrganizationsController < ApplicationController
   def create_organization
     begin
       raise StandardError.new "Invalid Image" unless valid_image?
-      @organization = Organization.new(organization_params)
+      @organization = Organization.find_or_initialize_by(id: organization_params[:id])
+      @organization.assign_attributes(organization_params)
       @organization.save(validate: false)
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
     rescue => exc
@@ -41,15 +42,37 @@ class OrganizationsController < ApplicationController
   def create_organizations_music_release
     begin
       raise StandardError.new "Invalid Image" unless valid_image?
-      @organization_music_release = MusicRelease.new(organization_music_release_params)
-      binding.pry
+      @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
+      raise StandardError.new "Create Project First" if organization_music_release_params[:organization_id].blank?
+      @organization_music_release.assign_attributes(organization_music_release_params)
       @organization_music_release.save(validate: false)
       raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
     rescue => exc
       flash[:settings_notice] = exc.message
     ensure
-      redirect_to artist_settings_path(tab: tabs(organization_params[:organization_type]))
+      redirect_to artist_settings_path(tab: tabs(params[:organization_type]))
     end
+  end
+
+  def create_organizations_event
+    begin
+      params[:project_events].each do|key, event|
+        project_event = ProjectEvent.find_or_initialize_by(id: organization_project_event_params(event)[:id])
+        project_event.assign_attributes(organization_project_event_params(event))
+        raise StandardError.new "Create Project First" if project_event.organization_id.blank?
+        project_event.save!
+        raise StandardError.new project_event.errors.full_messages.join(',') if project_event.errors.any?
+      end
+    rescue => exc
+      flash[:settings_notice] = exc.message
+    ensure
+      redirect_to artist_settings_path(tab: tabs(params[:organization_type]))
+    end
+  end
+
+  def organization_feeds
+    @organizations = Organization.all
+    @listings = []
   end
 
   def update
@@ -142,6 +165,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
+    params[:organization][:genre_id] = params[:organization][:genre_id].map {|str| "#{str}"}.join(',') if params[:organization][:genre_id].is_a?(Array)
     params.require(:organization).permit(permitted_params)
       .transform_values do |value|
         if value.instance_of?(String)
@@ -153,7 +177,11 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_music_release_params
-    params.require(:music_release).permit(:music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length)
+    params.require(:music_release).permit(:id, :music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length)
+  end
+
+  def organization_project_event_params(event)
+    event.permit(:id, :organization_id, :title, :icon, :event_type, :active)
   end
 
   def set_organization
@@ -197,6 +225,10 @@ class OrganizationsController < ApplicationController
     case tab
     when "unreleased"
       return "unreleased-music-project"
+    when "deejaying"
+      return "deejaying-services"
+    when "online_music_service"
+      return "online-music-services-page"
     end
   end
 end

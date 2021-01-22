@@ -1,0 +1,196 @@
+<%= content_for :page_meta do %>
+  <% title_with_timeframe(
+       page_title: "#{community_qualified_name} 👩‍💻👨‍💻",
+       timeframe: params[:timeframe],
+       content_for: true,
+       ) %>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <link rel="canonical" href="<%= app_url(request.path) %>" />
+  <meta name="description" content="<%= SiteConfig.community_description %>">
+<% end %>
+<style>
+  .project-card{
+    background: #2D3034;
+    backdrop-filter: blur(9px);
+  }
+  .artist-name{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .project-title{
+    font-family: 'Roboto';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .project-description{
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .genre{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.21px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .save-btn-text{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+</style>
+<%#= javascript_packs_with_chunks_tag "homePage", defer: true %>
+<% if flash[:error].present? %>
+<!--  <p class="alert alert-danger" style="text-align: center"><%#= flash[:error].capitalize %></p>-->
+<% end %>
+
+<!-- New View Html -->
+<div id="hero-html-wrapper" class="codeland-banner-container">
+  <section class="crayons-layout">
+    <div class="codeland-banner p-4 h-auto">
+      <div class="codeland-banner__description">
+        <h1 class="lh-tight fw-large mb-3 fs-3xl s:fs-5xl">
+          Music made for you
+        </h1>
+        <h1 class="lh-tight fw-large mb-3 fs-3xl s:fs-5xl">
+          Exclusive unreleased tracks
+        </h1>
+
+        <!--          <a href="/top/infinity" class="crayons-btn w-100 s:w-max">View our hottest content</a>-->
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left">
+  <%= render "articles/sidebar" %>
+  <main class="articles-list crayons-layout__content">
+    <!-- Header -->
+    <header class="flex items-center p-2 m:p-0 m:pb-2" id="on-page-nav-controls">
+      <button type="button" class="crayons-btn crayons-btn--ghost crayons-btn--icon mr-2 inline-block m:hidden" id="on-page-nav-butt-left" aria-label="nav-button-left">
+        <div class="crayons-icon nav-icon ">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="24" width="24"><path d="M398.044 29.719C359.712 10.555 309.267 0 256.001 0c-53.271 0-103.719 10.555-142.05 29.721-43.457 21.73-67.39 52.497-67.39 86.635v279.288c0 34.138 23.933 64.906 67.392 86.636C152.285 501.446 202.732 512 256.002 512c53.266 0 103.711-10.555 142.043-29.721 43.46-21.732 67.393-52.498 67.393-86.636V116.355c.001-34.138-23.934-64.904-67.394-86.636zM256.001 46.548c93.229 0 162.889 36.855 162.889 69.808 0 32.953-69.66 69.809-162.889 69.809-93.23 0-162.892-36.857-162.892-69.809 0-32.953 69.661-69.808 162.892-69.808zm162.89 349.095c0 32.953-69.662 69.809-162.891 69.809-93.23 0-162.892-36.856-162.892-69.809v-18.58c6.348 4.292 13.294 8.346 20.844 12.121 38.332 19.167 88.779 29.721 142.05 29.721 53.266 0 103.711-10.555 142.043-29.721 7.552-3.777 14.498-7.829 20.846-12.121v18.58zm.002-93.095h-.002c0 32.953-69.66 69.809-162.889 69.809-93.23 0-162.892-36.857-162.892-69.809v-18.58c6.348 4.292 13.294 8.343 20.844 12.119 38.332 19.168 88.779 29.722 142.05 29.722 53.266 0 103.711-10.555 142.043-29.722 7.552-3.777 14.498-7.829 20.846-12.123v18.584zm0-93.097h-.002c0 32.954-69.66 69.811-162.889 69.811-93.23 0-162.892-36.856-162.892-69.811v-18.579c6.348 4.292 13.294 8.343 20.844 12.118 38.331 19.167 88.779 29.721 142.05 29.721 53.266 0 103.711-10.555 142.043-29.721 7.552-3.777 14.498-7.829 20.846-12.121v18.582z"></path></svg>
+
+        </div>
+      </button>
+      <div class="flex-1 flex items-center justify-between">
+        <h2 class="crayons-subtitle-2">Posts</h2>
+        <nav class="crayons-tabs hidden s:flex">
+          <a href="/feed_articles" class="crayons-tabs__item ">Feed</a>
+
+          <a href="/top/week" class="crayons-tabs__item ">Week</a>
+          <a href="/top/month" class="crayons-tabs__item ">Month</a>
+          <a href="/top/year" class="crayons-tabs__item ">Year</a>
+          <a href="/top/infinity" class="crayons-tabs__item ">Infinity</a>
+
+          <a href="/latest" class="crayons-tabs__item crayons-tabs__item--current">Latest</a>
+        </nav>
+
+        <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">
+          <option value="/feed_articles">Feed</option>
+          <option value="/top/week">Week</option>
+          <option value="/top/month">Month</option>
+          <option value="/top/year">Year</option>
+          <option value="/top/infinity">Infinity</option>
+          <option value="/latest" selected="">Latest</option>
+        </select>
+      </div>
+
+      <button type="button" class="crayons-btn crayons-btn--ghost crayons-btn--icon ml-2 inline-block l:hidden" id="on-page-nav-butt-right" aria-label="nav-button-right">
+        <div class="crayons-icon nav-icon ">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216.934 216.934" height="24" width="24"><path d="M179.508 91.769a7.5 7.5 0 00-6.95-4.681h-32.323l26.743-77.131a7.5 7.5 0 00-12.373-7.777L39.089 116.98a7.499 7.499 0 005.288 12.82h32L47.26 206.781a7.499 7.499 0 0012.238 8.034L177.782 99.969a7.5 7.5 0 001.726-8.2zM73.196 180.61l21.051-55.657a7.5 7.5 0 00-7.015-10.153H62.563l79.623-79.13-19.575 56.462a7.5 7.5 0 007.085 9.957h24.37l-80.87 78.521z"></path></svg>
+
+        </div>
+      </button>
+    </header>
+    <!-- Center Content Div -->
+    <div style="min-height: 90vh">
+      <!-- Article Section -->
+      <article class="crayons-story cursor-pointer crayons-story--featured project-card">
+        <a href="#" class="crayons-story__hidden-navigation-link">
+          testtttt
+        </a>
+        <div role="presentation">
+          <a href="#" class="crayons-story__cover" title="testtttt" style="background-image: url('https://pigment.github.io/fake-logos/logos/medium/color/1.png');">
+            <span class="hidden">testtttt</span>
+          </a>
+          <div class="crayons-story__body">
+            <div class="crayons-story__top">
+              <p class="artist-name">Muzzamil Mujahid | Composer</p>
+            </div>
+            <div class="crayons-story__indention">
+              <h2 class="crayons-story__title">
+                <a href="#">
+                  <span>
+                    testtttt
+                  </span>
+                </a>
+              </h2>
+              <div class="crayons-story__tags">
+              </div>
+              <div class="crayons-story__bottom">
+                <div class="crayons-story__details">
+                  <a class="crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left" href="#">
+                    <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                      </path>
+                    </svg>
+                    <span title="Number of reactions">
+                      0
+                      <span class="hidden s:inline">
+                        &nbsp;reactions
+                      </span>
+                    </span>
+                  </a>
+                  <a class="crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left" href="#">
+                    <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                      </path>
+                    </svg>
+                    <span class="inline s:hidden">
+                      0
+                    </span>
+                    <span class="hidden s:inline">
+                      Add comment
+                    </span>
+                  </a>
+                </div>
+                <div class="crayons-story__save">
+                  <small class="crayons-story__tertiary mr-2">
+                    1 min read
+                  </small>
+                  <button type="button"  class="crayons-btn crayons-btn--s crayons-btn--secondary">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Right sidebar -->
+      <div class="sidebar-wrapper sidebar-wrapper-right crayons-layout__sidebar-right">
+      </div>
+    </div>
+  </main>
+</div>

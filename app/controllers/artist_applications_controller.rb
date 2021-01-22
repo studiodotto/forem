@@ -61,23 +61,24 @@ class ArtistApplicationsController < ApplicationController
       user.save
       raise StandardError.new user.errors.full_messages.join(',') if user.errors.any?
       user.add_role(:artist)
-        # artist_application.services.each do |service|
+      flash[:artist_success] = "Application received successfully"
+      sign_in_and_redirect(user, event: :authentication)
+    # artist_application.services.each do |service|
         #   service.user_id = resource.id
         #   service.save
         # end
         # artist_application.status = false
         # artist_application.user_id = resource.id
         # artist_application.save
-        if VerificationMailer.with(user_id: user.id).user_documents_email.deliver_now
-          flash[:artist_success] = "Application received successfully"
-          sign_in_and_redirect(user, event: :authentication)
-        else
-          raise StandardError.new "Failed to send verification mail"
+        # if VerificationMailer.with(user_id: user.id).user_documents_email.deliver_now
+        #
+        # else
+        #   raise StandardError.new "Failed to send verification mail"
           # flash[:artist_error] = "Failed to send verification mail"
           # @artist_application = ArtistApplication.new
           # set_data
           # return redirect_to new_artist_application_path
-        end
+        # end
       # else
       #   @artist_application = ArtistApplication.new
       #   set_data

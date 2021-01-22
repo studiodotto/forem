@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_133221) do
+ActiveRecord::Schema.define(version: 2021_01_20_101133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -907,7 +907,6 @@ ActiveRecord::Schema.define(version: 2021_01_16_133221) do
     t.integer "artist_id"
     t.integer "composer_id"
     t.integer "song_language_id"
-    t.integer "genre_id"
     t.integer "industry_id"
     t.integer "location_id"
     t.string "insta_url"
@@ -916,6 +915,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_133221) do
     t.string "itunes_url"
     t.string "twitter_handle"
     t.string "organization_type"
+    t.string "genre_id"
     t.index ["secret"], name: "index_organizations_on_secret", unique: true
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
@@ -1106,9 +1106,10 @@ ActiveRecord::Schema.define(version: 2021_01_16_133221) do
     t.string "title"
     t.string "icon"
     t.string "organization_id"
-    t.string "type"
+    t.string "event_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active"
   end
 
   create_table "rating_votes", force: :cascade do |t|

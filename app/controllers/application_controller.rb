@@ -88,9 +88,10 @@ class ApplicationController < ActionController::Base
   # This method is used by Devise to decide which is the path to redirect
   # the user to after a successful log in
   def after_sign_in_path_for(resource)
-    if current_user && current_user.has_role?(:artist)
-      return artist_settings_path(tab: 'profile-and-services')
-    else
+    # if current_user && current_user.has_role?(:artist)
+    #   return artist_settings_path(tab: 'profile-and-services')
+    #   # return artist_settings_path(tab: 'profile-and-services')
+    # else
       if current_user.saw_onboarding
         path = stored_location_for(resource) || request.env["omniauth.origin"] || root_path(signin: "true")
         signin_param = { "signin" => "true" } # the "signin" param is used by the service worker
@@ -107,7 +108,7 @@ class ApplicationController < ActionController::Base
         referrer = request.env["omniauth.origin"] || "none"
         return onboarding_path(referrer: referrer)
       end
-    end
+    # end
   end
 
   def after_accept_path_for(_resource)
