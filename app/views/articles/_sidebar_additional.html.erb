@@ -3,16 +3,16 @@
   <aside class="side-bar sidebar-additional showing grid gap-4" id="sidebar-additional">
     <% unless user_signed_in? || !any_enabled_auth_providers? %>
       <section class="crayons-card crayons-card--secondary signin-cta-widget">
-        <div class="authentication-widget__container">
+        <div class="authentication-widget__container updated-login-card">
           <figure class="authentication-widget__image-container">
             <img class="authentication-widget__image" src="<%= optimized_image_url(safe_logo_url(SiteConfig.secondary_logo_url), width: 190) %>"
                   alt="Secondary <%= community_name %> logo" />
           </figure>
           <div class="authentication-widget__content">
-            <h3 class="authentication-widget__title">
+            <h3 class="authentication-widget__title updated-login-card-title">
               <%= render "shared/authentication_title" %>
             </h3>
-            <p class="authentication-widget__description">
+            <p class="authentication-widget__description updated-login-card-desc">
               <%= render "shared/authentication_description" %>
             </p>
             <div class="authentication-widget__actions">

@@ -16,9 +16,10 @@ module Articles
         image = image.split("w_1000/").last if image.include?("w_1000/https://")
         return Images::Optimizer.call(image, width: width, height: height, crop: "imagga_scale")
       end
-      return legacy_article_social_image unless use_new_social_url?
-
-      article_social_preview_url(article, format: :png, host: SiteConfig.app_domain)
+      return Images::Optimizer.call(SiteConfig.main_social_image.to_s, width: 600)
+      # return legacy_article_social_image unless use_new_social_url?
+      #
+      # article_social_preview_url(article, format: :png, host: SiteConfig.app_domain)
     end
 
     private

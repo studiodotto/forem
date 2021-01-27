@@ -77,7 +77,7 @@
               <input type="hidden" name="project_events[casual_<%= index %>][active]" id="<%= event.first.delete(' ') %>" value="<%= current_event&.active? ? true : "" %>"/>
               <input type="hidden" name="project_events[casual_<%= index %>][title]" value="<%= event.first %>"/>
               <input type="hidden" name="project_events[casual_<%= index %>][icon]" value="<%= event.second %>"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][event_type]" value="ninty_second"/>
+              <input type="hidden" name="project_events[casual_<%= index %>][event_type]" value="casual"/>
               <input type="hidden" name="project_events[casual_<%= index %>][organization_id]"  value="<%= organization_id %>"/>
               <img src="<%= event.second %>" class="services-icon-unselected" alt="">
             </div>
@@ -103,12 +103,12 @@
               line-height: 21px;
               text-align: center;
               color: #000000;"><%= event.first %></span>
-              <input type="hidden" name="project_events[casual_<%= index %>][id]" value="<%= current_event.try(:id)  %>"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][active]" id="<%= event.first.delete(' ') %>" value="<%= current_event&.active? ? true : "" %>"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][title]" value="<%= event.first %>"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][icon]" value="<%= event.second %>"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][event_type]" value="ninty_second"/>
-              <input type="hidden" name="project_events[casual_<%= index %>][organization_id]"  value="<%= organization_id %>"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][id]" value="<%= current_event.try(:id)  %>"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][active]" id="<%= event.first.delete(' ') %>" value="<%= current_event&.active? ? true : "" %>"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][title]" value="<%= event.first %>"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][icon]" value="<%= event.second %>"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][event_type]" value="sport"/>
+              <input type="hidden" name="project_events[sport_<%= index %>][organization_id]"  value="<%= organization_id %>"/>
               <img src="<%= event.second %>" class="services-icon-unselected" alt="">
             </div>
           <% end %>

@@ -149,8 +149,8 @@
     <%= render partial: "shared/logo_design", locals: { f: f, account: @organization_membership.organization } %>
 
     <div class="crayons-field">
-      <%= f.label :location, class: "crayons-field__label" %>
-      <%= f.text_field :location, maxlength: 64, class: "crayons-textfield", placeholder: "Halifax, Nova Scotia" %>
+      <%= f.label :location_id, class: "crayons-field__label" %>
+      <%= f.text_field :location_id, maxlength: 64, class: "crayons-textfield", placeholder: "Halifax, Nova Scotia" %>
       <p class="crayons-field__description">Limit of 64 characters</p>
     </div>
     <div class="crayons-field">

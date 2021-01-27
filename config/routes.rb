@@ -467,6 +467,7 @@ Rails.application.routes.draw do
     post "/create_organizations_music_release" => "organizations#create_organizations_music_release", :as => :create_organizations_music_release
     post "/create_organizations_event" => "organizations#create_organizations_event", :as => :create_organizations_event
     get "/organization_feeds" => "organizations#organization_feeds", :as => :organization_feeds
+    get "/organizations/project_show/:id" => "organizations#project_show", :as => :organization_projects
     get "/signout_confirm" => "users#signout_confirm"
     get "/dashboard" => "dashboards#show"
     get "/dashboard/pro", to: "dashboards#pro"

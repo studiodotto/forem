@@ -117,7 +117,7 @@
   }
 </style>
 <div class="row" >
-  <%= form_with model: @organization, url: create_organization_path(@organization), method: :post, html: { class: "mb-2" }, local: true do |f| %>
+  <%= form_with model: @organization, url: create_organization_path(@organization), method: :post, html: { class: "mb-2", multipart: true  }, local: true do |f| %>
     <div class="container">
       <div class="row">
         <p style="font-family: 'Roboto', sans-serif;

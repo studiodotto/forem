@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event]
+  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show]
 
   def create
     rate_limit!(:organization_creation)
@@ -27,9 +27,9 @@ class OrganizationsController < ApplicationController
 
   def create_organization
     begin
-      raise StandardError.new "Invalid Image" unless valid_image?
       @organization = Organization.find_or_initialize_by(id: organization_params[:id])
       @organization.assign_attributes(organization_params)
+      raise StandardError.new @organization.errors.any? ? @organization.errors.full_messages.to_sentence : "Invalid image" unless valid_image?
       @organization.save(validate: false)
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
     rescue => exc
@@ -59,9 +59,11 @@ class OrganizationsController < ApplicationController
       params[:project_events].each do|key, event|
         project_event = ProjectEvent.find_or_initialize_by(id: organization_project_event_params(event)[:id])
         project_event.assign_attributes(organization_project_event_params(event))
+        if project_event.active? || project_event.active == "true"
         raise StandardError.new "Create Project First" if project_event.organization_id.blank?
         project_event.save!
         raise StandardError.new project_event.errors.full_messages.join(',') if project_event.errors.any?
+        end
       end
     rescue => exc
       flash[:settings_notice] = exc.message
@@ -72,7 +74,17 @@ class OrganizationsController < ApplicationController
 
   def organization_feeds
     @organizations = Organization.all
+    artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+    @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+    @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+    @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+    @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+    @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
     @listings = []
+  end
+
+  def project_show
+    @organization = Organization.find_by(id: params[:id])
   end
 
   def update
@@ -195,7 +207,7 @@ class OrganizationsController < ApplicationController
 
     return true unless image
 
-    if action_name == "create"
+    if action_name == "create" && !@organization.present?
       @organization = Organization.new(organization_params.except(:profile_image))
       authorize @organization
     end
