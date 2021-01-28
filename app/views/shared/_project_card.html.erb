@@ -42,12 +42,16 @@
               <% end %>
             </div>
             <div class="project-awards" style="float:right;">
-              <div class="awards">
-                <span style="margin-right: 10px"><%= project.try(:tag_line) %></span>
-              </div>
-              <div class="awards" style="margin-top: 5px">
-                <span><%= project.try(:tech_stack) %></span>
-              </div>
+              <% if project.try(:tag_line).present? %>
+                <div class="awards">
+                  <span style="margin-right: 10px"><%= project.try(:tag_line) %></span>
+                </div>
+              <% end %>
+              <% if project.try(:tech_stack).present? %>
+                <div class="awards" style="margin-top: 5px">
+                  <span><%= project.try(:tech_stack) %></span>
+                </div>
+              <% end %>
             </div>
           </div>
 
