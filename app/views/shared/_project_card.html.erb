@@ -1,89 +1,102 @@
 <!-- Project Card Section -->
 <article class="crayons-story cursor-pointer crayons-story--featured project-card">
-  <a href="#" class="crayons-story__hidden-navigation-link">
-    <%= music_release.try(:title) %>
-  </a>
-  <div role="presentation">
-    <a href="/organizations/project_show/15" class="crayons-story__cover" title="testtttt" style="background-image: url('https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg');">
-      <span class="hidden"><%= music_release.try(:title) %></span>
+  <% if music_release.present? %>
+    <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+    <a href="#" class="crayons-story__hidden-navigation-link">
+      <%= music_release.try(:title) %>
     </a>
-    <div class="crayons-story__body">
-      <div class="crayons-story__top">
-        <p class="artist-name"><%= project.try(:name) %> | <%= composer %></p>
-      </div>
-      <!--crayons-story__indention-->
-      <!--crayons-story__title -->
-      <div class="project-card-content">
-        <div class="project-box" style="display: inline-block; width: 100%">
-          <h2 style="float:left;">
-            <a class="project-title" href="#">
-              <span>
-                <%= music_release.try(:title) %>
-              </span>
-            </a>
-          </h2>
-          <button  class="project-save-btn">
-            SAVE
-          </button>
+    <div role="presentation">
+      <a href="/organizations/project_show/<%= project.id %>" class="crayons-story__cover" title="testtttt" style="background-image: url('<%= music_release.header_image_url.present? ? music_release.header_image_url : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
+        <span class="hidden"><%= music_release.try(:title) %></span>
+      </a>
+      <div class="crayons-story__body">
+        <div class="crayons-story__top">
+          <p class="artist-name"><%= project.try(:name) %> | <%= composer %></p>
         </div>
-        <div class="project-description">
-          <%= project.try(:summary) %>
-        </div>
-        <div class="project-genres-and-awards">
-          <div class="genres" style="float:left;">
-            <% if project.genre_id.present? %>
-              <% project.genre_id.split(',').each do |genre| %>
-                <span class="genre">
-                #<%= @genres[genre.to_i][0] %>
+        <!--crayons-story__indention-->
+        <!--crayons-story__title -->
+        <div class="project-card-content">
+          <div class="project-box" style="display: inline-block; width: 100%">
+            <h2 style="float:left;">
+              <a class="project-title" href="#">
+                <span>
+                  <%= music_release.try(:title) %>
                 </span>
+              </a>
+            </h2>
+            <button  class="project-save-btn">
+              SAVE
+            </button>
+          </div>
+          <div class="project-description">
+            <%= project.try(:summary) %>
+          </div>
+          <div class="project-genres-and-awards">
+            <div class="genres" style="float:left;">
+              <% if project.genre_id.present? %>
+                <% project.genre_id.split(',').each do |genre| %>
+                  <span class="genre">
+                  #<%= @genres[genre.to_i][0] %>
+                  </span>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
-          <div class="project-awards" style="float:right;">
-            <div class="awards">
-              <span style="margin-right: 10px"><%= project.try(:tag_line) %></span>
             </div>
-            <div class="awards" style="margin-top: 10px">
-              <span><%= project.try(:tech_stack) %></span>
+            <div class="project-awards" style="float:right;">
+              <div class="awards">
+                <span style="margin-right: 10px"><%= project.try(:tag_line) %></span>
+              </div>
+              <div class="awards" style="margin-top: 5px">
+                <span><%= project.try(:tech_stack) %></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="reviews-reactions">
-          <span class="project-date">2020 | 1 song | 3min 30 sec</span>
+          <div class="reviews-reactions">
+            <span class="project-date"><%= music_release.created_at.strftime('%Y') %> | 1 song | <%= length[0]  %> mins <%= length[1] %> secs</span>
 
-          <span class="fa fa-star reviews checked"></span>
-          <span class="fa fa-star reviews checked"></span>
-          <span class="fa fa-star reviews checked"></span>
-          <span class="fa fa-star reviews"></span>
-          <span class="fa fa-star reviews"></span>
+            <span class="fa fa-star reviews checked"></span>
+            <span class="fa fa-star reviews checked"></span>
+            <span class="fa fa-star reviews checked"></span>
+            <span class="fa fa-star reviews"></span>
+            <span class="fa fa-star reviews"></span>
 
-          <span class="reviews-text">10 reviews</span>
-          <%#= image_tag 'badge.png', width: '24px', style: "float:right" %>
-          <span class="fa fa-bookmark-o bookmark-icon"></span>
-          <a class="crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left reactions-icon" href="#">
-            <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-              </path>
-            </svg>
-            <span class="reactions-text" title="Number of reactions">
-                      0
-                      <span class="hidden s:inline">
-                        &nbsp;reactions
+            <span class="reviews-text">10 reviews</span>
+            <%#= image_tag 'badge.png', width: '24px', style: "float:right" %>
+            <span class="fa fa-bookmark-o bookmark-icon"></span>
+            <a class="crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left reactions-icon" href="#">
+              <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                </path>
+              </svg>
+              <span class="reactions-text" title="Number of reactions">
+                        0
+                        <span class="hidden s:inline">
+                          &nbsp;reactions
+                        </span>
                       </span>
-                    </span>
-          </a>
-        </div>
-        <div class="crayons-story__bottom">
-          <button class="price-btn project-font">
-            <span class="price-span">$ 150</span>
-            <span class="time-span">Price per 45 minutes set</span>
-          </button>
-          <button class="request-btn">
-            <span class="request-text project-font">REQUEST A PERSONALISED SET</span>
-          </button>
+            </a>
+          </div>
+          <div class="crayons-story__bottom">
+            <button class="price-btn project-font">
+              <span class="price-span">$ <%= number_with_precision(music_release.price, precision: 2) %></span>
+              <% if music_release.music_release_type = 'single' %>
+                <% if music_release.length < 60 %>
+                  <span class="time-span">Price for <%= length[1] %> secs</span>
+                <% else %>
+                  <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs</span>
+                <% end %>
+            <% else %>
+                <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs set</span>
+              <% end %>
+            </button>
+            <button class="request-btn">
+              <span class="request-text project-font">REQUEST A PERSONALISED SET</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% else %>
+   <div class="alert alert-danger">No product found against this project</div>
+  <% end %>
 </article>

@@ -50,16 +50,23 @@
       <div class="form-group">
         <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose a great image for your project</p>
         <div class="org_image_preview display-inline">
-          <img id="previewImg_<%= type %>" class="<%= f.object&.image.present? ? "" : "display-none" %>" src="<%= f.object&.image&.url %>" alt="Placeholder" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); width: 108px; height: 108px">
+          <img id="previewImg_<%= type %>" class="<%= f.object&.header_image_url.present? ? "" : "display-none" %>" src="<%= f.object&.header_image_url %>" alt="Placeholder" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); width: 108px; height: 108px">
         </div>
+<!--        <div class="display-inline">-->
+<!--          <button class="crayons-btn crayons-btn--outlined mr-2">-->
+<!--            <label for="cover-image-input" id="upload_img_label_<%#= type %>">-->
+              <%#= f.object&.image.present? ? "Change" : "Upload Image" %>
+<!--            </label>-->
+<!--            <input id="cover-image-input_<%#= type %>" type="file" data-img_id="previewImg_<%#= type %>" data-label_id="upload_img_label_<%#= type %>" data-rmv_btn_id="rmv_org_img_<%#= type %>" onchange="previewFile(this);" name="music_release[image]" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" data-max-file-size-mb="25">-->
+<!--          </button>-->
+<!--          <button class="crayons-btn crayons-btn--ghost-danger <%#= f.object&.image.present? ? "" : "display-none" %>" data-file_field="cover-image-input_<%#= type %>" data-img_id="previewImg_<%#= type %>" data-label_id="upload_img_label_<%#= type %>" data-rmv_btn_id="rmv_org_img_<%#= type %>" onclick="removeFile(this);" id="rmv_org_img_<%#= type %>" type="button">Remove</button>-->
+<!--        </div>-->
+        <input type="hidden" name="music_release[header_image_url]" id="<%= type %>-header-img-url">
         <div class="display-inline">
           <button class="crayons-btn crayons-btn--outlined mr-2">
-            <label for="cover-image-input" id="upload_img_label_<%= type %>">
-              <%= f.object&.image.present? ? "Change" : "Upload Image" %>
-            </label>
-            <input id="cover-image-input_<%= type %>" type="file" data-img_id="previewImg_<%= type %>" data-label_id="upload_img_label_<%= type %>" data-rmv_btn_id="rmv_org_img_<%= type %>" onchange="previewFile(this);" name="music_release[image]" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" data-max-file-size-mb="25">
+            <input type="file" id="<%= type %>-header-img">
+            <div id="<%= type %>-img-error" style="display: none" class="alert alert-danger"></div>
           </button>
-          <button class="crayons-btn crayons-btn--ghost-danger <%= f.object&.image.present? ? "" : "display-none" %>" data-file_field="cover-image-input_<%= type %>" data-img_id="previewImg_<%= type %>" data-label_id="upload_img_label_<%= type %>" data-rmv_btn_id="rmv_org_img_<%= type %>" onclick="removeFile(this);" id="rmv_org_img_<%= type %>" type="button">Remove</button>
         </div>
         <%#= f.file_field :image, class: "form-control track-fields", required: true, placeholder: "Enter title name" %>
       </div>
@@ -77,3 +84,31 @@
 
   </div>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).on('change',"#<%= type  %>-header-img",function (e){
+    var imageForm = new FormData();
+    imageForm.append('image', e.target.files[0]);
+    $.ajax({
+      url: '<%= image_uploads_path %>',
+      data: imageForm,
+      type: 'POST',
+      processData: false, // important
+      contentType: false, // important
+      dataType : 'json',
+      success:function(data){
+        if(data && data.links && data.links.length > 0 && data.links[0].includes('amazon')){
+          $("#<%= type %>-img-error").hide();
+          $("#<%= type %>-header-img-url").val(data.links[0]);
+        }else{
+          $("#<%= type %>-img-error").text('Cloudinary upload error').show();
+          $("#<%= type %>-header-img-url").val('');
+        }
+      },
+      error:function (err){
+        $("#<%= type %>-img-error").text('Unsupported image type').show();
+        $("#<%= type %>-header-img-url").val('');
+      }
+    });
+  })
+</script>

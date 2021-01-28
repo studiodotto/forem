@@ -319,7 +319,7 @@ class UsersController < ApplicationController
   def organizations_assoiations
     @single = @organization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
     @album = @organization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
-    @music_set = @organization.music_releases.music_set.first || MusicRelease.new(music_release_type: "album")
+    @music_set = @organization.music_releases.music_set.first || MusicRelease.new(music_release_type: "music_set")
     @ninty_second = @organization.music_releases.ninty_second.first || MusicRelease.new(music_release_type: "ninty_second")
     @organization_events = @organization.project_events
     artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")

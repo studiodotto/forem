@@ -207,7 +207,7 @@
 <main class="crayons-layout crayons-layout--2-cols crayons-layout--limited-l pt-0">
   <div class="crayons-layout__left-sidebar" style="padding-top: 60px">
     <nav class="hidden m:block">
-      <a href="#" style="color: white">
+      <a href="<%= organization_feeds_path %>" style="color: white">
         Projects
       </a>
       <%# Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
@@ -230,11 +230,11 @@
     <div class="row">
       <div class="container" style="background: #0E1218">
         <div class="row project-card-stories">
-          <%= render partial: 'shared/project_card' %>
+          <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '' } %>
           <div class="project-card-description-below">
             <p>
               <span style="display: block">ABOUT</span>
-              Romantic tunes for lighting a fire in any heart. Very simple emotional storytelling. Uplifting to hopeful, rising emotions. Heartwarming human emotion featuring elegant minimal arrangements
+              <%= @organization.try(:summary) %>
             </p>
           </div>
         </div>
@@ -244,7 +244,7 @@
 
       <div class="container track-details">
         <div class="track">
-          <h1 class="track-title">SINGLE</h1>
+          <h1 class="track-title"><%= @music_release.music_release_type.titleize %></h1>
           <div class="crayons-layout crayons-layout--3-cols crayons-layout--limited-l pt-0">
             <div>
               <span class="fa fa-star reviews checked"></span>
@@ -255,17 +255,17 @@
 
               <span class="reviews-text">10 reviews</span>
               <p class="track-details-title">DETAILS</p>
-              <p class="track-details-description">Playtime length about 3:30 minutes</p>
-              <p class="track-details-description">Private experience only. All rights belong to composers and performers. </p>
+              <p class="track-details-description">Playtime length about <%= Time.at(@music_release.length).utc.strftime("%M:%S") %> minutes</p>
+              <p class="track-details-description"><%= @music_release.description %></p>
             </div>
             <div>
               <button class="duration-box">
-                <span>3:30</span>
+                <span><%= Time.at(@music_release.length).utc.strftime("%M:%S") %></span>
               </button>
               <p class="duration-length">LENGTH</p>
             </div>
             <div>
-              <span class="track-price">$350.00</span>
+              <span class="track-price">$<%= number_with_precision(@music_release.price,precision: 2) %></span>
               <p class="duration-length">FIXED PRICE</p>
             </div>
           </div>
@@ -318,7 +318,7 @@
         </div>
 
         <button class="order-btn">
-          Buy now for $350
+          Buy now for $<%= number_with_precision(@music_release.price, precision: 2) %>
         </button>
       </div>
     </div>

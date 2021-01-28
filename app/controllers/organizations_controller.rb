@@ -85,6 +85,18 @@ class OrganizationsController < ApplicationController
 
   def project_show
     @organization = Organization.find_by(id: params[:id])
+    return redirect_to organization_feeds_path unless @organization.present?
+    @music_release = @organization.music_releases.first
+    unless @music_release.present?
+      flash[:alert] = 'No product exists against this project'
+      return redirect_to organization_feeds_path
+    end
+    artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+    @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+    @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+    @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+    @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+    @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
   end
 
   def update
@@ -189,7 +201,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_music_release_params
-    params.require(:music_release).permit(:id, :music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length)
+    params.require(:music_release).permit(:id, :music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length, :header_image_url)
   end
 
   def organization_project_event_params(event)
