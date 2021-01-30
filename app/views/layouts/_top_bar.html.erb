@@ -188,7 +188,7 @@
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 0.8rem;
     line-height: 21px;
     color: #000000;
     text-transform: uppercase;
@@ -287,6 +287,29 @@
     padding-left: 1.3rem;
     margin: auto;
     margin-top: 50px
+  }
+  .copies{
+    display: none;
+    color: white;
+    margin-bottom: 10px;
+    font-family: 'Roboto';
+  }
+  @media only screen and (max-width: 600px) {
+    .project-save-btn{
+      display: none;
+    }
+    .project-genres-and-awards{
+      display: none;
+    }
+    .reviews-reactions{
+      display: none;
+    }
+    .project-description{
+      display: none;
+    }
+    .copies{
+      display: block;
+    }
   }
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
