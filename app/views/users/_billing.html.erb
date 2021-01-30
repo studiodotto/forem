@@ -47,7 +47,7 @@
     setTimeout(function () {
       var handler = StripeCheckout.configure({
         key: '<%= SiteConfig.stripe_publishable_key %>',
-        image: "https://thepracticaldev.s3.amazonaws.com/i/xoxvppfjorrnxudkzskw.jpg",
+        image: "https://res.cloudinary.com/dyzicyjzq/image/fetch/s--rMcf2ecU--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://studioappbucket.s3.amazonaws.com/uploads/user/profile_image/6/bad08ef2-a74c-4316-8084-a645c5052bef.png",
         locale: 'auto',
         token: function (token) {
           var form = document.getElementById("credit-card-form")

@@ -272,9 +272,21 @@
         </div>
         <div class="debit-card" style="margin-top: 30px">
           <h1 class="track-title credit-debit"><%= image_tag 'circle.png' %> <span>CREDIT / Debit card</span></h1>
-          <input type="text" placeholder="Card number" class="card_number card-field">
-          <input type="text" placeholder="MM/YY" class="card-exp-csv card-field">
-          <input type="text" placeholder="CVC" class="card-exp-csv card-field border-right-0">
+          <% if current_user.stripe_id_code.blank? %>
+            <%#= form_tag stripe_active_cards_path, id: "credit-card-form", method: :post do %>
+<!--              <article>-->
+                <%# if flash[:error].present? %>
+<!--                  <div class="crayons-card crayons-card--secondary crayons-notice crayons-notice--danger">-->
+<!--                    <p><%#= flash[:error] %></p>-->
+<!--                  </div>-->
+                <%# end %>
+<!--              </article>-->
+<!--              <input type="hidden" name="from_project" value="true">-->
+              <input type="hidden" id="stripe_card_token">
+              <div id='card-msg' style="display: none; background: #fff3cd" class="alert alert-warning">Card information has been received</div>
+              <button id="add-credit-card-button" class="crayons-btn credit-card-button order-btn project-card-btn" type="button">Add Credit Card</button>
+            <%# end %>
+          <% end %>
         </div>
         <div>
           <p class="silver-text mt-80-mb-40">Who is this? Who is this for?</p>
@@ -324,3 +336,48 @@
     </div>
   </div>
 </main>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+  setTimeout(function () {
+    var handler = StripeCheckout.configure({
+      key: '<%= SiteConfig.stripe_publishable_key %>',
+      image: "https://res.cloudinary.com/dyzicyjzq/image/fetch/s--rMcf2ecU--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://studioappbucket.s3.amazonaws.com/uploads/user/profile_image/6/bad08ef2-a74c-4316-8084-a645c5052bef.png",
+      locale: 'auto',
+      token: function (token) {
+        var token_input = document.getElementById("stripe_card_token")
+        token_input.value = token.id
+        document.getElementById('add-credit-card-button').style.display = 'none'
+        document.getElementById('card-msg').style.display = 'block'
+      }
+    });
+
+    document.getElementById('add-credit-card-button').addEventListener('click', function (e) {
+      // Open Checkout with further options:
+      handler.open({
+        description: 'Add Credit Card',
+        amount: 0,
+        email: "<%= current_user.email %>",
+        panelLabel: "Add Card",
+        allowRememberMe: false,
+        zipCode: true,
+      });
+      e.preventDefault();
+    });
+
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function () {
+      handler.close();
+    });
+  }, 220)
+
+  function addHidden(theForm, key, value) {
+    // Create a hidden input element, and append it to the form:
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key; // 'the key/name of the attribute/field that is sent to the server
+    input.value = value;
+    theForm.appendChild(input);
+  }
+</script>
