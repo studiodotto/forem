@@ -80,24 +80,24 @@
                       </span>
             </a>
           </div>
-          <div class="crayons-story__bottom">
-            <button class="price-btn project-font">
-              <span class="price-span">$ <%= number_with_precision(music_release.price, precision: 2) %></span>
-              <% if music_release.music_release_type = 'single' %>
-                <% if music_release.length < 60 %>
-                  <span class="time-span">Price for <%= length[1] %> secs</span>
-                <% else %>
-                  <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs</span>
-                <% end %>
-            <% else %>
-                <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs set</span>
-              <% end %>
-            </button>
-            <button class="request-btn">
-              <span class="request-text project-font">REQUEST A PERSONALISED SET</span>
-            </button>
-          </div>
         </div>
+      </div>
+      <div class="crayons-story__bottom" style="padding: 0px !important;">
+        <button class="price-btn project-font">
+          <span class="price-span">$ <%= number_with_precision(music_release.price, precision: 2) %></span>
+          <% if music_release.music_release_type = 'single' %>
+            <% if music_release.length < 60 %>
+              <span class="time-span">Price for <%= length[1] %> secs</span>
+            <% else %>
+              <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs</span>
+            <% end %>
+          <% else %>
+            <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs set</span>
+          <% end %>
+        </button>
+        <button class="request-btn">
+          <span class="request-text project-font">REQUEST A PERSONALISED SET</span>
+        </button>
       </div>
     </div>
   <% else %>
