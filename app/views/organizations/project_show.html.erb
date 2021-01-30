@@ -270,9 +270,9 @@
             </div>
           </div>
         </div>
-        <% if current_user.try(:stripe_id_code).blank? %>
-          <div class="debit-card" style="margin-top: 30px">
-            <h1 class="track-title credit-debit"><%= image_tag 'circle.png' %> <span>CREDIT / Debit card</span></h1>
+        <%# if current_user.try(:stripe_id_code).blank? %>
+<!--          <div class="debit-card" style="margin-top: 30px">-->
+<!--            <h1 class="track-title credit-debit"><%#= image_tag 'circle.png' %> <span>CREDIT / Debit card</span></h1>-->
               <%#= form_tag stripe_active_cards_path, id: "credit-card-form", method: :post do %>
   <!--              <article>-->
                   <%# if flash[:error].present? %>
@@ -282,12 +282,12 @@
                   <%# end %>
   <!--              </article>-->
   <!--              <input type="hidden" name="from_project" value="true">-->
-                <input type="hidden" id="stripe_card_token">
-                <div id='card-msg' style="display: none; background: #fff3cd" class="alert alert-warning">Card information has been received</div>
-                <button id="add-credit-card-button" class="crayons-btn credit-card-button order-btn project-card-btn" type="button">Add Credit Card</button>
+<!--                <input type="hidden" id="stripe_card_token">-->
+<!--                <div id='card-msg' style="display: none; background: #fff3cd" class="alert alert-warning">Card information has been received</div>-->
+<!--                <button id="add-credit-card-button" class="crayons-btn credit-card-button order-btn project-card-btn" type="button">Add Credit Card</button>-->
               <%# end %>
-          </div>
-        <% end %>
+<!--          </div>-->
+        <%# end %>
         <div>
           <p class="silver-text mt-80-mb-40">Who is this? Who is this for?</p>
           <div class="project-icons">
@@ -329,7 +329,7 @@
           <input type="text" placeholder="your Name" style="width: 100%; background: rgba(255, 255, 255, 0.2);padding: 8px; margin-top: 11px; border: 0px; border-radius: 5px">
         </div>
 
-        <button class="order-btn">
+        <button class="order-btn" id="order-confirmation-button">
           Buy now for $<%= number_with_precision(@music_release.price, precision: 2) %>
         </button>
       </div>
@@ -348,23 +348,37 @@
       token: function (token) {
         var token_input = document.getElementById("stripe_card_token")
         token_input.value = token.id
-        document.getElementById('add-credit-card-button').style.display = 'none'
-        document.getElementById('card-msg').style.display = 'block'
+        // document.getElementById('add-credit-card-button').style.display = 'none'
+        // document.getElementById('card-msg').style.display = 'block'
       }
     });
 
-    document.getElementById('add-credit-card-button').addEventListener('click', function (e) {
+      //document.getElementById('add-credit-card-button').addEventListener('click', function (e) {
       // Open Checkout with further options:
-      handler.open({
-        description: 'Add Credit Card',
-        amount: 0,
-        email: "<%= current_user.present? ? current_user.email : '' %>",
-        panelLabel: "Add Card",
-        allowRememberMe: false,
-        zipCode: true,
+      // handler.open({
+       // description: 'Add Credit Card',
+       // amount: 0,
+       // email: "<%#= current_user.present? ? current_user.email : '' %>",
+       // panelLabel: "Add Card",
+       // allowRememberMe: false,
+       // zipCode: true,
+       //});
+       //e.preventDefault();
+       //});
+    <% if current_user.try(:stripe_id_code).blank? %>
+      document.getElementById('order-confirmation-button').addEventListener('click', function (e) {
+        // Open Checkout with further options:
+          handler.open({
+            description: 'Add Credit Card',
+            amount: 0,
+            email: "<%= current_user.present? ? current_user.email : '' %>",
+            panelLabel: "Add Card",
+            allowRememberMe: false,
+            zipCode: true,
+          });
+          e.preventDefault();
       });
-      e.preventDefault();
-    });
+    <% end %>
 
     // Close Checkout on page navigation:
     window.addEventListener('popstate', function () {
