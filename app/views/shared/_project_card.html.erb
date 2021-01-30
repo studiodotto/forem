@@ -6,7 +6,7 @@
       <%= music_release.try(:title) %>
     </a>
     <div role="presentation">
-      <a href="/organizations/project_show/<%= project.id %>" class="crayons-story__cover" title="testtttt" style="background-image: url('<%= music_release.header_image_url.present? ? music_release.header_image_url : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
+      <a href="/organizations/project_show/<%= project.id %>" class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? music_release.header_image_url : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
       <div class="crayons-story__body pd-b-0">
@@ -84,20 +84,20 @@
         </div>
       </div>
       <div class="crayons-story__bottom" style="padding: 0px !important;">
-        <button class="price-btn project-font">
-          <span class="price-span">$ <%= number_with_precision(music_release.price, precision: 2) %></span>
-          <% if music_release.music_release_type = 'single' %>
-            <% if music_release.length < 60 %>
-              <span class="time-span">Price for <%= length[1] %> secs</span>
-            <% else %>
-              <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs</span>
-            <% end %>
-          <% else %>
-            <span class="time-span">Price for <%= length[0]  %> mins <%= length[1] %> secs set</span>
-          <% end %>
-        </button>
-        <button class="request-btn">
-          <span class="request-text project-font">REQUEST A PERSONALISED SET</span>
+<!--        <button class="price-btn project-font">-->
+<!--          <span class="price-span">$ <%#= number_with_precision(music_release.price, precision: 2) %></span>-->
+          <%# if music_release.music_release_type = 'single' %>
+            <%# if music_release.length < 60 %>
+<!--              <span class="time-span">Price for <%#= length[1] %> secs</span>-->
+            <%# else %>
+<!--              <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
+            <%# end %>
+          <%# else %>
+<!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
+          <%# end %>
+<!--        </button>-->
+        <button class="request-btn" style="width: 100%">
+          <span class="request-text project-font">Buy track | 0.01% Royalties— $<%= number_with_precision(music_release.price, precision: 2) %>   </span>
         </button>
       </div>
     </div>
