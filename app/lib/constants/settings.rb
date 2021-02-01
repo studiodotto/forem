@@ -20,6 +20,7 @@ module Constants
       New\ Music\ Releases
       Account\ and\ Banking
       Analytics
+      Single\ Track\ Music\ Page
       Online\ Music\ Services\ Page
       Deejaying\ Services
       Unreleased\ Music\ Project

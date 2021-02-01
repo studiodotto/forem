@@ -32,6 +32,14 @@ class OrganizationsController < ApplicationController
       raise StandardError.new @organization.errors.any? ? @organization.errors.full_messages.to_sentence : "Invalid image" unless valid_image?
       @organization.save(validate: false)
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
+      if organization_params[:organization_type] == 'single_track'
+        @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
+        @organization_music_release.assign_attributes(organization_music_release_params.merge({organization_id: @organization.id}))
+        @organization_music_release.save(validate: false)
+        if @organization_music_release.errors.any?
+          raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
+        end
+      end
     rescue => exc
       flash[:settings_notice] = exc.message
     ensure
@@ -253,6 +261,8 @@ class OrganizationsController < ApplicationController
       return "deejaying-services"
     when "online_music_service"
       return "online-music-services-page"
+    when "single_track"
+      return "single-track-music-page"
     end
   end
 end

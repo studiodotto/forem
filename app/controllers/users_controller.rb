@@ -307,6 +307,9 @@ class UsersController < ApplicationController
     when "deejaying-services"
       @organization = current_user.artist_organizations.deejaying.first_or_initialize
       organizations_assoiations
+    when "single-track-music-page"
+      @organization = current_user.artist_organizations.single_track.first_or_initialize
+      organizations_assoiations
     when "posts"
       # handle_response_templates_tab
     else

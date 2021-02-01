@@ -27,7 +27,7 @@ class Organization < ApplicationRecord
   has_many :orders
   has_many :music_releases
 
-  enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service"}
+  enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service", "single_track" => "single_track"}
 
   validates :articles_count, presence: true
   validates :bg_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
