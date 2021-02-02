@@ -6,7 +6,7 @@
       <%= music_release.try(:title) %>
     </a>
     <div role="presentation">
-      <a href="/organizations/project_show/<%= project.id %>" class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? cloud_cover_url(music_release.header_image_url) : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
+      <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? cloud_cover_url(music_release.header_image_url) : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
       <div class="crayons-story__body pd-b-0">

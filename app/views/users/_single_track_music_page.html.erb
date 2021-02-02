@@ -165,7 +165,7 @@
         <p class="color-gray">Pick a brand name for your services, your project, or your band. You can always just use your name.</p>
         <div class="form-group">
           <input type="hidden" name="organization[organization_type]" value="single_track">
-          <%= f.hidden_field :id%>
+          <%= f.hidden_field :id, value: "#{@single.try(:id)}" %>
           <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
           <%= f.text_field :name, class: "form-control organization-fields", required: true %>
         </div>

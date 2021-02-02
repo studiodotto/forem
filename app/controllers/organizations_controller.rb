@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show]
+  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show, :project_edit]
 
   def create
     rate_limit!(:organization_creation)
@@ -33,6 +33,9 @@ class OrganizationsController < ApplicationController
       @organization.save(validate: false)
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
       if organization_params[:organization_type] == 'single_track'
+        puts "============"
+        puts organization_music_release_params
+        puts "============="
         @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
         @organization_music_release.assign_attributes(organization_music_release_params.merge({organization_id: @organization.id}))
         @organization_music_release.save(validate: false)
@@ -43,8 +46,12 @@ class OrganizationsController < ApplicationController
     rescue => exc
       flash[:settings_notice] = exc.message
     ensure
-      flash[:notice] = "Project created successfully"
-      redirect_to artist_settings_path(tab: tabs(organization_params[:organization_type]))
+      if organization_params[:id].present?
+        flash[:settings_notice] = "Project updated successfully"
+      else
+        flash[:settings_notice] = "Project created successfully"
+      end
+      redirect_to artist_settings_path(tab: 'my-projects')
     end
   end
 
@@ -90,6 +97,14 @@ class OrganizationsController < ApplicationController
     @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
     @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
     @listings = []
+  end
+
+  def project_edit
+    @organization = Organization.find_by(id: params[:id])
+    if @organization.present?
+      prepare_org_data
+      set_user
+    end
   end
 
   def project_show
@@ -265,5 +280,26 @@ class OrganizationsController < ApplicationController
     when "single_track"
       return "single-track-music-page"
     end
+  end
+
+  def prepare_org_data
+    @single = @organization.music_releases.single.first || MusicRelease.new(music_release_type: "single")
+    @album = @organization.music_releases.album.first || MusicRelease.new(music_release_type: "album")
+    @music_set = @organization.music_releases.music_set.first || MusicRelease.new(music_release_type: "music_set")
+    @ninty_second = @organization.music_releases.ninty_second.first || MusicRelease.new(music_release_type: "ninty_second")
+    @organization_events = @organization.project_events
+    artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
+    @ninty_second_events = artists_data['ninty_second_events'].map{|ninty_second_event| [ninty_second_event[:label], ninty_second_event[:url]]}
+    @events = artists_data['events'].map{|event| [event[:label], event[:url]]}
+    @sport_events = artists_data['sports_events'].map{|sport_event| [sport_event[:label], sport_event[:url]]}
+    @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
+    @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}
+    @industries = artists_data['industries'].map{|industry| [industry[:label], industry[:id]]}
+    @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
+    @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
+  end
+
+  def set_user
+    @user = current_user
   end
 end

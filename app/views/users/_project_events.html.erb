@@ -1,7 +1,7 @@
 <% if type == "ninty_second" %>
   <div class="container">
     <%= form_with model: ProjectEvent, url: create_organizations_event_path(), method: :post, html: { class: "mb-2" }, local: true do |f| %>
-      <% organization_ninty_second_events = @organization_events.ninty_second %>
+      <% organization_ninty_second_events = @organization_events.try(:ninty_second).present? ? @organization_events.ninty_second : []  %>
 
       <div class="row">
         <p style="font-family: 'Roboto', sans-serif;font-style: normal;
@@ -48,7 +48,7 @@
   <div class="container">
     <%= form_with model: ProjectEvent, url: create_organizations_event_path(), method: :post, html: { class: "mb-2" }, local: true do |f| %>
       <div class="row">
-        <% organization_casual_events = @organization_events.casual %>
+        <% organization_casual_events = @organization_events.try(:casual).present? ? @organization_events.casual : [] %>
         <p style="font-family: 'Roboto', sans-serif;font-style: normal;
           font-weight: normal;
           font-size: 24px;
@@ -91,7 +91,7 @@
           letter-spacing: 0.1px;
           color: #000000;
           margin-top: 2rem">Sports</p>
-        <% organization_sport_events = @organization_events.sport %>
+        <% organization_sport_events = @organization_events.try(:sport).present? ? @organization_events.sport : [] %>
         <p class="color-gray">Select multiple types of sports activities. If you like or none.</p>
         <div class="form-group crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr !important;" >
           <% @sport_events.each_with_index do |event, index| %>

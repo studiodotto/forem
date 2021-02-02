@@ -1,26 +1,9 @@
-<%= content_for :page_meta do %>
-  <% title_with_timeframe(
-       page_title: "#{community_qualified_name} 👩‍💻👨‍💻",
-       timeframe: params[:timeframe],
-       content_for: true,
-       ) %>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icon Library -->
-  <link rel="canonical" href="<%= app_url(request.path) %>" />
-  <meta name="description" content="<%= SiteConfig.community_description %>">
-<% end %>
-<%#= javascript_packs_with_chunks_tag "homePage", defer: true %>
-<% if flash[:error].present? %>
-  <!--  <p class="alert alert-danger" style="text-align: center"><%#= flash[:error].capitalize %></p>-->
-<% end %>
-
 <main class="articles-list crayons-layout__content">
   <!-- Center Content Div -->
   <div style="min-height: 90vh">
     <% @organizations.each do |project| %>
       <% if project.music_releases.first.present? %>
-        <%= render partial: 'shared/project_card', locals: {project: project, music_release: project.music_releases.first, composer: project.composer_id.present? ? @composers[project.composer_id][0] : '' } %>
+        <%= render partial: 'shared/project_card', locals: {project: project, music_release: project.music_releases.first, composer: project.composer_id.present? ? @composers[project.composer_id][0] : '', artist_side: true } %>
       <% end %>
     <% end %>
   </div>
