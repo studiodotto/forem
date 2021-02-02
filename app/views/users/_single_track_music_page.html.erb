@@ -165,7 +165,7 @@
         <p class="color-gray">Pick a brand name for your services, your project, or your band. You can always just use your name.</p>
         <div class="form-group">
           <input type="hidden" name="organization[organization_type]" value="single_track">
-          <%= f.hidden_field :id, value: "#{@single.try(:id)}" %>
+          <%= f.hidden_field :id, value: "#{@organization.try(:id)}" %>
           <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
           <%= f.text_field :name, class: "form-control organization-fields", required: true %>
         </div>
@@ -260,6 +260,7 @@
           <p class="track-labels">Single title</p>
           <input type="hidden" name="music_release[user_id]" value="<%= current_user.try(:id) %>">
           <input type="hidden" name="music_release[music_release_type]" value="single">
+          <input type="hidden" name="music_release[id]" value="<%= @single.try(:id) %>">
           <input type="text" name="music_release[title]" class="form-control track-fields" placeholder="Enter title name" value="<%= @single.try(:title) %>" required>
         </div>
         <div class="crayons-layout" style="padding: 0px; grid-template-columns: 1fr 1fr 1fr !important;">

@@ -33,9 +33,6 @@ class OrganizationsController < ApplicationController
       @organization.save(validate: false)
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
       if organization_params[:organization_type] == 'single_track'
-        puts "============"
-        puts organization_music_release_params
-        puts "============="
         @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
         @organization_music_release.assign_attributes(organization_music_release_params.merge({organization_id: @organization.id}))
         @organization_music_release.save(validate: false)
