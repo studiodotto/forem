@@ -43,6 +43,7 @@ class OrganizationsController < ApplicationController
     rescue => exc
       flash[:settings_notice] = exc.message
     ensure
+      flash[:notice] = "Project created successfully"
       redirect_to artist_settings_path(tab: tabs(organization_params[:organization_type]))
     end
   end
