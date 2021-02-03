@@ -59,7 +59,8 @@
           </div>
 
           <div class="reviews-reactions">
-            <span class="project-date"><%= music_release.created_at.strftime('%Y') %> | 1 song | <%= length[0]  %> mins <%= length[1] %> secs</span>
+<!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
+            <span class="project-date">Release date <%= music_release.created_at.strftime('%Y %B') %></span>
 
             <span class="fa fa-star reviews checked"></span>
             <span class="fa fa-star reviews checked"></span>
