@@ -1,12 +1,12 @@
 <!-- Project Card Section -->
-<article class="crayons-story cursor-pointer crayons-story--featured project-card">
+<article class="crayons-story cursor-pointer crayons-story--featured project-card margin-bottom-30">
   <% if music_release.present? %>
     <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
     <a href="#" class="crayons-story__hidden-navigation-link">
       <%= music_release.try(:title) %>
     </a>
     <div role="presentation">
-      <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? cloud_cover_url(music_release.header_image_url) : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
+      <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 650, height: 650, crop: "pad") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
       <div class="crayons-story__body pd-b-0">
