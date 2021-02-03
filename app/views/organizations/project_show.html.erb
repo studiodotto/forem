@@ -230,7 +230,7 @@
     <div class="row">
       <div class="container" style="background: #0E1218">
         <div class="row project-card-stories">
-          <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '' } %>
+          <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '', artist_side: false } %>
           <div class="project-card-description-below">
             <p>
               <span style="display: block">ABOUT</span>

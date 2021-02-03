@@ -5,7 +5,7 @@
   </div>
 
   <div class="ml-auto">
-    <%= link_to "View @#{@organization.name}", "/#{@organization.slug}", class: "btn btn-primary", target: "_blank", rel: "noopener" %>
+    <%= link_to "View @#{@organization.name}", "/organizations/project_show/#{@organization.id}", class: "btn btn-primary", target: "_blank", rel: "noopener" %>
   </div>
 </header>
 

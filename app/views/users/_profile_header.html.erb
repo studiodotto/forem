@@ -29,10 +29,10 @@
         <p class="fs-base m:fs-l color-base-90 mb-4 mx-auto max-w-100 m:max-w-75"><%= sanitize(@user.summary.presence || "404 bio not found") %></p>
 
         <div class="profile-header__meta">
-          <% if @organization.location.present? %>
+          <% if @organization.try(:location_id).present? %>
             <span class="profile-header__meta__item">
               <%= inline_svg_tag("location.svg", aria: true, class: "crayons-icon mr-2 shrink-0", title: "Location") %>
-              <%= sanitize @organization.location %>
+              <%= sanitize @organization.try(:location_id) %>
             </span>
           <% end %>
 

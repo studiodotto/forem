@@ -27,10 +27,16 @@ class OrganizationsController < ApplicationController
 
   def create_organization
     begin
+      if organization_params[:id].present?
+        flash[:settings_notice] = "Project updated successfully"
+      else
+        flash[:settings_notice] = "Project created successfully"
+      end
+      slug = SecureRandom.hex(5) + (Organization.last.id + 1).to_s
       @organization = Organization.find_or_initialize_by(id: organization_params[:id])
-      @organization.assign_attributes(organization_params)
+      @organization.assign_attributes(organization_params.merge(slug: slug))
       raise StandardError.new @organization.errors.any? ? @organization.errors.full_messages.to_sentence : "Invalid image" unless valid_image?
-      @organization.save(validate: false)
+      @organization.save
       raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
       if organization_params[:organization_type] == 'single_track'
         @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
@@ -43,11 +49,6 @@ class OrganizationsController < ApplicationController
     rescue => exc
       flash[:settings_notice] = exc.message
     ensure
-      if organization_params[:id].present?
-        flash[:settings_notice] = "Project updated successfully"
-      else
-        flash[:settings_notice] = "Project created successfully"
-      end
       redirect_to artist_settings_path(tab: 'my-projects')
     end
   end

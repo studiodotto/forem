@@ -29,31 +29,32 @@ class Organization < ApplicationRecord
 
   enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service", "single_track" => "single_track"}
 
-  validates :articles_count, presence: true
+  # validates :articles_count, presence: true
   validates :bg_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
-  validates :company_size, format: { with: INTEGER_REGEXP, message: MESSAGES[:integer_only], allow_blank: true }
-  validates :company_size, length: { maximum: 7 }, allow_nil: true
-  validates :credits_count, presence: true
-  validates :cta_body_markdown, length: { maximum: 256 }
-  validates :cta_button_text, length: { maximum: 20 }
-  validates :cta_button_url, length: { maximum: 150 }, url: { allow_blank: true, no_local: true }
-  validates :github_username, length: { maximum: 50 }
-  validates :email, length: { maximum: 64 }
-  validates :name, :summary, :url, :profile_image, presence: true
-  validates :name, length: { maximum: 50 }
-  validates :proof, length: { maximum: 1500 }
-  validates :secret, length: { is: 100 }, allow_nil: true
-  validates :secret, uniqueness: true
+  # validates :company_size, format: { with: INTEGER_REGEXP, message: MESSAGES[:integer_only], allow_blank: true }
+  # validates :company_size, length: { maximum: 7 }, allow_nil: true
+  # validates :credits_count, presence: true
+  # validates :cta_body_markdown, length: { maximum: 256 }
+  # validates :cta_button_text, length: { maximum: 20 }
+  # validates :cta_button_url, length: { maximum: 150 }, url: { allow_blank: true, no_local: true }
+  # validates :github_username, length: { maximum: 50 }
+  # validates :email, length: { maximum: 64 }
+  # validates :name, :summary, :url, :profile_image, presence: true
+  validates :name, :summary, presence: true
+  # validates :name, length: { maximum: 50 }
+  # validates :proof, length: { maximum: 1500 }
+  # validates :secret, length: { is: 100 }, allow_nil: true
+  # validates :secret, uniqueness: true
   validates :slug, exclusion: { in: ReservedWords.all, message: MESSAGES[:reserved_word] }
   validates :slug, format: { with: SLUG_REGEXP }, length: { in: 2..18 }
   validates :slug, presence: true, uniqueness: { case_sensitive: false }
-  validates :spent_credits_count, presence: true
-  validates :summary, length: { maximum: 250 }
-  validates :tag_line, length: { maximum: 60 }
-  validates :tech_stack, :story, length: { maximum: 640 }
-  validates :text_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
-  validates :twitter_username, length: { maximum: 15 }
-  validates :unspent_credits_count, presence: true
+  # validates :spent_credits_count, presence: true
+  # validates :summary, length: { maximum: 250 }
+  # validates :tag_line, length: { maximum: 60 }
+  # validates :tech_stack, :story, length: { maximum: 640 }
+  # validates :text_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true
+  # validates :twitter_username, length: { maximum: 15 }
+  # validates :unspent_credits_count, presence: true
   # validates :url, length: { maximum: 200 }, url: { allow_blank: true, no_local: true }
 
   validate :unique_slug_including_users_and_podcasts, if: :slug_changed?

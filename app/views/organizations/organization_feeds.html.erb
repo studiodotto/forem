@@ -100,7 +100,7 @@
     <div style="min-height: 90vh">
       <% @organizations.each do |project| %>
         <% if project.music_releases.first.present? %>
-          <%= render partial: 'shared/project_card', locals: {project: project, music_release: project.music_releases.first, composer: project.composer_id.present? ? @composers[project.composer_id][0] : '' } %>
+          <%= render partial: 'shared/project_card', locals: {project: project, music_release: project.music_releases.first, composer: project.composer_id.present? ? @composers[project.composer_id][0] : '', artist_side: false } %>
         <% end %>
       <% end %>
       <!-- Right sidebar -->
