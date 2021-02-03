@@ -1,5 +1,5 @@
 <!-- Project Card Section -->
-<article class="crayons-story cursor-pointer crayons-story--featured project-card margin-bottom-30">
+<article class="<%= project_side.present? ? 'crayons-story cursor-pointer crayons-story--featured project-card' : 'crayons-story cursor-pointer crayons-story--featured project-card margin-bottom-30' %>">
   <% if music_release.present? %>
     <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
     <a href="#" class="crayons-story__hidden-navigation-link">
@@ -28,11 +28,11 @@
               SAVE
             </button>
           </div>
-          <div class="project-description">
+          <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
             <%= project.try(:summary) %>
           </div>
-          <div class="copies">1000 COPIES</div>
-          <div class="project-genres-and-awards">
+          <div class="<%= project_side.present? ? 'copies-project' : 'copies-project' %>">1000 COPIES</div>
+          <div class="<%= project_side.present? ? 'project-genres-and-awards-projects' : 'project-genres-and-awards' %>">
             <div class="genres" style="float:left;">
               <% if project.genre_id.present? %>
                 <% project.genre_id.split(',').each do |genre| %>
@@ -62,16 +62,16 @@
 <!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
             <span class="project-date">Release date <%= music_release.created_at.strftime('%Y %B') %></span>
 
-            <span class="fa fa-star reviews checked"></span>
-            <span class="fa fa-star reviews checked"></span>
-            <span class="fa fa-star reviews checked"></span>
-            <span class="fa fa-star reviews"></span>
-            <span class="fa fa-star reviews"></span>
+            <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
+            <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
+            <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
+            <span class="<%= project_side.present? ? 'fa fa-star reviews-project' : 'fa fa-star reviews' %>"></span>
+            <span class="<%= project_side.present? ? 'fa fa-star reviews-project' : 'fa fa-star reviews' %>"></span>
 
-            <span class="reviews-text">10 reviews</span>
+            <span class="<%= project_side.present? ? 'reviews-text-project' : 'reviews-text' %>">10 reviews</span>
             <%#= image_tag 'badge.png', width: '24px', style: "float:right" %>
-            <span class="fa fa-bookmark-o bookmark-icon"></span>
-            <a class="crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left reactions-icon" href="#">
+            <span class="<%= project_side.present? ? 'fa fa-bookmark-o bookmark-icon-project' : 'fa fa-bookmark-o bookmark-icon' %>"></span>
+            <a class="<%= project_side.present? ? 'crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left reactions-icon-project' : 'crayons-btn crayons-btn--ghost crayons-btn--s crayons-btn--icon-left reactions-icon' %>" href="#">
               <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
                 </path>

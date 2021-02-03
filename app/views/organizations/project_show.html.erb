@@ -230,7 +230,7 @@
     <div class="row">
       <div class="container" style="background: #0E1218">
         <div class="row project-card-stories">
-          <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '', artist_side: false } %>
+          <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '', artist_side: false, project_side: true } %>
           <div class="project-card-description-below">
             <p>
               <span style="display: block">ABOUT</span>
@@ -238,22 +238,22 @@
             </p>
           </div>
         </div>
-        <p class="yellow-text">How it works?</p>
-        <p class="silver-text">Book now _artist to</p>
+        <p class="yellow-text" style="display: none">How it works?</p>
+        <p class="silver-text" style="display: none">Book now _artist to</p>
       </div>
 
-      <div class="container track-details">
+      <div class="container track-details" style="display: none">
         <div class="track">
           <h1 class="track-title"><%= @music_release.music_release_type.titleize %></h1>
           <div class="crayons-layout crayons-layout--3-cols crayons-layout--limited-l pt-0">
             <div>
-              <span class="fa fa-star reviews checked"></span>
-              <span class="fa fa-star reviews checked"></span>
-              <span class="fa fa-star reviews checked"></span>
-              <span class="fa fa-star reviews"></span>
-              <span class="fa fa-star reviews"></span>
+              <span class="fa fa-star reviews-project checked"></span>
+              <span class="fa fa-star reviews-project checked"></span>
+              <span class="fa fa-star reviews-project checked"></span>
+              <span class="fa fa-star reviews-project"></span>
+              <span class="fa fa-star reviews-project"></span>
 
-              <span class="reviews-text">10 reviews</span>
+              <span class="reviews-text-project">10 reviews</span>
               <p class="track-details-title">DETAILS</p>
               <p class="track-details-description">Playtime length about <%= Time.at(@music_release.length).utc.strftime("%M:%S") %> minutes</p>
               <p class="track-details-description"><%= @music_release.description %></p>
@@ -329,10 +329,13 @@
           <input type="text" placeholder="your Name" style="width: 100%; background: rgba(255, 255, 255, 0.2);padding: 8px; margin-top: 11px; border: 0px; border-radius: 5px">
         </div>
 
-        <button class="order-btn" id="order-confirmation-button">
-          Buy now for $<%= number_with_precision(@music_release.price, precision: 2) %>
-        </button>
+<!--        <button class="order-btn" id="order-confirmation-button">-->
+<!--          Buy now for $<%#= number_with_precision(@music_release.price, precision: 2) %>-->
+<!--        </button>-->
       </div>
+<!--      <button class="request-btn" style="width: 100%" id="order-confirmation-button">-->
+<!--        Buy now for $<%#= number_with_precision(@music_release.price, precision: 2) %>-->
+<!--      </button>-->
     </div>
   </div>
 </main>
