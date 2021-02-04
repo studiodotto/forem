@@ -17,7 +17,8 @@
         <!--crayons-story__indention-->
         <!--crayons-story__title -->
         <div class="project-card-content">
-<!--          <div class="project-box" style="display: inline-block; width: 100%">-->
+          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+          <!--          <div class="project-box" style="display: inline-block; width: 100%">-->
 <!--            <h2 style="float:left;">-->
 <!--              <a class="project-title" href="#">-->
 <!--                <span>-->
@@ -30,7 +31,7 @@
 <!--            </button>-->
 <!--          </div>-->
           <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
-            <%= project.try(:summary) %>
+            <%= music_release.try(:description) %>
           </div>
 <!--          <div class="<%#= project_side.present? ? 'copies-project' : 'copies-project' %>"><%#= music_release.copies.to_i %> LIMITED EDITION MP3</div>-->
           <div class="<%= project_side.present? ? 'project-genres-and-awards-projects' : 'project-genres-and-awards' %>">
@@ -61,8 +62,7 @@
 
           <div class="reviews-reactions">
 <!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
-            <span class="project-date">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</span>
-
+            <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
@@ -86,6 +86,7 @@
             </a>
           </div>
         </div>
+        <div style="<%= project_side ? 'height:10px; background: #171a1f' : 'display:none' %>"></div>
         <div class="project-card-content p-l-r-0 amt-bg">
           <div class="p-l-r-0 amt-data">
             <div style="display: inline-block;width: 40%; padding-top: 10px; padding-bottom: 10px">
