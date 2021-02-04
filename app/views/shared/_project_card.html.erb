@@ -9,29 +9,30 @@
       <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 650, height: 650, crop: "pad") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
-      <div class="crayons-story__body pd-b-0">
+      <div class="crayons-story__body pd-b-0 p-l-r-0">
         <div class="crayons-story__top">
-          <p class="artist-name"><%= project.try(:name) %> | <%= composer %></p>
+<!--          <p class="artist-name"><%#= project.try(:name) %> | <%#= composer %></p>-->
+          <p class="artist-name"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
         </div>
         <!--crayons-story__indention-->
         <!--crayons-story__title -->
         <div class="project-card-content">
-          <div class="project-box" style="display: inline-block; width: 100%">
-            <h2 style="float:left;">
-              <a class="project-title" href="#">
-                <span>
-                  <%= music_release.try(:title) %>
-                </span>
-              </a>
-            </h2>
-            <button  class="project-save-btn">
-              SAVE
-            </button>
-          </div>
+<!--          <div class="project-box" style="display: inline-block; width: 100%">-->
+<!--            <h2 style="float:left;">-->
+<!--              <a class="project-title" href="#">-->
+<!--                <span>-->
+                  <%#= music_release.try(:title) %>
+<!--                </span>-->
+<!--              </a>-->
+<!--            </h2>-->
+<!--            <button  class="project-save-btn">-->
+<!--              SAVE-->
+<!--            </button>-->
+<!--          </div>-->
           <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
             <%= project.try(:summary) %>
           </div>
-          <div class="<%= project_side.present? ? 'copies-project' : 'copies-project' %>">1000 COPIES</div>
+<!--          <div class="<%#= project_side.present? ? 'copies-project' : 'copies-project' %>"><%#= music_release.copies.to_i %> LIMITED EDITION MP3</div>-->
           <div class="<%= project_side.present? ? 'project-genres-and-awards-projects' : 'project-genres-and-awards' %>">
             <div class="genres" style="float:left;">
               <% if project.genre_id.present? %>
@@ -60,7 +61,7 @@
 
           <div class="reviews-reactions">
 <!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
-            <span class="project-date">Release date <%= music_release.created_at.strftime('%Y %B') %></span>
+            <span class="project-date">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</span>
 
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
@@ -83,6 +84,22 @@
                         </span>
                       </span>
             </a>
+          </div>
+        </div>
+        <div class="project-card-content p-l-r-0 amt-bg">
+          <div class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left p-l-r-0">
+            <div>
+              <p class="artist-name p-l-10">Price</p>
+              <p class="pink-text p-l-10">US$1000</p>
+            </div>
+            <div>
+              <p class="artist-name p-l-10">Royalities</p>
+              <p class="pink-text p-l-10">0.01%</p>
+            </div>
+            <div>
+              <p class="artist-name p-l-10 m-b-10">Duration</p>
+              <p class="pink-text p-l-10 display-inline">30</p><p class="pink-text desc-text display-inline m-l-5">YEARS</p>
+            </div>
           </div>
         </div>
       </div>
