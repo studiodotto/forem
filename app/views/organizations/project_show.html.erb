@@ -231,6 +231,7 @@
       <div class="container" style="background: #0E1218">
         <div class="row project-card-stories">
           <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '', artist_side: false, project_side: true } %>
+          <div style="height:10px; background: #171a1f"></div>
           <div class="project-card-description-below">
             <p>
               <p class="funding-text">FUNDING NEW MUSICAL WORK</p>
