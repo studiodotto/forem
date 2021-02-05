@@ -18,7 +18,7 @@ locations:
   - :id: 9
     :label: Antarctica
   - :id: 10
-    :label: Antigua And Barbuda
+    :label: Antigua and Barbuda
   - :id: 11
     :label: Argentina
   - :id: 12
@@ -54,440 +54,450 @@ locations:
   - :id: 27
     :label: Bolivia
   - :id: 28
-    :label: Bosnia and Herzegowina
+    :label: Bonaire
   - :id: 29
-    :label: Botswana
+    :label: Bosnia and Herzegovina
   - :id: 30
-    :label: Bouvet Island
+    :label: Botswana
   - :id: 31
-    :label: Brazil
+    :label: Bouvet Island
   - :id: 32
-    :label: British Indian Ocean Territory
+    :label: Brazil
   - :id: 33
-    :label: Brunei Darussalam
+    :label: British Indian Ocean Territory
   - :id: 34
-    :label: Bulgaria
+    :label: British Virgin Islands
   - :id: 35
-    :label: Burkina Faso
+    :label: Brunei
   - :id: 36
-    :label: Burundi
+    :label: Bulgaria
   - :id: 37
-    :label: Cambodia
+    :label: Burkina Faso
   - :id: 38
-    :label: Cameroon
+    :label: Burundi
   - :id: 39
-    :label: Canada
+    :label: Cambodia
   - :id: 40
-    :label: Cape Verde
+    :label: Cameroon
   - :id: 41
-    :label: Cayman Islands
+    :label: Canada
   - :id: 42
-    :label: Central African Republic
+    :label: Cape Verde
   - :id: 43
-    :label: Chad
+    :label: Cayman Islands
   - :id: 44
-    :label: Chile
+    :label: Central African Republic
   - :id: 45
-    :label: China
+    :label: Chad
   - :id: 46
-    :label: Christmas Island
+    :label: Chile
   - :id: 47
-    :label: Cocos (Keeling) Islands
+    :label: China
   - :id: 48
-    :label: Colombia
+    :label: Christmas Island
   - :id: 49
-    :label: Comoros
+    :label: Cocos (Keeling) Islands
   - :id: 50
-    :label: Congo
+    :label: Colombia
   - :id: 51
-    :label: Congo, the Democratic Republic of the
+    :label: Comoros
   - :id: 52
-    :label: Cook Islands
+    :label: Congo, Democratic Republic of
   - :id: 53
-    :label: Costa Rica
+    :label: Congo, Republic of
   - :id: 54
-    :label: Cote d'Ivoire
+    :label: Cook Islands
   - :id: 55
-    :label: Croatia
+    :label: Costa Rica
   - :id: 56
-    :label: Cuba
+    :label: Croatia
   - :id: 57
-    :label: Cyprus
+    :label: Cuba
   - :id: 58
-    :label: Czech Republic
+    :label: Curaçao
   - :id: 59
-    :label: Denmark
+    :label: Cyprus
   - :id: 60
-    :label: Djibouti
+    :label: Czech Republic
   - :id: 61
-    :label: Dominica
+    :label: Denmark
   - :id: 62
-    :label: Dominican Republic
+    :label: Djibouti
   - :id: 63
-    :label: Ecuador
+    :label: Dominica
   - :id: 64
-    :label: Egypt
+    :label: Dominican Republic
   - :id: 65
-    :label: El Salvador
+    :label: Ecuador
   - :id: 66
-    :label: Equatorial Guinea
+    :label: Egypt
   - :id: 67
-    :label: Eritrea
+    :label: El Salvador
   - :id: 68
-    :label: Estonia
+    :label: Equatorial Guinea
   - :id: 69
-    :label: Ethiopia
+    :label: Eritrea
   - :id: 70
-    :label: Falkland Islands (Malvinas)
+    :label: Estonia
   - :id: 71
-    :label: Faroe Islands
+    :label: Ethiopia
   - :id: 72
-    :label: Fiji
+    :label: Falkland Islands
   - :id: 73
-    :label: Finland
+    :label: Faroe Islands
   - :id: 74
-    :label: France
+    :label: Fiji
   - :id: 75
-    :label: French Guiana
+    :label: Finland
   - :id: 76
-    :label: French Polynesia
+    :label: France
   - :id: 77
-    :label: French Southern Territories
+    :label: French Guiana
   - :id: 78
-    :label: Gabon
+    :label: French Polynesia
   - :id: 79
-    :label: Gambia
+    :label: French Southern and Antarctic Lands
   - :id: 80
-    :label: Georgia
+    :label: Gabon
   - :id: 81
-    :label: Germany
+    :label: Gambia
   - :id: 82
-    :label: Ghana
+    :label: Georgia
   - :id: 83
-    :label: Gibraltar
+    :label: Germany
   - :id: 84
-    :label: Greece
+    :label: Ghana
   - :id: 85
-    :label: Greenland
+    :label: Gibraltar
   - :id: 86
-    :label: Grenada
+    :label: Greece
   - :id: 87
-    :label: Guadeloupe
+    :label: Greenland
   - :id: 88
-    :label: Guam
+    :label: Grenada
   - :id: 89
-    :label: Guatemala
+    :label: Guadeloupe
   - :id: 90
-    :label: Guernsey
+    :label: Guam
   - :id: 91
-    :label: Guinea
+    :label: Guatemala
   - :id: 92
-    :label: Guinea-Bissau
+    :label: Guernsey
   - :id: 93
-    :label: Guyana
+    :label: Guinea
   - :id: 94
-    :label: Haiti
+    :label: Guinea-Bissau
   - :id: 95
-    :label: Heard and McDonald Islands
+    :label: Guyana
   - :id: 96
-    :label: Holy See (Vatican City State)
+    :label: Haiti
   - :id: 97
-    :label: Honduras
+    :label: Heard Island and McDonald Islands
   - :id: 98
-    :label: Hong Kong
+    :label: Honduras
   - :id: 99
-    :label: Hungary
+    :label: Hong Kong
   - :id: 100
-    :label: Iceland
+    :label: Hungary
   - :id: 101
-    :label: India
+    :label: Iceland
   - :id: 102
-    :label: Indonesia
+    :label: India
   - :id: 103
-    :label: Iran, Islamic Republic of
+    :label: Indonesia
   - :id: 104
-    :label: Iraq
+    :label: Iran
   - :id: 105
-    :label: Ireland
+    :label: Iraq
   - :id: 106
-    :label: Isle of Man
+    :label: Ireland
   - :id: 107
-    :label: Israel
+    :label: Isle of Man
   - :id: 108
-    :label: Italy
+    :label: Israel
   - :id: 109
-    :label: Jamaica
+    :label: Italy
   - :id: 110
-    :label: Japan
+    :label: Ivory Coast
   - :id: 111
-    :label: Jersey
+    :label: Jamaica
   - :id: 112
-    :label: Jordan
+    :label: Japan
   - :id: 113
-    :label: Kazakhstan
+    :label: Jersey
   - :id: 114
-    :label: Kenya
+    :label: Jordan
   - :id: 115
-    :label: Kiribati
+    :label: Kazakhstan
   - :id: 116
-    :label: Korea, Democratic People's Republic of
+    :label: Kenya
   - :id: 117
-    :label: Korea, Republic of
+    :label: Kiribati
   - :id: 118
-    :label: Kuwait
+    :label: Korea, Democratic People's Republic of
   - :id: 119
-    :label: Kyrgyzstan
+    :label: Korea, Republic of
   - :id: 120
-    :label: Lao People's Democratic Republic
+    :label: Kosovo
   - :id: 121
-    :label: Latvia
+    :label: Kuwait
   - :id: 122
-    :label: Lebanon
+    :label: Kyrgyzstan
   - :id: 123
-    :label: Lesotho
+    :label: Laos
   - :id: 124
-    :label: Liberia
+    :label: Latvia
   - :id: 125
-    :label: Libyan Arab Jamahiriya
+    :label: Lebanon
   - :id: 126
-    :label: Liechtenstein
+    :label: Lesotho
   - :id: 127
-    :label: Lithuania
+    :label: Liberia
   - :id: 128
-    :label: Luxembourg
+    :label: Libya
   - :id: 129
-    :label: Macao
+    :label: Liechtenstein
   - :id: 130
-    :label: Macedonia, The Former Yugoslav Republic Of
+    :label: Lithuania
   - :id: 131
-    :label: Madagascar
+    :label: Luxembourg
   - :id: 132
-    :label: Malawi
+    :label: Macau
   - :id: 133
-    :label: Malaysia
+    :label: Macedonia
   - :id: 134
-    :label: Maldives
+    :label: Madagascar
   - :id: 135
-    :label: Mali
+    :label: Malawi
   - :id: 136
-    :label: Malta
+    :label: Malaysia
   - :id: 137
-    :label: Marshall Islands
+    :label: Maldives
   - :id: 138
-    :label: Martinique
+    :label: Mali
   - :id: 139
-    :label: Mauritania
+    :label: Malta
   - :id: 140
-    :label: Mauritius
+    :label: Marshall Islands
   - :id: 141
-    :label: Mayotte
+    :label: Martinique
   - :id: 142
-    :label: Mexico
+    :label: Mauritania
   - :id: 143
-    :label: Micronesia, Federated States of
+    :label: Mauritius
   - :id: 144
-    :label: Moldova, Republic of
+    :label: Mayotte
   - :id: 145
-    :label: Monaco
+    :label: Mexico
   - :id: 146
-    :label: Mongolia
+    :label: Micronesia
   - :id: 147
-    :label: Montenegro
+    :label: Moldova
   - :id: 148
-    :label: Montserrat
+    :label: Monaco
   - :id: 149
-    :label: Morocco
+    :label: Mongolia
   - :id: 150
-    :label: Mozambique
+    :label: Montenegro
   - :id: 151
-    :label: Myanmar
+    :label: Montserrat
   - :id: 152
-    :label: Namibia
+    :label: Morocco
   - :id: 153
-    :label: Nauru
+    :label: Mozambique
   - :id: 154
-    :label: Nepal
+    :label: Myanmar
   - :id: 155
-    :label: Netherlands
+    :label: Namibia
   - :id: 156
-    :label: Netherlands Antilles
+    :label: Nauru
   - :id: 157
-    :label: New Caledonia
+    :label: Nepal
   - :id: 158
-    :label: New Zealand
+    :label: Netherlands
   - :id: 159
-    :label: Nicaragua
+    :label: New Caledonia
   - :id: 160
-    :label: Niger
+    :label: New Zealand
   - :id: 161
-    :label: Nigeria
+    :label: Nicaragua
   - :id: 162
-    :label: Niue
+    :label: Niger
   - :id: 163
-    :label: Norfolk Island
+    :label: Nigeria
   - :id: 164
-    :label: Northern Mariana Islands
+    :label: Niue
   - :id: 165
-    :label: Norway
+    :label: Norfolk Island
   - :id: 166
-    :label: Oman
+    :label: Northern Mariana Islands
   - :id: 167
-    :label: Pakistan
+    :label: Norway
   - :id: 168
-    :label: Palau
+    :label: Oman
   - :id: 169
-    :label: Palestinian Territory, Occupied
+    :label: Pakistan
   - :id: 170
-    :label: Panama
+    :label: Palau
   - :id: 171
-    :label: Papua New Guinea
+    :label: Palestine
   - :id: 172
-    :label: Paraguay
+    :label: Panama
   - :id: 173
-    :label: Peru
+    :label: Papua New Guinea
   - :id: 174
-    :label: Philippines
+    :label: Paraguay
   - :id: 175
-    :label: Pitcairn
+    :label: Peru
   - :id: 176
-    :label: Poland
+    :label: Philippines
   - :id: 177
-    :label: Portugal
+    :label: Pitcairn Islands
   - :id: 178
-    :label: Puerto Rico
+    :label: Poland
   - :id: 179
-    :label: Qatar
+    :label: Portugal
   - :id: 180
-    :label: Reunion
+    :label: Puerto Rico
   - :id: 181
-    :label: Romania
+    :label: Qatar
   - :id: 182
-    :label: Russian Federation
+    :label: Réunion
   - :id: 183
-    :label: Rwanda
+    :label: Romania
   - :id: 184
-    :label: Saint Barthelemy
+    :label: Russia
   - :id: 185
-    :label: Saint Helena
+    :label: Rwanda
   - :id: 186
-    :label: Saint Kitts and Nevis
+    :label: Saint Barthélemy
   - :id: 187
-    :label: Saint Lucia
+    :label: Saint Helena, Ascension, and Tristan da Cunha
   - :id: 188
-    :label: Saint Pierre and Miquelon
+    :label: Saint Kitts and Nevis
   - :id: 189
-    :label: Saint Vincent and the Grenadines
+    :label: Saint Lucia
   - :id: 190
-    :label: Samoa
+    :label: Saint Martin
   - :id: 191
-    :label: San Marino
+    :label: Saint Pierre and Miquelon
   - :id: 192
-    :label: Sao Tome and Principe
+    :label: Saint Vincent and the Grenadines
   - :id: 193
-    :label: Saudi Arabia
+    :label: Samoa
   - :id: 194
-    :label: Senegal
+    :label: San Marino
   - :id: 195
-    :label: Serbia
+    :label: São Tomé and Príncipe
   - :id: 196
-    :label: Seychelles
+    :label: Saudi Arabia
   - :id: 197
-    :label: Sierra Leone
+    :label: Senegal
   - :id: 198
-    :label: Singapore
+    :label: Serbia
   - :id: 199
-    :label: Slovakia
+    :label: Seychelles
   - :id: 200
-    :label: Slovenia
+    :label: Sierra Leone
   - :id: 201
-    :label: Solomon Islands
+    :label: Singapore
   - :id: 202
-    :label: Somalia
+    :label: Sint Maarten
   - :id: 203
-    :label: South Africa
+    :label: Slovakia
   - :id: 204
-    :label: South Georgia and the South Sandwich Islands
+    :label: Slovenia
   - :id: 205
-    :label: Spain
+    :label: Solomon Islands
   - :id: 206
-    :label: Sri Lanka
+    :label: Somalia
   - :id: 207
-    :label: Sudan
+    :label: South Africa
   - :id: 208
-    :label: Suriname
+    :label: South Georgia
   - :id: 209
-    :label: Svalbard and Jan Mayen
+    :label: South Sudan
   - :id: 210
-    :label: Swaziland
+    :label: Spain
   - :id: 211
-    :label: Sweden
+    :label: Sri Lanka
   - :id: 212
-    :label: Switzerland
+    :label: Sudan
   - :id: 213
-    :label: Syrian Arab Republic
+    :label: Suriname
   - :id: 214
-    :label: Taiwan, Province of China
+    :label: Svalbard and Jan Mayen
   - :id: 215
-    :label: Tajikistan
+    :label: Swaziland
   - :id: 216
-    :label: Tanzania, United Republic of
+    :label: Sweden
   - :id: 217
-    :label: Thailand
+    :label: Switzerland
   - :id: 218
-    :label: Timor-Leste
+    :label: Syria
   - :id: 219
-    :label: Togo
+    :label: Taiwan
   - :id: 220
-    :label: Tokelau
+    :label: Tajikistan
   - :id: 221
-    :label: Tonga
+    :label: Tanzania
   - :id: 222
-    :label: Trinidad and Tobago
+    :label: Thailand
   - :id: 223
-    :label: Tunisia
+    :label: Timor-Leste
   - :id: 224
-    :label: Turkey
+    :label: Togo
   - :id: 225
-    :label: Turkmenistan
+    :label: Tokelau
   - :id: 226
-    :label: Turks and Caicos Islands
+    :label: Tonga
   - :id: 227
-    :label: Tuvalu
+    :label: Trinidad and Tobago
   - :id: 228
-    :label: Uganda
+    :label: Tunisia
   - :id: 229
-    :label: Ukraine
+    :label: Turkey
   - :id: 230
-    :label: United Arab Emirates
+    :label: Turkmenistan
   - :id: 231
-    :label: United Kingdom
+    :label: Turks and Caicos Islands
   - :id: 232
-    :label: United States
+    :label: Tuvalu
   - :id: 233
-    :label: United States Minor Outlying Islands
+    :label: Uganda
   - :id: 234
-    :label: Uruguay
+    :label: Ukraine
   - :id: 235
-    :label: Uzbekistan
+    :label: United Arab Emirates
   - :id: 236
-    :label: Vanuatu
+    :label: United Kingdom
   - :id: 237
-    :label: Venezuela
+    :label: United States
   - :id: 238
-    :label: Viet Nam
+    :label: United States Minor Outlying Islands
   - :id: 239
-    :label: Virgin Islands, British
+    :label: United States Virgin Islands
   - :id: 240
-    :label: Virgin Islands, U.S.
+    :label: Uruguay
   - :id: 241
-    :label: Wallis and Futuna
+    :label: Uzbekistan
   - :id: 242
-    :label: Western Sahara
+    :label: Vanuatu
   - :id: 243
-    :label: Yemen
+    :label: Vatican City
   - :id: 244
-    :label: Zambia
+    :label: Venezuela
   - :id: 245
+    :label: Vietnam
+  - :id: 246
+    :label: Wallis and Futuna
+  - :id: 247
+    :label: Western Sahara
+  - :id: 248
+    :label: Yemen
+  - :id: 249
+    :label: Zambia
+  - :id: 250
     :label: Zimbabwe
 industries:
   - :id: 1

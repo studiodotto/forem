@@ -416,6 +416,245 @@
     line-height: 25px !important;
     color: #FFFFFF !important;
   }
+
+  /* The Modal (background) */
+  .user-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 230px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: center;
+  }
+
+  /* Modal Content */
+  /*.user-modal-content {*/
+  /*  position: relative;*/
+  /*  background-color: #fefefe;*/
+  /*  margin: auto;*/
+  /*  padding: 0;*/
+  /*  border: 1px solid #888;*/
+  /*  width: 40%;*/
+  /*  !*width: 70%;*!*/
+  /*  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+  /*  -webkit-animation-name: animatetop;*/
+  /*  -webkit-animation-duration: 0.4s;*/
+  /*  animation-name: animatetop;*/
+  /*  animation-duration: 0.4s*/
+  /*}*/
+
+
+  /* On screens that are 992px or less, set the background color to blue */
+  /*@media screen and (max-width: 992px) {*/
+  /*  .user-modal-content {*/
+  /*    position: relative;*/
+  /*    background-color: #fefefe;*/
+  /*    margin: auto;*/
+  /*    padding: 0;*/
+  /*    border: 1px solid #888;*/
+  /*    width: 80%;*/
+  /*    !*width: 70%;*!*/
+  /*    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+  /*    -webkit-animation-name: animatetop;*/
+  /*    -webkit-animation-duration: 0.4s;*/
+  /*    animation-name: animatetop;*/
+  /*    animation-duration: 0.4s*/
+  /*  }*/
+  /*}*/
+
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+    .user-modal {
+     padding-top: 100px;
+    }
+  }
+  /*  .user-modal-content {*/
+  /*    position: relative;*/
+  /*    background-color: #fefefe;*/
+  /*    margin: auto;*/
+  /*    padding: 0;*/
+  /*    border: 1px solid #888;*/
+  /*    width: 90%;*/
+  /*    !*width: 70%;*!*/
+  /*    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+  /*    -webkit-animation-name: animatetop;*/
+  /*    -webkit-animation-duration: 0.4s;*/
+  /*    animation-name: animatetop;*/
+  /*    animation-duration: 0.4s*/
+  /*  }*/
+  /*}*/
+
+  .user-modal-content{
+    /* position: relative; */
+    /* background-color: #fefefe; */
+    /* margin: auto; */
+    /* padding: 0; */
+    /* border: 1px solid #888; */
+    /* width: 40%; */
+    /* width: 70%; */
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+    /* -webkit-animation-name: animatetop; */
+    /* -webkit-animation-duration: 0.4s; */
+    /* animation-name: animatetop; */
+    /* animation-duration: 0.4s; */
+    display: inline-block;
+    border-radius: 6px;
+    width: 300px;
+    /* padding-bottom: 36px; */
+    position: relative;
+    background-color: #f5f5f7;
+    box-shadow: 0 12px 30px 0 rgba(0,0,0,.5), inset 0 1px 0 0 hsla(0,0%,100%,.65);
+    margin: auto;
+    /* justify-content: center; */
+    text-align: left;
+  }
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  /*.user-close {*/
+  /*  color: white;*/
+  /*  float: right;*/
+  /*  font-size: 28px;*/
+  /*  font-weight: bold;*/
+  /*}*/
+
+  /*.user-close:hover,*/
+  /*.user-close:focus {*/
+  /*  color: #000;*/
+  /*  text-decoration: none;*/
+  /*  cursor: pointer;*/
+  /*}*/
+
+  .user-modal-header {
+    padding: 10px 16px;
+    /*background-color: #5cb85c;*/
+    /*background-color: #2D3034;*/
+    /*color: white;*/
+    text-align: center;
+    background-color: #e8e9eb;
+    font-size: 13px;
+    font-weight: 500;
+    color: #5b5b65;
+    text-shadow: 0 1px 0 #fff;
+    padding-bottom: 6px;
+  }
+
+  .user-modal-body {
+    padding: 2px 36px;
+    padding-top: 30px !important;
+  }
+
+  .user-modal-footer {
+    padding: 10px 16px;
+    /*background-color: #5cb85c;*/
+    /*background-color: #2D3034;*/
+    /*color: white;*/
+    text-align: center;
+    background-color: #e8e9eb;
+  }
+  #continue{
+    /*background: white;*/
+    /*color: black;*/
+
+    position: relative;
+    border-radius: 4px;
+    background-color: #3ea8e5;
+    background-image: linear-gradient(-180deg,#44b1e8,#3098de);
+    box-shadow: 0 1px 0 0 rgba(46,86,153,.15), inset 0 1px 0 0 rgba(46,86,153,.1), inset 0 -1px 0 0 rgba(46,86,153,.4);
+    font-size: 17px;
+    line-height: 21px;
+    height: 37px;
+    font-weight: 700;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+    color: #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    margin-bottom: 36px;
+    margin-top: 30px;
+    /* text-align: center; */
+    width: 100%;
+  }
+  .Header{
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: block;
+    padding: 12px 36px;
+    text-align: center;
+    background-color: #e8e9eb;
+    position: relative;
+  }
+  .Header-logo{
+    position: relative;
+    margin-bottom: 6px;
+    height: 35px;
+  }
+  .Header-logoWrap{
+    position: absolute;
+    top: -38px;
+    right: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+  }
+  .Header-logoBorder{
+    border: 3px solid #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.18), 0 2px 2px 0 rgba(0,0,0,.08);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+  .Header-logoImage{
+    background-image: url('https://res.cloudinary.com/dyzicyjzq/image/fetch/s--rMcf2ecU--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://studioappbucket.s3.amazonaws.com/uploads/user/profile_image/6/bad08ef2-a74c-4316-8084-a645c5052bef.png');
+    width: 64px;
+    height: 64px;
+    margin: 3px;
+    border-radius: 100%;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .Header-purchaseDescription{
+    font-size: 13px;
+    font-weight: 500;
+    color: #5b5b65;
+    text-shadow: 0 1px 0 #fff;
+    padding-bottom: 6px;
+  }
+  .Header-navClose{
+    width: 25px;
+    height: 25px;
+    /*background-image: url(/m/lib/../lib/images/close-92c5506….png);*/
+    background-size: 17px;
+    background-position: 4px 4px;
+    right: 6px;
+    top: 6px;
+  }
+  .error-text{
+    color: darkred;
+    display: block;
+    font-size: 13px;
+  }
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">

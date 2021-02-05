@@ -288,7 +288,9 @@
                   <%# end %>
   <!--              </article>-->
   <!--              <input type="hidden" name="from_project" value="true">-->
-                <input type="hidden" id="stripe_card_token">
+        <input type="text" id="name" name="name">
+        <input type="text" id="email" name="email">
+        <input type="text" id="stripe_card_token">
 <!--                <div id='card-msg' style="display: none; background: #fff3cd" class="alert alert-warning">Card information has been received</div>-->
 <!--                <button id="add-credit-card-button" class="crayons-btn credit-card-button order-btn project-card-btn" type="button">Add Credit Card</button>-->
               <%# end %>
@@ -345,62 +347,3 @@
     </div>
   </div>
 </main>
-
-<script src="https://checkout.stripe.com/checkout.js"></script>
-
-<script>
-  setTimeout(function () {
-    var handler = StripeCheckout.configure({
-      key: '<%= SiteConfig.stripe_publishable_key %>',
-      image: "https://res.cloudinary.com/dyzicyjzq/image/fetch/s--rMcf2ecU--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://studioappbucket.s3.amazonaws.com/uploads/user/profile_image/6/bad08ef2-a74c-4316-8084-a645c5052bef.png",
-      locale: 'auto',
-      token: function (token) {
-        var token_input = document.getElementById("stripe_card_token")
-        token_input.value = token.id
-        // document.getElementById('add-credit-card-button').style.display = 'none'
-        // document.getElementById('card-msg').style.display = 'block'
-      }
-    });
-
-      //document.getElementById('add-credit-card-button').addEventListener('click', function (e) {
-      // Open Checkout with further options:
-      // handler.open({
-       // description: 'Add Credit Card',
-       // amount: 0,
-       // email: "<%#= current_user.present? ? current_user.email : '' %>",
-       // panelLabel: "Add Card",
-       // allowRememberMe: false,
-       // zipCode: true,
-       //});
-       //e.preventDefault();
-       //});
-    <% if current_user.try(:stripe_id_code).blank? %>
-      document.getElementById('order-confirmation-button').addEventListener('click', function (e) {
-        // Open Checkout with further options:
-          handler.open({
-            description: 'Add Credit Card',
-            amount: 0,
-            email: "<%= current_user.present? ? current_user.email : '' %>",
-            panelLabel: "Add Card",
-            allowRememberMe: false,
-            zipCode: true,
-          });
-          e.preventDefault();
-      });
-    <% end %>
-
-    // Close Checkout on page navigation:
-    window.addEventListener('popstate', function () {
-      handler.close();
-    });
-  }, 220)
-
-  function addHidden(theForm, key, value) {
-    // Create a hidden input element, and append it to the form:
-    var input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = key; // 'the key/name of the attribute/field that is sent to the server
-    input.value = value;
-    theForm.appendChild(input);
-  }
-</script>
