@@ -69,6 +69,8 @@
           <input autocomplete="email" class="crayons-textfield" type="email" name="email" placeholder="Email" id="email" required>
           <p style="display: none" class="error-text" id="email_error">Email is invalid</p>
         </div>
+        <input type="hidden" name="project_id" id="project_id">
+        <input type="hidden" name="project_price" id="project_price">
         <input type="hidden" name="stripe_token" id="stripe_card_token">
 
         <button class="crayons-btn crayons-btn--secondary" id="continue">Continue</button>
@@ -167,10 +169,10 @@
         UNITEDBITS</p>
       <div class="codeland-banner__description" style="margin-top: 20px">
         <p class="banner-heading">
-          The network for music pioneers
+          Share music royalties with fans rather than record labels
         </p>
         <p class="banner-description">
-          Invest in music pioneers—Join the network, turn your love for music into a business, create a legacy of music for the future
+          UnitedBits turns music into investment product, to help artists bring new music to market, and fans earn income. Join the network, be a Music Pioneer.
         </p>
 <!--        <p class="banner-description">-->
 <!--          into a business, create a legacy of music for the future-->
@@ -273,6 +275,8 @@
   function buy_product(project_id, price, name){
     document.getElementById('product-name').innerText=name;
     document.getElementById('product-price').innerHTML='$ '+ price.toFixed(2);
+    document.getElementById('project_id').value=project_id;
+    document.getElementById('project_price').value=price.toFixed(2);
     // $('#product-price').value=price;
     openModal();
     // handler.open({
