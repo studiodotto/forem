@@ -50,6 +50,9 @@
       </div>
     </header>
     <div class="user-modal-body">
+      <p class="product-info" id="product-name"></p>
+      <p class="product-info" id="product-price"></p>
+      <hr style="margin-bottom: 18px">
       <%= form_tag stripe_active_cards_path, id: "credit-card-form", method: :post do %>
         <div class="crayons-field mb-3">
 <!--          <label class="crayons-field__label" for="user_email">First Name</label>-->
@@ -74,6 +77,72 @@
 <!--    <div class="user-modal-footer">-->
 <!--      <button class="crayons-btn crayons-btn--secondary" id="continue">Continue</button>-->
 <!--    </div>-->
+  </div>
+
+</div>
+
+<!-- The Modal -->
+<div id="paymentConfirmationModal" class="user-modal">
+
+  <!-- Modal content -->
+  <div class="user-modal-content">
+    <!--    <div class="user-modal-header">-->
+    <!--      <span class="user-close">&times;</span>-->
+    <!--      Add your information-->
+    <!--    </div>-->
+    <header class="Header" role="banner">
+      <div>
+        <span>
+        </span>
+        <span class="Header-navClose" aria-label="Close">
+
+        </span>
+      </div>
+      <div class="Header-logo">
+        <div class="Header-logoWrap">
+          <div class="Header-logoBevel">
+          </div>
+          <div class="Header-logoBorder">
+          </div>
+          <div class="Header-logoImage" alt="Logo">
+          </div>
+        </div>
+      </div>
+      <h2 class="Header-purchaseDescription u-textTruncate">
+        Review Order Details
+      </h2>
+      <div class="Header-account" style="position: relative;">
+      </div>
+    </header>
+    <div class="user-modal-body">
+      <h1>Project</h1>
+      <p>Test project</p>
+      <h1>Price</h1>
+      <p>12.00 $</p>
+      <%#= form_tag stripe_active_cards_path, id: "credit-card-form", method: :post do %>
+<!--        <div class="crayons-field mb-3">-->
+<!--                    <label class="crayons-field__label" for="user_email">First Name</label>-->
+<!--          <input autocomplete="first_name" class="crayons-textfield" type="text" name="first_name" placeholder="First name" id="first_name" required>-->
+<!--          <p style="display: none" id="first_name_error" class="error-text">First name can't be blank</p>-->
+<!--        </div>-->
+<!--        <div class="crayons-field mb-3">-->
+<!--                   <label class="crayons-field__label" for="user_email">Last Name</label>-->
+<!--          <input autocomplete="last_name" class="crayons-textfield" type="text" name="last_name" placeholder="Last name" id="last_name" required>-->
+<!--          <p style="display: none" id="last_name_error" class="error-text">Last name can't be blank</p>-->
+<!--        </div>-->
+<!--        <div class="crayons-field mb-3">-->
+<!--                   <label class="crayons-field__label" for="user_email">Email</label>-->
+<!--          <input autocomplete="email" class="crayons-textfield" type="email" name="email" placeholder="Email" id="email" required>-->
+<!--          <p style="display: none" class="error-text" id="email_error">Email is invalid</p>-->
+<!--        </div>-->
+<!--        <input type="hidden" name="stripe_token" id="stripe_card_token">-->
+
+<!--        <button class="crayons-btn crayons-btn--secondary" id="continue">Continue</button>-->
+      <%# end %>
+    </div>
+    <!--    <div class="user-modal-footer">-->
+    <!--      <button class="crayons-btn crayons-btn--secondary" id="continue">Continue</button>-->
+    <!--    </div>-->
   </div>
 
 </div>
@@ -129,28 +198,17 @@
 
         </div>
       </button>
-<!--      <div class="flex-1 flex items-center justify-between">-->
-<!--        <h2 class="crayons-subtitle-2">Posts</h2>-->
-<!--        <nav class="crayons-tabs hidden s:flex">-->
-<!--          <a href="/feed_articles" class="crayons-tabs__item ">Feed</a>-->
-
-<!--          <a href="/top/week" class="crayons-tabs__item ">Week</a>-->
-<!--          <a href="/top/month" class="crayons-tabs__item ">Month</a>-->
-<!--          <a href="/top/year" class="crayons-tabs__item ">Year</a>-->
-<!--          <a href="/top/infinity" class="crayons-tabs__item ">Infinity</a>-->
-
-<!--          <a href="/latest" class="crayons-tabs__item crayons-tabs__item--current">Latest</a>-->
-<!--        </nav>-->
-
-<!--        <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">-->
-<!--          <option value="/feed_articles">Feed</option>-->
-<!--          <option value="/top/week">Week</option>-->
-<!--          <option value="/top/month">Month</option>-->
-<!--          <option value="/top/year">Year</option>-->
-<!--          <option value="/top/infinity">Infinity</option>-->
-<!--          <option value="/latest" selected="">Latest</option>-->
-<!--        </select>-->
-<!--      </div>-->
+      <div class="flex-1 flex items-center justify-between">
+        <h2 class="crayons-subtitle-2">New Releases</h2>
+        <nav class="crayons-tabs hidden s:flex">
+          <a href="/latest" class="crayons-tabs__item">Posts</a>
+          <a href="/projects_feed" class="crayons-tabs__item crayons-tabs__item--current">Releases</a>
+        </nav>
+        <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">
+          <option value="/latest">Posts</option>
+          <option value="/projects_feed" selected>Releases</option>
+        </select>
+      </div>
 
       <button type="button" class="crayons-btn crayons-btn--ghost crayons-btn--icon ml-2 inline-block l:hidden" id="on-page-nav-butt-right" aria-label="nav-button-right">
         <div class="crayons-icon nav-icon ">
@@ -180,6 +238,11 @@
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
   }
+
+  // function openConfirmationModal(){
+  //   var modal = document.getElementById("paymentConfirmationModal");
+  //   modal.style.display = "block";
+  // }
   // When the user clicks on <span> (x), close the modal
   function closeModal(){
     var modal = document.getElementById("myModal");
@@ -207,7 +270,10 @@
     document.getElementById('last_name_error').style.display='none'
     document.getElementById('email_error').style.display='none'
   }
-  function buy_product(product){
+  function buy_product(project_id, price, name){
+    document.getElementById('product-name').innerText=name;
+    document.getElementById('product-price').innerHTML='$ '+ price.toFixed(2);
+    // $('#product-price').value=price;
     openModal();
     // handler.open({
     //   description: 'Add Credit Card',
@@ -227,9 +293,12 @@
       token: function (token) {
         var token_input = document.getElementById("stripe_card_token")
         token_input.value = token.id
+        // openConfirmationModal();
         // document.getElementById('add-credit-card-button').style.display = 'none'
         // document.getElementById('card-msg').style.display = 'block'
+
       }
+
     });
     <%# if current_user.try(:stripe_id_code).blank? %>
 <!--    document.getElementById('buy-music-btn-<%#= project.id %>').addEventListener('click', function (e) {-->
@@ -268,7 +337,7 @@
           description: 'Add Credit Card',
           amount: 0,
           email: document.getElementById('email').value,
-          panelLabel: "Confirm purchase",
+          panelLabel: "Add Card",
           // panelLabel: "Confirm purchase",
         });
       }
