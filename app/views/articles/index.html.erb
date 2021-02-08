@@ -93,7 +93,7 @@
 
 <!--            <a href="<%#= list_path %>/latest" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("latest") %>">Latest</a>-->
             <a href="<%= list_path %>/latest" class="crayons-tabs__item crayons-tabs__item--current">Posts</a>
-            <a href="/projects_feed" class="crayons-tabs__item ">Projects</a>
+            <a href="/projects_feed" class="crayons-tabs__item ">New releases</a>
           </nav>
 
           <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">
@@ -104,7 +104,7 @@
 <!--            <option value="<%#= list_path %>/top/infinity" <%# if timeframe_check("infinity") %> selected<%# end %>>Infinity</option>-->
 <!--            <option value="<%#= list_path %>/latest" <%# if timeframe_check("latest") %> selected<%# end %>>Latest</option>-->
             <option value="<%= list_path %>/latest" selected>Posts</option>
-            <option value="/projects_feed">Projects</option>
+            <option value="/projects_feed">New releases</option>
           </select>
         </div>
 
