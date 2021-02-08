@@ -84,24 +84,26 @@
         <div class="flex-1 flex items-center justify-between">
           <h2 class="crayons-subtitle-2">Posts</h2>
           <nav class="crayons-tabs hidden s:flex">
-            <a href="<%= list_path %>/feed_articles" class="crayons-tabs__item <%= "crayons-tabs__item--current" if %w[week month year infinity latest].exclude?(params[:timeframe]) %>">Feed</a>
+<!--            <a href="<%#= list_path %>/feed_articles" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if %w[week month year infinity latest].exclude?(params[:timeframe]) %>">Feed</a>-->
 
-            <a href="<%= list_path %>/top/week" class="crayons-tabs__item <%= "crayons-tabs__item--current" if timeframe_check("week") %>">Week</a>
-            <a href="<%= list_path %>/top/month" class="crayons-tabs__item <%= "crayons-tabs__item--current" if timeframe_check("month") %>">Month</a>
-            <a href="<%= list_path %>/top/year" class="crayons-tabs__item <%= "crayons-tabs__item--current" if timeframe_check("year") %>">Year</a>
-            <a href="<%= list_path %>/top/infinity" class="crayons-tabs__item <%= "crayons-tabs__item--current" if timeframe_check("infinity") %>">Infinity</a>
+<!--            <a href="<%#= list_path %>/top/week" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("week") %>">Week</a>-->
+<!--            <a href="<%#= list_path %>/top/month" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("month") %>">Month</a>-->
+<!--            <a href="<%#= list_path %>/top/year" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("year") %>">Year</a>-->
+<!--            <a href="<%#= list_path %>/top/infinity" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("infinity") %>">Infinity</a>-->
 
-            <a href="<%= list_path %>/latest" class="crayons-tabs__item <%= "crayons-tabs__item--current" if timeframe_check("latest") %>">Latest</a>
+<!--            <a href="<%#= list_path %>/latest" class="crayons-tabs__item <%#= "crayons-tabs__item--current" if timeframe_check("latest") %>">Latest</a>-->
+            <a href="<%= list_path %>/latest" class="crayons-tabs__item crayons-tabs__item--current">Posts</a>
             <a href="/projects_feed" class="crayons-tabs__item ">Projects</a>
           </nav>
 
           <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">
-            <option value="<%= list_path %>/feed_articles" <% if ["week", "month", "year", "infinity", "latest"].exclude?(params[:timeframe]) %> selected<% end %>>Feed</option>
-            <option value="<%= list_path %>/top/week" <% if timeframe_check("week") %> selected<% end %>>Week</option>
-            <option value="<%= list_path %>/top/month" <% if timeframe_check("month") %> selected<% end %>>Month</option>
-            <option value="<%= list_path %>/top/year" <% if timeframe_check("year") %> selected<% end %>>Year</option>
-            <option value="<%= list_path %>/top/infinity" <% if timeframe_check("infinity") %> selected<% end %>>Infinity</option>
-            <option value="<%= list_path %>/latest" <% if timeframe_check("latest") %> selected<% end %>>Latest</option>
+<!--            <option value="<%#= list_path %>/feed_articles" <%# if ["week", "month", "year", "infinity", "latest"].exclude?(params[:timeframe]) %> selected<%# end %>>Feed</option>-->
+<!--            <option value="<%#= list_path %>/top/week" <%# if timeframe_check("week") %> selected<%# end %>>Week</option>-->
+<!--            <option value="<%#= list_path %>/top/month" <%# if timeframe_check("month") %> selected<%# end %>>Month</option>-->
+<!--            <option value="<%#= list_path %>/top/year" <%# if timeframe_check("year") %> selected<%# end %>>Year</option>-->
+<!--            <option value="<%#= list_path %>/top/infinity" <%# if timeframe_check("infinity") %> selected<%# end %>>Infinity</option>-->
+<!--            <option value="<%#= list_path %>/latest" <%# if timeframe_check("latest") %> selected<%# end %>>Latest</option>-->
+            <option value="<%= list_path %>/latest" selected>Posts</option>
             <option value="/projects_feed">Projects</option>
           </select>
         </div>
