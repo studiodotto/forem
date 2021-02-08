@@ -12,7 +12,7 @@
 <% end %>
 <%#= javascript_packs_with_chunks_tag "homePage", defer: true %>
 <% if flash[:error].present? %>
-<!--  <p class="alert alert-danger" style="text-align: center"><%#= flash[:error].capitalize %></p>-->
+  <p class="alert alert-danger" style="text-align: center"><%= flash[:error].capitalize %></p>
 <% end %>
 
 <!-- User Modal -->
@@ -53,7 +53,7 @@
       <p class="product-info" id="product-name"></p>
       <p class="product-info" id="product-price"></p>
       <hr style="margin-bottom: 18px">
-      <%= form_tag stripe_active_cards_path, id: "credit-card-form", method: :post do %>
+      <%= form_tag orders_path, id: "credit-card-form", method: :post do %>
         <div class="crayons-field mb-3">
 <!--          <label class="crayons-field__label" for="user_email">First Name</label>-->
           <input autocomplete="first_name" class="crayons-textfield" type="text" name="first_name" placeholder="First name" id="first_name" required>
@@ -69,10 +69,14 @@
           <input autocomplete="email" class="crayons-textfield" type="email" name="email" placeholder="Email" id="email" required>
           <p style="display: none" class="error-text" id="email_error">Email is invalid</p>
         </div>
-        <input type="hidden" name="project_id" id="project_id">
+        <div class="crayons-field mb-3">
+          <!--          <label class="crayons-field__label" for="user_email">Email</label>-->
+          <input autocomplete="password" class="crayons-textfield" type="password" name="password" placeholder="Password" id="password" required>
+          <p style="display: none" class="error-text" id="password_error">Password is invalid</p>
+        </div>
+        <input type="hidden" name="music_release_id" id="music_release_id">
         <input type="hidden" name="project_price" id="project_price">
         <input type="hidden" name="stripe_token" id="stripe_card_token">
-
         <button class="crayons-btn crayons-btn--secondary" id="continue">Continue</button>
       <% end %>
     </div>
@@ -268,14 +272,16 @@
     document.getElementById('first_name').value = '';
     document.getElementById('last_name').value = '';
     document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
     document.getElementById('first_name_error').style.display='none'
     document.getElementById('last_name_error').style.display='none'
     document.getElementById('email_error').style.display='none'
+    document.getElementById('password_error').style.display='none'
   }
-  function buy_product(project_id, price, name){
+  function buy_product(music_release_id, price, name){
     document.getElementById('product-name').innerText=name;
     document.getElementById('product-price').innerHTML='$ '+ price.toFixed(2);
-    document.getElementById('project_id').value=project_id;
+    document.getElementById('music_release_id').value=music_release_id;
     document.getElementById('project_price').value=price.toFixed(2);
     // $('#product-price').value=price;
     openModal();
@@ -297,6 +303,8 @@
       token: function (token) {
         var token_input = document.getElementById("stripe_card_token")
         token_input.value = token.id
+        // var form = document.getElementById('credit-card-form')
+        // form.submit();
         // openConfirmationModal();
         // document.getElementById('add-credit-card-button').style.display = 'none'
         // document.getElementById('card-msg').style.display = 'block'
@@ -316,6 +324,7 @@
       var first_name = document.getElementById('first_name').value;
       var last_name = document.getElementById('last_name').value;
       var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
       var error_count = 0;
       if (first_name.replace(/\s/g, '') == ''){
         document.getElementById('first_name_error').style.display='block'
@@ -334,6 +343,12 @@
         error_count = error_count + 1;
       }else{
         document.getElementById('email_error').style.display='none'
+      }
+      if (password.replace(/\s/g, '') == '' || password.length < 6){
+        document.getElementById('password_error').style.display='block'
+        error_count = error_count + 1;
+      }else{
+        document.getElementById('password_error').style.display='none'
       }
       if(error_count == 0){
         closeModal();

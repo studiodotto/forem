@@ -236,6 +236,7 @@ Rails.application.routes.draw do
     resources :articles, only: %i[update create destroy] do
       patch "/admin_unpublish", to: "articles#admin_unpublish"
     end
+    resources :orders, only: %i[update create destroy]
     resources :article_mutes, only: %i[update]
     resources :comments, only: %i[create update destroy] do
       patch "/hide", to: "comments#hide"
@@ -568,7 +569,8 @@ Rails.application.routes.draw do
     get "/:username" => "stories#index", :as => "user_profile"
 
     # root "stories#index"
-    root to: redirect("/latest")
+    # root to: redirect("/latest")
+    root to: redirect("/projects_feed")
   end
 end
 
