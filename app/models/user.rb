@@ -146,6 +146,8 @@ class User < ApplicationRecord
   has_many :webhook_endpoints, class_name: "Webhook::Endpoint", inverse_of: :user, dependent: :delete_all
   has_many :audios
   has_many :music_releases
+  has_many :buyer_orders, class_name: 'Order', foreign_key: :buyer_id
+  has_many :seller_orders, class_name: 'Order', foreign_key: :seller_id
   accepts_nested_attributes_for   :services
   mount_uploader :profile_image, ProfileImageUploader
 

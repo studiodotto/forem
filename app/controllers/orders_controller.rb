@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
       if @card.present?
         charge = Payments::Customer.charge(
             customer: @customer,
-            amount: params[:project_price].to_f * 100,
+            amount: (params[:project_price].to_f * 100).to_i,
             description: "Purchase of product #{params[:music_release_id]}",
             card_id: @card&.id,
             )
@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
           order = Order.create({
             organization_id: music_release.organization.id,
             status: 'accepted',
-            total_amount: params[:project_price].to_f,
+            total_amount: params[ :project_price].to_f,
             email: @user.email,
             seller_id: music_release.organization.artist.id,
             buyer_id: @user.id,

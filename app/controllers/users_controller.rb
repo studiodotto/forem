@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[
     update update_language_settings confirm_destroy request_destroy full_delete remove_identity artist_edit
   ]
-  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org artist_update]
+  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org artist_update made_for_you]
   before_action :authenticate_user!, only: %i[onboarding_update onboarding_checkbox_update]
   before_action :set_suggested_users, only: %i[index]
   before_action :initialize_stripe, only: %i[edit]
@@ -274,6 +274,10 @@ class UsersController < ApplicationController
     else
       not_found unless @tab.in?(Constants::Settings::TAB_LIST.map { |t| t.downcase.tr(" ", "-") })
     end
+  end
+
+  def made_for_you
+    @orders = current_user.buyer_orders.includes(:music_release)
   end
 
   def handle_artist_settings_tab

@@ -91,7 +91,7 @@
           <div class="p-l-r-0 amt-data">
             <div style="display: inline-block;width: 40%; padding-top: 10px; padding-bottom: 10px">
               <p class="artist-name p-l-10 f-s-9">Price</p>
-              <p class="white-large-text p-l-10">US $ <%= number_with_precision(music_release.try(:price), precision: 2) %></p>
+              <p class="white-large-text p-l-10">US$ <%= number_with_precision(music_release.try(:price), precision: 2) %></p>
             </div>
             <div style="display: inline-block;width: 36%; padding-top: 10px; padding-bottom: 10px">
               <p class="artist-name p-l-10 f-s-9">Royalities</p>
@@ -118,7 +118,7 @@
 <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
           <%# end %>
 <!--        </button>-->
-        <button class="<%= project_side ? 'request-btn' : 'request-btn btn-updated-style custom-margins' %>" data-project_id="<%= music_release.id %>" onclick="buy_product(<%= project.id %>, <%= number_with_precision(music_release.try(:price), precision: 2) %>, '<%= music_release.title %>')" id="buy-music-btn-<%= project.id %>" style="width: 100%">
+        <button class="<%= project_side ? 'request-btn' : 'request-btn btn-updated-style custom-margins' %>" data-project_id="<%= music_release.id %>" onclick="buy_product(<%= music_release.id %>, <%= number_with_precision(music_release.try(:price), precision: 2) %>, '<%= music_release.title %>')" id="buy-music-btn-<%= project.id %>" style="width: 100%">
           <span class="request-text project-font">
 <!--            Buy track | 0.01% Royalties— $<%#= number_with_precision(music_release.price, precision: 2) %>-->
 <!--            Buy $<%#= number_with_precision(music_release.price, precision: 2) %> -->

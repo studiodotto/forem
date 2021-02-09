@@ -1,0 +1,161 @@
+<%= javascript_packs_with_chunks_tag "homePage", defer: true %>
+
+<div class="crayons-layout crayons-layout--2-cols crayons-layout--3-cols--drop-right-left">
+  <div style="background: #0E1218; color: white !important;">
+    <%= render partial: 'articles/sidebar' %>
+  </div>
+  <div class="wallet-div" id='articles-list'>
+    <header class="flex items-center p-2 m:p-0 m:pb-2" id="on-page-nav-controls">
+      <button type="button" class="crayons-btn crayons-btn--ghost crayons-btn--icon mr-2 inline-block m:hidden" id="on-page-nav-butt-left" aria-label="nav-button-left">
+        <div class="crayons-icon nav-icon " style="color: white">
+          <%= SiteConfig.left_navbar_svg_icon.html_safe %>
+        </div>
+      </button>
+      <div class="flex-1 flex items-center justify-between">
+        <h2 class="wallet-heading">WALLET ANALYTICS</h2>
+      </div>
+    </header>
+<!--    <h3 class="wallet-heading">WALLET ANALYTICS</h3>-->
+    <div class="table-responsive">
+      <table class="crayons-table" style="width: 100%">
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Title</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Released</th>
+          <th scope="col">Royalties</th>
+          <th scope="col">Price</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody class="mfy-body">
+        <% if @orders.present? %>
+          <% @orders.each do |order| %>
+            <tr class="mfy-tr">
+              <td><%= image_tag order.music_release.header_image_url.present? ? order.music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %></td>
+              <td><%= order.music_release.title.capitalize %></td>
+              <td style="color: #00e4ff !important;">
+                <%= order.organization.name.capitalize %>
+              </td>
+              <td>
+                <%= order.music_release.created_at.strftime('%Y %B') %>
+              </td>
+              <td>0.01%</td>
+              <td>US$ <%= number_with_precision(order.music_release.try(:price), precision: 2) %></td>
+              <td>
+                <% length = Time.at(order.music_release.length).utc.strftime("%M:%S").split(":") %>
+                <% if order.music_release.length < 60 %>
+                  <%= length[1] %> secs
+                <% else %>
+                  <%= length[0]  %> mins <%= length[1] %> secs
+                <% end %>
+                <%# else %>
+                <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
+                <%# end %>
+              </td>
+              <td>
+                <% if order.status.present? && order.status == 'completed' %>
+              <span class="badge badge-success">
+                <%= order.status %>
+              </span>
+                <% else %>
+              <span class="badge badge-warning">
+                pending
+              </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr class="mfy-tr">
+            <td colspan="8" style="text-align: center">You have not purchased any music yet</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+  body{
+    background: #1c1c1c !important;
+  }
+  .mfy-body{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-body{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-tr{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-body .mfy-tr:hover{
+    background: #373737 !important;
+    color: black;
+  }
+  .badge {
+    display: inline-block !important;
+    padding: .25em .4em !important;
+    font-size: 75% !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: baseline !important;
+    border-radius: .25rem !important;
+  }
+  .badge-success {
+    color: #fff;
+    background-color: #28a745;
+  }
+  .badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+  }
+  .badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+  }
+  .table-responsive {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
+  }
+  table th{
+    color: white !important;
+    background: #242424 !important;
+  }
+  .wallet-heading{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    /*margin-bottom: 20px;*/
+  }
+  .wallet-div{
+    background: #0d0d0d;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: linear-gradient(177.01deg, #524F4F 2.37%, #0E1218 97.42%);
+    backdrop-filter: blur(9px);
+  }
+  .sidebar-navigation-links .crayons-link {
+    color: #DDE0E2 !important;
+  }
+  .flex-1{
+    color: #DDE0E2 !important;
+  }
+</style>
+<script type="text/javascript" charset="utf-8">
+  document.querySelectorAll("a[href='http://localhost:3000/made_for_you']")[0].classList.add('crayons-link--current')
+</script>

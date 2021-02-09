@@ -468,6 +468,7 @@ Rails.application.routes.draw do
     post "/create_organizations_music_release" => "organizations#create_organizations_music_release", :as => :create_organizations_music_release
     post "/create_organizations_event" => "organizations#create_organizations_event", :as => :create_organizations_event
     get "/projects_feed" => "organizations#organization_feeds", :as => :organization_feeds
+    get "/your_wallet" => "users#made_for_you", :as => :made_for_you
     get "/organizations/project_show/:id" => "organizations#project_show", :as => :organization_projects
     get "/organizations/project_edit/:id" => "organizations#project_edit", :as => :organization_project_edit
     get "/signout_confirm" => "users#signout_confirm"
