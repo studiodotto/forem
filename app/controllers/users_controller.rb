@@ -315,7 +315,7 @@ class UsersController < ApplicationController
       @organization = current_user.artist_organizations.single_track.new
       organizations_assoiations
     when "my-projects"
-      @organizations = current_user.artist_organizations
+      @organizations = current_user.artist_organizations.order(created_at: :desc)
       artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
       @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
       @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}

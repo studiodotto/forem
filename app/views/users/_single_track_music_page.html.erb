@@ -310,7 +310,7 @@
           </div>
           <div class="display-inline">
             <button class="crayons-btn crayons-btn--outlined mr-2">
-              <input type="file" id="single-header-img">
+              <input type="file" id="single-header-img" class="form-control track-fields">
               <div id="single-img-error" style="display: none" class="alert alert-danger"></div>
             </button>
           </div>
@@ -339,31 +339,35 @@
         <%#= f.label(:audio, "Select audio", class: "crayons-field__label") %>
         <!--          input-->
         <%#= input "audio", class: "form-control", required: true, style: "display: block; margin-top: 5px" %>
+        <% if @single.audios.present? %>
+          <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Audio details</p>
+          <table class="crayons-table" width="100%">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Link</th>
+              <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody class="crayons-card">
+            <%# @applications.each do |application| %>
+            <tr>
+              <td><%= @single.audios.first.try(:id) %></td>
+              <td><a href="<%= @single.audios.first.try(:link) %>"><%= @single.audios.first.try(:link) %></a></td>
+              <td>
+                <% if @single.audios.first.try(:status).present? %>
+                  <span class ='badge badge-success'>Approved</span>
+                <% else %>
+                  <span class ='badge badge-warning'>Pending</span>
+                <% end %>
+              </td>
+              <!--            <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
+            </tr>
+            <%# end %>
+            </tbody>
+          </table>
+        <% end %>
       </div>
-    </div>
-
-    <div class="container" style="background: white">
-      <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Audio details</p>
-      <br>
-      <table class="crayons-table" width="100%">
-        <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Link</th>
-          <th scope="col">Status</th>
-        </tr>
-        </thead>
-        <tbody class="crayons-card">
-        <%# @applications.each do |application| %>
-          <tr>
-            <td>2</td>
-            <td>https://testaudio.com</td>
-            <td><span class ='badge badge-success'>Approved</span></td>
-<!--            <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
-          </tr>
-        <%# end %>
-        </tbody>
-      </table>
     </div>
 
   <div class="container">

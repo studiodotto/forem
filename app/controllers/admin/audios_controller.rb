@@ -35,6 +35,21 @@ module Admin
       end
     end
 
+    def update_audio
+      audio = Audio.find(params[:id])
+      if params[:status].present?
+        status = params[:status] == 'reject' ? false : true
+        update = audio.update(status: status)
+        if update
+          flash[:notice] = 'record updated successfully'
+          redirect_to admin_music_releases_path
+        else
+          flash[:alert] = 'cannot update record'
+          redirect_to admin_music_releases_path
+        end
+      end
+    end
+
     def edit
       @audio = Audio.find(params[:id])
     end

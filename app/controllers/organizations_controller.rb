@@ -45,9 +45,25 @@ class OrganizationsController < ApplicationController
         if @organization_music_release.errors.any?
           raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
         end
+        if @organization_music_release.present?
+          uploaders = upload_audios(params[:audio])
+          links = uploaders.map(&:url)
+          if links.length.zero? || !links[0].include?('studioappbucket')
+            raise StandardError.new 'Bucket is not responding'
+          end
+          if @organization_music_release.audios.present?
+            @organization_music_release.audios.first.update(link: links[0])
+          else
+            @organization_music_release.audios.create(name: @organization_music_release.title, link: links[0], slug: @organization_music_release.slug + "#{Audio.last.id.to_i + 1}", music_release_id: @organization_music_release.try(:id), user_id: current_user.id)
+          end
+        end
       end
     rescue => exc
       flash[:settings_notice] = exc.message
+    rescue CarrierWave::IntegrityError => e # client error
+      flash[:settings_notice] = e.message
+    rescue CarrierWave::ProcessingError # server error
+      flash[:settings_notice] = 'Audio processing error occurred'
     ensure
       redirect_to artist_settings_path(tab: 'my-projects')
     end
@@ -299,5 +315,15 @@ class OrganizationsController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  private
+
+  def upload_audios(audios)
+    Array.wrap(audios).map do |audio|
+      BaseAudioUploader.new.tap do |uploader|
+        uploader.store!(audio)
+      end
+    end
   end
 end

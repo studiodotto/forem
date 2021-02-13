@@ -1,3 +1,11 @@
+<style>
+  .crayons-table th {
+    width: 10% !important;
+  }
+  .crayons-table th:first-child {
+    width: 5% !important;
+  }
+</style>
 <%= form_tag("/admin/music_releases", method: "get", class: "mb-6") do %>
   <div class="form-group">
     <%= text_field_tag(:search, params[:search], aria: { label: "Search" }) %>
@@ -13,8 +21,9 @@
     <th scope="col">ID</th>
     <th scope="col">Title</th>
     <th scope="col">Artist name</th>
-    <th scope="col">Tracks</th>
-    <th scope="col">Published</th>
+<!--    <th scope="col">Tracks</th>-->
+    <th scope="col">Link</th>
+    <th scope="col">Audio action</th>
     <th scope="col">Artist</th>
   </tr>
   </thead>
@@ -24,10 +33,27 @@
       <td><%= music_release.id %></td>
       <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
       <td><%= music_release.organization.present? ? music_release.organization.name : '' %></td>
-      <td><%= music_release.tracks_count %></td>
-      <td><%= music_release.published.present? ? 'true' : 'false' %></td>
+<!--      <td><%#= music_release.tracks_count %></td>-->
+<!--      <td><%#= music_release.published.present? ? 'true' : 'false' %></td>-->
+      <td>
+        <% if music_release.audios.present? && music_release.audios.first.try(:link).present? %>
+          <% if music_release.audios.first.link.present? %>
+            <a href="<%= music_release.audios.first.link %>"><%= music_release.audios.first.link %></a>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% if music_release.audios.present? && music_release.audios.first.try(:link).present? %>
+          <% if music_release.audios.first.status.present? %>
+            <%= link_to "Reject", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
+          <% else %>
+            <%= link_to "Approve", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
+          <% end %>
+        <% end %>
+      </td>
       <td><%= link_to "@#{music_release.user.username}", "/#{music_release.user.username}" %></td>
     </tr>
+  <!-- update_post_admin_audio -->
   <% end %>
   </tbody>
 </table>

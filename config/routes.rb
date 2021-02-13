@@ -61,7 +61,11 @@ Rails.application.routes.draw do
       end
 
       resources :articles, only: %i[index show update]
-      resources :audios, only: %i[index update edit]
+      resources :audios, only: %i[index update edit] do
+        member do
+          put 'update_audio'
+        end
+      end
       resources :artist_applications, only: %i[index update edit] do
         member do
           post :approve
