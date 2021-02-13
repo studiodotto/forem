@@ -200,6 +200,11 @@ class Article < ApplicationRecord
                          .where("score > ?", -4)
                      }
 
+  scope :with_artist_orgs, lambda { |orgs_id|
+    published
+        .where(organization_id: orgs_id)
+  }
+
   scope :eager_load_serialized_data, -> { includes(:user, :organization, :tags) }
 
   store_attributes :boost_states do

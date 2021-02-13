@@ -22,12 +22,13 @@ class Organization < ApplicationRecord
   has_many :sponsorships, dependent: :destroy
   has_many :unspent_credits, -> { where spent: false }, class_name: "Credit", inverse_of: :organization
   has_many :users, through: :organization_memberships
-  belongs_to :artist, class_name: "User", foreign_key: 'artist_id'
+  belongs_to :artist, class_name: "User", foreign_key: 'artist_id', optional: true
   has_many :project_events
   has_many :orders
   has_many :music_releases
+  has_many :audios
 
-  enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service", "single_track" => "single_track"}
+  enum organization_type: {"unreleased"=>"unreleased", "deejaying"=>"deejaying", "online_music_service"=>"online_music_service", "single_track" => "single_track", "exclusive" => "exclusive"}
 
   # validates :articles_count, presence: true
   validates :bg_color_hex, format: COLOR_HEX_REGEXP, allow_blank: true

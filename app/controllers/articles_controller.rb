@@ -113,7 +113,6 @@ class ArticlesController < ApplicationController
 
   def create
     authorize Article
-
     @user = current_user
     article = Articles::Creator.call(@user, article_params_json)
 
@@ -207,7 +206,11 @@ class ArticlesController < ApplicationController
   def base_editor_assigments
     @user = current_user
     @version = @user.editor_version if @user
-    @organizations = @user&.organizations
+    if params[:exclusive].present?
+      @organizations = @user.artist_organizations.exclusive
+    else
+      @organizations = @user&.organizations
+    end
     @tag = Tag.find_by(name: params[:template])
     @prefill = params[:prefill].to_s.gsub("\\n ", "\n").gsub("\\n", "\n")
     @user_approved_liquid_tags = Users::ApprovedLiquidTags.call(@user)
@@ -277,7 +280,7 @@ class ArticlesController < ApplicationController
     # fix the bug <https://github.com/thepracticaldev/dev.to/issues/2871>
     if params["article"]["user_id"] && org_admin_user_change_privilege
       allowed_params << :user_id
-    elsif params["article"]["organization_id"] && allowed_to_change_org_id?
+    elsif params["article"]["organization_id"] && (allowed_to_change_org_id? || Organization.find(params["article"]["organization_id"]).organization_type.to_s == 'exclusive')
       # change the organization of the article only if explicitly asked to do so
       allowed_params << :organization_id
     end

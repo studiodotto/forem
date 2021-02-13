@@ -21,6 +21,7 @@ module Constants
       Account\ and\ Banking
       Analytics
       My\ Projects
+      Share\ Exclusive\ Content
       Single\ Track\ Music\ Page
       Online\ Music\ Services\ Page
       Deejaying\ Services

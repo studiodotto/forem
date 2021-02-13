@@ -287,7 +287,7 @@
         </div>
       </div>
 
-      <div class="row" style="padding: 20px; background: white">
+      <div class="row" style="padding: 20px; padding-top: 0px; background: white">
         <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Cover image</p>
         <br>
         <div class="form-group">
@@ -328,6 +328,42 @@
 <!--        </div>-->
 <!--      </div>-->
 
+    </div>
+
+    <div class="container" style="background: white">
+      <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Music audio</p>
+      <br>
+      <div class="form-group">
+        <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose the audio for your project</p>
+        <input type="file" name="audio" class="form-control track-fields">
+        <%#= f.label(:audio, "Select audio", class: "crayons-field__label") %>
+        <!--          input-->
+        <%#= input "audio", class: "form-control", required: true, style: "display: block; margin-top: 5px" %>
+      </div>
+    </div>
+
+    <div class="container" style="background: white">
+      <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Audio details</p>
+      <br>
+      <table class="crayons-table" width="100%">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Link</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody class="crayons-card">
+        <%# @applications.each do |application| %>
+          <tr>
+            <td>2</td>
+            <td>https://testaudio.com</td>
+            <td><span class ='badge badge-success'>Approved</span></td>
+<!--            <td><%#= application.try(:status).present? ? "<span class ='badge badge-success'>Approved</span>".html_safe : "<span class ='badge badge-danger'>Pending</span>".html_safe %></td>-->
+          </tr>
+        <%# end %>
+        </tbody>
+      </table>
     </div>
 
   <div class="container">

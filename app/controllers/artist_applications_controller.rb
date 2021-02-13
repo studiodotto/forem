@@ -2,6 +2,9 @@ class ArtistApplicationsController < ApplicationController
   def new
     # @user = User.new
     # set_data
+    if current_user.present?
+      return redirect_to root_path
+    end
   end
 
   def create
@@ -61,6 +64,7 @@ class ArtistApplicationsController < ApplicationController
       user.save
       raise StandardError.new user.errors.full_messages.join(',') if user.errors.any?
       user.add_role(:artist)
+      user.artist_organizations.create(name: "Exclusive #{user.email.include?('@') ? user.email.split('@')[0].capitalize : ''}", summary: 'Exclusive content organization', tag_line: 'Exclusive material by artists', tech_stack: 'Exclusive stack', bg_color_hex: '#3b49df', organization_type: 'exclusive', slug: "exclusive-#{SecureRandom.hex(3)}#{user.id}")
       flash[:artist_success] = "Application received successfully"
       sign_in_and_redirect(user, event: :authentication)
     # artist_application.services.each do |service|

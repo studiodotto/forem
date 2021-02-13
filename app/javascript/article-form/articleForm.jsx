@@ -79,7 +79,6 @@ export default class ArticleForm extends Component {
             edited: true,
           }
         : {};
-
     this.state = {
       id: this.article.id || null, // eslint-disable-line react/no-unused-state
       title: this.article.title || '',
@@ -96,7 +95,7 @@ export default class ArticleForm extends Component {
       editing: this.article.id !== null, // eslint-disable-line react/no-unused-state
       mainImage: this.article.main_image || null,
       organizations,
-      organizationId: this.article.organization_id,
+      organizationId: (organizations && organizations[0] && organizations[0].organization_type == 'exclusive') ? organizations[0].id : this.article.organization_id,
       errors: null,
       edited: false,
       updatedAt: this.article.updated_at,
@@ -199,6 +198,12 @@ export default class ArticleForm extends Component {
   };
 
   handleMainImageUrlChange = (payload) => {
+    this.setState({
+      mainImage: payload.links[0],
+    });
+  };
+
+  handleAudioUrlChange = (payload) => {
     this.setState({
       mainImage: payload.links[0],
     });

@@ -71,11 +71,11 @@ module ApplicationHelper
       "twitter" => "v1456342401/twitter-logo-silhouette_1_letrqc.png",
       "github" => "v1456342401/github-logo_m841aq.png",
       "link" => "v1456342401/link-symbol_apfbll.png",
-      "volume" => "v1461589297/technology_1_aefet2.png",
-      "volume-mute" => "v1461589297/technology_jiugwb.png"
+      "volume" => "https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/volume.png",
+      "volume-mute" => "https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/volume.png"
     }.fetch(name, "v1456342953/star-in-black-of-five-points-shape_sor40l.png")
-
-    "https://res.cloudinary.com/#{ApplicationConfig['CLOUDINARY_CLOUD_NAME']}/image/upload/#{postfix}"
+    postfix['volume']
+    # "https://res.cloudinary.com/#{ApplicationConfig['CLOUDINARY_CLOUD_NAME']}/image/upload/#{postfix}"
   end
 
   def optimized_image_url(url, width: 500, quality: 80, fetch_format: "auto", random_fallback: true)

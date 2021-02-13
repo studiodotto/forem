@@ -15,7 +15,8 @@ class StoriesController < ApplicationController
   SIGNED_OUT_RECORD_COUNT = 60
 
   before_action :authenticate_user!, except: %i[index search show]
-  before_action :set_cache_control_headers, only: %i[index search show]
+  # before_action :set_cache_control_headers, only: %i[index search show]
+  before_action :set_cache_control_headers, only: %i[search show]
   before_action :redirect_to_lowercase_username, only: %i[index]
 
   rescue_from ArgumentError, with: :bad_request
@@ -105,6 +106,16 @@ class StoriesController < ApplicationController
     @music_release = MusicRelease.published.find_by(slug: params[:username])
     @organization = Organization.find_by(slug: params[:username])
     @page = Page.find_by(slug: params[:username], is_top_level_path: true)
+    if @organization.present? && @organization.organization_type.to_s == 'exclusive'
+      @buyers = @organization.artist.seller_orders.pluck(:id)
+      if !current_user || (current_user && !@buyers.include?(current_user.id))
+        if !current_user || (current_user.any_admin? && !(current_user.id == @organization.artist.id))
+          flash[:global_settings] = "You're not allowed to access this page"
+          return redirect_to root_path
+        end
+      end
+    end
+    set_cache_control_headers
     if @podcast
       Honeycomb.add_field("stories_route", "podcast")
       handle_podcast_index

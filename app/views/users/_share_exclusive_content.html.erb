@@ -1,0 +1,90 @@
+<% title("Dashboard - #{community_name}") %>
+
+<div class="crayons-card p-6" data-controller="image-upload">
+  <a href="/new?exclusive=true" class="crayons-btn login-card-btn" style="margin-bottom: 20px">Write an Exclusive Post</a>
+  <a href="/<%= Organization.find(@exclusive.id).slug %>" class="crayons-btn login-card-btn" style="margin-bottom: 20px">Visit Exclusive Content</a>
+  <h2>Your exclusive posts</h2>
+  <br>
+  <article class="crayons-story cursor-pointer">
+    <a href="/hb288/test-post-5c15" class="crayons-story__hidden-navigation-link">
+      test post
+    </a>
+    <div role="presentation">
+      <div class="crayons-story__body">
+        <div class="crayons-story__top">
+          <div class="crayons-story__meta">
+            <div class="crayons-story__author-pic">
+              <a href="/hb288" class="crayons-avatar crayons-avatar--l">
+                <img src="https://res.cloudinary.com/dyzicyjzq/image/fetch/s--JouKsIaI--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://thepracticaldev.s3.amazonaws.com/i/99mvlsfu5tfj9m7ku25d.png" alt="hb288 profile" class="crayons-avatar__image" loading="lazy">
+              </a>
+            </div>
+            <div>
+              <p>
+                <a href="/hb288" class="crayons-story__secondary fw-medium">
+                </a>
+              </p>
+              <a href="/hb288/test-post-5c15" class="crayons-story__tertiary fs-xs">
+                <time datetime="">Feb 12 (1 hour ago)</time>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="crayons-story__indention">
+          <h2 class="crayons-story__title" style="display: inline-block">
+            <a href="/hb288/test-post-5c15" id="article-link-55">
+              <span>
+                test post
+              </span>
+            </a>
+          </h2>
+          <a href="/new?exclusive=true" class="crayons-btn login-card-btn" style="margin-bottom: 20px; float: right">Add Audio</a>
+          <div class="crayons-story__tags">
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="crayons-story cursor-pointer">
+    <a href="/hb288/test-post-5c15" class="crayons-story__hidden-navigation-link">
+      Posts new
+    </a>
+    <div role="presentation">
+      <div class="crayons-story__body">
+        <div class="crayons-story__top">
+          <div class="crayons-story__meta">
+            <div class="crayons-story__author-pic">
+              <a href="/hb288" class="crayons-avatar crayons-avatar--l">
+                <img src="https://res.cloudinary.com/dyzicyjzq/image/fetch/s--JouKsIaI--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://thepracticaldev.s3.amazonaws.com/i/99mvlsfu5tfj9m7ku25d.png" alt="hb288 profile" class="crayons-avatar__image" loading="lazy">
+              </a>
+            </div>
+            <div>
+              <p>
+                <a href="/hb288" class="crayons-story__secondary fw-medium">
+                </a>
+              </p>
+              <a href="/hb288/test-post-5c15" class="crayons-story__tertiary fs-xs">
+                <time datetime="">Feb 12 (1 hour ago)</time>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="crayons-story__indention">
+          <h2 class="crayons-story__title" style="display: inline-block">
+            <a href="/hb288/test-post-5c15" id="article-link-55">
+              <span>
+                test post
+              </span>
+            </a>
+          </h2>
+          <a href="/new?exclusive=true" class="crayons-btn login-card-btn" style="margin-bottom: 20px; float: right">Add Audio</a>
+          <p><strong>Tracks</strong></p>
+          <div class="crayons-story__bottom">
+            <p>https://studioappbucket.s3.amazonaws.com/audio/audio-upload.mp3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<%#= render partial: "shared/audio_upload", locals: {exclusive: @exclusive.id} %>

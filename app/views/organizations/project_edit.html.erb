@@ -34,9 +34,8 @@
   <div class="crayons-layout__left-sidebar">
     <nav class="hidden m:block">
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
-        <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-          <%= possible_tab == "Profile and services" ? "Account Detail Verification" : possible_tab %>
-        </a>
+        <h1><%= possible_tab %></h1>
+
       <% end %>
     </nav>
     <div class="m:hidden p-2 pt-0">

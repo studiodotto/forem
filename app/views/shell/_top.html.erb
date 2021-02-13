@@ -92,6 +92,29 @@
           width: 40px;
           height: 40px;
         }
+        .badge {
+          display: inline-block !important;
+          padding: .25em .4em !important;
+          font-size: 75% !important;
+          font-weight: 700 !important;
+          line-height: 1 !important;
+          text-align: center !important;
+          white-space: nowrap !important;
+          vertical-align: baseline !important;
+          border-radius: .25rem !important;
+        }
+        .badge-success {
+          color: #fff;
+          background-color: #28a745;
+        }
+        .badge-warning {
+          color: #212529;
+          background-color: #ffc107;
+        }
+        .badge-danger {
+          color: #fff;
+          background-color: #dc3545;
+        }
       </style>
       <% unless user_signed_in? %>
         <%= javascript_packs_with_chunks_tag "Search", defer: true %>

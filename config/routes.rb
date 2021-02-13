@@ -1,6 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
+  get 'exclusive_content/index'
   use_doorkeeper do
     controllers tokens: "oauth/tokens"
   end
@@ -175,6 +176,7 @@ Rails.application.routes.draw do
         end
         resources :comments, only: %i[index show]
         resources :videos, only: [:index]
+        resources :exclusive_contents, only: [:index]
         resources :podcast_episodes, only: [:index]
         resources :music_tracks, only: [:index]
         resources :users, only: %i[show] do

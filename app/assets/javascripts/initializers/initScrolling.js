@@ -203,6 +203,27 @@ function buildVideoArticleHTML(videoArticle) {
   );
 }
 
+function buildExclusiveArticleHtml(exclusiveArticle) {
+  return (
+    '<a class="single-video-article single-article" href="' +
+    exclusiveArticle.path +
+    '" id="exclusive-article-' +
+    exclusiveArticle.id +
+    '">\n' +
+    '  <div class="video-image" style="background-image: url(' +
+    exclusiveArticle.main_image +
+    ')">\n' +
+    '   </div>\n' +
+    '   <p><strong>' +
+    exclusiveArticle.title +
+    '</strong></p>\n' +
+    '  <p>' +
+    exclusiveArticle.user.name +
+    '</p>\n' +
+    '</a>'
+  );
+}
+
 function insertVideos(videoArticles) {
   var list = document.getElementById('subvideos');
   var newVideosHTML = '';
@@ -233,6 +254,38 @@ function insertVideos(videoArticles) {
 
 function fetchNextVideoPage(el) {
   fetchNext(el, '/api/videos', insertVideos);
+}
+
+function insertExclusives(exclusiveArticles) {
+  var list = document.getElementById('sub_exclusives');
+  var newExclusivesHTML = '';
+  exclusiveArticles.forEach(function insertExclusive(exclusiveArticle) {
+    var existingEl = document.getElementById(
+      'exclusive-article-' + exclusiveArticle.id,
+    );
+    if (!existingEl) {
+      var newHTML = buildExclusiveArticleHtml(exclusiveArticle);
+      newExclusivesHTML += newHTML;
+    }
+  });
+
+  var distanceFromBottom =
+    document.documentElement.scrollHeight - document.body.scrollTop;
+  var newNode = document.createElement('div');
+  newNode.innerHTML = newExclusivesHTML;
+  newNode.className += 'video-collection';
+  var singleArticles = document.querySelectorAll(
+    '.single-article, .crayons-story',
+  );
+  var lastElement = singleArticles[singleArticles.length - 1];
+  insertAfter(newNode, lastElement);
+  if (nextPage > 0) {
+    fetching = false;
+  }
+}
+
+function fetchNextExclusivePage(el) {
+  fetchNext(el, '/api/exclusive_contents', insertExclusives);
 }
 
 function insertArticles(articles) {
@@ -411,6 +464,11 @@ function fetchNextPageIfNearBottom() {
     scrollableElemId = 'user-dashboard';
     fetchCallback = function fetch() {
       fetchNextFollowingPage(indexContainer);
+    };
+  } else if (indexWhich === 'exclusive') {
+    scrollableElemId = 'exclusive-collection';
+    fetchCallback = function fetch() {
+      fetchNextExclusivePage(indexContainer);
     };
   } else {
     scrollableElemId = 'articles-list';

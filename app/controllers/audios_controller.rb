@@ -15,13 +15,12 @@ class AudiosController < ApplicationController
 
       uploaders = upload_audios(params[:audio])
       links = uploaders.map(&:url)
-
       if links.length.zero? || !links[0].include?('studioappbucket')
         render json: { error: 'bucket is not responding' }, status: :unprocessable_entity and return
       end
       music_release = MusicRelease.find_by(id: params[:music_release])
-      uploaded_audio = current_user.audios.create(name: params[:title], link: links[0], slug: params[:slug], music_release_id: music_release.id)
-
+      organization = Organization.find_by(id: params[:exclusive_id])
+      uploaded_audio = current_user.audios.create(name: params[:title], link: links[0], slug: params[:slug], music_release_id: music_release.try(:id), organization_id: organization.try(:id))
       if uploaded_audio
         if music_release.present?
           music_track = MusicTrack.new
@@ -36,6 +35,8 @@ class AudiosController < ApplicationController
           else
             render json: { error: music_track.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
           end
+        elsif organization.present?
+          render json: { link: links[0] }, status: :ok and return
         end
       else
         render json: { error: 'cannot upload audio to database' }, status: :unprocessable_entity

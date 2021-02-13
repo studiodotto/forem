@@ -11,7 +11,7 @@
   </aside>
 
   <div class="crayons-layout__content mb-5" id="user-dashboard">
-    <%= render "shared/audio_upload" %>
+    <%= render partial: "shared/audio_upload", locals: {exclusive: false}  %>
     <div class="crayons-card p-6" data-controller="image-upload">
       <h2 class="crayons-title mb-4">Approved tracks</h2>
       <%= render partial: 'audios/audios_table', locals: {audios: @audios} %>

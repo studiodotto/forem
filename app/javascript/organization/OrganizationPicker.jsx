@@ -13,16 +13,20 @@ const orgOptions = (organizations, organizationId, emptyLabel) => {
     }
     return <option value={organization.id}>{organization.name}</option>;
   });
-  const nullOrgOption =
-    organizationId === null ? (
-      <option value="" selected>
-        {emptyLabel}
-      </option>
-    ) : (
-      <option value="">{emptyLabel}</option>
-    );
+  if (!window.location.href.includes('exclusive')){
+    const nullOrgOption =
+      organizationId === null ? (
+        <option value="" selected>
+          {emptyLabel}
+        </option>
+      ) : (
+        <option value="">{emptyLabel}</option>
+      );
 
-  return [nullOrgOption, ...orgs];
+    return [nullOrgOption, ...orgs];
+  }else {
+    return orgs;
+  }
 };
 
 export const OrganizationPicker = ({

@@ -21,9 +21,13 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <div class="crayons-card p-6" data-controller="image-upload">
-  <h2 class="crayons-title mb-4">Upload an Audio</h2>
+  <h2 class="crayons-title mb-4"><%= exclusive.blank? ? 'Upload an Audio' : 'Add audio to exclusive content' %></h2>
+  <% if exclusive.present? %>
+    <a href="/new?exclusive=true" class="crayons-btn login-card-btn" style="margin-bottom: 20px">Write an Exclusive Post</a>
+    <a href="/<%= Organization.find(exclusive).slug %>" class="crayons-btn login-card-btn" style="margin-bottom: 20px">Visit Exclusive Content</a>
+  <% end %>
   <% # Multipart, remote forms are tricky, the data is actually sent in the Stimulus controller. %>
-  <% if @music_releases.present? %>
+  <% if (@music_releases.present? && exclusive.blank?) || exclusive.present? %>
     <%= form_with(url: audio_upload_path, multipart: true, id: "audio-form") do |f| %>
       <div class="form-group">
         <%= f.label(:audio, "Select audio", class: "crayons-field__label") %>
@@ -40,14 +44,18 @@
         <%= f.text_field "slug", class: "form-control crayons-textfield", required: true, style: "display: block;width: 300px; margin-top: 5px" %>
       </div>
       <br>
-      <div class="form-group">
-        <label for="selected-podcast" class="crayons-field__label">Select music release</label>
-        <select class="crayons-select" name="music_release" id="selected-podcast" style="width: 300px; display: block; margin-top: 5px">
-          <% @music_releases.each do |music_release| %>
-            <option value="<%= music_release.id %>"><%= music_release.title %></option>
-          <% end %>
-        </select>
-      </div>
+      <% if exclusive.present? %>
+        <input type="hidden" name="exclusive_id" value="<%= exclusive %>">
+      <% else %>
+        <div class="form-group">
+          <label for="selected-podcast" class="crayons-field__label">Select music release</label>
+          <select class="crayons-select" name="music_release" id="selected-podcast" style="width: 300px; display: block; margin-top: 5px">
+            <% @music_releases.each do |music_release| %>
+              <option value="<%= music_release.id %>"><%= music_release.title %></option>
+            <% end %>
+          </select>
+        </div>
+      <% end %>
       <br>
       <%= f.submit 'Upload', class: "crayons-btn crayons-btn--primary mt-4", style: 'width: 120px'%>
       <i style="display: none; right: 30px; position: relative; color: white" class="fa fa-circle-o-notch fa-spin" id="loader"></i>

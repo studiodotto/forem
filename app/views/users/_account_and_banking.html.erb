@@ -1,6 +1,6 @@
 <div class="crayons-card p-6">
   <h2 class="crayons-title mb-4">Accounting and Banking</h2>
-  <% if @payment_provider.present? %>
+  <% if @payment_provider.present?  && @payment_provider.try(:external_id).present? %>
     <label class="crayons-field__label">Account id</label>
     <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
     <br><br>
@@ -16,6 +16,11 @@
       <a href="#"><button class="crayons-btn" style="width: 100%">Can't generate link</button></a>
     <% end %>
   <% else %>
-    <div>Please enter banking information from mail</div>
+    <a href="<%= new_user_document_path(user_id: current_user.id) %>">
+      <button class="crayons-btn hidden mr-2 whitespace-nowrap s:block  ">
+        Attach your bank
+      </button>
+    </a>
+<!--    <div>Please enter banking information from mail</div>-->
   <% end %>
 </div>

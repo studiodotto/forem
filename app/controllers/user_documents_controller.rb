@@ -26,7 +26,9 @@ class UserDocumentsController < ApplicationController
     user = payment_provider.user
     # user.update(is_verified: true)
     # VerificationMailer.with(user_id: payment_provider.user.id).artist_verified.deliver_now
-    redirect_to verified_user_documents_path
+    # redirect_to verified_user_documents_path
+    flash[:global_notice] = "Bank information added successfully"
+    redirect_to artist_settings_path(tab: 'account-and-banking')
   end
 
   def verified

@@ -12,6 +12,7 @@
   <tr>
     <th scope="col">ID</th>
     <th scope="col">Title</th>
+    <th scope="col">Artist name</th>
     <th scope="col">Tracks</th>
     <th scope="col">Published</th>
     <th scope="col">Artist</th>
@@ -22,6 +23,7 @@
     <tr>
       <td><%= music_release.id %></td>
       <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
+      <td><%= music_release.organization.present? ? music_release.organization.name : '' %></td>
       <td><%= music_release.tracks_count %></td>
       <td><%= music_release.published.present? ? 'true' : 'false' %></td>
       <td><%= link_to "@#{music_release.user.username}", "/#{music_release.user.username}" %></td>

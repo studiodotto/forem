@@ -9,6 +9,17 @@
      data-feed="<%= params[:timeframe] || "base-feed" %>"
      data-articles-since="<%= Timeframer.new(params[:timeframe]).datetime&.iso8601 %>">
   <%= render "organizations/sidebar" %>
+  <div class="flex-1 flex items-center justify-between" style="max-width: calc(100% - 560px);">
+    <h2 class="crayons-subtitle-2" id="heading">Posts</h2>
+    <nav class="crayons-tabs hidden s:flex">
+      <a href="#" class="crayons-tabs__item crayons-tabs__item--current" onclick="show_posts(); return false" id="posts">Posts</a>
+      <a href="#" class="crayons-tabs__item" id="audios" onclick="show_audios(); return false">Audios</a>
+    </nav>
+    <select class="crayons-select s:hidden ml-2 s:ml-auto w-auto" id="feed-filter-select" aria-label="feed-filter-select">
+      <option value="/latest">Posts</option>
+      <option value="/projects_feed" selected="">New releases</option>
+    </select>
+  </div>
   <div class="articles-list" id="articles-list">
     <div class="substories" id="substories">
       <%# organizations/main_feed will iterate on stories with .each_with_index,
@@ -21,7 +32,76 @@
       loading...
     </div>
   </div>
+  <div class="articles-list" id="audios-list" style="display: none">
+    <div class="substories">
+      <% if @organization.audios.present? %>
+        <% @organization.audios.each do |audio| %>
+          <div class="crayons-story">
+            <div class="crayons-story__body">
+              <div class="crayons-story__top">
+                <div class="crayons-story__meta">
+                  <div class="crayons-story__author-pic">
+                    <a class="crayons-logo crayons-logo--l" href="#">
+                      <img alt="<%= @organization.name %> logo" src="<%= @organization.profile_image_90 %>" class="crayons-logo__image">
+                    </a>
+                    <a href="#" class="crayons-story__tertiary fs-xs"><time datetime="<%= audio.created_at %>"><%= audio.created_at&.strftime("%b %e") %></time></a>
+                  </div>
+                </div>
+              </div>
+<!--              Audio <%#= audio %>-->
+              <div class="podcast-episode-container" data-meta="{&quot;podcastName&quot;:&quot;Test Podcasttttttt&quot;,&quot;episodeName&quot;:&quot;test&quot;,&quot;podcastImageUrl&quot;:&quot;https://res.cloudinary.com/dyzicyjzq/image/fetch/s--toDeRZhO--/c_limit,f_auto,fl_progressive,q_80,w_600/https://studioappbucket.s3.amazonaws.com/uploads/podcast/image/12/14cbf324-f86c-4e56-b221-0c3828ab1f42.png&quot;}">
+              <div class="hero">
+                <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= @organization.slug %>" data-episode="<%= audio.id.to_s %>">
+                  <div class="record" id="record">
+                    <%= optimized_image_tag(@organization.profile_image_90,
+                                            optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                            image_options: { class: "main-image", id: "main-image-#{audio.id.to_s}", alt: 'test' }) %>
+                    <img alt="Play Button" onclick="audioClick(<%= audio.id %>)" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+                    <img alt="Pause Button" onclick="audioPauseClick(<%= audio.id %>)" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+                    <div class="status-message" id="status-message-<%= audio.id.to_s %>">
+                      play
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio} %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <%= render "organizations/sidebar_additional" %>
 </div>
 
 <%= render "stories/stories_list_script" %>
+<script type="text/javascript" charset="utf-8">
+  function show_posts(){
+    document.getElementById('audios').classList.remove("crayons-tabs__item--current");
+    document.getElementById('posts').classList.add("crayons-tabs__item--current");
+    document.getElementById('articles-list').style.display = 'block'
+    document.getElementById('audios-list').style.display = 'none'
+    document.getElementById('heading').innerHTML = 'Posts'
+  }
+  function show_audios(){
+    document.getElementById('posts').classList.remove("crayons-tabs__item--current");
+    document.getElementById('audios').classList.add("crayons-tabs__item--current");
+    document.getElementById('audios-list').style.display = 'block'
+    document.getElementById('articles-list').style.display = 'none'
+    document.getElementById('heading').innerHTML = 'Audios'
+  }
+  // function audioClick(id){
+  //   var slides = document.getElementsByClassName("main-image");
+  //   for (var i = 0; i < slides.length; i++) {
+  //     slides.item(i).style['animation-play-state'] = 'paused'
+  //   }
+  //   document.getElementById("main-image-"+id).style['animation-play-state'] = 'running'
+  // }
+  // function audioPauseClick(id){
+  //   var slides = document.getElementsByClassName("main-image");
+  //   for (var i = 0; i < slides.length; i++) {
+  //     slides.item(i).style['animation-play-state'] = 'paused'
+  //   }
+  // }
+</script>

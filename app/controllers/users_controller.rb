@@ -325,6 +325,8 @@ class UsersController < ApplicationController
       @listings = []
     when "posts"
       # handle_response_templates_tab
+    when "share-exclusive-content"
+      @exclusive = current_user.artist_organizations.exclusive.first
     else
       not_found unless @tab.in?(Constants::Settings::ARTIST_TAB_LIST.map { |t| t.downcase.tr(" ", "-") })
     end
