@@ -3,8 +3,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[create]
   before_action :initialize_stripe
   def create
-    @user = find_or_create_user
-    if @user.present?
+    user_response = find_or_create_user
+    if user_response[:error_msg].present?
+      flash[:error] = user_response[:error_msg]
+      return redirect_to organization_feeds_path
+    end
+    @user = user_response[:user]
+    is_new = user_response[:new_user]
+    if @user.present? && !@user.any_admin? && !@user.has_role?(:artist)
       find_or_create_customer
       find_or_create_card
       music_release = MusicRelease.find(params[:music_release_id])
@@ -13,12 +19,12 @@ class OrdersController < ApplicationController
             customer: @customer,
             amount: (params[:project_price].to_f * 100).to_i,
             description: "Purchase of product #{params[:music_release_id]}",
-            card_id: @card&.id,
+            card_id: params[:stripe_token].present? ? @card&.id : @card,
             )
         if charge.present?
           order = Order.create({
             organization_id: music_release.organization.id,
-            status: 'accepted',
+            status: 'completed',
             total_amount: params[ :project_price].to_f,
             email: @user.email,
             seller_id: music_release.organization.artist.id,
@@ -28,9 +34,16 @@ class OrdersController < ApplicationController
             order_type: 'single_track',
          })
           if order.present?
-            flash[:order_placed] = "Order has been placed"
+            if is_new.present?
+              flash[:global_notice] = "Order has been placed, please confirm email and visit the Made for you section to listen music"
+            else
+              flash[:global_notice] = "Order has been placed, kindly visit the Made for you section to listen music"
+            end
             return redirect_to organization_feeds_path
           else
+            if is_new.present?
+              @user.destroy
+            end
             flash[:error] = order.errors.full_messages.to_sentence
             return redirect_to organization_feeds_path
           end
@@ -38,10 +51,15 @@ class OrdersController < ApplicationController
       else
         # DatadogStatsClient.increment("stripe.errors", tags: ["action:create_card", "user_id:#{current_user.id}"])
         flash[:error] = "There was a problem adding your card"
-        return redirect_to organization_feeds_path
       end
+    else
+      flash[:error] = "You're not a regular customer"
     end
+    return redirect_to organization_feeds_path
   rescue Payments::PaymentsError => e
+    if is_new.present?
+      @user.destroy
+    end
     redirect_to organization_feeds_path, flash: { error: e.message }
   end
 
@@ -49,9 +67,13 @@ class OrdersController < ApplicationController
 
   def find_or_create_user
     user = nil
+    is_new = false
     if current_user.present?
       user = current_user
+    elsif User.find_by(email: params[:email]).present?
+      user = User.find_by(email: params[:email])
     else
+      is_new = true
       new_user = User.create({
          first_name: params[:first_name],
          last_name: params[:last_name],
@@ -65,12 +87,12 @@ class OrdersController < ApplicationController
          username: params[:first_name] + SecureRandom.hex(2)
       })
       if new_user.errors.any?
-        return redirect_to organization_feeds_path, flash: { error: new_user.errors.full_messages.to_sentence }
+        return {error_msg:  new_user.errors.full_messages.to_sentence }
       end
       user = new_user
       user.add_role :customer
     end
-    user
+    {user: user, new_user: is_new}
   end
 
   def find_customer
@@ -88,7 +110,7 @@ class OrdersController < ApplicationController
   end
 
   def find_or_create_card
-    @card = if params[:stripe_token]
+    @card = if params[:stripe_token].present?
               Payments::Customer.create_source(@customer.id, params[:stripe_token])
             else
               @customer.default_source

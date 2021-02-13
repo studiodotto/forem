@@ -34,7 +34,26 @@
         <% if @orders.present? %>
           <% @orders.each do |order| %>
             <tr class="mfy-tr">
-              <td><%= image_tag order.music_release.header_image_url.present? ? order.music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %></td>
+              <td><%= image_tag order.music_release.header_image_url.present? ? order.music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %>
+                <% if order.music_release.audios.present? && order.music_release.audios.first.try(:link).present? && order.music_release.audios.first.try(:status).present? %>
+                  <% audio = order.music_release.audios.first %>
+                  <img src="assets/playbutt.png" id="play-<%= audio.id %>" onclick="play_music(<%= audio.id %>)" width="30px" height="30px" style="position: relative; left: 10px; bottom: 10px" />
+                  <img src="assets/pausebutt.png" id="pause-<%= audio.id %>" onclick="pause_music(<%= audio.id %>)" width="30px" height="30px" style="position: relative; left: 10px; bottom: 10px; display: none" />
+                  <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= order.organization.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
+                    <div class="record" id="record">
+                      <%= optimized_image_tag(order.organization.profile_image_90,
+                                              optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                              image_options: { class: "main-image", id: "main-image-#{audio.id.to_s}", alt: 'test' }) %>
+                      <img alt="Play Button" id="hidden-play-<%= audio.id %>" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+                      <img alt="Pause Button" id="hidden-pause-<%= audio.id %>" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+                      <div class="status-message" id="status-message-<%= audio.id.to_s %>">
+                        play
+                      </div>
+                    </div>
+                  </div>
+                  <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: order.music_release.audios.first} %>
+                <% end %>
+              </td>
               <td><%= order.music_release.title.capitalize %></td>
               <td style="color: #00e4ff !important;">
                 <%= order.organization.name.capitalize %>
@@ -157,5 +176,18 @@
   }
 </style>
 <script type="text/javascript" charset="utf-8">
-  document.querySelectorAll("a[href='http://unitedbits.io/your_wallet']")[0].classList.add('crayons-link--current')
+  // document.querySelectorAll("a[href='http://unitedbits.io/your_wallet']")[0].classList.add('crayons-link--current')
+  function play_music(audio_id){
+    // if(document.getElementById("closebutt")){
+    //   document.getElementById("closebutt").click();
+    // }
+    document.getElementById("record-"+audio_id).click();
+    document.getElementById("play-"+audio_id).style.display = 'none'
+    document.getElementById("pause-"+audio_id).style.display = 'inline-block'
+  }
+  function pause_music(audio_id){
+    document.getElementById("record-"+audio_id).click();
+    document.getElementById("pause-"+audio_id).style.display = 'none'
+    document.getElementById("play-"+audio_id).style.display = 'inline-block'
+  }
 </script>

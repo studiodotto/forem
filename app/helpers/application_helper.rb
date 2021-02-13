@@ -42,15 +42,17 @@ module ApplicationHelper
   # rubocop:enable Rails/HelperInstanceVariable
 
   def title(page_title)
-    derived_title = if page_title.include?(community_name)
-                      page_title
-                    elsif user_signed_in?
-                      "#{page_title} - #{community_qualified_name} 👩‍💻👨‍💻"
-                    else
-                      "#{page_title} - #{community_name}"
-                    end
-    content_for(:title) { derived_title }
-    derived_title
+    if page_title.present?
+      derived_title = if page_title.include?(community_name)
+                        page_title
+                      elsif user_signed_in?
+                        "#{page_title} - #{community_qualified_name} 👩‍💻👨‍💻"
+                      else
+                        "#{page_title} - #{community_name}"
+                      end
+      content_for(:title) { derived_title }
+      derived_title
+    end
   end
 
   def title_with_timeframe(page_title:, timeframe:, content_for: false)

@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show, :project_edit]
-
+  before_action :initialize_stripe, only: :organization_feeds
   def create
     rate_limit!(:organization_creation)
 
@@ -111,6 +111,15 @@ class OrganizationsController < ApplicationController
     @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
     @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
     @listings = []
+    @source = nil
+    if current_user.present? && current_user.stripe_id_code.present?
+      find_customer
+      @customer.sources.each do |source|
+        if source.id == @customer.default_source
+          @source = source
+        end
+      end
+    end
   end
 
   def project_edit
@@ -187,6 +196,10 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
+  def find_customer
+    @customer = Payments::Customer.get(current_user.stripe_id_code)
+  end
 
   def permitted_params
     %i[
