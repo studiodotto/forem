@@ -45,7 +45,7 @@ class OrganizationsController < ApplicationController
         if @organization_music_release.errors.any?
           raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
         end
-        if @organization_music_release.present?
+        if @organization_music_release.present? && params[:audio].present?
           uploaders = upload_audios(params[:audio])
           links = uploaders.map(&:url)
           if links.length.zero? || !links[0].include?('studioappbucket')
