@@ -39,7 +39,7 @@
                   <% audio = order.music_release.audios.first %>
                   <img src="assets/playbutt.png" id="play-<%= audio.id %>" onclick="play_music(<%= audio.id %>)" width="30px" height="30px" style="position: relative; left: 10px; bottom: 10px" />
                   <img src="assets/pausebutt.png" id="pause-<%= audio.id %>" onclick="pause_music(<%= audio.id %>)" width="30px" height="30px" style="position: relative; left: 10px; bottom: 10px; display: none" />
-                  <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= order.organization.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
+                  <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= order.music_release.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
                     <div class="record" id="record">
                       <%= optimized_image_tag(order.organization.profile_image_90,
                                               optimizer_options: { width: 420, height: 420, crop: "fill" },
@@ -51,7 +51,13 @@
                       </div>
                     </div>
                   </div>
-                  <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: order.music_release.audios.first} %>
+                  <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
+                  <% if audio.music_release.try(:header_image_url).present?  %>
+                    <% image = audio.music_release.try(:header_image_url) %>
+                  <% elsif audio.music_release.try(:organization).try(:profile_image_90).present? %>
+                    <% image = audio.music_release.try(:organization).try(:profile_image_90) %>
+                  <% end %>
+                  <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: order.music_release.audios.first, slug: order.music_release.slug, image: image} %>
                 <% end %>
               </td>
               <td><%= order.music_release.title.capitalize %></td>

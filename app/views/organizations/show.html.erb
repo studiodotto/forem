@@ -65,7 +65,11 @@
                 </div>
               </div>
               </div>
-              <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio} %>
+              <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
+              <% if @organization.try(:profile_image_90).present? %>
+                <% image = @organization.try(:profile_image_90) %>
+              <% end %>
+              <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio, slug: @organization.slug, image: image} %>
             </div>
           </div>
         <% end %>

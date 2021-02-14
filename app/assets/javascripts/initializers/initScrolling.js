@@ -223,6 +223,59 @@ function buildExclusiveArticleHtml(exclusiveArticle) {
     '</a>'
   );
 }
+function buildExclusiveListeningHtml(listening) {
+  return (
+    '<div class="single-article single-article-small-pic single-article-single-podcast" id="listening-link-' +
+    listening.id +
+    '">\n' +
+    '  <div class="small-pic"> \n ' +
+    '<img alt="listening" onclick="play_music('+listening.id+')" width="240" height="240" src="/assets/playbutt.png" /> ' +
+    '</div> ' +
+    '  <div class="content"> \n ' +
+    '<h3> <span class="tag-identifier">free listen</span>'+listening.music_release.title+'</h3>' +
+    '</div> <h4>'+listening.music_release.description+'</h4> ' +
+    '</div>' +
+    '<div id="record-'+listening.id+'" style="display: none" class="record-wrapper" style="display: none" data-episode="'+listening.id+'" data-podcast="'+listening.slug+'" >' +
+    '<div class="record" id="record">'+
+    '<img class="main-image" id="main-image-'+listening.id+'" alt="test" width="420" height="420" src="https://res.cloudinary.com/dyzicyjzq/image/fetch/s--VVrZmDcF--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://res.cloudinary.com/dyzicyjzq/image/fetch/s--JouKsIaI--/c_fill%2Cf_auto%2Cfl_progressive%2Ch_90%2Cq_auto%2Cw_90/https://thepracticaldev.s3.amazonaws.com/i/99mvlsfu5tfj9m7ku25d.png">' +
+    '<img alt="Play Button" id="hidden-play-'+listening.id+'" class="butt play-butt" src="/assets/playbutt.png">' +
+    '<img alt="Pause Button" id="hidden-pause-'+listening.id+'" class="butt pause-butt" src="/assets/pausebutt.png">' +
+    '<div class="status-message" id="status-message-'+listening.id+'">play</div>' +
+    '</div>' +
+    '</div>' +
+    '<div class="hidden-audio" id="hidden-audio-'+listening.id+'" style="display:none" data-episode="'+listening.id+'" data-podcast="'+listening.slug+'">' +
+    '<audio id="audio" data-episode="'+listening.id+'" data-podcast="'+listening.slug+'">' +
+    '<source src="'+listening.link+'" type="audio/mpeg"> Your browser does not support the audio element.' +
+    '</audio>' +
+    '<div id="progressBar" class="audio-player-display">' +
+    '<a href="//'+listening.id+'">' +
+    '<img id="episode-profile-image" alt="fs" width="420" height="420" src="https://res.cloudinary.com/dyzicyjzq/image/fetch/s--VVrZmDcF--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://res.cloudinary.com/dyzicyjzq/image/fetch/s--JouKsIaI--/c_fill%2Cf_auto%2Cfl_progressive%2Ch_90%2Cq_auto%2Cw_90/https://thepracticaldev.s3.amazonaws.com/i/99mvlsfu5tfj9m7ku25d.png">' +
+    '<img id="animated-bars" src="/assets/animated-bars.gif" alt="animated volume bars">' +
+    '</a>' +
+    '<span id="barPlayPause">' +
+    '<img class="butt play-butt" alt="play" src="/assets/playbutt.png">'+
+    '<img class="butt pause-butt" alt="pause" src="/assets/pausebutt.png">'+
+    '</span>'+
+    '<span id="volume">'+
+    '<span id="volumeindicator" class="volume-icon-wrapper showing">' +
+    '<span id="volbutt"><img alt="volume" class="icon-img" height="16" width="16" src="/assets/volume"></span>' +
+    '<span class="range-wrapper">' +
+    '<input type="range" name="points" id="volumeslider" value="50" min="0" max="100" data-show-value="true">' +
+    '</span>' +
+    '</span>' +
+    '<span id="mutebutt" class="volume-icon-wrapper hidden"><img alt="volume-mute" class="icon-img" height="16" width="16" src="/assets/volume"></span>'+
+    '<span class="speed" id="speed" data-speed="1">1x</span>' +
+    '</span>' +
+    '<span class="buffer-wrapper" id="bufferwrapper">'+
+    '<span id="buffer"></span>' +
+    '<span id="progress"></span>' +
+    '<span id="time">initializing...</span>' +
+    '<span id="closebutt">×</span>' +
+    '</span>' +
+    '</div>' +
+    '</div>'
+  );
+}
 
 function insertVideos(videoArticles) {
   var list = document.getElementById('subvideos');
@@ -284,8 +337,40 @@ function insertExclusives(exclusiveArticles) {
   }
 }
 
+function insertListenings(listenings) {
+  var list = document.getElementById('sub_listenings');
+  var newListeningsHTML = '';
+  listenings.forEach(function insertListening(listening) {
+    var existingEl = document.getElementById(
+      'listening-' + listening.id,
+    );
+    if (!existingEl) {
+      var newHTML = buildExclusiveListeningHtml(listening);
+      newListeningsHTML += newHTML;
+    }
+  });
+
+  var distanceFromBottom =
+    document.documentElement.scrollHeight - document.body.scrollTop;
+  var newNode = document.createElement('div');
+  newNode.innerHTML = newListeningsHTML;
+  newNode.className += 'listening-collection';
+  var singleArticles = document.querySelectorAll(
+    '.single-article, .crayons-story',
+  );
+  var lastElement = singleArticles[singleArticles.length - 1];
+  insertAfter(newNode, lastElement);
+  if (nextPage > 0) {
+    fetching = false;
+  }
+}
+
 function fetchNextExclusivePage(el) {
   fetchNext(el, '/api/exclusive_contents', insertExclusives);
+}
+
+function fetchNextListeningPage(el) {
+  fetchNext(el, '/api/listenings', insertListenings);
 }
 
 function insertArticles(articles) {
@@ -469,6 +554,11 @@ function fetchNextPageIfNearBottom() {
     scrollableElemId = 'exclusive-collection';
     fetchCallback = function fetch() {
       fetchNextExclusivePage(indexContainer);
+    };
+  } else if (indexWhich === 'listening') {
+    scrollableElemId = 'listening-collection';
+    fetchCallback = function fetch() {
+      fetchNextListeningPage(indexContainer);
     };
   } else {
     scrollableElemId = 'articles-list';

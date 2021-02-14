@@ -1,4 +1,8 @@
 class ExclusiveContentController < ApplicationController
+  INDEX_ATTRIBUTES_FOR_SERIALIZATION = %i[
+        id video path title video_thumbnail_url main_image user_id video_duration_in_seconds video_source_url
+      ].freeze
+  private_constant :INDEX_ATTRIBUTES_FOR_SERIALIZATION
   def index
     sellers = current_user.buyer_orders.pluck(:seller_id).uniq
     orgs = []
@@ -11,7 +15,12 @@ class ExclusiveContentController < ApplicationController
       end
     end
     @orgs = orgs
-    @exclusive_articles = Article.all.includes([:user]).page(params[:page].to_i).per(6)
+    @exclusive_articles = Article.published
+                              .includes([:user])
+                              .select(INDEX_ATTRIBUTES_FOR_SERIALIZATION)
+                              .where(organizationId: orgs)
+                              .order(published_at: :desc)
+                              .page(params[:page].to_i).per(24)
     set_surrogate_key_header "exclusive_contents", Article.table_key, @exclusive_articles.map(&:record_key)
   end
 end

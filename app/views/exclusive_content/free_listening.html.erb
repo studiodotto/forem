@@ -1,0 +1,45 @@
+<% page_title = title("Free listening") %>
+
+<%= content_for :page_meta do %>
+  <link rel="canonical" href="<%= app_url(request.path) %>" />
+  <meta name="description" content="<%= SiteConfig.community_description %>">
+  <%= meta_keywords_default %>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= app_url(request.path) %>" />
+  <meta property="og:title" content="<%= page_title %>" />
+  <meta property="og:image" content="<%= SiteConfig.main_social_image %>">
+  <meta property="og:description" content="All videos on <%= community_name %>" />
+  <meta property="og:site_name" content="<%= community_qualified_name %>" />
+
+  <meta name="twitter:site" content="@<%= SiteConfig.social_media_handles["twitter"] %>">
+  <meta name="twitter:title" content="<%= page_title %>">
+  <meta name="twitter:description" content="All videos on <%= community_name %>">
+  <meta name="twitter:image:src" content="<%= SiteConfig.main_social_image %>">
+  <meta name="twitter:card" content="summary_large_image">
+<% end %>
+
+<div class="home" id="index-container" data-which="free_listening" data-params="<%= {}.to_json %>">
+  <header>
+    <h1><%= community_name %> Free listening</h1>
+  </header>
+  <div class="articles-list" id="listening-collection">
+      <% @audios.each do |audio| %>
+        <div class="single-article single-article-small-pic single-article-single-podcast"  id="listening-link-<%= audio.link %>">
+          <div class="small-pic">
+            <img alt="test" width="240" height="240" src="/assets/playbutt.png">
+          </div>
+          <div class="content">
+            <h3><span class="tag-identifier">free listen</span><%= audio.music_release.present? ? audio.music_release.title : audio.name %></h3>
+          </div>
+          <h4>
+            <%= audio.music_release.present? ? audio.music_release.description : '' %>
+          </h4>
+        </div>
+      <% end %>
+  </div>
+  <div class="sub_listenings"></div>
+  <div class="loading-articles" id="loading-articles">
+    loading...
+  </div>
+</div>

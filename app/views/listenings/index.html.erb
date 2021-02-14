@@ -1,0 +1,73 @@
+<% page_title = title("Free listening") %>
+
+<%= content_for :page_meta do %>
+  <link rel="canonical" href="<%= app_url(request.path) %>" />
+  <meta name="description" content="<%= SiteConfig.community_description %>">
+  <%= meta_keywords_default %>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= app_url(request.path) %>" />
+  <meta property="og:title" content="<%= page_title %>" />
+  <meta property="og:image" content="<%= SiteConfig.main_social_image %>">
+  <meta property="og:description" content="All videos on <%= community_name %>" />
+  <meta property="og:site_name" content="<%= community_qualified_name %>" />
+
+  <meta name="twitter:site" content="@<%= SiteConfig.social_media_handles["twitter"] %>">
+  <meta name="twitter:title" content="<%= page_title %>">
+  <meta name="twitter:description" content="All videos on <%= community_name %>">
+  <meta name="twitter:image:src" content="<%= SiteConfig.main_social_image %>">
+  <meta name="twitter:card" content="summary_large_image">
+<% end %>
+
+<div class="home crayons-layout" id="index-container" data-which="listening" data-params="<%= {}.to_json %>">
+  <header class="articles-list" style="max-width: unset">
+    <h1><%= community_name %> Free listening</h1>
+  </header>
+  <div class="articles-list" style="max-width: unset" id="listening-collection">
+    <% @audios.each do |audio| %>
+      <div class="single-article single-article-small-pic single-article-single-podcast"  id="listening-link-<%= audio.id %>">
+        <div class="small-pic">
+          <img alt="test" onclick="play_music(<%= audio.id %>)" width="240" height="240" src="/assets/playbutt.png">
+        </div>
+        <div class="content">
+          <h3><span class="tag-identifier">free listen</span><%= audio.music_release.present? ? audio.music_release.title : audio.name %></h3>
+        </div>
+        <h4>
+          <%= audio.music_release.present? ? audio.music_release.description : '' %>
+        </h4>
+      </div>
+      <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= audio.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
+        <div class="record" id="record">
+          <%= optimized_image_tag('/assets/playbutt.png',
+                                  optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                  image_options: { class: "main-image", id: "main-image-#{audio.id.to_s}", alt: 'test' }) %>
+          <img alt="Play Button" id="hidden-play-<%= audio.id %>" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+          <img alt="Pause Button" id="hidden-pause-<%= audio.id %>" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+          <div class="status-message" id="status-message-<%= audio.id.to_s %>">
+            play
+          </div>
+        </div>
+      </div>
+      <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
+      <% if audio.music_release.try(:header_image_url).present?  %>
+      <% image = audio.music_release.try(:header_image_url) %>
+      <% end %>
+      <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio, slug: audio.slug, image: image} %>
+    <% end %>
+  </div>
+  <div class="sub_listenings"></div>
+  <div class="loading-articles" id="loading-articles">
+    loading...
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  function play_music(audio_id){
+    if(document.getElementById("closebutt")){
+      document.getElementById("closebutt").click();
+    }
+    document.getElementById("record-"+audio_id).click();
+    // document.getElementById("play-"+audio_id).style.display = 'none'
+    // document.getElementById("pause-"+audio_id).style.display = 'inline-block'
+  }
+</script>

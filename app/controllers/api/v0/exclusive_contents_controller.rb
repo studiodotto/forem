@@ -13,9 +13,11 @@ module Api
         per_page = (6).to_i
         num = [per_page, 1000].min
         orgs = params[:orgs].split(',')
-        @exclusive_articles = Article.all
+        @exclusive_articles = Article.published
                               .includes([:user])
                               .select(INDEX_ATTRIBUTES_FOR_SERIALIZATION)
+                              .where(organizationId: orgs)
+                              .order(published_at: :desc)
                               .page(page).per(num)
         set_surrogate_key_header "exclusive_contents", Article.table_key, @exclusive_articles.map(&:record_key)
       end
