@@ -18,7 +18,7 @@ class ExclusiveContentController < ApplicationController
     @exclusive_articles = Article.published
                               .includes([:user])
                               .select(INDEX_ATTRIBUTES_FOR_SERIALIZATION)
-                              .where(organizationId: orgs)
+                              .where(organization_id: orgs)
                               .order(published_at: :desc)
                               .page(params[:page].to_i).per(24)
     set_surrogate_key_header "exclusive_contents", Article.table_key, @exclusive_articles.map(&:record_key)
