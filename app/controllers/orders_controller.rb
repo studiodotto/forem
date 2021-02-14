@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     end
     @user = user_response[:user]
     is_new = user_response[:new_user]
-    if @user.present? && !@user.any_admin? && !@user.has_role?(:artist)
+    if @user.present?
       find_or_create_customer
       find_or_create_card
       music_release = MusicRelease.find(params[:music_release_id])
@@ -70,8 +70,10 @@ class OrdersController < ApplicationController
     is_new = false
     if current_user.present?
       user = current_user
+      user.update(first_name: params[:first_name],last_name: params[:last_name])
     elsif User.find_by(email: params[:email]).present?
       user = User.find_by(email: params[:email])
+      user.update(first_name: params[:first_name],last_name: params[:last_name])
     else
       is_new = true
       new_user = User.create({
@@ -90,7 +92,7 @@ class OrdersController < ApplicationController
         return {error_msg:  new_user.errors.full_messages.to_sentence }
       end
       user = new_user
-      user.add_role :customer
+      user.add_role :customer if !user.any_admin? && !user.has_role?(:artist)
     end
     {user: user, new_user: is_new}
   end
