@@ -25,17 +25,6 @@
   </header>
   <div class="articles-list" style="max-width: unset" id="listening-collection">
     <% @audios.each do |audio| %>
-      <div class="single-article single-article-small-pic single-article-single-podcast"  id="listening-link-<%= audio.id %>">
-        <div class="small-pic">
-          <img alt="test" onclick="play_music(<%= audio.id %>)" width="240" height="240" src="/assets/playbutt.png">
-        </div>
-        <div class="content">
-          <h3><span class="tag-identifier">free listen</span><%= audio.music_release.present? ? audio.music_release.title : audio.name %></h3>
-        </div>
-        <h4>
-          <%= audio.music_release.present? ? audio.music_release.description : '' %>
-        </h4>
-      </div>
       <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= audio.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
         <div class="record" id="record">
           <%= optimized_image_tag('/assets/playbutt.png',
@@ -50,9 +39,20 @@
       </div>
       <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
       <% if audio.music_release.try(:header_image_url).present?  %>
-      <% image = audio.music_release.try(:header_image_url) %>
+        <% image = audio.music_release.try(:header_image_url) %>
       <% end %>
       <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio, slug: audio.slug, image: image} %>
+      <div class="single-article single-article-small-pic single-article-single-podcast"  id="listening-link-<%= audio.id %>">
+        <div class="small-pic">
+          <img alt="test" onclick="play_music(<%= audio.id %>)" width="240" height="240" src="/assets/playbutt.png">
+        </div>
+        <div class="content">
+          <h3><span class="tag-identifier">free listen</span><%= audio.music_release.present? ? audio.music_release.title : audio.name %></h3>
+        </div>
+        <h4>
+          <%= audio.music_release.present? ? audio.music_release.description : '' %>
+        </h4>
+      </div>
     <% end %>
   </div>
   <div class="sub_listenings"></div>
