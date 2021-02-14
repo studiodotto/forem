@@ -342,7 +342,7 @@ function insertListenings(listenings) {
   var newListeningsHTML = '';
   listenings.forEach(function insertListening(listening) {
     var existingEl = document.getElementById(
-      'listening-' + listening.id,
+      'listening-link-' + listening.id,
     );
     if (!existingEl) {
       var newHTML = buildExclusiveListeningHtml(listening);
