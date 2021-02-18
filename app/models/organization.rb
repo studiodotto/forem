@@ -22,6 +22,7 @@ class Organization < ApplicationRecord
   has_many :sponsorships, dependent: :destroy
   has_many :unspent_credits, -> { where spent: false }, class_name: "Credit", inverse_of: :organization
   has_many :users, through: :organization_memberships
+  has_many :collaborators, through: :organization_memberships, foreign_key: :collaborator_id
   belongs_to :artist, class_name: "User", foreign_key: 'artist_id', optional: true
   has_many :project_events
   has_many :orders

@@ -313,6 +313,7 @@ class UsersController < ApplicationController
       organizations_assoiations
     when "single-track-music-page"
       @organization = current_user.artist_organizations.single_track.new
+      @artists = User.with_role(:artist).map{|a| {'id': a.id,'name': a.username}}.to_json
       organizations_assoiations
     when "my-projects"
       @organizations = current_user.artist_organizations.order(created_at: :desc)
@@ -323,6 +324,8 @@ class UsersController < ApplicationController
       @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
       @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
       @listings = []
+    when "contributions"
+      @orgs = current_user.collaborator_orgs
     when "posts"
       # handle_response_templates_tab
     when "share-exclusive-content"

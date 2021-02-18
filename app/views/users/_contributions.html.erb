@@ -1,0 +1,140 @@
+
+<!--    <header class="flex items-center p-2 m:p-0 m:pb-2" id="on-page-nav-controls">-->
+<!--      <div class="flex-1 flex items-center justify-between">-->
+<!--        <h2 class="wallet-heading">WALLET ANALYTICS</h2>-->
+<!--      </div>-->
+<!--    </header>-->
+    <!--    <h3 class="wallet-heading">WALLET ANALYTICS</h3>-->
+    <% if @orgs.present? %>
+      <% @orgs.each do |org| %>
+        <div class="table-responsive" style="margin-bottom: 20px">
+          <h2><%= org.name %></h2>
+          <table class="crayons-table" style="width: 100%">
+            <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Title</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Released</th>
+              <th scope="col">Royalties</th>
+              <th scope="col">Price</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody class="mfy-body">
+            <% org.organization_memberships.each do |contribution| %>
+                <% music_release = contribution.organization.music_releases.first %>
+                <tr class="mfy-tr">
+                  <td><%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %>
+                  </td>
+                  <td><%= music_release.title.capitalize %></td>
+                  <td style="color: #00e4ff !important;">
+                    <%=  contribution.collaborator.username %>
+                  </td>
+                  <td>
+                    <%= music_release.created_at.strftime('%Y %B') %>
+                  </td>
+                  <td><%= contribution.royalty %> %</td>
+                  <td>US$ <%= number_with_precision(music_release.try(:price), precision: 2) %></td>
+                  <td>
+                    <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+                    <% if music_release.length < 60 %>
+                      <%= length[1] %> secs
+                    <% else %>
+                      <%= length[0]  %> mins <%= length[1] %> secs
+                    <% end %>
+                    <%# else %>
+                    <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
+                    <%# end %>
+                  </td>
+                  <td>
+                  <span class="badge badge-success">
+                    Completed
+                  </span>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+       <% end %>
+      <% end %>
+<style>
+  body{
+    background: #1c1c1c !important;
+  }
+  .mfy-body{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-body{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-tr{
+    background: #373737 !important;
+    color: white;
+  }
+  .mfy-body .mfy-tr:hover{
+    background: #373737 !important;
+    color: black;
+  }
+  .badge {
+    display: inline-block !important;
+    padding: .25em .4em !important;
+    font-size: 75% !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: baseline !important;
+    border-radius: .25rem !important;
+  }
+  .badge-success {
+    color: #fff;
+    background-color: #28a745;
+  }
+  .badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+  }
+  .badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+  }
+  .table-responsive {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
+  }
+  table th{
+    color: white !important;
+    background: #242424 !important;
+  }
+  .wallet-heading{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    /*margin-bottom: 20px;*/
+  }
+  .wallet-div{
+    background: #0d0d0d;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: linear-gradient(177.01deg, #524F4F 2.37%, #0E1218 97.42%);
+    backdrop-filter: blur(9px);
+  }
+  .sidebar-navigation-links .crayons-link {
+    color: #DDE0E2 !important;
+  }
+  .flex-1{
+    color: #DDE0E2 !important;
+  }
+</style>

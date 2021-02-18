@@ -68,6 +68,8 @@ class User < ApplicationRecord
   has_one :payment_provider, dependent: :destroy
   has_one :artist_application, dependent: :destroy
   has_many :artist_organizations, class_name: 'Organization', foreign_key: :artist_id
+  has_many :collaborator_organizations, foreign_key: :collaborator_id, class_name: 'OrganizationMembership'
+  has_many :collaborator_orgs, through: :collaborator_organizations, source: :organization
   accepts_nested_attributes_for   :user_document
 
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant", foreign_key: :resource_owner_id,

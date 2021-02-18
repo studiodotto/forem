@@ -28,6 +28,7 @@ module Constants
       Unreleased\ Music\ Project
       Profile\ and\ services
       Posts
+      Contributions
     ].freeze
   end
 end

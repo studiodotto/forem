@@ -181,6 +181,63 @@
           color: #08090A;
           flex: none;
           order: 0;
+          flex-grow: 0;">Contributors</p>
+      </div>
+      <div class="row">
+        <p class="color-gray">Add contributors</p>
+      </div>
+      <br>
+      <div class="row" id="contributors-div">
+        <% if @organization.try(:id).present? && @organization.organization_memberships.present? %>
+          <p style="color: darkred">20% royalties is allocated for unitedbits, you can distribute the remaining 80% royalties</p>
+          <% @organization.organization_memberships.each_with_index do |value, index| %>
+            <div style="padding: 0px;" class="contributor-div" id="<%= index %>-contributor-div">
+              <div class="form-group" style="width: 47%; display: inline-block">
+                <p class="track-labels">Collaborator</p>
+                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
+                  <option value="<%= value.collaborator.id %>" selected><%= value.collaborator.username %></option>
+                </select>
+              </div>
+              <div class="form-group" style="width: 47%; display: inline-block">
+                <p class="track-labels">Royalties in percentage</p>
+                <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="<%= value.royalty %>">
+              </div>
+              <% if value.collaborator_id == current_user.id %>
+                <i class="fa fa-times-circle" style="display: none" id="<%= index %>-closeContributor" onclick="closeContributors(<%= index %>)"></i>
+            <% else %>
+                <i class="fa fa-times-circle" id="<%= index %>-closeContributor" style="cursor: pointer" onclick="closeContributors(<%= index %>)"></i>
+            <% end %>
+            </div>
+         <% end %>
+        <% else %>
+          <div style="padding: 0px;" class="contributor-div" id="0-contributor-div">
+            <p style="color: darkred">20% royalties is allocated for unitedbits, you can distribute the remaining 80% royalties</p>
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Collaborator</p>
+              <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
+                <option value="<%= current_user.id %>" selected><%= current_user.username %></option>
+              </select>
+            </div>
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Royalties in percentage</p>
+              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="80">
+            </div>
+            <i class="fa fa-times-circle" style="display: none" id="0-closeContributor" onclick="closeContributors(0)"></i>
+          </div>
+        <% end %>
+      </div>
+      <a href="#" onclick="addItem();return false;">Add new Item</a>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #08090A;
+          flex: none;
+          order: 0;
           flex-grow: 0;">About you and your music </p>
       </div>
       <div class="row">
@@ -274,8 +331,12 @@
           </div>
           <div class="form-group">
             <p class="track-labels">Number of Limited Edition copies</p>
-            <input type="text" name="music_release[copies]" class="form-control track-fields" placeholder="How many copies you make" value="<%= @single.try(:copies) %>" required>
+            <input type="text" name="music_release[copies]" class="form-control track-fields" placeholder="How many copies you make" id="customer-copies" value="<%= @single.try(:copies) %>" required>
           </div>
+        </div>
+        <div class="form-group">
+          <p class="track-labels">Royalties</p>
+          <input type="text" name="music_release[royalty]" class="form-control track-fields" id="customer-royalties" placeholder="Royalties percentage" value="<%= @single.try(:royalty) %>" required>
         </div>
         <div class="form-group">
           <p class="track-labels">Project Details</p>
@@ -335,7 +396,7 @@
       <br>
       <div class="form-group">
         <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose the audio for your project</p>
-        <input type="file" name="audio" class="form-control track-fields">
+        <input type="file" name="audio" class="form-control track-fields" id="audio">
         <%#= f.label(:audio, "Select audio", class: "crayons-field__label") %>
         <!--          input-->
         <%#= input "audio", class: "form-control", required: true, style: "display: block; margin-top: 5px" %>
@@ -386,14 +447,24 @@
         margin: 0px 0px;">Note: you are not automatically enrolled on UnitedBits marketplace. If you meet the eligibility requirements, a talent representative will contact you within a few days to finish onboarding.</p>
       <div class="form-group">
         <% btn_text = f.object.id.present? ? "Update your online business" : "Create your online business" %>
-        <%= f.submit btn_text, class: "crayons-btn application-submit-btn organization-submit-btn" %>
+        <%= f.submit btn_text, class: "crayons-btn application-submit-btn organization-submit-btn", id: 'submit-btn' %>
+        <p style="color: darkred; display: none" id="img-msg">Image is being uploaded</p>
+        <p style="color: darkred; display: none" id="audio-msg">Audio upload may take some more time, please wait</p>
       </div>
     </div>
   </div>
  <% end %>
 </div>
 <script>
-  document.multiselect('#organization_genre_id');
+  setTimeout(function (){
+    try{
+      document.multiselect('#organization_genre_id');
+    }catch(err){
+      location.reload();
+    }
+  },200)
+  var artists = "<%= @artists %>"
+  artists = JSON.parse(artists.replaceAll('&quot;', '"'))
   function previewFile(input) {
     var file = event.target.files[0];
     if (file) {
@@ -414,8 +485,14 @@
     document.getElementById(input.dataset.label_id).text = "Upload Image";
     document.getElementById(input.dataset.file_field).value = "";
   }
-
+  $(document).on('change', '#audio', function (e){
+    $('#audio-msg').show();
+  })
   $(document).on('change',"#single-header-img",function (e){
+    var submitBtn = document.getElementById('submit-btn')
+    var imageMsg = document.getElementById('img-msg')
+    submitBtn.setAttribute('disabled', true)
+    imageMsg.style.display = 'block'
     var imageForm = new FormData();
     imageForm.append('image', e.target.files[0]);
     $.ajax({
@@ -426,6 +503,8 @@
       contentType: false, // important
       dataType : 'json',
       success:function(data){
+        submitBtn.disabled = false;
+        imageMsg.style.display = 'none'
         if(data && data.links && data.links.length > 0 && data.links[0].includes('amazon')){
           $("#single-img-error").hide();
           $("#single-header-img-url").val(data.links[0]);
@@ -435,9 +514,76 @@
         }
       },
       error:function (err){
+        submitBtn.disabled = false;
+        imageMsg.style.display = 'none'
         $("#single-img-error").text('Unsupported image type').show();
         $("#single-header-img-url").val('');
       }
     });
   })
+
+  function addItem(){
+    var contributorsDiv = document.getElementById('contributors-div')
+    contributorsDiv.insertAdjacentHTML('beforeend', makeAddContributor(contributorsDiv));
+  }
+
+  function makeAddContributor(contributorsDiv){
+    var artistSelect = '<select name="organization_memberships[][collaborator_id]" class="form-control track-fields contributors-select" onchange="onContributorChange(this)" style="padding: 7px !important;" required>';
+    artistSelect += '<option value="">Select Contributor</option>';
+    for(var i=0; i < artists.length; i++){
+      artistSelect += '<option value="' + artists[i]['id'] + '">' + artists[i]['name'] + '</option>';
+    }
+    // artistSelect += '<option value="0">Customers</option>';
+    artistSelect +='</select>';
+    var contributor =
+      '<div id="'+(contributorsDiv.childElementCount)+'-contributor-div">' +
+      '<div style="padding: 0px;" class="contributor-div">\n' +
+      '          <div class="form-group" style="width: 47%; display: inline-block">\n' +
+      '            <p class="track-labels">Collaborator</p>\n' + artistSelect +
+      '            \n' +
+      '          </div>\n' +
+      '          <div class="form-group" style="width: 47%; display: inline-block">\n' +
+      '            <p class="track-labels">Royalties in percentage</p>\n' +
+        '            <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set royalties" required>\n' +
+      '          </div>\n' +
+      '          <i class="fa fa-times-circle" style="cursor: pointer" id="'+contributorsDiv.childElementCount+'-closeContributor" onclick="closeContributors('+contributorsDiv.childElementCount+')"></i>\n' +
+      '        </div>' +
+      '</div>'
+    return contributor;
+  }
+
+  // $('#submit-btn').click(function (e){
+  //   e.preventDefault();
+  //   var percentage = 0;
+  //   $('.royalties-percentage').each(function(index, royality){
+  //     if(royality.value){
+  //       percentage = percentage + parseFloat(ss.value)
+  //     }
+  //   })
+  //   var copies = parseInt($('#customer-copies').val()) || 0;
+  //   var royalties = parseFloat($('#customer-royalties').val()) || 0;
+  //   var customerRoyalties =
+  //   if($('#audio').val() != ''){
+  //     $('#audio-msg').show();
+  //   }
+  // })
+
+  function onContributorChange(contributorSelect){
+    var selected_val = contributorSelect.value;
+    var list= document.getElementsByClassName("contributors-select");
+    var count = 0;
+    for (var i = 0; i < list.length; i++) {
+      if(list[i].value == selected_val){
+        count = count + 1;
+      }
+    }
+    if(count>1){
+      contributorSelect.value = ''
+      alert('try to avoid selecting duplicates');
+    }
+  }
+
+  function closeContributors(contributorId){
+    document.getElementById(contributorId+'-contributor-div').remove();
+  }
 </script>

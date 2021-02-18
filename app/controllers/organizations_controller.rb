@@ -57,6 +57,13 @@ class OrganizationsController < ApplicationController
             @organization_music_release.audios.create(name: @organization_music_release.title, link: links[0], slug: @organization_music_release.slug + "#{Audio.last.id.to_i + 1}", music_release_id: @organization_music_release.try(:id), user_id: current_user.id)
           end
         end
+        params.permit!
+        collaborators =  params[:organization_memberships]
+        collaborators.each do |collaborator|
+          collaborator.merge!({organization_id: @organization.id, type_of_user: 'collaborator'})
+        end
+        @organization.organization_memberships.destroy_all
+        OrganizationMembership.create(collaborators)
       end
     rescue => exc
       flash[:settings_notice] = exc.message
@@ -128,6 +135,7 @@ class OrganizationsController < ApplicationController
       prepare_org_data
       set_user
     end
+    @artists = User.with_role(:artist).map{|a| {'id': a.id,'name': a.username}}.to_json
   end
 
   def project_show
@@ -252,7 +260,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_music_release_params
-    params.require(:music_release).permit(:id, :music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length, :header_image_url)
+    params.require(:music_release).permit(:id, :music_release_type, :user_id, :organization_id, :title, :description, :slug, :image, :price, :copies, :length, :header_image_url, :royalty)
   end
 
   def organization_project_event_params(event)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_140447) do
+ActiveRecord::Schema.define(version: 2021_02_18_151340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -729,6 +729,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_140447) do
     t.integer "organization_id"
     t.string "url"
     t.text "header_image_url"
+    t.float "royalty", default: 0.0
     t.index ["user_id"], name: "index_music_releases_on_user_id"
   end
 
@@ -868,8 +869,11 @@ ActiveRecord::Schema.define(version: 2021_02_11_140447) do
     t.bigint "organization_id", null: false
     t.string "type_of_user", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id"
     t.string "user_title"
+    t.integer "collaborator_id"
+    t.float "royalty", default: 0.0
+    t.index ["collaborator_id", "organization_id"], name: "idx_org_artist_user", unique: true
     t.index ["user_id", "organization_id"], name: "index_organization_memberships_on_user_id_and_organization_id", unique: true
   end
 
