@@ -7,6 +7,7 @@
     <!--    <h3 class="wallet-heading">WALLET ANALYTICS</h3>-->
     <% if @orgs.present? %>
       <% @orgs.each do |org| %>
+        <% music_release = org.music_releases.first %>
         <div class="table-responsive" style="margin-bottom: 20px">
           <h2><%= org.name %></h2>
           <table class="crayons-table" style="width: 100%">
@@ -17,14 +18,46 @@
               <th scope="col">Artist</th>
               <th scope="col">Released</th>
               <th scope="col">Royalties</th>
-              <th scope="col">Price</th>
+<!--              <th scope="col">Price</th>-->
               <th scope="col">Duration</th>
               <th scope="col">Status</th>
             </tr>
             </thead>
             <tbody class="mfy-body">
-            <% org.organization_memberships.each do |contribution| %>
-                <% music_release = contribution.organization.music_releases.first %>
+            <% total = 0 %>
+            <% org.organization_memberships.each_with_index do |contribution, index| %>
+                <% if index == 0 %>
+                  <tr class="mfy-tr">
+                    <td><%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %>
+                    </td>
+                    <td><%= music_release.title.capitalize %></td>
+                    <td style="color: #00e4ff !important;">
+                      United Bits
+                    </td>
+                    <td>
+                      <%= music_release.created_at.strftime('%Y %B') %>
+                    </td>
+                    <td>20.00 %</td>
+                    <!--                  <td>US$ <%#= number_with_precision(music_release.try(:price), precision: 2) %></td>-->
+                    <td>
+                      <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+                      <% if music_release.length < 60 %>
+                        <%= length[1] %> secs
+                      <% else %>
+                        <%= length[0]  %> mins <%= length[1] %> secs
+                      <% end %>
+                      <%# else %>
+                      <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
+                      <%# end %>
+                    </td>
+                    <td>
+                      <span class="badge badge-success">
+                        Completed
+                      </span>
+                    </td>
+                  </tr>
+                <% end %>
+                <% total = total + contribution.royalty %>
                 <tr class="mfy-tr">
                   <td><%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %>
                   </td>
@@ -36,7 +69,7 @@
                     <%= music_release.created_at.strftime('%Y %B') %>
                   </td>
                   <td><%= contribution.royalty %> %</td>
-                  <td>US$ <%= number_with_precision(music_release.try(:price), precision: 2) %></td>
+<!--                  <td>US$ <%#= number_with_precision(music_release.try(:price), precision: 2) %></td>-->
                   <td>
                     <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
                     <% if music_release.length < 60 %>
@@ -55,6 +88,29 @@
                   </td>
                 </tr>
             <% end %>
+            <% total_amount = music_release.orders.sum(:total_amount) %>
+            <tr class="total-row">
+              <td colspan="7" style="text-align: center">
+                <strong>
+                  Sales Amount
+                </strong>
+                <strong style="margin-left: 3%">
+                  $<%= number_with_precision(total_amount, precision: 2) %>
+                </strong>
+                <strong style="margin-left: 10%">
+                  Royalties
+                </strong>
+                <strong style="margin-left: 3%">
+                  <%= number_with_precision((total + 20), precision: 2) + " %" %>
+                </strong>
+                <strong style="margin-left: 10%">
+                  Balance
+                </strong>
+                <strong style="margin-left: 3%">
+                  <%= number_with_precision((total + 20) * total_amount, precision: 2) %>
+                </strong>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>

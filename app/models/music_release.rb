@@ -5,7 +5,7 @@ class MusicRelease < ApplicationRecord
   belongs_to :organization
   has_many :music_tracks, dependent: :destroy
   has_many :audios, dependent: :destroy
-  has_many :orders
+  has_many :orders, foreign_key: :release_id
   enum music_release_type: {"album"=>"album", "single"=>"single", "music_set"=>"music_set", "ninty_second"=>"ninty_second"}
 
   mount_uploader :image, ProfileImageUploader

@@ -220,15 +220,15 @@
             </div>
             <div class="form-group" style="width: 47%; display: inline-block">
               <p class="track-labels">Royalties in percentage</p>
-              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="80">
+              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime">
             </div>
             <i class="fa fa-times-circle" style="display: none" id="0-closeContributor" onclick="closeContributors(0)"></i>
           </div>
         <% end %>
       </div>
       <a href="#" onclick="addItem();return false;">Add new Item</a>
+      <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 80% of the royalties</p>
     </div>
-
     <div class="container">
       <div class="row">
         <p style="font-family: 'Roboto', sans-serif;font-style: normal;
@@ -586,4 +586,18 @@
   function closeContributors(contributorId){
     document.getElementById(contributorId+'-contributor-div').remove();
   }
+
+  $(document).on('keyup','.royalties-percentage', function(){
+    var total = 0;
+    $('.royalties-percentage').each(function(royalty, value){
+      total = total + (parseFloat(value.value) || 0);
+    })
+    console.log(total)
+    if(total > 80){
+      $('#royalty-error').show();
+      $(this).val('')
+    }else{
+      $('#royalty-error').hide();
+    }
+  })
 </script>
