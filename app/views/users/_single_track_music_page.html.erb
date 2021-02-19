@@ -200,7 +200,7 @@
               </div>
               <div class="form-group" style="width: 47%; display: inline-block">
                 <p class="track-labels">Royalties in percentage</p>
-                <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="<%= value.royalty %>">
+                <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="<%= value.royalty %>" required>
               </div>
               <% if value.collaborator_id == current_user.id %>
                 <i class="fa fa-times-circle" style="display: none" id="<%= index %>-closeContributor" onclick="closeContributors(<%= index %>)"></i>
@@ -220,7 +220,7 @@
             </div>
             <div class="form-group" style="width: 47%; display: inline-block">
               <p class="track-labels">Royalties in percentage</p>
-              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime">
+              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" required>
             </div>
             <i class="fa fa-times-circle" style="display: none" id="0-closeContributor" onclick="closeContributors(0)"></i>
           </div>
