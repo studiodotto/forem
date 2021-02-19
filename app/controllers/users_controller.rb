@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[
     update update_language_settings confirm_destroy request_destroy full_delete remove_identity artist_edit
   ]
-  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org artist_update made_for_you]
+  after_action :verify_authorized, except: %i[index signout_confirm add_org_admin remove_org_admin remove_from_org artist_update made_for_you join_artist_org]
   before_action :authenticate_user!, only: %i[onboarding_update onboarding_checkbox_update]
   before_action :set_suggested_users, only: %i[index]
   before_action :initialize_stripe, only: %i[edit]
@@ -211,6 +211,20 @@ class UsersController < ApplicationController
     else
       flash[:error] = "The given organization secret was invalid."
       redirect_to "/settings/organization/new"
+    end
+  end
+
+  def join_artist_org
+    if (@organization = Organization.find_by(secret: params[:org_secret].strip))
+      org_memberships = OrganizationMembership.where(collaborator_id: current_user.id, organization_id: @organization.id, type_of_user: "collaborator")
+      unless org_memberships.present?
+        OrganizationMembership.create(collaborator_id: current_user.id, organization_id: @organization.id, type_of_user: "collaborator")
+      end
+      flash[:global_notice] = "You have joined the #{@organization.name} project."
+      redirect_to "/artist_settings/contributions"
+    else
+      flash[:error] = "The given project secret was invalid."
+      redirect_to "/artist_settings/contributions"
     end
   end
 

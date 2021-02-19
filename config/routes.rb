@@ -399,6 +399,7 @@ Rails.application.routes.draw do
     # Settings
     post "users/update_language_settings" => "users#update_language_settings"
     post "users/join_org" => "users#join_org"
+    post "users/join_artist_org" => "users#join_artist_org"
     post "users/leave_org/:organization_id" => "users#leave_org", :as => :users_leave_org
     post "users/add_org_admin" => "users#add_org_admin"
     post "users/remove_org_admin" => "users#remove_org_admin"
@@ -408,6 +409,7 @@ Rails.application.routes.draw do
     get "users/confirm_destroy/:token", to: "users#confirm_destroy", as: :user_confirm_destroy
     delete "users/full_delete", to: "users#full_delete", as: :user_full_delete
     post "organizations/generate_new_secret" => "organizations#generate_new_secret"
+    post "organizations/generate_new_artist_secret" => "organizations#generate_new_artist_secret"
     post "users/api_secrets" => "api_secrets#create", :as => :users_api_secrets
     delete "users/api_secrets/:id" => "api_secrets#destroy", :as => :users_api_secret
 

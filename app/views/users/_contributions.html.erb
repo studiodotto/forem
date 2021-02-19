@@ -57,7 +57,7 @@
                     </td>
                   </tr>
                 <% end %>
-                <% total = total + contribution.royalty %>
+                <% total = total + contribution.royalty.to_f %>
                 <tr class="mfy-tr">
                   <td><%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 50, height: 50 %>
                   </td>

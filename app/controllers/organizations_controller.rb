@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show, :project_edit]
+  after_action :verify_authorized, except: [:organization_feeds, :create_organization, :create_organizations_music_release, :create_organizations_event, :project_show, :project_edit, :generate_new_artist_secret]
   before_action :initialize_stripe, only: :organization_feeds
   def create
     rate_limit!(:organization_creation)
@@ -201,6 +201,14 @@ class OrganizationsController < ApplicationController
     @organization.save
     flash[:settings_notice] = "Your org secret was updated"
     redirect_to "/settings/organization"
+  end
+
+  def generate_new_artist_secret
+    @organization = Organization.find_by(id: organization_params[:id])
+    @organization.secret = @organization.generated_random_secret
+    @organization.save
+    flash[:global_notice] = "Your project secret was updated"
+    redirect_to "/organizations/project_edit/#{@organization.id}"
   end
 
   private

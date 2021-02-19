@@ -144,6 +144,24 @@
     <div class="alert alert-success">Project created successfully</div>
   </div>
 <% end %>
+<% unless @organization.try(:id).present? %>
+  <div class="row">
+    <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important">
+      <h3>Join a Project</h3>
+      <%= form_tag "/users/join_artist_org" do %>
+        <div class="crayons-field mb-6">
+          <%= label_tag :org_secret, "Secret code", class: "crayons-field__label" %>
+          <p class="crayons-field__description">Provided to you by project admin</p>
+          <%= text_field_tag :org_secret, nil, placeholder: "...", class: "crayons-textfield", autocomplete: "off" %>
+          <input type="hidden" name="from_artist" value="true">
+        </div>
+
+        <button class="crayons-btn" type="submit" style="background: #454545 !important">Join Project</button>
+      <% end %>
+    </div>
+  </div>
+  <h3>OR</h3>
+<% end %>
 <div class="row" >
   <%= form_with model: @organization, url: create_organization_path(@organization), method: :post, html: { class: "mb-2", multipart: true  }, local: true do |f| %>
     <div class="container">
@@ -183,6 +201,42 @@
           order: 0;
           flex-grow: 0;">Contributors</p>
       </div>
+      <% if @organization.try(:id).present? %>
+        <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
+          <header>
+            <h3 class="mb-2">Invite crew members</h3>
+            <p>Invite contributors by sending them the secret and the following instructions:</p>
+          </header>
+
+          <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important">
+            <ol class="list-decimal pl-6 mb-2">
+              <li>Sign up at
+                <a href="<%= app_url %>"><%= app_url %></a></li>
+              <li>Navigate to
+                <a href="<%= app_url('artist_settings/single-track-music-page') %>"><%= app_url('artist_settings/single-track-music-page') %></a>
+              </li>
+              <li>Paste the secret code below and click <b>Join Project</b></li>
+            </ol>
+            <p>
+              Your secret code is:
+              <clipboard-copy for="settings-org-secret">
+                <div id="copy-clip" onclick="copyToClipboard()">
+                  <input type="text" class="ff-monospace ff-s fw-medium" id="settings-org-secret" value="<%= @organization.secret %>" readonly aria-label="Organization secret (to be rotated regularly)">
+                  <%= inline_svg_tag("copy.svg", aria: true, class: "crayons-icon", title: "Copy to clipboard") %>
+                </div>
+              </clipboard-copy>
+              <span class="copy-text-announcer" id="copy-text-announcer" role="alert" hidden>Copied to clipboard!</span>
+          </div>
+
+          <div class="flex items-center">
+            <%= form_tag "/organizations/generate_new_artist_secret", onsubmit: "return confirm('Are you sure you want to generate a new secret? All outstanding secrets will be invalid.');" do %>
+              <%= hidden_field_tag "organization[id]", @organization.id %>
+              <button type="submit" class="crayons-btn crayons-btn--secondary" style="background: #454545 !important; color: white !important;">Generate new secret</button>
+            <% end %>
+            <p class="fw-medium color-accent-danger ml-3">You should rotate this regularly!</p>
+          </div>
+        </div>
+      <% end %>
       <div class="row">
         <p class="color-gray">Add contributors</p>
       </div>
@@ -194,9 +248,11 @@
             <div style="padding: 0px;" class="contributor-div" id="<%= index %>-contributor-div">
               <div class="form-group" style="width: 47%; display: inline-block">
                 <p class="track-labels">Collaborator</p>
-                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
-                  <option value="<%= value.collaborator.id %>" selected><%= value.collaborator.username %></option>
-                </select>
+<!--                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>-->
+<!--                  <option value="<%#= value.collaborator.id %>" selected><%#= value.collaborator.username %></option>-->
+<!--                </select>-->
+                <input type="text" value="<%= value.collaborator.username %>" class="form-control track-fields" style="padding: 7px !important; background: #e2e2e2; cursor: not-allowed" readonly>
+                <input type="hidden" value="<%= value.collaborator.id %>" name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
               </div>
               <div class="form-group" style="width: 47%; display: inline-block">
                 <p class="track-labels">Royalties in percentage</p>
@@ -226,8 +282,14 @@
           </div>
         <% end %>
       </div>
-      <a href="#" onclick="addItem();return false;">Add new Item</a>
-      <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 80% of the royalties</p>
+      <% if @organization.try(:id).present? %>
+        <a style="display: none" href="#" onclick="addItem();return false;">Add new Item</a>
+        <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 80% of the royalties</p>
+        <p style="color: darkred">You will see all the contributors here when they accept your invitation</p>
+
+    <% else %>
+        <p style="color: darkred;">you can only see yourself as contributor. But you can invite contributors by sharing secret, after creating the project</p>
+      <% end %>
     </div>
     <div class="container">
       <div class="row">
@@ -600,4 +662,14 @@
       $('#royalty-error').hide();
     }
   })
+
+  function copyToClipboard(){
+    var secret = $('#settings-org-secret').val();
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(secret).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $('#copy-text-announcer').show();
+  }
 </script>
