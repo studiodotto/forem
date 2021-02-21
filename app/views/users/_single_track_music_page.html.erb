@@ -249,7 +249,7 @@
           <% @organization.organization_memberships.each_with_index do |value, index| %>
             <div style="padding: 0px;" class="contributor-div" id="<%= index %>-contributor-div">
               <div class="form-group" style="width: 47%; display: inline-block">
-                <p class="track-labels">Collaborator</p>
+                <p class="track-labels">Crew member</p>
 <!--                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>-->
 <!--                  <option value="<%#= value.collaborator.id %>" selected><%#= value.collaborator.username %></option>-->
 <!--                </select>-->
@@ -283,7 +283,7 @@
           <!-- Contributor -->
           <div style="padding: 0px;" class="contributor-div" id="0-contributor-div">
             <div class="form-group" style="width: 47%; display: inline-block">
-              <p class="track-labels">Collaborator</p>
+              <p class="track-labels">Crew member</p>
               <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
                 <option value="<%= current_user.id %>" selected><%= current_user.username %></option>
               </select>
@@ -633,7 +633,7 @@
       '<div id="'+(contributorsDiv.childElementCount)+'-contributor-div">' +
       '<div style="padding: 0px;" class="contributor-div">\n' +
       '          <div class="form-group" style="width: 47%; display: inline-block">\n' +
-      '            <p class="track-labels">Collaborator</p>\n' + artistSelect +
+      '            <p class="track-labels">Crew member</p>\n' + artistSelect +
       '            \n' +
       '          </div>\n' +
       '          <div class="form-group" style="width: 47%; display: inline-block">\n' +
