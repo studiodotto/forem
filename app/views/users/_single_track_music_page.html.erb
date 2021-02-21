@@ -144,24 +144,6 @@
     <div class="alert alert-success">Project created successfully</div>
   </div>
 <% end %>
-<% unless @organization.try(:id).present? %>
-  <div class="row">
-    <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important">
-      <h3>Join a Project</h3>
-      <%= form_tag "/users/join_artist_org" do %>
-        <div class="crayons-field mb-6">
-          <%= label_tag :org_secret, "Secret code", class: "crayons-field__label" %>
-          <p class="crayons-field__description">Provided to you by project admin</p>
-          <%= text_field_tag :org_secret, nil, placeholder: "...", class: "crayons-textfield", autocomplete: "off" %>
-          <input type="hidden" name="from_artist" value="true">
-        </div>
-
-        <button class="crayons-btn" type="submit" style="background: #454545 !important">Join Project</button>
-      <% end %>
-    </div>
-  </div>
-  <h3>OR</h3>
-<% end %>
 <div class="row" >
   <% if @organization.try(:id).present? %>
     <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
@@ -728,6 +710,5 @@
     $temp.remove();
     $('#copy-text-announcer').show();
   }
-
   calculateTotalRoyalties();
 </script>

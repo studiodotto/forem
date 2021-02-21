@@ -340,6 +340,7 @@ class UsersController < ApplicationController
       @listings = []
     when "your-music-productions"
       @orgs = current_user.collaborator_orgs
+      @payment_provider = current_user.payment_provider
     when "posts"
       # handle_response_templates_tab
     when "share-exclusive-content"

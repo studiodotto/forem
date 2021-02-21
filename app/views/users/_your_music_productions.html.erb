@@ -13,6 +13,49 @@
     border-radius: 0px !important;
   }
 </style>
+    <div class="row">
+      <h2 style="margin-bottom: 10px">Dashboard</h2>
+      <p id="dashboard-description" style="font-weight: 500; margin-bottom: 10px">This is your dashboard to structure your collaborations, monitor your projects, and manage your money</p>
+      <div class="crayons-card p-6" style="background: #fed853 !important; margin-bottom: 24px">
+        <h3>Accounting and Banking</h3>
+        <% if @payment_provider.present?  && @payment_provider.try(:external_id).present? %>
+          <label class="crayons-field__label">Account id</label>
+          <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
+          <br><br>
+          <label class="crayons-field__label">Secret token</label>
+          <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.access_token %>" disabled>
+          <br><br>
+          <label class="crayons-field__label">Refresh token</label>
+          <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.refresh_token %>" disabled>
+          <br><br>
+          <% if @payment_provider.try(:dashboard_link) %>
+            <a href="<%= @payment_provider.dashboard_link %>"><button class="crayons-btn" style="width: 100%; background: #454545 !important">Visit Dashboard</button></a>
+          <% else %>
+            <a href="#"><button class="crayons-btn" style="width: 100%">Can't generate link</button></a>
+          <% end %>
+        <% else %>
+          <a href="<%= new_user_document_path(user_id: current_user.id) %>" target="_top">
+            <button class="crayons-btn hidden mr-2 whitespace-nowrap s:block  " style="background: #454545 !important; margin-top: 20px">
+              Attach your bank
+            </button>
+          </a>
+          <!--    <div>Please enter banking information from mail</div>-->
+        <% end %>
+      </div>
+      <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important">
+        <h3>Join a Project</h3>
+        <%= form_tag "/users/join_artist_org" do %>
+          <div class="crayons-field mb-6">
+            <%= label_tag :org_secret, "Secret code", class: "crayons-field__label" %>
+            <p class="crayons-field__description">Provided to you by project admin</p>
+            <%= text_field_tag :org_secret, nil, placeholder: "...", class: "crayons-textfield", autocomplete: "off" %>
+            <input type="hidden" name="from_artist" value="true">
+          </div>
+
+          <button class="crayons-btn" type="submit" style="background: #454545 !important">Join Project</button>
+        <% end %>
+      </div>
+    </div>
     <% if @orgs.present? %>
       <% @orgs.each do |org| %>
         <% music_release = org.music_releases.first %>
