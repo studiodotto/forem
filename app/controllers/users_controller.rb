@@ -221,10 +221,10 @@ class UsersController < ApplicationController
         OrganizationMembership.create(collaborator_id: current_user.id, organization_id: @organization.id, type_of_user: "collaborator")
       end
       flash[:global_notice] = "You have joined the #{@organization.name} project."
-      redirect_to "/artist_settings/contributions"
+      redirect_to "/artist_settings/your-music-productions"
     else
       flash[:error] = "The given project secret was invalid."
-      redirect_to "/artist_settings/contributions"
+      redirect_to "/artist_settings/your-music-productions"
     end
   end
 
@@ -338,7 +338,7 @@ class UsersController < ApplicationController
       @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
       @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
       @listings = []
-    when "contributions"
+    when "your-music-productions"
       @orgs = current_user.collaborator_orgs
     when "posts"
       # handle_response_templates_tab

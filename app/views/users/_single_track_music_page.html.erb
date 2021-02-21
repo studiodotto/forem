@@ -163,6 +163,42 @@
   <h3>OR</h3>
 <% end %>
 <div class="row" >
+  <% if @organization.try(:id).present? %>
+    <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
+      <header>
+        <h3 class="mb-2">Invite crew members</h3>
+        <p>Invite crew members by sending them the secret and the following instructions:</p>
+      </header>
+
+      <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important">
+        <ol class="list-decimal pl-6 mb-2">
+          <li>Sign up at
+            <a href="<%= app_url %>"><%= app_url %></a></li>
+          <li>Navigate to
+            <a href="<%= app_url('artist_settings/single-track-music-page') %>"><%= app_url('artist_settings/single-track-music-page') %></a>
+          </li>
+          <li>Paste the secret code below and click <b>Join Project</b></li>
+        </ol>
+        <p>
+          Your secret code is:
+          <clipboard-copy for="settings-org-secret">
+            <div id="copy-clip" onclick="copyToClipboard()">
+              <input type="text" class="ff-monospace ff-s fw-medium" id="settings-org-secret" value="<%= @organization.secret %>" readonly aria-label="Organization secret (to be rotated regularly)">
+              <%= inline_svg_tag("copy.svg", aria: true, class: "crayons-icon", title: "Copy to clipboard") %>
+            </div>
+          </clipboard-copy>
+          <span class="copy-text-announcer" id="copy-text-announcer" role="alert" hidden>Copied to clipboard!</span>
+      </div>
+
+      <div class="flex items-center">
+        <%= form_tag "/organizations/generate_new_artist_secret", onsubmit: "return confirm('Are you sure you want to generate a new secret? All outstanding secrets will be invalid.');" do %>
+          <%= hidden_field_tag "organization[id]", @organization.id %>
+          <button type="submit" class="crayons-btn crayons-btn--secondary" style="background: #454545 !important; color: white !important;">Generate new secret</button>
+        <% end %>
+        <p class="fw-medium color-accent-danger ml-3">You should rotate this regularly!</p>
+      </div>
+    </div>
+  <% end %>
   <%= form_with model: @organization, url: create_organization_path(@organization), method: :post, html: { class: "mb-2", multipart: true  }, local: true do |f| %>
     <div class="container">
       <div class="row">
@@ -201,49 +237,38 @@
           order: 0;
           flex-grow: 0;">Crew members</p>
       </div>
-      <% if @organization.try(:id).present? %>
-        <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
-          <header>
-            <h3 class="mb-2">Invite crew members</h3>
-            <p>Invite crew members by sending them the secret and the following instructions:</p>
-          </header>
+      <div class="grid gap-2" style="margin-top: 20px; margin-bottom: 10px; background: #fed853 !important">
+        <div class="crayons-card crayons-card--secondary p-4 flex items-center" style="background: #fed853 !important">
+          <p class="fw-medium flex-1">
+            <a href="#"><%= current_user.username.capitalize %></a>
+            <span class="crayons-indicator">You</span>
 
-          <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important">
-            <ol class="list-decimal pl-6 mb-2">
-              <li>Sign up at
-                <a href="<%= app_url %>"><%= app_url %></a></li>
-              <li>Navigate to
-                <a href="<%= app_url('artist_settings/single-track-music-page') %>"><%= app_url('artist_settings/single-track-music-page') %></a>
-              </li>
-              <li>Paste the secret code below and click <b>Join Project</b></li>
-            </ol>
-            <p>
-              Your secret code is:
-              <clipboard-copy for="settings-org-secret">
-                <div id="copy-clip" onclick="copyToClipboard()">
-                  <input type="text" class="ff-monospace ff-s fw-medium" id="settings-org-secret" value="<%= @organization.secret %>" readonly aria-label="Organization secret (to be rotated regularly)">
-                  <%= inline_svg_tag("copy.svg", aria: true, class: "crayons-icon", title: "Copy to clipboard") %>
-                </div>
-              </clipboard-copy>
-              <span class="copy-text-announcer" id="copy-text-announcer" role="alert" hidden>Copied to clipboard!</span>
-          </div>
+            <span class="crayons-indicator crayons-indicator--critical">Admin</span>
+          </p>
 
-          <div class="flex items-center">
-            <%= form_tag "/organizations/generate_new_artist_secret", onsubmit: "return confirm('Are you sure you want to generate a new secret? All outstanding secrets will be invalid.');" do %>
-              <%= hidden_field_tag "organization[id]", @organization.id %>
-              <button type="submit" class="crayons-btn crayons-btn--secondary" style="background: #454545 !important; color: white !important;">Generate new secret</button>
-            <% end %>
-            <p class="fw-medium color-accent-danger ml-3">You should rotate this regularly!</p>
+          <div class="flex">
+            <!-- TODO: ? -->
           </div>
         </div>
-      <% end %>
+      </div>
       <div class="row">
         <p class="color-gray">Add contributors</p>
       </div>
       <br>
       <div class="row" id="contributors-div">
         <% if @organization.try(:id).present? && @organization.organization_memberships.present? %>
-          <p style="color: darkred">20% royalties is allocated for unitedbits, you can distribute the remaining 80% royalties</p>
+          <p style="color: darkred">Total royalties must be 100%</p>
+          <!-- Contributor -->
+          <div style="padding: 0px;" class="contributor" >
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Unitedbits platform</p>
+              <input type="text" class="form-control track-fields" value="Unitedbits" style="padding: 7px !important; background: #e2e2e2; cursor: not-allowed" readonly>
+            </div>
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Royalties in percentage</p>
+              <input type="text" class="form-control track-fields royalties-percentage"  style="padding: 7px !important; background: #e2e2e2; cursor: not-allowed " placeholder="Set royalties percentage" value="20" readonly>
+            </div>
+          </div>
           <% @organization.organization_memberships.each_with_index do |value, index| %>
             <div style="padding: 0px;" class="contributor-div" id="<%= index %>-contributor-div">
               <div class="form-group" style="width: 47%; display: inline-block">
@@ -256,7 +281,7 @@
               </div>
               <div class="form-group" style="width: 47%; display: inline-block">
                 <p class="track-labels">Royalties in percentage</p>
-                <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" value="<%= value.royalty %>" required>
+                <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set royalties percentage" value="<%= value.royalty %>" required>
               </div>
               <% if value.collaborator_id == current_user.id %>
                 <i class="fa fa-times-circle" style="display: none" id="<%= index %>-closeContributor" onclick="closeContributors(<%= index %>)"></i>
@@ -266,8 +291,20 @@
             </div>
          <% end %>
         <% else %>
+          <p style="color: darkred">Total royalties must be 100%</p>
+          <!-- Contributor -->
+          <div style="padding: 0px;" class="contributor" >
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Unitedbits platform</p>
+              <input type="text" class="form-control track-fields" value="Unitedbits" style="cursor: not-allowed" readonly>
+            </div>
+            <div class="form-group" style="width: 47%; display: inline-block">
+              <p class="track-labels">Royalties in percentage</p>
+              <input type="text" class="form-control track-fields royalties-percentage"  style="cursor: not-allowed" placeholder="Set royalties percentage" value="20" readonly>
+            </div>
+          </div>
+          <!-- Contributor -->
           <div style="padding: 0px;" class="contributor-div" id="0-contributor-div">
-            <p style="color: darkred">20% royalties is allocated for unitedbits, you can distribute the remaining 80% royalties</p>
             <div class="form-group" style="width: 47%; display: inline-block">
               <p class="track-labels">Collaborator</p>
               <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
@@ -276,18 +313,25 @@
             </div>
             <div class="form-group" style="width: 47%; display: inline-block">
               <p class="track-labels">Royalties in percentage</p>
-              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set approx playtime" required>
+              <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set royalties percentage" required>
             </div>
             <i class="fa fa-times-circle" style="display: none" id="0-closeContributor" onclick="closeContributors(0)"></i>
           </div>
         <% end %>
       </div>
+      <div class="form-group" style="width: 47%; display: inline-block">
+      </div>
+      <div class="form-group" style="width: 47%; display: inline-block">
+        <p class="track-labels">Royalties in total</p>
+        <input type="text" class="form-control track-fields" id="royalties-total" value="" readonly style="cursor: not-allowed">
+      </div>
       <% if @organization.try(:id).present? %>
         <a style="display: none" href="#" onclick="addItem();return false;">Add new Item</a>
-        <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 80% of the royalties</p>
+        <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 100% of the royalties</p>
         <p style="color: darkred">You will see all the contributors here when they accept your invitation</p>
 
     <% else %>
+        <p style="color: darkred; display: none; margin-bottom: 10px" id="royalty-error">Please make sure to distribute 100% of the royalties</p>
         <p style="color: darkred;">you can only see yourself as contributor. But you can invite contributors by sharing secret, after creating the project</p>
       <% end %>
     </div>
@@ -654,14 +698,22 @@
     $('.royalties-percentage').each(function(royalty, value){
       total = total + (parseFloat(value.value) || 0);
     })
-    console.log(total)
-    if(total > 80){
+    if(total > 100){
       $('#royalty-error').show();
       $(this).val('')
     }else{
       $('#royalty-error').hide();
     }
+    calculateTotalRoyalties();
   })
+
+  function calculateTotalRoyalties(){
+    var total = 0;
+    $('.royalties-percentage').each(function(royalty, value){
+      total = total + (parseFloat(value.value) || 0);
+    })
+    $('#royalties-total').val(total);
+  }
 
   function copyToClipboard(){
     var secret = $('#settings-org-secret').val();
@@ -672,4 +724,6 @@
     $temp.remove();
     $('#copy-text-announcer').show();
   }
+
+  calculateTotalRoyalties();
 </script>
