@@ -98,9 +98,7 @@
             </div>
           </div>
         </div>
-        <% total_amount = music_release.orders.sum(:total_amount) %>
-        <div class="table-responsive" style="margin-bottom: 20px">
-<!--          <h2><%#= org.name %></h2>-->
+        <div class="row">
           <div class="crayons-story__body pd-b-0 p-l-r-0" style="background: #373737 !important; backdrop-filter: blur(9px); padding: 20px">
             <div class="crayons-story__top m-b-0">
               <!--          <p class="artist-name"> | </p>-->
@@ -110,6 +108,10 @@
               <p class="project-date" style="padding-left: 10px">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
             </div>
           </div>
+        </div>
+        <% total_amount = music_release.orders.sum(:total_amount) %>
+        <div class="table-responsive" style="margin-bottom: 20px">
+<!--          <h2><%#= org.name %></h2>-->
           <table class="crayons-table" style="width: 100%">
             <thead>
             <tr>

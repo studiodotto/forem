@@ -39,7 +39,7 @@
       <%# end %>
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
         <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-          <%= possible_tab == "Profile and services" ? "Account Detail Verification" : possible_tab %>
+          <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
         </a>
       <% end %>
     </nav>
@@ -47,7 +47,7 @@
       <select id="mobile-page-selector" class="crayons-select">
         <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
           <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
-            <%= possible_tab == "Profile and services" ? "Account Detail Verification" : possible_tab %>
+            <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
           </option>
         <% end %>
       </select>

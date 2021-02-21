@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       skip_authorization
       return redirect_to sign_up_path
     end
-    return redirect_to sign_up_path if !current_user.any_admin?
+    return redirect_to sign_up_path if !current_user.any_admin? and !current_user.has_role?(:artist)
     set_user
     set_current_tab(params["tab"] || "incoming-notifications")
     handle_artist_settings_tab
@@ -81,11 +81,13 @@ class UsersController < ApplicationController
   def artist_update
     @artist = User.find(params[:id])
     if @artist.update(artist_update_params)
-      params[:service].each do |service_param|
-        service = Service.find(service_param[:id])
-        service.name = service_param[:name]
-        service.price = service_param[:price]
-        service.save
+      if params[:service].present?
+        params[:service].each do |service_param|
+          service = Service.find(service_param[:id])
+          service.name = service_param[:name]
+          service.price = service_param[:price]
+          service.save
+        end
       end
       flash[:global_notice] = 'Successfully updated information'
       return redirect_to '/artist_settings/profile-and-services'
