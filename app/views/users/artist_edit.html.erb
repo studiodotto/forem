@@ -37,12 +37,28 @@
         <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
           <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
             <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-              <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+              <% if possible_tab == "Single Track Music Page" %>
+                Create a new single track
+              <% elsif possible_tab == "Profile and services" %>
+                Your profile
+              <% elsif possible_tab == "My Projects" %>
+                Projects
+              <% else %>
+                <%= possible_tab %>
+              <% end %>
             </a>
           <% end %>
         <% else %>
           <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-            <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+            <% if possible_tab == "Single Track Music Page" %>
+              Create a new single track
+            <% elsif possible_tab == "Profile and services" %>
+              Your profile
+            <% elsif possible_tab == "My Projects" %>
+              Projects
+            <% else %>
+              <%= possible_tab %>
+            <% end %>
           </a>
         <% end %>
       <% end %>

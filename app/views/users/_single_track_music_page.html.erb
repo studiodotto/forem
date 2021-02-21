@@ -158,13 +158,21 @@
 <br>
 <div class="row" >
   <% if @organization.try(:id).present? %>
-    <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
-      <header>
-        <h3 class="mb-2">Invite crew members</h3>
-        <p>Invite crew members by sending them the secret and the following instructions:</p>
-      </header>
-
-      <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important">
+    <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px; grid-gap: 0">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #08090A;
+          flex: none;
+          order: 0;
+          flex-grow: 0;">Invite your crew members</p>
+      </div>
+      <div class="row">
+        <p class="color-gray" style="margin-bottom: 20px">Grow your team by sending them the secret and following instructions</p>
+      </div>
+      <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important; margin-bottom: 20px">
         <ol class="list-decimal pl-6 mb-2">
           <li>Sign up at
             <a href="<%= app_url %>"><%= app_url %></a></li>
@@ -203,8 +211,12 @@
           color: #08090A;
           flex: none;
           order: 0;
-          flex-grow: 0;">Crew members</p>
+          flex-grow: 0;">Team and royalties structure
+        </p>
       </div>
+<!--      <div class="row">-->
+<!--        <p class="color-gray">Invite your crew members by sharing secret. First create your the project</p>-->
+<!--      </div>-->
       <div class="grid gap-2" style="margin-top: 20px; margin-bottom: 10px; background: #fed853 !important">
         <div class="crayons-card crayons-card--secondary p-4 flex items-center" style="background: #fed853 !important">
           <p class="fw-medium flex-1">
@@ -218,9 +230,6 @@
             <!-- TODO: ? -->
           </div>
         </div>
-      </div>
-      <div class="row">
-        <p class="color-gray">Add contributors</p>
       </div>
       <br>
       <div class="row" id="contributors-div">
@@ -304,7 +313,6 @@
         <div class="alert alert-danger" style="display: none" id="royalty-error">
           <p>Verify royalties split to 100% not more</p>
         </div>
-        <p style="color: darkred;">Invite your crew members by sharing secret. First create your the project</p>
       <% end %>
     </div>
   <!-- Single Track Music Page -->
@@ -474,7 +482,7 @@
       </div>
 
       <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Tell your fans about this project</p>
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Tell your fans about this project*</p>
         <p class="color-gray">Tell your fans a few things about this project and the services you are offering.</p>
         <div class="form-group">
           <%= f.text_area :summary, class: "form-control organization-fields", required: true, row: 5 %>
@@ -503,13 +511,13 @@
         <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Song Language*</p>
         <p class="color-gray">Select the languages you perform. You can choose up to four. If you want more shoot us a mail.</p>
         <div class="form-group">
-          <%= f.select(:song_language_id, options_for_select(@languages, f.object.song_language_id), {}, { class: "crayons-select" }) %>
+          <%= f.select(:song_language_id, options_for_select(@languages, f.object.song_language_id), {}, { class: "crayons-select", required: true }) %>
         </div>
       </div>
       <br>
 
       <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select Genre*</p>
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select Genre</p>
         <p class="color-gray">You can select up to four genres*</p>
         <div class="form-group">
           <%= f.select(:genre_id, options_for_select(@genres, f.object.genre_id.try(:split, ',')), {}, { class: "crayons-select", multiple: true }) %>

@@ -14,21 +14,21 @@ module Constants
     ].freeze
 
     ARTIST_TAB_LIST = %w[
+      Single\ Track\ Music\ Page
+      Your\ Music\ Productions
+      My\ Projects
+      Profile\ and\ services
       Incoming\ Notifications
       Commission\ Monitor
       Audio\ Uploads
       New\ Music\ Releases
       Account\ and\ Banking
       Analytics
-      My\ Projects
       Share\ Exclusive\ Content
-      Single\ Track\ Music\ Page
       Online\ Music\ Services\ Page
       Deejaying\ Services
       Unreleased\ Music\ Project
-      Profile\ and\ services
       Posts
-      Your\ Music\ Productions
     ].freeze
   end
 end

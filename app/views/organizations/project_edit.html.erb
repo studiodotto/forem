@@ -39,7 +39,16 @@
       <%# end %>
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
         <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-          <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+          <%#= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+          <% if possible_tab == "Single Track Music Page" %>
+            Create a new single track
+          <% elsif possible_tab == "Profile and services" %>
+            Your profile
+          <% elsif possible_tab == "My Projects" %>
+            Projects
+          <% else %>
+            <%= possible_tab %>
+          <% end %>
         </a>
       <% end %>
     </nav>
@@ -47,7 +56,16 @@
       <select id="mobile-page-selector" class="crayons-select">
         <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
           <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
-            <%= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+            <%#= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+            <% if possible_tab == "Single Track Music Page" %>
+              Create a new single track
+            <% elsif possible_tab == "Profile and services" %>
+              Your profile
+            <% elsif possible_tab == "My Projects" %>
+              Projects
+            <% else %>
+              <%= possible_tab %>
+            <% end %>
           </option>
         <% end %>
       </select>
