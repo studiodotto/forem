@@ -5,22 +5,41 @@
 <!--      </div>-->
 <!--    </header>-->
     <!--    <h3 class="wallet-heading">WALLET ANALYTICS</h3>-->
+<style>
+  th{
+    border-radius: 0px !important;
+  }
+  td{
+    border-radius: 0px !important;
+  }
+</style>
     <% if @orgs.present? %>
       <% @orgs.each do |org| %>
         <% music_release = org.music_releases.first %>
+        <% total_amount = music_release.orders.sum(:total_amount) %>
         <div class="table-responsive" style="margin-bottom: 20px">
-          <h2><%= org.name %></h2>
+<!--          <h2><%#= org.name %></h2>-->
+          <div class="crayons-story__body pd-b-0 p-l-r-0" style="background: #373737 !important; backdrop-filter: blur(9px); padding: 20px">
+            <div class="crayons-story__top m-b-0">
+              <!--          <p class="artist-name"> | </p>-->
+              <p class="artist-name"><%= org.try(:name) %> | <%= music_release.try(:title) %></p>
+            </div>
+            <div class="reviews-reactions">
+              <p class="project-date" style="padding-left: 10px">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+            </div>
+          </div>
           <table class="crayons-table" style="width: 100%">
             <thead>
             <tr>
               <th scope="col"></th>
               <th scope="col">Title</th>
-              <th scope="col">Artist</th>
-              <th scope="col">Released</th>
+              <th scope="col">Crew Members</th>
+<!--              <th scope="col">Released</th>-->
               <th scope="col">Royalties</th>
+              <th scope="col">Balance</th>
 <!--              <th scope="col">Price</th>-->
-              <th scope="col">Duration</th>
-              <th scope="col">Status</th>
+<!--              <th scope="col">Duration</th>-->
+<!--              <th scope="col">Status</th>-->
             </tr>
             </thead>
             <tbody class="mfy-body">
@@ -34,26 +53,29 @@
                     <td style="color: #00e4ff !important;">
                       United Bits
                     </td>
-                    <td>
-                      <%= music_release.created_at.strftime('%Y %B') %>
-                    </td>
+<!--                    <td>-->
+                      <%#= music_release.created_at.strftime('%Y %B') %>
+<!--                    </td>-->
                     <td>20.00 %</td>
                     <!--                  <td>US$ <%#= number_with_precision(music_release.try(:price), precision: 2) %></td>-->
-                    <td>
-                      <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
-                      <% if music_release.length < 60 %>
-                        <%= length[1] %> secs
-                      <% else %>
-                        <%= length[0]  %> mins <%= length[1] %> secs
-                      <% end %>
+<!--                    <td>-->
+                      <%# length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+                      <%# if music_release.length < 60 %>
+<!--                        <%#= length[1] %> secs-->
+                      <%# else %>
+<!--                        <%#= length[0]  %> mins <%#= length[1] %> secs-->
+                      <%# end %>
                       <%# else %>
                       <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
                       <%# end %>
-                    </td>
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                      <span class="badge badge-success">-->
+<!--                        Completed-->
+<!--                      </span>-->
+<!--                    </td>-->
                     <td>
-                      <span class="badge badge-success">
-                        Completed
-                      </span>
+                      $<%= number_with_precision(((20) * total_amount)/100, precision: 2) %>
                     </td>
                   </tr>
                 <% end %>
@@ -65,49 +87,53 @@
                   <td style="color: #00e4ff !important;">
                     <%=  contribution.collaborator.username %>
                   </td>
-                  <td>
-                    <%= music_release.created_at.strftime('%Y %B') %>
-                  </td>
-                  <td><%= contribution.royalty %> %</td>
+<!--                  <td>-->
+                    <%#= music_release.created_at.strftime('%Y %B') %>
+<!--                  </td>-->
+                  <td><%= number_with_precision(contribution.royalty, precision: 2)  %> %</td>
 <!--                  <td>US$ <%#= number_with_precision(music_release.try(:price), precision: 2) %></td>-->
-                  <td>
-                    <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
-                    <% if music_release.length < 60 %>
-                      <%= length[1] %> secs
-                    <% else %>
-                      <%= length[0]  %> mins <%= length[1] %> secs
-                    <% end %>
+<!--                  <td>-->
+                    <%# length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+                    <%# if music_release.length < 60 %>
+<!--                      <%#= length[1] %> secs-->
+                    <%# else %>
+<!--                      <%#= length[0]  %> mins <%#= length[1] %> secs-->
+                    <%# end %>
                     <%# else %>
                     <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
                     <%# end %>
-                  </td>
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                  <span class="badge badge-success">-->
+<!--                    Completed-->
+<!--                  </span>-->
+<!--                  </td>-->
                   <td>
-                  <span class="badge badge-success">
-                    Completed
-                  </span>
+                    $<%= number_with_precision(((contribution.royalty.to_f) * total_amount)/100, precision: 2) %>
                   </td>
                 </tr>
             <% end %>
-            <% total_amount = music_release.orders.sum(:total_amount) %>
             <tr class="total-row">
-              <td colspan="7" style="text-align: center">
-                <strong>
-                  Sales Amount
-                </strong>
-                <strong style="margin-left: 3%">
-                  $<%= number_with_precision(total_amount, precision: 2) %>
-                </strong>
-                <strong style="margin-left: 10%">
-                  Royalties
-                </strong>
+              <td style="text-align: center">
+<!--                <strong>-->
+<!--                  Sales Amount-->
+<!--                </strong>-->
+              </td>
+              <td>
+<!--                <strong style="margin-left: 3%">-->
+<!--                  $<%#= number_with_precision(total_amount, precision: 2) %>-->
+<!--                </strong>-->
+              </td>
+              <td>
+              </td>
+              <td>
                 <strong style="margin-left: 3%">
                   <%= number_with_precision((total + 20), precision: 2) + " %" %>
                 </strong>
-                <strong style="margin-left: 10%">
-                  Balance
-                </strong>
+              </td>
+              <td>
                 <strong style="margin-left: 3%">
-                  <%= number_with_precision((total + 20) * total_amount, precision: 2) %>
+                  $<%= number_with_precision(((total + 20) * total_amount)/100, precision: 2) %>
                 </strong>
               </td>
             </tr>
