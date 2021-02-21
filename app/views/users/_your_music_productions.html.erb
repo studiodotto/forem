@@ -18,6 +18,7 @@
       <p id="dashboard-description" style="font-weight: 500; margin-bottom: 10px">This is your dashboard to structure your collaborations, monitor your projects, and manage your money</p>
       <div class="crayons-card p-6" style="background: #fed853 !important; margin-bottom: 24px">
         <h3>Accounting and Banking</h3>
+        <p style="font-weight: 500; margin-bottom: 10px">Connect your bank account to receive payouts</p>
         <% if @payment_provider.present?  && @payment_provider.try(:external_id).present? %>
           <label class="crayons-field__label">Account id</label>
           <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
