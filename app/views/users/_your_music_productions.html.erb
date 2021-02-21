@@ -34,6 +34,7 @@
               <th scope="col"></th>
               <th scope="col">Title</th>
               <th scope="col">Crew Members</th>
+              <th>Role</th>
 <!--              <th scope="col">Released</th>-->
               <th scope="col">Royalties</th>
               <th scope="col">Balance</th>
@@ -52,6 +53,9 @@
                     <td><%= music_release.title.capitalize %></td>
                     <td style="color: #00e4ff !important;">
                       United Bits
+                    </td>
+                    <td>
+                      Platform
                     </td>
 <!--                    <td>-->
                       <%#= music_release.created_at.strftime('%Y %B') %>
@@ -86,6 +90,13 @@
                   <td><%= music_release.title.capitalize %></td>
                   <td style="color: #00e4ff !important;">
                     <%=  contribution.collaborator.username %>
+                  </td>
+                  <td>
+                    <% if contribution.collaborator.id == org.artist.id %>
+                      Admin
+                    <% else %>
+                      Contributor
+                    <% end %>
                   </td>
 <!--                  <td>-->
                     <%#= music_release.created_at.strftime('%Y %B') %>
@@ -126,6 +137,7 @@
               </td>
               <td>
               </td>
+              <td></td>
               <td>
                 <strong style="margin-left: 3%">
                   <%= number_with_precision((total + 20), precision: 2) + " %" %>
