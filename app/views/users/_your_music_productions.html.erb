@@ -18,7 +18,8 @@
       <p id="dashboard-description" style="font-weight: 500; margin-bottom: 10px">This is your dashboard to structure your collaborations, monitor your projects, and manage your money</p>
       <div class="crayons-card p-6" style="background: #fed853 !important; margin-bottom: 24px">
         <h3>Accounting and Banking</h3>
-        <p style="font-weight: 500; margin-bottom: 10px">Connect your bank account to receive payouts</p>
+        <p style="font-weight: 500; margin-top: 5px !important;">Connect your bank account to receive payouts</p>
+        <p style="font-weight: 500;">Unitedbits partners with Stripe for fast, secure payments. Fill out a few details so you can start getting paid</p>
         <% if @payment_provider.present?  && @payment_provider.try(:external_id).present? %>
           <label class="crayons-field__label">Account id</label>
           <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
@@ -59,7 +60,44 @@
     </div>
     <% if @orgs.present? %>
       <% @orgs.each do |org| %>
-        <% music_release = org.music_releases.first %>
+       <% music_release = org.music_releases.first %>
+       <% total_count = music_release.orders.count(:id) %>
+        <div class="row">
+          <div class="project-img-header" style="background: #373737 !important; padding: 10px">
+            <%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 100, height: 100 %>
+            <span class="badge badge-success" style="bottom: 20px; position: relative; left: 20px"> Approved </span>
+          </div>
+          <div class="video-collection" style="background: #373737 !important; border-radius: 0px !important;">
+            <div class="card-body bg-warning single-video-box box-badge">
+              <div class="rotate">
+                <i class="fa fa-calendar-check-o fa-2x"></i>
+              </div>
+              Release Date
+              <p style="color: white;margin-left: 5%;"><%= music_release.created_at.strftime('%Y %B') %></p>
+            </div>
+            <div class="card-body bg-warning single-video-box box-badge" style="background: #1cac4a !important;">
+              <div class="rotate">
+                <i class="fa fa-clock-o fa-2x"></i>
+              </div>
+              Pre release Date
+              <p style="color: white;margin-left: 5%;"><%= music_release.created_at.strftime('%Y %B') %></p>
+            </div>
+            <div class="card-body bg-warning single-video-box box-badge" style="background: #db1099 !important;">
+              <div class="rotate">
+                <i class="fa fa-money fa-2x"></i>
+              </div>
+              Price
+              <p style="color: white;margin-left: 5%;">$<%= number_with_precision(music_release.price, precision: 2) %></p>
+            </div>
+            <div class="card-body bg-warning single-video-box box-badge" style="background: #ff521a !important">
+              <div class="rotate">
+                <i class="fa fa-calculator fa-2x"></i>
+              </div>
+              No. of Sales
+              <p style="color: white;margin-left: 5%;"><%= total_count %></p>
+            </div>
+          </div>
+        </div>
         <% total_amount = music_release.orders.sum(:total_amount) %>
         <div class="table-responsive" style="margin-bottom: 20px">
 <!--          <h2><%#= org.name %></h2>-->

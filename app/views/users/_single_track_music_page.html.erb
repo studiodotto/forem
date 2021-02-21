@@ -144,6 +144,18 @@
     <div class="alert alert-success">Project created successfully</div>
   </div>
 <% end %>
+<div class="row">
+  <p style="font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;color: #08090A;
+    line-height: 36px;">Create a new single track release</p>
+</div>
+
+<div class="row">
+  <p class="color-gray">This service is designed to bring you an easy-to-use form to launch a new track and fix collaborations.</p>
+</div>
+<br>
 <div class="row" >
   <% if @organization.try(:id).present? %>
     <div class="crayons-card crayons-card--content-rows" style="background: #fed853 !important; margin-top: 10px">
@@ -182,32 +194,6 @@
     </div>
   <% end %>
   <%= form_with model: @organization, url: create_organization_path(@organization), method: :post, html: { class: "mb-2", multipart: true  }, local: true do |f| %>
-    <div class="container">
-      <div class="row">
-        <p style="font-family: 'Roboto', sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 24px;color: #08090A;
-          line-height: 36px;">Create a new single track release</p>
-      </div>
-
-      <div class="row">
-        <p class="color-gray">This service is designed to bring you an easy-to-use form to launch your online music business, offer products and services and accept new music work commissions.</p>
-      </div>
-      <br>
-
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">1. Artist Name</p>
-        <p class="color-gray">Pick a brand name for your services, your project, or your band. You can always just use your name.</p>
-        <div class="form-group">
-          <input type="hidden" name="organization[organization_type]" value="single_track">
-          <%= f.hidden_field :id, value: "#{@organization.try(:id)}" %>
-          <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
-          <%= f.text_field :name, class: "form-control organization-fields", required: true %>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <div class="row">
         <p style="font-family: 'Roboto', sans-serif;font-style: normal;
@@ -321,79 +307,6 @@
         <p style="color: darkred;">you can only see yourself as contributor. But you can invite contributors by sharing secret, after creating the project</p>
       <% end %>
     </div>
-    <div class="container">
-      <div class="row">
-        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
-          font-weight: normal;
-          font-size: 24px;
-          line-height: 28px;
-          color: #08090A;
-          flex: none;
-          order: 0;
-          flex-grow: 0;">About you and your music </p>
-      </div>
-      <div class="row">
-        <p class="color-gray">Tell your fans about you, and the collaborations you are available for. Access different kinds of projects, from concert music and jazz to dance and video games</p>
-      </div>
-      <br>
-      <div class="row">
-        <p class="required-text">Starred fields are required</p>
-        <br>
-        <p class="deejaying-text">Deejaying Music Production</p>
-        <br>
-<!--        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Composer and Performers*</p>-->
-<!--        <p class="color-gray">Select type of ensemble or instrumentation*</p>-->
-<!--        <div class="form-group">-->
-          <%#= f.select(:composer_id, options_for_select(@composers, f.object.composer_id), {}, { class: "crayons-select" }) %>
-<!--        </div>-->
-      </div>
-
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Song Language*</p>
-        <p class="color-gray">Select the languages you perform. You can choose up to four. If you want more shoot us a mail.</p>
-        <div class="form-group">
-          <%= f.select(:song_language_id, options_for_select(@languages, f.object.song_language_id), {}, { class: "crayons-select" }) %>
-        </div>
-      </div>
-      <br>
-
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select Genre*</p>
-        <p class="color-gray">You can select up to four genres*</p>
-        <div class="form-group">
-          <%= f.select(:genre_id, options_for_select(@genres, f.object.genre_id.try(:split, ',')), {}, { class: "crayons-select", multiple: true }) %>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">2. Your project and services*</p>
-        <p class="color-gray">Tell your fans a few things about this project and the services you are offering.</p>
-        <div class="form-group">
-          <%= f.text_area :summary, class: "form-control organization-fields", required: true, row: 5 %>
-        </div>
-      </div>
-      <br>
-
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">3. Awards and Nominations_1</p>
-        <p class="color-gray">In online tell your fans about your greates awards and nominatons</p>
-        <div class="form-group">
-          <%= f.text_field :tag_line, class: "form-control organization-fields" %>
-        </div>
-      </div>
-      <br>
-
-      <div class="row">
-        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">4. Awards and Nominations_2</p>
-        <p class="color-gray">In online what’s your greatest achievement in your music career</p>
-        <div class="form-group">
-          <%= f.text_field :tech_stack, class: "form-control organization-fields" %>
-        </div>
-      </div>
-    </div>
-
   <!-- Single Track Music Page -->
     <div class="container" style="padding: 0px">
 
@@ -403,8 +316,18 @@
           font-size: 24px;
           line-height: 28px;
           letter-spacing: 0.1px;
-          color: #000000;">Single track project with royalities</p>
+          color: #000000;">Single track project with royalities for fans</p>
         <br>
+        <div class="row">
+          <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Artist Name</p>
+          <p class="color-gray">Pick a brand name for your services, your project, or your band. You can always just use your name.</p>
+          <div class="form-group">
+            <input type="hidden" name="organization[organization_type]" value="single_track">
+            <%= f.hidden_field :id, value: "#{@organization.try(:id)}" %>
+            <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
+            <%= f.text_field :name, class: "form-control organization-fields", required: true %>
+          </div>
+        </div>
         <div class="form-group">
           <p class="track-labels">Single title</p>
           <input type="hidden" name="music_release[user_id]" value="<%= current_user.try(:id) %>">
@@ -520,6 +443,77 @@
             </tbody>
           </table>
         <% end %>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #08090A;
+          flex: none;
+          order: 0;
+          flex-grow: 0;">About this release </p>
+      </div>
+      <div class="row">
+        <!--        <p class="color-gray">Tell your fans about you, and the collaborations you are available for. Access different kinds of projects, from concert music and jazz to dance and video games</p>-->
+      </div>
+      <!--      <br>-->
+      <div class="row">
+        <p class="required-text">Starred fields are required</p>
+        <br>
+        <!--        <p class="deejaying-text">Deejaying Music Production</p>-->
+        <!--        <br>-->
+        <!--        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Composer and Performers*</p>-->
+        <!--        <p class="color-gray">Select type of ensemble or instrumentation*</p>-->
+        <!--        <div class="form-group">-->
+        <%#= f.select(:composer_id, options_for_select(@composers, f.object.composer_id), {}, { class: "crayons-select" }) %>
+        <!--        </div>-->
+      </div>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Tell your fans about this project</p>
+        <p class="color-gray">Tell your fans a few things about this project and the services you are offering.</p>
+        <div class="form-group">
+          <%= f.text_area :summary, class: "form-control organization-fields", required: true, row: 5 %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Awards and Nominations_1</p>
+        <p class="color-gray">In one line tell your fans about your greates awards and nominatons</p>
+        <div class="form-group">
+          <%= f.text_field :tag_line, class: "form-control organization-fields" %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Awards and Nominations_2</p>
+        <p class="color-gray">In one line what’s your greatest achievement in your music career</p>
+        <div class="form-group">
+          <%= f.text_field :tech_stack, class: "form-control organization-fields" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Song Language*</p>
+        <p class="color-gray">Select the languages you perform. You can choose up to four. If you want more shoot us a mail.</p>
+        <div class="form-group">
+          <%= f.select(:song_language_id, options_for_select(@languages, f.object.song_language_id), {}, { class: "crayons-select" }) %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select Genre*</p>
+        <p class="color-gray">You can select up to four genres*</p>
+        <div class="form-group">
+          <%= f.select(:genre_id, options_for_select(@genres, f.object.genre_id.try(:split, ',')), {}, { class: "crayons-select", multiple: true }) %>
+        </div>
       </div>
     </div>
 

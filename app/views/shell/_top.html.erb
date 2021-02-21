@@ -115,6 +115,14 @@
           color: #fff;
           background-color: #dc3545;
         }
+        .box-badge{
+          /*width: 25%;*/
+          text-align: center;
+          background: #5345fd;
+          color: white;
+          padding: 10px;
+          z-index: 99;
+        }
       </style>
       <% unless user_signed_in? %>
         <%= javascript_packs_with_chunks_tag "Search", defer: true %>

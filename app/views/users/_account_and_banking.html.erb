@@ -1,6 +1,5 @@
 <div class="crayons-card p-6">
   <h2 class="crayons-title mb-4">Accounting and Banking</h2>
-  <p style="font-weight: 500; margin-bottom: 10px">Connect your bank account to receive payouts</p>
   <% if @payment_provider.present?  && @payment_provider.try(:external_id).present? %>
     <label class="crayons-field__label">Account id</label>
     <input class="crayons-textfield" style="background: #00000017" type="text" value="<%= @payment_provider.external_id %>" disabled>
