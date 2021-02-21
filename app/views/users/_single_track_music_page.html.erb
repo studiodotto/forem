@@ -327,11 +327,15 @@
       </div>
       <% if @organization.try(:id).present? %>
         <a style="display: none" href="#" onclick="addItem();return false;">Add new Item</a>
-        <p style="color: darkred; display: none" id="royalty-error">Please make sure to distribute 100% of the royalties</p>
+        <div class="alert alert-danger" style="display: none" id="royalty-error">
+          <p>Verify royalties split to 100% not more</p>
+        </div>
         <p style="color: darkred">You will see all the contributors here when they accept your invitation</p>
 
     <% else %>
-        <p style="color: darkred; display: none; margin-bottom: 10px" id="royalty-error">Please make sure to distribute 100% of the royalties</p>
+        <div class="alert alert-danger" style="display: none" id="royalty-error">
+          <p>Verify royalties split to 100% not more</p>
+        </div>
         <p style="color: darkred;">you can only see yourself as contributor. But you can invite contributors by sharing secret, after creating the project</p>
       <% end %>
     </div>
