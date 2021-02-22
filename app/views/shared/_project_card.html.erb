@@ -1,6 +1,26 @@
 <!-- Project Card Section -->
 <article class="<%= project_side.present? ? 'crayons-story cursor-pointer crayons-story--featured project-card' : 'crayons-story cursor-pointer crayons-story--featured project-card margin-bottom-30' %>">
   <% if music_release.present? %>
+    <% if music_release.audios.published.present? %>
+      <% audio = music_release.audios.published.first %>
+      <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= audio.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
+        <div class="record" id="record">
+          <%= optimized_image_tag('/assets/playbutt.png',
+                                  optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                  image_options: { class: "main-image", id: "main-image-#{audio.id.to_s}", alt: 'test' }) %>
+          <img alt="Play Button" id="hidden-play-<%= audio.id %>" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+          <img alt="Pause Button" id="hidden-pause-<%= audio.id %>" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+          <div class="status-message" id="status-message-<%= audio.id.to_s %>">
+            play
+          </div>
+        </div>
+      </div>
+      <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
+      <% if music_release.try(:header_image_url).present?  %>
+        <% image = music_release.try(:header_image_url) %>
+      <% end %>
+      <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio, slug: audio.slug, image: image} %>
+    <% end %>
     <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
     <a href="#" class="crayons-story__hidden-navigation-link">
       <%= music_release.try(:title) %>
@@ -17,7 +37,7 @@
         <!--crayons-story__indention-->
         <!--crayons-story__title -->
         <div class="project-card-content">
-          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
           <!--          <div class="project-box" style="display: inline-block; width: 100%">-->
 <!--            <h2 style="float:left;">-->
 <!--              <a class="project-title" href="#">-->
@@ -62,7 +82,10 @@
 
           <div class="reviews-reactions">
 <!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
-            <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+            <p class="project-date" style="<%= project_side ? 'display: none' : 'display: inline-block' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+            <% if music_release.audios.published.present? %>
+              <img alt="test" onclick="play_music(<%= audio.id %>)" style="float: right; position: relative; bottom: 10px" width="30" height="30" src="/assets/playbutt.png">
+            <% end %>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
             <span class="<%= project_side.present? ? 'fa fa-star reviews-project checked' : 'fa fa-star reviews checked' %>"></span>
@@ -136,7 +159,14 @@
 
 
 <script>
-
+  function play_music(audio_id){
+    if(document.getElementById("closebutt")){
+      document.getElementById("closebutt").click();
+    }
+    document.getElementById("record-"+audio_id).click();
+    // document.getElementById("play-"+audio_id).style.display = 'none'
+    // document.getElementById("pause-"+audio_id).style.display = 'inline-block'
+  }
 
   // function addHidden(theForm, key, value) {
   //   // Create a hidden input element, and append it to the form:
