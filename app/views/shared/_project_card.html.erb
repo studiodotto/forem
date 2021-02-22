@@ -5,7 +5,7 @@
     <a href="#" class="crayons-story__hidden-navigation-link">
       <%= music_release.try(:title) %>
     </a>
-    <div role="presentation">
+    <div role="presentation" class="project-presentation">
       <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 650, height: 650, crop: "pad") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
@@ -86,7 +86,7 @@
             </a>
           </div>
         </div>
-        <div style="<%= project_side ? 'height:10px; background: #171a1f' : 'display:none' %>"></div>
+        <div style="<%= project_side ? 'height:10px; background: #ffffff' : 'display:none' %>"></div>
         <div class="<%= project_side ? 'project-card-content p-l-r-0 amt-bg' : 'project-card-content p-l-r-0 amt-bg btn-updated-style' %>">
           <div class="p-l-r-0 amt-data">
             <div style="display: inline-block;width: 40%; padding-top: 10px; padding-bottom: 10px">
@@ -122,7 +122,8 @@
           <span class="request-text project-font">
 <!--            Buy track | 0.01% Royalties— $<%#= number_with_precision(music_release.price, precision: 2) %>-->
 <!--            Buy $<%#= number_with_precision(music_release.price, precision: 2) %> -->
-            <span class="request-span-text pinkish-text">BUY MP3 + Royalties</span>
+<!--            <span class="request-span-text pinkish-text">BUY MP3 + Royalties</span>-->
+            <span class="request-span-text pinkish-text">GET THIS TRACK</span>
           </span>
         </button>
       </div>
