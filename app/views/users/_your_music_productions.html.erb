@@ -102,10 +102,10 @@
           <div class="crayons-story__body pd-b-0 p-l-r-0" style="background: #373737 !important; backdrop-filter: blur(9px); padding: 20px">
             <div class="crayons-story__top m-b-0">
               <!--          <p class="artist-name"> | </p>-->
-              <p class="artist-name"><%= org.try(:name) %> | <%= music_release.try(:title) %></p>
+              <p class="artist-name" style="color: white; padding-left: 10px"><%= org.try(:name) %> | <%= music_release.try(:title) %></p>
             </div>
             <div class="reviews-reactions">
-              <p class="project-date" style="padding-left: 10px">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+              <p class="project-date" style="padding-left: 10px; color: white">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
             </div>
           </div>
         </div>
