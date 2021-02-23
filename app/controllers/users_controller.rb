@@ -453,7 +453,7 @@ class UsersController < ApplicationController
   end
 
   def artist_update_params
-    params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location_id, :composer_id, :industry_id,
+    params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location, :composer_id, :industry_id,
                                  :song_language_id, :genre_id, :industry_id, :commission_accepted, :sell_tracks, :sell_campaigns, :spotify_url,
                                  :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url)
   end

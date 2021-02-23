@@ -145,11 +145,19 @@
   </div>
 <% end %>
 <div class="row">
-  <p style="font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;color: #08090A;
-    line-height: 36px;">Create a new single track release</p>
+  <% if @organization.try(:id).present? %>
+    <p style="font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;color: #08090A;
+      line-height: 36px;">@<%= @organization.music_releases.present? ? @organization.music_releases.first.title : @organization.name %></p>
+  <% else %>
+    <p style="font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;color: #08090A;
+      line-height: 36px;">Create a new single track release</p>
+  <% end %>
 </div>
 
 <div class="row">

@@ -38,25 +38,22 @@
 
       <%# end %>
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
-        <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
-          <%#= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
-          <% if possible_tab == "Single Track Music Page" %>
-            Create a new single track
-          <% elsif possible_tab == "Profile and services" %>
-            Your profile
-          <% elsif possible_tab == "My Projects" %>
-            Projects
-          <% else %>
-            <%= possible_tab %>
+        <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
+          <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+            <a class="crayons-link crayons-link--block <% if possible_tab == 'My Projects' %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
+              <% if possible_tab == "Single Track Music Page" %>
+                Create a new single track
+              <% elsif possible_tab == "Profile and services" %>
+                Your profile
+              <% elsif possible_tab == "My Projects" %>
+                Projects
+              <% else %>
+                <%= possible_tab %>
+              <% end %>
+            </a>
           <% end %>
-        </a>
-      <% end %>
-    </nav>
-    <div class="m:hidden p-2 pt-0">
-      <select id="mobile-page-selector" class="crayons-select">
-        <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
-          <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
-            <%#= possible_tab == "Profile and services" ? "Your Profile" : possible_tab %>
+        <% else %>
+          <a class="crayons-link crayons-link--block <% if possible_tab == "My Projects" %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
             <% if possible_tab == "Single Track Music Page" %>
               Create a new single track
             <% elsif possible_tab == "Profile and services" %>
@@ -66,7 +63,40 @@
             <% else %>
               <%= possible_tab %>
             <% end %>
-          </option>
+          </a>
+        <% end %>
+      <% end %>
+    </nav>
+    <div class="m:hidden p-2 pt-0">
+      <select id="mobile-page-selector" class="crayons-select">
+        <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
+          <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
+            <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+              <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
+                <% if possible_tab == "Single Track Music Page" %>
+                  Create a new single track
+                <% elsif possible_tab == "Profile and services" %>
+                  Your profile
+                <% elsif possible_tab == "My Projects" %>
+                  Projects
+                <% else %>
+                  <%= possible_tab %>
+                <% end %>
+              </option>
+            <% end %>
+          <% else %>
+            <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
+              <% if possible_tab == "Single Track Music Page" %>
+                Create a new single track
+              <% elsif possible_tab == "Profile and services" %>
+                Your profile
+              <% elsif possible_tab == "My Projects" %>
+                Projects
+              <% else %>
+                <%= possible_tab %>
+              <% end %>
+            </option>
+          <% end %>
         <% end %>
       </select>
     </div>
