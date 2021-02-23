@@ -63,9 +63,18 @@
        <% music_release = org.music_releases.first %>
        <% total_count = music_release.orders.count(:id) %>
         <div class="row">
-          <div class="project-img-header" style="background: #373737 !important; padding: 10px">
-            <%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 100, height: 100 %>
-            <span class="badge badge-success" style="bottom: 20px; position: relative; left: 20px"> Approved </span>
+          <div style="background: #373737 !important; padding: 10px;">
+            <div class="project-img-header" style="display: inline-block">
+              <%= image_tag music_release.header_image_url.present? ? music_release.header_image_url : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png', width: 100, height: 100 %>
+            </div>
+            <div style="display: inline-block">
+              <h2 style="bottom: 20px; position: relative; left: 20px; color: white">
+                 <%= music_release.title  %>
+              </h2>
+              <p>
+                <span class="badge badge-success" style="bottom: 20px; position: relative; left: 20px"> Approved </span>
+              </p>
+            </div>
           </div>
           <div class="video-collection" style="background: #373737 !important; border-radius: 0px !important;">
             <div class="card-body bg-warning single-video-box box-badge">
