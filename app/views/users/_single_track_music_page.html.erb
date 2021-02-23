@@ -561,6 +561,56 @@
   setTimeout(function (){
     try{
       document.multiselect('#organization_genre_id');
+      $(document).on('change', '#audio', function (e){
+        $('#audio-msg').show();
+      })
+      $(document).on('change',"#single-header-img",function (e){
+        var submitBtn = document.getElementById('submit-btn')
+        var imageMsg = document.getElementById('img-msg')
+        submitBtn.setAttribute('disabled', true)
+        imageMsg.style.display = 'block'
+        var imageForm = new FormData();
+        imageForm.append('image', e.target.files[0]);
+        $.ajax({
+          url: '<%= image_uploads_path %>',
+          data: imageForm,
+          type: 'POST',
+          processData: false, // important
+          contentType: false, // important
+          dataType : 'json',
+          success:function(data){
+            submitBtn.disabled = false;
+            imageMsg.style.display = 'none'
+            if(data && data.links && data.links.length > 0 && data.links[0].includes('amazon')){
+              $("#single-img-error").hide();
+              $("#single-header-img-url").val(data.links[0]);
+            }else{
+              $("#single-img-error").text('Cloudinary upload error').show();
+              $("#single-header-img-url").val('');
+            }
+          },
+          error:function (err){
+            submitBtn.disabled = false;
+            imageMsg.style.display = 'none'
+            $("#single-img-error").text('Unsupported image type').show();
+            $("#single-header-img-url").val('');
+          }
+        });
+      })
+      $(document).on('keyup','.royalties-percentage', function(){
+        var total = 0;
+        $('.royalties-percentage').each(function(royalty, value){
+          total = total + (parseFloat(value.value) || 0);
+        })
+        if(total > 100){
+          $('#royalty-error').show();
+          $(this).val('')
+        }else{
+          $('#royalty-error').hide();
+        }
+        calculateTotalRoyalties();
+      })
+      calculateTotalRoyalties();
     }catch(err){
       location.reload();
     }
@@ -587,42 +637,6 @@
     document.getElementById(input.dataset.label_id).text = "Upload Image";
     document.getElementById(input.dataset.file_field).value = "";
   }
-  $(document).on('change', '#audio', function (e){
-    $('#audio-msg').show();
-  })
-  $(document).on('change',"#single-header-img",function (e){
-    var submitBtn = document.getElementById('submit-btn')
-    var imageMsg = document.getElementById('img-msg')
-    submitBtn.setAttribute('disabled', true)
-    imageMsg.style.display = 'block'
-    var imageForm = new FormData();
-    imageForm.append('image', e.target.files[0]);
-    $.ajax({
-      url: '<%= image_uploads_path %>',
-      data: imageForm,
-      type: 'POST',
-      processData: false, // important
-      contentType: false, // important
-      dataType : 'json',
-      success:function(data){
-        submitBtn.disabled = false;
-        imageMsg.style.display = 'none'
-        if(data && data.links && data.links.length > 0 && data.links[0].includes('amazon')){
-          $("#single-img-error").hide();
-          $("#single-header-img-url").val(data.links[0]);
-        }else{
-          $("#single-img-error").text('Cloudinary upload error').show();
-          $("#single-header-img-url").val('');
-        }
-      },
-      error:function (err){
-        submitBtn.disabled = false;
-        imageMsg.style.display = 'none'
-        $("#single-img-error").text('Unsupported image type').show();
-        $("#single-header-img-url").val('');
-      }
-    });
-  })
 
   function addItem(){
     var contributorsDiv = document.getElementById('contributors-div')
@@ -689,20 +703,6 @@
     document.getElementById(contributorId+'-contributor-div').remove();
   }
 
-  $(document).on('keyup','.royalties-percentage', function(){
-    var total = 0;
-    $('.royalties-percentage').each(function(royalty, value){
-      total = total + (parseFloat(value.value) || 0);
-    })
-    if(total > 100){
-      $('#royalty-error').show();
-      $(this).val('')
-    }else{
-      $('#royalty-error').hide();
-    }
-    calculateTotalRoyalties();
-  })
-
   function calculateTotalRoyalties(){
     var total = 0;
     $('.royalties-percentage').each(function(royalty, value){
@@ -720,5 +720,4 @@
     $temp.remove();
     $('#copy-text-announcer').show();
   }
-  calculateTotalRoyalties();
 </script>
