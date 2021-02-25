@@ -53,7 +53,7 @@ module Admin
     def update_project
       org = Organization.find(params[:id])
       if params[:status].present?
-        status = params[:status] == 'reject' ? false : true
+        status = params[:status] == 'reject' ? 'rejected' : 'approved'
         update = org.update(status: status)
         if update
           flash[:notice] = 'record updated successfully'

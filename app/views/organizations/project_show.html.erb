@@ -208,7 +208,7 @@
   <div class="crayons-layout__left-sidebar" style="padding-top: 60px">
     <nav class="hidden m:block">
       <a href="<%= organization_feeds_path %>" style="color: white">
-        Projects
+        Home
       </a>
       <%# Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
 <!--        <a class="crayons-link crayons-link--block <%# if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<%# end %>" href="/artist_settings/<%#= possible_tab.downcase.tr(" ", "-") %>">-->
@@ -231,18 +231,18 @@
       <div class="container" style="background: #0E1218">
         <div class="row project-card-stories">
           <%= render partial: 'shared/project_card', locals: {project: @organization, music_release: @music_release, composer: @organization.composer_id.present? ? @composers[@organization.composer_id][0] : '', artist_side: false, project_side: true } %>
-          <div style="height:10px; background: #ffffff"></div>
-          <div class="project-card-description-below">
-            <p>
-              <p class="funding-text">FUNDING NEW MUSICAL WORK</p>
-              <p class="works-text">How it works?</p>
-              <p class="works-text">
-                Owners of Music Rights (i.e. songwriters, artists, performers) sell a percentage of their future royalty income, from the new music release,  through Unitedbits marketplace to finance new musical work. When an auction is completed, the rights will be available in your wallet. and , Trade music rights at Unitedbits financial marketplace.
-                Future developments
-                The Unitedbits protocol, on the Ethereum blockchain, empowers under-resourced music pioneers, investors,  liquidity providers and traders to participate in a financial marketplace for music that is open and accessible to all.
-              </p>
-            </p>
-          </div>
+<!--          <div style="height:10px; background: #ffffff"></div>-->
+<!--          <div class="project-card-description-below">-->
+<!--            <p>-->
+<!--              <p class="funding-text">FUNDING NEW MUSICAL WORK</p>-->
+<!--              <p class="works-text">How it works?</p>-->
+<!--              <p class="works-text">-->
+<!--                Owners of Music Rights (i.e. songwriters, artists, performers) sell a percentage of their future royalty income, from the new music release,  through Unitedbits marketplace to finance new musical work. When an auction is completed, the rights will be available in your wallet. and , Trade music rights at Unitedbits financial marketplace.-->
+<!--                Future developments-->
+<!--                The Unitedbits protocol, on the Ethereum blockchain, empowers under-resourced music pioneers, investors,  liquidity providers and traders to participate in a financial marketplace for music that is open and accessible to all.-->
+<!--              </p>-->
+<!--            </p>-->
+<!--          </div>-->
         </div>
         <p class="yellow-text" style="display: none">How it works?</p>
         <p class="silver-text" style="display: none">Book now _artist to</p>

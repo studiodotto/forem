@@ -81,7 +81,7 @@ class Organization < ApplicationRecord
   alias_attribute :old_old_username, :old_old_slug
   alias_attribute :website_url, :url
 
-  scope :approved, -> { where(status: true) }
+  scope :approved, -> { where(status: 'approved') }
 
   def check_for_slug_change
     return unless slug_changed?

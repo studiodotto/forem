@@ -20,6 +20,7 @@
   <tr>
     <th scope="col">ID</th>
     <th scope="col">Title</th>
+    <th scope="col">Release date</th>
     <th scope="col">Artist name</th>
 <!--    <th scope="col">Tracks</th>-->
     <th scope="col">Link</th>
@@ -31,10 +32,11 @@
   </thead>
   <tbody class="crayons-card">
   <% @music_releases.each do |music_release| %>
-    <% music_release = music_release.reload %>
+    <% music_release =  music_release.reload %>
     <tr>
       <td><%= music_release.id %></td>
       <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
+      <td><%= music_release.created_at.strftime('%d %B %Y') %></td>
       <td><%= music_release.organization.present? ? music_release.organization.name : '' %></td>
 <!--      <td><%#= music_release.tracks_count %></td>-->
 <!--      <td><%#= music_release.published.present? ? 'true' : 'false' %></td>-->
@@ -49,27 +51,30 @@
       <td>
         <% if music_release.audios.present? && music_release.audios.first.try(:link).present? %>
           <% if music_release.audios.first.status.present? %>
-            <%= link_to "Reject", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
+            <%= link_to "Reject", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'reject'), method: :put, class: 'btn btn-danger btn-sm' %>
           <% else %>
-            <%= link_to "Approve", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
+            <%= link_to "Approve", update_audio_admin_audio_path(id: music_release.audios.first.id, status: 'approve'), method: :put, class: 'btn btn-success btn-sm' %>
           <% end %>
         <% end %>
       </td>
       <td>
-        <% if music_release.organization.present? %>
-          <% if music_release.organization.present? && music_release.organization.status.present? %>
+        <% org = music_release.organization.reload if music_release.organization.present? %>
+        <% if org.present? %>
+          <% if org.status == 'approved' %>
             <span class="badge badge-success">Approved</span>
+          <% elsif org.status == 'pending' %>
+            <span class="badge badge-warning">Pending</span>
           <% else %>
             <span class="badge badge-danger">Rejected</span>
           <% end %>
         <% end %>
       </td>
       <td>
-        <% if music_release.organization.present? %>
-          <% if music_release.organization.present? && music_release.organization.status.present? %>
-            <%= link_to "Reject", update_project_admin_audio_path(id: music_release.organization.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
+        <% if org.present? %>
+          <% if org.present? && org.status == 'approved' %>
+            <%= link_to "Reject", update_project_admin_audio_path(id: org.id, status: 'reject'), method: :put, class: 'btn btn-danger btn-sm' %>
           <% else %>
-            <%= link_to "Approve", update_project_admin_audio_path(id: music_release.organization.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
+            <%= link_to "Approve", update_project_admin_audio_path(id: org.id, status: 'approve'), method: :put, class: 'btn btn-success btn-sm' %>
           <% end %>
         <% end %>
       </td>
