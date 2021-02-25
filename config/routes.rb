@@ -310,6 +310,7 @@ Rails.application.routes.draw do
     resources :badges, only: [:index]
     resources :user_blocks, param: :blocked_id, only: %i[show create destroy]
     resources :podcasts, only: %i[new create]
+    resources :playlists, only: %i[new create]
     resources :music_releases, only: %i[new create]
     resources :article_approvals, only: %i[create]
     resources :video_chats, only: %i[show]
@@ -522,6 +523,7 @@ Rails.application.routes.draw do
 
     get "/pod", to: "podcast_episodes#index"
     get "/podcasts", to: redirect("pod")
+    get "/playlists", to: "playlists#index"
     get "/music_releases", to: "music_tracks#index"
     get "/readinglist" => "reading_list_items#index"
     get "/readinglist/:view" => "reading_list_items#index", :constraints => { view: /archive/ }

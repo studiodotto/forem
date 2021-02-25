@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_151340) do
+ActiveRecord::Schema.define(version: 2021_02_24_142326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -206,6 +206,13 @@ ActiveRecord::Schema.define(version: 2021_02_18_151340) do
     t.integer "organization_id"
     t.index ["organization_id"], name: "index_audios_on_organization_id"
     t.index ["user_id"], name: "index_audios_on_user_id"
+  end
+
+  create_table "audios_playlists", id: false, force: :cascade do |t|
+    t.bigint "audio_id", null: false
+    t.bigint "playlist_id", null: false
+    t.index ["audio_id", "playlist_id"], name: "index_audios_playlists_on_audio_id_and_playlist_id"
+    t.index ["playlist_id", "audio_id"], name: "index_audios_playlists_on_playlist_id_and_audio_id"
   end
 
   create_table "audit_logs", force: :cascade do |t|
@@ -970,6 +977,15 @@ ActiveRecord::Schema.define(version: 2021_02_18_151340) do
     t.index ["user_id"], name: "index_payment_providers_on_user_id"
   end
 
+  create_table "playlists", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
   create_table "podcast_episodes", force: :cascade do |t|
     t.boolean "any_comments_hidden", default: false
     t.text "body"
@@ -1604,6 +1620,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_151340) do
   add_foreign_key "page_views", "articles", on_delete: :cascade
   add_foreign_key "page_views", "users", on_delete: :nullify
   add_foreign_key "payment_providers", "users"
+  add_foreign_key "playlists", "users"
   add_foreign_key "podcast_episodes", "podcasts", on_delete: :cascade
   add_foreign_key "podcasts", "users", column: "creator_id"
   add_foreign_key "poll_options", "polls", on_delete: :cascade

@@ -1,0 +1,48 @@
+<%= content_for :page_meta do %>
+
+<% end %>
+<div class="home">
+  <div id="sidebar-wrapper-left" class="sidebar-wrapper sidebar-wrapper-left"></div>
+  <div class="sidebar-bg" id="sidebar-bg-left"></div>
+  <div class="side-bar">
+    <div class="widget podcast-pic-widget">
+      <header>
+        <a href="/pod"><h4>podcasts</h4></a>
+      </header>
+      <div class="widget-body">
+        <p>CSDS</p>
+      </div>
+    </div>
+  </div>
+  <div class="podcasts-form" id="podcasts-form">
+    <%= form_for @playlist, url: playlists_path do |form| %>
+      <div>
+        <header class="mb-4">
+          <a href="/playlists" class="podcast-back-button">&lt; return to playlists</a>
+          <h2>Create new playlist</h2>
+        </header>
+        <% if @playlist.errors.any? %>
+          <div class="podcast-errors">
+            <h2><%= pluralize(@playlist.errors.count, "error") %> while creating a playlist:</h2>
+            <ul>
+              <% @playlist.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="crayons-card mb-6 grid grid-flow-row gap-6 p-6">
+          <div class="crayons-field">
+            <%= form.label :title, class: "crayons-field__label" %>
+            <%= form.text_field :title, placeholder: "", class: "crayons-textfield" %>
+          </div>
+          <div class="crayons-field">
+            <%= form.label :slug, "Slug", class: "crayons-field__label" %>
+            <%= form.text_area :slug, placeholder: "", class: "crayons-textfield" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= render "podcast_episodes/sidebar_additional" %>
+</div>

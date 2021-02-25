@@ -27,52 +27,52 @@ class OrganizationsController < ApplicationController
 
   def create_organization
     begin
+      params.permit!
+      collaborators =  params[:organization_memberships]
+      # total_royalty = 20
+      # collaborators.each do |collaborator|
+      #   total_royalty = total_royalty + (collaborator[:royalty].to_i)
+      # end
+      # unless total_royalty == 100
+      #   flash[:error] = "Royalty distribution is not equal to 100%"
+      # else
       if organization_params[:id].present?
         flash[:settings_notice] = "Project updated successfully"
       else
         flash[:settings_notice] = "Project created successfully"
       end
-      params.permit!
-      collaborators =  params[:organization_memberships]
-      total_royalty = 20
-      collaborators.each do |collaborator|
-        total_royalty = total_royalty + (collaborator[:royalty].to_i)
-      end
-      unless total_royalty == 100
-        flash[:error] = "Royalty distribution is not equal to 100%"
-      else
-        slug = SecureRandom.hex(5) + (Organization.last.id + 1).to_s
-        @organization = Organization.find_or_initialize_by(id: organization_params[:id])
-        @organization.assign_attributes(organization_params.merge(slug: slug))
-        raise StandardError.new @organization.errors.any? ? @organization.errors.full_messages.to_sentence : "Invalid image" unless valid_image?
-        @organization.save
-        raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
-        if organization_params[:organization_type] == 'single_track'
-          @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
-          @organization_music_release.assign_attributes(organization_music_release_params.merge({organization_id: @organization.id}))
-          @organization_music_release.save(validate: false)
-          if @organization_music_release.errors.any?
-            raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
-          end
-          if @organization_music_release.present? && params[:audio].present?
-            uploaders = upload_audios(params[:audio])
-            links = uploaders.map(&:url)
-            if links.length.zero? || !links[0].include?('studioappbucket')
-              raise StandardError.new 'Bucket is not responding'
-            end
-            if @organization_music_release.audios.present?
-              @organization_music_release.audios.first.update(link: links[0])
-            else
-              @organization_music_release.audios.create(name: @organization_music_release.title, link: links[0], slug: @organization_music_release.slug + "#{Audio.last.id.to_i + 1}", music_release_id: @organization_music_release.try(:id), user_id: current_user.id)
-            end
-          end
-          collaborators.each do |collaborator|
-            collaborator.merge!({organization_id: @organization.id, type_of_user: 'collaborator'})
-          end
-          @organization.organization_memberships.destroy_all
-          OrganizationMembership.create(collaborators)
+      slug = SecureRandom.hex(5) + (Organization.last.id + 1).to_s
+      @organization = Organization.find_or_initialize_by(id: organization_params[:id])
+      @organization.assign_attributes(organization_params.merge(slug: slug))
+      raise StandardError.new @organization.errors.any? ? @organization.errors.full_messages.to_sentence : "Invalid image" unless valid_image?
+      @organization.save
+      raise StandardError.new @organization.errors.full_messages.join(',') if @organization.errors.any?
+      if organization_params[:organization_type] == 'single_track'
+        @organization_music_release = MusicRelease.find_or_initialize_by(id: organization_music_release_params[:id])
+        @organization_music_release.assign_attributes(organization_music_release_params.merge({organization_id: @organization.id}))
+        @organization_music_release.save(validate: false)
+        if @organization_music_release.errors.any?
+          raise StandardError.new @organization_music_release.errors.full_messages.join(',') if @organization_music_release.errors.any?
         end
+        if @organization_music_release.present? && params[:audio].present?
+          uploaders = upload_audios(params[:audio])
+          links = uploaders.map(&:url)
+          if links.length.zero? || !links[0].include?('studioappbucket')
+            raise StandardError.new 'Bucket is not responding'
+          end
+          if @organization_music_release.audios.present?
+            @organization_music_release.audios.first.update(link: links[0])
+          else
+            @organization_music_release.audios.create(name: @organization_music_release.title, link: links[0], slug: @organization_music_release.slug + "#{Audio.last.id.to_i + 1}", music_release_id: @organization_music_release.try(:id), user_id: current_user.id)
+          end
+        end
+        collaborators.each do |collaborator|
+          collaborator.merge!({organization_id: @organization.id, type_of_user: 'collaborator'})
+        end
+        @organization.organization_memberships.destroy_all
+        OrganizationMembership.create(collaborators)
       end
+      # end
     rescue => exc
       flash[:settings_notice] = exc.message
     rescue CarrierWave::IntegrityError => e # client error
