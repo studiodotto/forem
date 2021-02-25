@@ -46,20 +46,20 @@
                 </div>
                 <div style="width: 70%; display: inline-block; position: relative; bottom: 8px">
                   <p class="artist-name"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
-                  <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %></p>
+                  <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
                 </div>
               <% elsif !project_side  %>
                 <p class="artist-name"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
-                <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %></p>
+                <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
               <% end %>
             </div>
           <% else %>
             <p class="artist-name"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
-            <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %></p>
+            <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
           <% end %>
           <!--  LIMITED EDITION MP3 -->
 
-          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block' %>">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
           <!--          <div class="project-box" style="display: inline-block; width: 100%">-->
 <!--            <h2 style="float:left;">-->
 <!--              <a class="project-title" href="#">-->

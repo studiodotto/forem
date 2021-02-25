@@ -114,7 +114,7 @@
               <p class="artist-name" style="color: white; padding-left: 10px"><%= org.try(:name) %> | <%= music_release.try(:title) %></p>
             </div>
             <div class="reviews-reactions">
-              <p class="project-date" style="padding-left: 10px; color: white">Release date <%= music_release.created_at.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+              <p class="project-date" style="padding-left: 10px; color: white">Release date <%= music_release.organization.release_date.strftime('%Y %B') %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
             </div>
           </div>
         </div>

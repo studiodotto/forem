@@ -36,7 +36,7 @@
     <tr>
       <td><%= music_release.id %></td>
       <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
-      <td><%= music_release.created_at.strftime('%d %B %Y') %></td>
+      <td><%= music_release.organization.present? && music_release.organization.release_date.present? ? music_release.organization.release_date.strftime('%d %B %Y') : '' %></td>
       <td><%= music_release.organization.present? ? music_release.organization.name : '' %></td>
 <!--      <td><%#= music_release.tracks_count %></td>-->
 <!--      <td><%#= music_release.published.present? ? 'true' : 'false' %></td>-->

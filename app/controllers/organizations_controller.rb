@@ -28,6 +28,7 @@ class OrganizationsController < ApplicationController
   def create_organization
     begin
       params.permit!
+      params["organization"]["release_date"] = (params["organization"]["release_date"]).to_date
       collaborators =  params[:organization_memberships]
       # total_royalty = 20
       # collaborators.each do |collaborator|
@@ -260,6 +261,7 @@ class OrganizationsController < ApplicationController
       soundcloud_url
       itunes_url
       organization_type
+      release_date
     ]
   end
 

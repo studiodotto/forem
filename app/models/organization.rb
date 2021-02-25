@@ -42,7 +42,8 @@ class Organization < ApplicationRecord
   # validates :github_username, length: { maximum: 50 }
   # validates :email, length: { maximum: 64 }
   # validates :name, :summary, :url, :profile_image, presence: true
-  validates :name, :summary, presence: true
+  validates :name, presence: true
+  # validates :name, :summary, presence: true
   # validates :name, length: { maximum: 50 }
   # validates :proof, length: { maximum: 1500 }
   # validates :secret, length: { is: 100 }, allow_nil: true
