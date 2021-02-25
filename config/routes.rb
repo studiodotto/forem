@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       resources :audios, only: %i[index update edit] do
         member do
           put 'update_audio'
+          put 'update_project', as: :update_project
         end
       end
       resources :artist_applications, only: %i[index update edit] do

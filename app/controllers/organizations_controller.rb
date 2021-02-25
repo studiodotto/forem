@@ -118,7 +118,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_feeds
-    @organizations = Organization.all.includes(:music_releases)
+    @organizations = Organization.approved.includes(:music_releases => [:audios]).order(created_at: :desc)
     artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
     @locations = artists_data['locations'].map{|location| [location[:label], location[:id]]}
     @composers = artists_data['composers'].map{|composer| [composer[:label], composer[:id]]}

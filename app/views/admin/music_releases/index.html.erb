@@ -23,12 +23,15 @@
     <th scope="col">Artist name</th>
 <!--    <th scope="col">Tracks</th>-->
     <th scope="col">Link</th>
-    <th scope="col">Audio action</th>
     <th scope="col">Artist</th>
+    <th scope="col">Audio action</th>
+    <th scope="col">Project status</th>
+    <th scope="col">Project action</th>
   </tr>
   </thead>
   <tbody class="crayons-card">
   <% @music_releases.each do |music_release| %>
+    <% music_release = music_release.reload %>
     <tr>
       <td><%= music_release.id %></td>
       <td><%= link_to music_release.title, edit_admin_music_release_path(music_release) %></td>
@@ -42,6 +45,7 @@
           <% end %>
         <% end %>
       </td>
+      <td><%= link_to "@#{music_release.user.username}", "/#{music_release.user.username}" %></td>
       <td>
         <% if music_release.audios.present? && music_release.audios.first.try(:link).present? %>
           <% if music_release.audios.first.status.present? %>
@@ -51,7 +55,24 @@
           <% end %>
         <% end %>
       </td>
-      <td><%= link_to "@#{music_release.user.username}", "/#{music_release.user.username}" %></td>
+      <td>
+        <% if music_release.organization.present? %>
+          <% if music_release.organization.present? && music_release.organization.status.present? %>
+            <span class="badge badge-success">Approved</span>
+          <% else %>
+            <span class="badge badge-danger">Rejected</span>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% if music_release.organization.present? %>
+          <% if music_release.organization.present? && music_release.organization.status.present? %>
+            <%= link_to "Reject", update_project_admin_audio_path(id: music_release.organization.id, status: 'reject'), method: :put, class: 'btn btn-danger' %>
+          <% else %>
+            <%= link_to "Approve", update_project_admin_audio_path(id: music_release.organization.id, status: 'approve'), method: :put, class: 'btn btn-success' %>
+          <% end %>
+        <% end %>
+      </td>
     </tr>
   <!-- update_post_admin_audio -->
   <% end %>

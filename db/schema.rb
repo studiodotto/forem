@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_142326) do
+ActiveRecord::Schema.define(version: 2021_02_25_123324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -930,6 +930,7 @@ ActiveRecord::Schema.define(version: 2021_02_24_142326) do
     t.string "twitter_handle"
     t.string "organization_type"
     t.string "genre_id"
+    t.boolean "status", default: false
     t.index ["secret"], name: "index_organizations_on_secret", unique: true
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
