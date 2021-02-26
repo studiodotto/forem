@@ -486,7 +486,7 @@ class UsersController < ApplicationController
   def artist_update_params
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location, :composer_id, :industry_id,
                                  :song_language_id, :genre_id, :industry_id, :commission_accepted, :sell_tracks, :sell_campaigns, :spotify_url,
-                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url, :profile_image, :username)
+                                 :soundcloud_url, :itunes_url, :twitter_url, :apple_music_url, :twitch_url, :youtube_url, :instagram_url, :facebook_url, :website_url, :profile_image, :username)
   end
 
   def render_update_response
