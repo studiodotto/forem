@@ -73,7 +73,7 @@
     margin: 0px 25px;
   }
 </style>
-<div class="container-fluid" style="background: #28292D; width: 100%; height: 810px;">
+<div class="container-fluid" style="background: #28292D; width: 100%;">
   <div class="container" style="background: #28292D; width: 1000px !important;">
     <% if flash[:artist_error].present? %>
       <div class="alert alert-danger" style="text-align: center">
@@ -142,13 +142,13 @@
         <% end %>
       </div>
       <br>
-      <div class="row">
+      <div class="row" style="margin-bottom: 70px">
         <p class="text-color-white text-centered footer-p">Note: you are not automatically accessing Unitedbits marketplace. If you meet the</p>
         <p class="text-color-white text-centered footer-p">eligibility requirements, a music director will contact you within a few</p>
         <p class="text-color-white text-centered footer-p">days to finish onboarding.</p>
       </div>
     <% else %>
-      <div class="thank-you-div">
+      <div class="thank-you-div" style="margin-bottom: 70px">
         <h1>
           Thank you
         </h1>
