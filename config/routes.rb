@@ -475,6 +475,7 @@ Rails.application.routes.draw do
     get "/settings/:tab/:org_id" => "users#edit", :constraints => { tab: /organization/ }
     get "/settings/:tab/:id" => "users#edit", :constraints => { tab: /response-templates/ }
     get "/artist_settings/(:tab)" => "users#artist_edit", :as => :artist_settings
+    get "t/artist_settings/(:tab)" => "users#artist_edit", :as => :artist_settings_tags
     post "/create_organization" => "organizations#create_organization", :as => :create_organization
     post "/create_organizations_music_release" => "organizations#create_organizations_music_release", :as => :create_organizations_music_release
     post "/create_organizations_event" => "organizations#create_organizations_event", :as => :create_organizations_event
