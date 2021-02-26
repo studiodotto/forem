@@ -62,6 +62,12 @@ module Moderator
         remove_privileges
       when "Warn"
         warned
+      when "Artist"
+        user.remove_role(:customer)
+        user.add_role(:artist)
+      when "Customer"
+        user.remove_role(:artist)
+        user.add_role(:customer)
       when "Comment Ban"
         comment_banned
       when "Regular Member"

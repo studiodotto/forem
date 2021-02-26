@@ -5,6 +5,8 @@ module Constants
                   "Ban",
                   "Regular Member",
                   "Trusted",
+                  "Customer",
+                  "Artist",
                   "Pro"].freeze
 
     SPECIAL_ROLES = ["Admin",
