@@ -14,6 +14,7 @@ module Constants
     ].freeze
 
     ARTIST_TAB_LIST = %w[
+      Raw\ N\ Uncut\ Music\ Page
       Single\ Track\ Music\ Page
       Your\ Music\ Productions
       My\ Projects

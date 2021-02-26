@@ -40,6 +40,12 @@
           <%= f.file_field "profile_image", accept: "image/*", class: "crayons-card crayons-card--secondary p-3 flex items-center flex-1 w-100" %>
         </div>
       </div>
+      <div class="crayons-field" style="margin-top: 10px">
+        <div class="crayons-field">
+          <%= f.label :username, class: "crayons-field__label" %>
+          <%= f.text_field "username", maxlength: 30, class: "crayons-textfield", placeholder: "johndoe", value: @user.username %>
+        </div>
+      </div>
     </div>
 <!--    <br><br>-->
 <!--     About fields -->

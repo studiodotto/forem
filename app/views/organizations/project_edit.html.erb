@@ -40,7 +40,7 @@
       <%# end %>
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
         <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
-          <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+          <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions", "Raw N Uncut Music Page"].include?(possible_tab) %>
             <a class="crayons-link crayons-link--block <% if possible_tab == 'My Projects' %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
               <% if possible_tab == "Single Track Music Page" %>
                 Create a new single track
@@ -48,6 +48,8 @@
                 Your profile
               <% elsif possible_tab == "My Projects" %>
                 Projects
+              <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                Create a RAW N UNCUT
               <% else %>
                 <%= possible_tab %>
               <% end %>
@@ -61,6 +63,8 @@
               Your profile
             <% elsif possible_tab == "My Projects" %>
               Projects
+            <% elsif possible_tab == "Raw N Uncut Music Page" %>
+              Create a RAW N UNCUT
             <% else %>
               <%= possible_tab %>
             <% end %>
@@ -72,7 +76,7 @@
       <select id="mobile-page-selector" class="crayons-select">
         <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
           <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
-            <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+            <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions", "Raw N Uncut Music Page"].include?(possible_tab) %>
               <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
                 <% if possible_tab == "Single Track Music Page" %>
                   Create a new single track
@@ -80,6 +84,8 @@
                   Your profile
                 <% elsif possible_tab == "My Projects" %>
                   Projects
+                <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                  Create a RAW N UNCUT
                 <% else %>
                   <%= possible_tab %>
                 <% end %>
@@ -93,6 +99,8 @@
                 Your profile
               <% elsif possible_tab == "My Projects" %>
                 Projects
+              <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                Create a RAW N UNCUT
               <% else %>
                 <%= possible_tab %>
               <% end %>
@@ -120,8 +128,9 @@
     <% if @user.errors.any? %>
       <%= render partial: "users/errors", locals: { errors: @user.errors, title_suffix: "prohibited your profile from being saved" } %>
     <% end %>
-
-    <% if @organization.organization_type == 'single_track' %>
+    <% if @organization.try(:org_type).present? && @organization.try(:org_type) == 'uncut' %>
+      <%= render partial: 'users/raw_n_uncut_music_page' %>
+    <% elsif @organization.organization_type == 'single_track' %>
       <%= render partial: 'users/single_track_music_page' %>
     <% elsif @organization.organization_type == 'deejaying' %>
       <%= render partial: 'users/deejaying_services' %>

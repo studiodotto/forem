@@ -34,6 +34,8 @@
       Your profile
     <% elsif @tab == "my-projects" %>
       Projects
+    <% elsif @tab == "raw-n-uncut-music-page" %>
+      Create a RAW N UNCUT event
     <% else %>
       <%= @tab.tr('-', ' ').capitalize %>
     <% end %>
@@ -45,7 +47,7 @@
     <nav class="hidden m:block">
       <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
         <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
-          <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+          <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions", "Raw N Uncut Music Page"].include?(possible_tab) %>
             <a class="crayons-link crayons-link--block <% if @tab == possible_tab.downcase.tr(' ', '-') %>crayons-link--current<% end %>" href="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>">
               <% if possible_tab == "Single Track Music Page" %>
                 Create a new single track
@@ -53,6 +55,8 @@
                 Your profile
               <% elsif possible_tab == "My Projects" %>
                 Projects
+              <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                Create a RAW N UNCUT
               <% else %>
                 <%= possible_tab %>
               <% end %>
@@ -66,6 +70,8 @@
               Your profile
             <% elsif possible_tab == "My Projects" %>
               Projects
+            <% elsif possible_tab == "Raw N Uncut Music Page" %>
+              Create a RAW N UNCUT
             <% else %>
               <%= possible_tab %>
             <% end %>
@@ -77,7 +83,7 @@
       <select id="mobile-page-selector" class="crayons-select">
         <% Constants::Settings::ARTIST_TAB_LIST.each do |possible_tab| %>
           <% if current_user.has_role?(:artist) && !current_user.any_admin? %>
-            <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions"].include?(possible_tab) %>
+            <% if ["Profile and services", "Single Track Music Page", "My Projects", "Your Music Productions", "Raw N Uncut Music Page"].include?(possible_tab) %>
               <option value="/artist_settings/<%= possible_tab.downcase.tr(" ", "-") %>" <% if @tab == possible_tab.downcase.tr(' ', '-') %> selected <% end %>>
                 <% if possible_tab == "Single Track Music Page" %>
                   Create a new single track
@@ -85,6 +91,8 @@
                   Your profile
                 <% elsif possible_tab == "My Projects" %>
                   Projects
+                <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                  Create a RAW N UNCUT
                 <% else %>
                   <%= possible_tab %>
                 <% end %>
@@ -98,6 +106,8 @@
                 Your profile
               <% elsif possible_tab == "My Projects" %>
                 Projects
+              <% elsif possible_tab == "Raw N Uncut Music Page" %>
+                Create a RAW N UNCUT
               <% else %>
                 <%= possible_tab %>
               <% end %>

@@ -262,6 +262,7 @@ class OrganizationsController < ApplicationController
       itunes_url
       organization_type
       release_date
+      org_type
     ]
   end
 

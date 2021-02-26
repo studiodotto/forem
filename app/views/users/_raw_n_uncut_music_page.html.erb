@@ -1446,7 +1446,7 @@
       font-style: normal;
       font-weight: normal;
       font-size: 24px;color: #08090A;
-      line-height: 36px;">Create a new single track release</p>
+      line-height: 36px;">Create a RAW N UNCUT music streaming</p>
   <% end %>
 </div>
 
@@ -1512,9 +1512,9 @@
           flex-grow: 0;">Team and royalties structure
         </p>
       </div>
-<!--      <div class="row">-->
-<!--        <p class="color-gray">Invite your crew members by sharing secret. First create your the project</p>-->
-<!--      </div>-->
+      <!--      <div class="row">-->
+      <!--        <p class="color-gray">Invite your crew members by sharing secret. First create your the project</p>-->
+      <!--      </div>-->
       <div class="grid gap-2" style="margin-top: 20px; margin-bottom: 10px; background: #fed853 !important">
         <div class="crayons-card crayons-card--secondary p-4 flex items-center" style="background: #fed853 !important">
           <p class="fw-medium flex-1">
@@ -1548,9 +1548,9 @@
             <div style="padding: 0px;" class="contributor-div" id="<%= index %>-contributor-div">
               <div class="form-group" style="width: 47%; display: inline-block">
                 <p class="track-labels">Crew member</p>
-<!--                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>-->
-<!--                  <option value="<%#= value.collaborator.id %>" selected><%#= value.collaborator.username %></option>-->
-<!--                </select>-->
+                <!--                <select name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>-->
+                <!--                  <option value="<%#= value.collaborator.id %>" selected><%#= value.collaborator.username %></option>-->
+                <!--                </select>-->
                 <input type="text" value="<%= value.collaborator.username %>" class="form-control track-fields" style="padding: 7px !important; background: #e2e2e2; cursor: not-allowed" readonly>
                 <input type="hidden" value="<%= value.collaborator.id %>" name="organization_memberships[][collaborator_id]" class="form-control track-fields" style="padding: 7px !important;" readonly>
               </div>
@@ -1560,11 +1560,11 @@
               </div>
               <% if value.collaborator_id == current_user.id %>
                 <i class="fa fa-times-circle" style="display: none" id="<%= index %>-closeContributor" onclick="closeContributors(<%= index %>)"></i>
-            <% else %>
+              <% else %>
                 <i class="fa fa-times-circle" id="<%= index %>-closeContributor" style="cursor: pointer" onclick="closeContributors(<%= index %>)"></i>
-            <% end %>
+              <% end %>
             </div>
-         <% end %>
+          <% end %>
         <% else %>
           <p style="color: darkred">Total royalties must be 100%</p>
           <!-- Contributor -->
@@ -1607,13 +1607,13 @@
         </div>
         <p style="color: darkred">You will see all the contributors here when they accept your invitation</p>
 
-    <% else %>
+      <% else %>
         <div class="alert alert-danger" style="display: none" id="royalty-error">
           <p>Verify royalties split to 100% not more</p>
         </div>
       <% end %>
     </div>
-  <!-- Single Track Music Page -->
+    <!-- Single Track Music Page -->
     <div class="container" style="padding: 0px">
 
       <div class="row" style="padding: 20px; background: white">
@@ -1622,7 +1622,7 @@
           font-size: 24px;
           line-height: 28px;
           letter-spacing: 0.1px;
-          color: #000000;">Single track project</p>
+          color: #000000;">RAW N UNCUT streaming project</p>
         <br>
         <div class="row">
           <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Artist Name</p>
@@ -1630,7 +1630,7 @@
           <div class="form-group">
             <input type="hidden" name="organization[organization_type]" value="single_track">
             <%= f.hidden_field :id, value: "#{@organization.try(:id)}" %>
-            <%= f.hidden_field :org_type, value: "single" %>
+            <%= f.hidden_field :org_type, value: "uncut" %>
             <input type="hidden" name="organization[artist_id]" value="<%= current_user.id %>">
             <%= f.text_field :name, class: "form-control organization-fields", required: true %>
           </div>
@@ -1643,27 +1643,31 @@
           <input type="text" name="music_release[title]" class="form-control track-fields" placeholder="Enter title name" value="<%= @single.try(:title) %>" required>
         </div>
         <div class="crayons-layout" style="padding: 0px; grid-template-columns: 1fr 1fr 1fr !important;">
+<!--          <div class="form-group">-->
+<!--            <p class="track-labels">Price per song</p>-->
+<!--            <input type="text" name="music_release[price]" class="form-control track-fields" placeholder="Set a price for your music" value="<%#= @single.try(:price) %>" required>-->
+<!--          </div>-->
           <div class="form-group">
-            <p class="track-labels">Price per song</p>
-            <input type="text" name="music_release[price]" class="form-control track-fields" placeholder="Set a price for your music" value="<%= @single.try(:price) %>" required>
+            <p class="track-labels">Music streaming start time</p>
+            <input type="text" name="music_release[price]" class="form-control track-fields" placeholder="Set a streaming start time" value="<%= @single.try(:price) %>" required>
           </div>
           <div class="form-group">
             <p class="track-labels">Length</p>
             <input type="text" name="music_release[length]" class="form-control track-fields" placeholder="Set approx playtime in seconds" value="<%= @single.try(:length) %>" required>
           </div>
-<!--          <div class="form-group">-->
-<!--            <p class="track-labels">Number of Limited Edition copies</p>-->
-<!--            <input type="text" name="music_release[copies]" class="form-control track-fields" placeholder="How many copies you make" id="customer-copies" value="<%#= @single.try(:copies) %>" required>-->
-<!--          </div>-->
+          <!--          <div class="form-group">-->
+          <!--            <p class="track-labels">Number of Limited Edition copies</p>-->
+          <!--            <input type="text" name="music_release[copies]" class="form-control track-fields" placeholder="How many copies you make" id="customer-copies" value="<%#= @single.try(:copies) %>" required>-->
+          <!--          </div>-->
         </div>
-<!--        <div class="form-group">-->
-<!--          <p class="track-labels">Royalties</p>-->
-<!--          <input type="text" name="music_release[royalty]" class="form-control track-fields" id="customer-royalties" placeholder="Royalties percentage" value="<%#= @single.try(:royalty) %>" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <p class="track-labels">Project Details</p>-->
-<!--          <input type="text" name="music_release[description]" class="form-control track-fields" placeholder="Enter details here" value="<%#= @single.try(:description) %>" required>-->
-<!--        </div>-->
+        <!--        <div class="form-group">-->
+        <!--          <p class="track-labels">Royalties</p>-->
+        <!--          <input type="text" name="music_release[royalty]" class="form-control track-fields" id="customer-royalties" placeholder="Royalties percentage" value="<%#= @single.try(:royalty) %>" required>-->
+        <!--        </div>-->
+        <!--        <div class="form-group">-->
+        <!--          <p class="track-labels">Project Details</p>-->
+        <!--          <input type="text" name="music_release[description]" class="form-control track-fields" placeholder="Enter details here" value="<%#= @single.try(:description) %>" required>-->
+        <!--        </div>-->
         <div class="form-group">
           <p class="track-labels">Slug</p>
           <input type="text" name="music_release[slug]" class="form-control track-fields" placeholder="This is the web address of your project" value="<%= @single.try(:slug) %>" required>
@@ -1675,9 +1679,9 @@
         <br>
         <div class="form-group">
           <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose a great image for your project</p>
-<!--          <div class="org_image_preview display-inline">-->
-<!--            <img id="previewImg_single" class="<%#= f.object&.header_image_url.present? ? "" : "display-none" %>" src="<%#= f.object&.header_image_url %>" alt="Placeholder" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); width: 108px; height: 108px">-->
-<!--          </div>-->
+          <!--          <div class="org_image_preview display-inline">-->
+          <!--            <img id="previewImg_single" class="<%#= f.object&.header_image_url.present? ? "" : "display-none" %>" src="<%#= f.object&.header_image_url %>" alt="Placeholder" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1); width: 108px; height: 108px">-->
+          <!--          </div>-->
           <!--        <div class="display-inline">-->
           <!--          <button class="crayons-btn crayons-btn--outlined mr-2">-->
           <!--            <label for="cover-image-input" id="upload_img_label_<%#= type %>">-->
@@ -1701,15 +1705,15 @@
         </div>
       </div>
 
-<!--      <div class="row" style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px; background: white">-->
-<!--        <div class="form-group">-->
-          <%# if organization&.id.present? %>
-            <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}" %>
-          <%# else %>
-            <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}", disabled: true %>
-          <%# end %>
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="row" style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px; background: white">-->
+      <!--        <div class="form-group">-->
+      <%# if organization&.id.present? %>
+      <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}" %>
+      <%# else %>
+      <%#= f.submit submit_btn, class: "crayons-btn application-submit-btn #{btn_class}", disabled: true %>
+      <%# end %>
+      <!--        </div>-->
+      <!--      </div>-->
 
     </div>
 
@@ -1762,7 +1766,7 @@
           color: #08090A;
           flex: none;
           order: 0;
-          flex-grow: 0;">About this release </p>
+          flex-grow: 0;">About this RAW N UNCUT streaming event </p>
       </div>
       <div class="row">
         <!--        <p class="color-gray">Tell your fans about you, and the collaborations you are available for. Access different kinds of projects, from concert music and jazz to dance and video games</p>-->
@@ -1800,13 +1804,13 @@
       </div>
       <br>
 
-<!--      <div class="row">-->
-<!--        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Awards and Nominations_2</p>-->
-<!--        <p class="color-gray">In one line what’s your greatest achievement in your music career</p>-->
-<!--        <div class="form-group">-->
-          <%#= f.text_field :tech_stack, class: "form-control organization-fields" %>
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="row">-->
+      <!--        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Awards and Nominations_2</p>-->
+      <!--        <p class="color-gray">In one line what’s your greatest achievement in your music career</p>-->
+      <!--        <div class="form-group">-->
+      <%#= f.text_field :tech_stack, class: "form-control organization-fields" %>
+      <!--        </div>-->
+      <!--      </div>-->
 
       <div class="row">
         <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Song Language*</p>
@@ -1826,50 +1830,50 @@
       </div>
     </div>
 
-  <div class="container">
-    <div class="row">
-      <p style="font-family: 'Roboto', sans-serif;font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 28px;
-        color: #08090A;
-        flex: none;
-        order: 0;
-        flex-grow: 0;">Release date </p>
-    </div>
-    <div class="row" style="margin-top: 30px">
-      <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select release date*</p>
-      <div class="form-group">
-        <%= f.text_field :release_date, "data-provide" => 'datepicker', required: true, class: 'crayons-select' %>
-        <%#= f.date_select :release_date, start_year: Time.now.year, required: true %>
-        <%#= f.select(:genre_id, options_for_select(@genres, f.object.genre_id.try(:split, ',')), {}, { class: "crayons-select", multiple: true }) %>
+    <div class="container">
+      <div class="row">
+        <p style="font-family: 'Roboto', sans-serif;font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #08090A;
+          flex: none;
+          order: 0;
+          flex-grow: 0;">Release date </p>
+      </div>
+      <div class="row" style="margin-top: 30px">
+        <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Select release date*</p>
+        <div class="form-group">
+          <%= f.text_field :release_date, "data-provide" => 'datepicker', required: true, class: 'crayons-select' %>
+          <%#= f.date_select :release_date, start_year: Time.now.year, required: true %>
+          <%#= f.select(:genre_id, options_for_select(@genres, f.object.genre_id.try(:split, ',')), {}, { class: "crayons-select", multiple: true }) %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="row">
-      <p style="    font-family: 'Roboto', sans-serif;
-        text-align: center;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 154.69%;
-        letter-spacing: 0.01em;
-        color: #000000;
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-        margin: 0px 0px;">Note: you are not automatically enrolled on UnitedBits marketplace. If you meet the eligibility requirements, a talent representative will contact you within a few days to finish onboarding.</p>
-      <div class="form-group">
-        <% btn_text = f.object.id.present? ? "Update your track" : "Create your track" %>
-        <%= f.submit btn_text, class: "crayons-btn application-submit-btn organization-submit-btn", id: 'submit-btn' %>
-        <p style="color: darkred; display: none" id="img-msg">Image is being uploaded</p>
-        <p style="color: darkred; display: none" id="audio-msg">Audio upload may take some more time, please wait</p>
+    <div class="container">
+      <div class="row">
+        <p style="    font-family: 'Roboto', sans-serif;
+          text-align: center;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 154.69%;
+          letter-spacing: 0.01em;
+          color: #000000;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+          margin: 0px 0px;">Note: you are not automatically enrolled on UnitedBits marketplace. If you meet the eligibility requirements, a talent representative will contact you within a few days to finish onboarding.</p>
+        <div class="form-group">
+          <% btn_text = f.object.id.present? ? "Update your track" : "Create your track" %>
+          <%= f.submit btn_text, class: "crayons-btn application-submit-btn organization-submit-btn", id: 'submit-btn' %>
+          <p style="color: darkred; display: none" id="img-msg">Image is being uploaded</p>
+          <p style="color: darkred; display: none" id="audio-msg">Audio upload may take some more time, please wait</p>
+        </div>
       </div>
     </div>
-  </div>
- <% end %>
+  <% end %>
 </div>
 <script>
   setTimeout(function (){
@@ -1975,7 +1979,7 @@
       '          </div>\n' +
       '          <div class="form-group" style="width: 47%; display: inline-block">\n' +
       '            <p class="track-labels">Royalties in percentage</p>\n' +
-        '            <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set royalties" required>\n' +
+      '            <input type="text" name="organization_memberships[][royalty]" class="form-control track-fields royalties-percentage" placeholder="Set royalties" required>\n' +
       '          </div>\n' +
       '          <i class="fa fa-times-circle" style="cursor: pointer" id="'+contributorsDiv.childElementCount+'-closeContributor" onclick="closeContributors('+contributorsDiv.childElementCount+')"></i>\n' +
       '        </div>' +

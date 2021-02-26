@@ -337,6 +337,10 @@ class UsersController < ApplicationController
       @organization = current_user.artist_organizations.single_track.new
       @artists = User.with_role(:artist).map{|a| {'id': a.id,'name': a.username}}.to_json
       organizations_assoiations
+    when "raw-n-uncut-music-page"
+      @organization = current_user.artist_organizations.single_track.new
+      @artists = User.with_role(:artist).map{|a| {'id': a.id,'name': a.username}}.to_json
+      organizations_assoiations
     when "my-projects"
       @organizations = current_user.artist_organizations.order(created_at: :desc)
       artists_data = YAML.load_file("#{Rails.root}/lib/data/artists_data.yml")
@@ -482,7 +486,7 @@ class UsersController < ApplicationController
   def artist_update_params
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location, :composer_id, :industry_id,
                                  :song_language_id, :genre_id, :industry_id, :commission_accepted, :sell_tracks, :sell_campaigns, :spotify_url,
-                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url, :profile_image)
+                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url, :profile_image, :username)
   end
 
   def render_update_response
