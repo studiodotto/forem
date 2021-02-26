@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[onboarding_update onboarding_checkbox_update]
   before_action :set_suggested_users, only: %i[index]
   before_action :initialize_stripe, only: %i[edit]
+  include ImageUploads
 
   INDEX_ATTRIBUTES_FOR_SERIALIZATION = %i[id name username summary profile_image].freeze
   private_constant :INDEX_ATTRIBUTES_FOR_SERIALIZATION
@@ -80,21 +81,26 @@ class UsersController < ApplicationController
 
   def artist_update
     @artist = User.find(params[:id])
-    if @artist.update(artist_update_params)
-      if params[:service].present?
-        params[:service].each do |service_param|
-          service = Service.find(service_param[:id])
-          service.name = service_param[:name]
-          service.price = service_param[:price]
-          service.save
+    if verify_profile_image
+      if @artist.update(artist_update_params)
+        if params[:service].present?
+          params[:service].each do |service_param|
+            service = Service.find(service_param[:id])
+            service.name = service_param[:name]
+            service.price = service_param[:price]
+            service.save
+          end
         end
+        flash[:global_notice] = 'Successfully updated information'
+        return redirect_to '/artist_settings/profile-and-services'
+      else
+        error = "Cannot update information"
+        error = @artist.errors.full_messages.to_sentence if @artist.errors.any?
+        flash[:error] = error
+        return redirect_to '/artist_settings/profile-and-services'
       end
-      flash[:global_notice] = 'Successfully updated information'
-      return redirect_to '/artist_settings/profile-and-services'
     else
-      error = "Cannot update information"
-      error = @artist.errors.full_messages.to_sentence if @artist.errors.any?
-      flash[:error] = error
+      flash[:error] = @error_message
       return redirect_to '/artist_settings/profile-and-services'
     end
   end
@@ -411,6 +417,27 @@ class UsersController < ApplicationController
   #   @languages = artists_data['languages'].map{|language| [language[:label], language[:id]]}
   #   @genres = artists_data['genres'].each_with_index.map{|genre, key| [genre, key + 1]}
   # end
+  def verify_profile_image
+    image = artist_update_params[:profile_image]
+    return true unless image
+    return true if valid_image_file?(image) && valid_filename?(image)
+
+    false
+  end
+
+  def valid_image_file?(image)
+    return true if file?(image)
+
+    @error_message = IS_NOT_FILE_MESSAGE
+    false
+  end
+
+  def valid_filename?(image)
+    return true unless long_filename?(image)
+
+    @error_message = FILENAME_TOO_LONG_MESSAGE
+    false
+  end
 
   def organizations_assoiations
     @single = MusicRelease.new(music_release_type: "single")
@@ -455,7 +482,7 @@ class UsersController < ApplicationController
   def artist_update_params
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :email, :telephone, :location, :composer_id, :industry_id,
                                  :song_language_id, :genre_id, :industry_id, :commission_accepted, :sell_tracks, :sell_campaigns, :spotify_url,
-                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url)
+                                 :soundcloud_url, :itunes_url, :twitter_url, :facebook_url, :website_url, :profile_image)
   end
 
   def render_update_response

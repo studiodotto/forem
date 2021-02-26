@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'application' %>
 
 <!--<div class="container" style="background: #f2ca27">-->
-  <%= form_with model: @user, url: user_artist_update_path(@user), method: :put, html: { class: "mb-2" }, local: true  do |f| %>
+  <%= form_with model: @user, url: user_artist_update_path(@user), method: :put, html: { class: "mb-2", multipart: true }, local: true  do |f| %>
     <div class="fields-div basics_info_box">
       <h2 class="crayons-title mb-4">The Basics</h2>
       <p> Starred fields are required</p>
@@ -29,6 +29,16 @@
       <div class="form-group">
         <%= f.label "Location ", class: "d-block field-label-normal" %>
         <%= f.select(:location, options_for_select(@locations, f.object.location), {}, { class: "crayons-select" }) %>
+      </div>
+      <div class="crayons-field" style="margin-top: 10px">
+        <%= f.label :profile_image, class: "crayons-field__label" %>
+
+        <div class="flex items-center">
+          <% if @user.profile_image_url.present? %>
+            <span class="crayons-avatar crayons-avatar--xl mr-2"><img alt="<%= @user.username %> profile image" src="<%= Images::Profile.call(@user.profile_image_url, length: 50) %>" class="crayons-avatar__image" /></span>
+          <% end %>
+          <%= f.file_field "profile_image", accept: "image/*", class: "crayons-card crayons-card--secondary p-3 flex items-center flex-1 w-100" %>
+        </div>
       </div>
     </div>
 <!--    <br><br>-->
