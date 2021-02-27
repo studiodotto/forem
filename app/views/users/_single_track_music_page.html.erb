@@ -17,7 +17,7 @@
     margin-top: 0.5rem;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 137.19%;
     color: #64707D;
   }
@@ -1465,10 +1465,12 @@
           color: #08090A;
           flex: none;
           order: 0;
-          flex-grow: 0;">Invite your crew members</p>
+          flex-grow: 0;">Invite your crew members— Grow your team</p>
       </div>
       <div class="row">
-        <p class="color-gray" style="margin-bottom: 20px">Grow your team by sending them the secret and following instructions</p>
+        <p class="color-gray" style="margin-bottom: 20px">
+          Setup a project, and invite your collaborators by sending them the secret code and following instructions, that will appear here.
+        </p>
       </div>
       <div class="crayons-card crayons-card--secondary p-4" style="background: #fed853 !important; margin-bottom: 20px">
         <ol class="list-decimal pl-6 mb-2">
@@ -1509,7 +1511,10 @@
           color: #08090A;
           flex: none;
           order: 0;
-          flex-grow: 0;">Team and royalties structure
+          flex-grow: 0;">Split royalties— Generate income
+        </p>
+        <p class="color-gray">
+          Setup royalties sharing plans and build collaborations.  Connect with world-class influencers, DJs, and A+Rs. Grow your fanbase to bring your music the audience it deserves.
         </p>
       </div>
 <!--      <div class="row">-->
@@ -1672,6 +1677,7 @@
 
       <div class="row" style="padding: 20px; padding-top: 0px; background: white">
         <p style="font-size: 24px;font-family: 'Roboto', sans-serif; font-weight: 600">Cover image</p>
+        <p class="color-gray">You can upload JPEG and PNG files. Image size should be less than or equal to 4096x4096. Frame is designed for square covers, it will also fit nicely landscape orientation covers</p>
         <br>
         <div class="form-group">
           <p style="font-weight: 600;font-size: 15px;font-family: 'Roboto', sans-serif;">Choose a great image for your project</p>
@@ -1782,9 +1788,11 @@
 
       <div class="row">
         <p style="font-size: 18px;font-family: 'Roboto', sans-serif;">Tell your fans about this project*</p>
-        <p class="color-gray">Tell your fans a few things about this project and the services you are offering.</p>
+        <p class="color-gray">Tell your fans a few things about this project and the services you are offering. Max 256 characters</p>
         <div class="form-group">
-          <input type="text" name="music_release[description]" class="form-control track-fields" placeholder="Enter details here" value="<%= @single.try(:description) %>" required>
+          <textarea class="form-control organization-fields" name="music_release[description]" placeholder="Enter details here" rows="4" maxlength="256" required><%= @single.try(:description) %></textarea>
+
+          <!--          <input type="text" name="music_release[description]" class="form-control track-fields" placeholder="Enter details here" value="<%#= @single.try(:description) %>" required>-->
 
           <%#= f.text_area :summary, class: "form-control organization-fields", required: true, row: 5 %>
         </div>
@@ -1907,7 +1915,11 @@
           error:function (err){
             submitBtn.disabled = false;
             imageMsg.style.display = 'none'
-            $("#single-img-error").text('Unsupported image type').show();
+            var msg = "Unsupported image type"
+            if(err && err.responseJSON && err.responseJSON.error){
+              msg = err.responseJSON.error
+            }
+            $("#single-img-error").text(msg).show();
             $("#single-header-img-url").val('');
           }
         });

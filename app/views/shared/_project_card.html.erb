@@ -59,7 +59,7 @@
           <% end %>
           <!--  LIMITED EDITION MP3 -->
 
-          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %> LIMITED EDITION MP3</p>
+          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block; font-size: 17px; line-height: 28px; ' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
           <!--          <div class="project-box" style="display: inline-block; width: 100%">-->
 <!--            <h2 style="float:left;">-->
 <!--              <a class="project-title" href="#">-->
@@ -72,10 +72,6 @@
 <!--              SAVE-->
 <!--            </button>-->
 <!--          </div>-->
-          <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
-            <%= music_release.try(:description) %>
-          </div>
-<!--          <div class="<%#= project_side.present? ? 'copies-project' : 'copies-project' %>"><%#= music_release.copies.to_i %> LIMITED EDITION MP3</div>-->
           <div class="<%= project_side.present? ? 'project-genres-and-awards-projects' : 'project-genres-and-awards' %>">
             <div class="genres" style="float:left;">
               <% if project.genre_id.present? %>
@@ -101,6 +97,13 @@
               <% end %>
             </div>
           </div>
+          <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
+            <h1>The story of @<%= music_release.try(:title) %></h1>
+          </div>
+          <% if project_side.present? %>
+            <p style="font-size: 17px; line-height: 28px; font-weight: 300"><%= music_release.try(:description) %></p>
+          <% end %>
+          <!--          <div class="<%#= project_side.present? ? 'copies-project' : 'copies-project' %>"><%#= music_release.copies.to_i %> LIMITED EDITION MP3</div>-->
 
           <div class="reviews-reactions">
 <!--            <span class="project-date"><%#= music_release.created_at.strftime('%Y') %> | 1 song | <%#= length[0]  %> mins <%#= length[1] %> secs</span>-->
