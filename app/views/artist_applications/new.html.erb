@@ -9,21 +9,42 @@
     text-align: center
   }
   .start-now-btn{
-    color: black;
     /*height: 3rem;*/
-    background: #FED853 !important;;
-    border: 1px solid #FED853 !important;;
-    box-sizing: border-box !important;
-    border-radius: 0px 4.8px 4.8px 0px !important;
+    width: 54%;
+    background: rgba(254, 216, 83, 0.9);
+    border: 2px solid rgba(254, 216, 83, 0.3);
+    box-sizing: border-box;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 0px;
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+    height: 43px;
   }
+  .start-now-btn:hover{
+    background: rgb(255 218 91) !important;
+  }
+  /*.signup-field{*/
+  /*  width: 50%;*/
+  /*  padding: 12px;*/
+  /*  background: #FFFFFF;*/
+  /*  border: 1px solid #FED853;*/
+  /*  box-sizing: border-box;*/
+  /*  box-shadow: 0px 0px 0px rgba(19, 126, 255, 0.25);*/
+  /*  border-radius: 4.8px 0px 0px 4.8px;*/
+  /*}*/
   .signup-field{
     width: 50%;
     padding: 12px;
-    background: #FFFFFF;
-    border: 1px solid #FED853;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 0px rgba(19, 126, 255, 0.25);
-    border-radius: 4.8px 0px 0px 4.8px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #FED853;
+    color: white !important;
   }
   .margin-for-password-field{
     margin-top: 1.8rem;
@@ -72,9 +93,220 @@
     flex-grow: 0;
     margin: 0px 25px;
   }
+/*  new css*/
+  .new-white-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 40px;
+    color: #FFFFFF;
+    margin-left: 10px;
+  }
+  .music-container{
+    background: #28292D !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding-top: 5.2em;
+  }
+  .juke-text{
+    font-family: 'Sen', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 7.2em;
+    line-height: 117px;
+    color: #8491A0;
+    margin-left: 10px;
+  }
+  .streaming-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 35px;
+    letter-spacing: 1.44px;
+    color: #FFFFFF;
+    margin-left: 10px;
+  }
+  .streaming-text-yellow{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 35px;
+    letter-spacing: 1.44px;
+    color: #D7E02C !important;
+  }
+  ::-webkit-input-placeholder { /* Edge */
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+  }
+
+  ::placeholder {
+    font-family: 'Roboto','sans-serif';
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 16px !important;
+    line-height: 19px !important;
+    color: #FFFFFF;
+  }
+  .btn-below-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 54%;
+    margin: auto;
+    margin-top: 50px;
+  }
+  .form-enroll{
+    padding-top: 7.2em;
+  }
+  .jukebox-works-container{
+    background: #28292D;
+    border-radius: 0px;
+    padding-top: 10.2em;
+    padding-bottom: 10.2em;
+  }
+  .jukebox-work-text{
+    font-family: 'Roboto', 'sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .art-text{
+    font-family: 'Roboto', 'sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: #5221E6;
+  }
+  .jukebox-work-below-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 40px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .artificial-container{
+    background: #D7E12B;
+    border-radius: 0px;
+    padding-top: 10.2em;
+  }
+  .artificial-work-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: #000000;
+  }
+  .artificial-below-work-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: #5221E6;
+  }
+  .artificial-descriptive-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    color: #181823;
+  }
+  .break-text{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-transform: uppercase;
+    color: #D4DF2A;
+  }
+  .break-white{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+  .text-gray-color{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #8491A0;
+  }
+  .text-white-color{
+    font-family: 'Roboto','sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+  }
+  .logo-banner-bg{
+    background: url("https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png");
+  }
+  .juke-img{
+    position: absolute;
+    top: 15%;
+    width: 400px;
+    left: 50%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .juke-text{
+      font-size: 4.2em;
+    }
+    .juke-img{
+      display: none;
+    }
+    .signup-field{
+      width: 90%;
+    }
+    .start-now-btn{
+      width: 97%;
+    }
+    .btn-below-text{
+      width: 100%;
+    }
+  }
 </style>
 <div class="container-fluid" style="background: #28292D; width: 100%;">
-  <div class="container" style="background: #28292D; width: 1000px !important;">
+  <div class="container music-container">
     <% if flash[:artist_error].present? %>
       <div class="alert alert-danger" style="text-align: center">
         <% if flash[:artist_error].is_a?(String) %>
@@ -90,62 +322,48 @@
     <% end %>
     <% unless flash[:artist_success].present? %>
       <div class="row">
-        <p class="text-color-white text-centered" style="font-size: 2rem; margin-top: 11%">
-          <svg class="svg-logo" width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="29" cy="29" r="29" fill="#181818"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M32.0129 8.25455C31.5519 8.39301 25.9493 10.0653 19.5626 11.9708C13.1759 13.8762 7.87255 15.4736 7.77732 15.5204C7.22477 15.7923 6.86205 16.6277 7.05014 17.1953C7.11323 17.3856 7.76567 18.1307 12.3575 23.2561L17.593 29.0999L17.3716 29.1695C17.2499 29.2078 16.1842 29.5289 15.0036 29.8831C13.7195 30.2684 12.7904 30.5703 12.6911 30.6344C12.4694 30.7778 12.195 31.1164 12.0881 31.3784C11.9571 31.6997 11.9655 32.123 12.1082 32.3895C12.2748 32.7008 30.3574 52.8388 30.5499 52.9274C30.798 53.0417 31.1814 53.0188 31.4427 52.8741C31.706 52.7283 32.0068 52.4002 32.1064 52.1502C32.1455 52.052 32.6449 50.0225 33.2163 47.6403C33.7877 45.2581 34.4705 42.4165 34.7338 41.3257C34.9971 40.2349 35.3164 38.9069 35.4435 38.3746L35.6746 37.4069L37.5952 39.5496C38.851 40.9507 39.5733 41.7236 39.682 41.7826C39.9352 41.92 40.3188 41.9062 40.6007 41.7495C40.8596 41.6057 41.1328 41.3169 41.2455 41.0679C41.3726 40.787 48 13.1098 48 12.8596C48 12.6298 47.918 12.3632 47.8042 12.2229C47.711 12.108 47.4787 11.9788 47.297 11.9408C47.1169 11.9031 47.8817 11.6828 39.2126 14.2693C35.3121 15.433 32.1174 16.3803 32.1133 16.3744C32.1092 16.3685 32.4984 14.7326 32.9783 12.739C33.502 10.5637 33.8508 9.03236 33.8509 8.90922C33.8513 8.39516 33.4863 7.99289 33.0262 8.0001C32.9299 8.00165 32.4739 8.11613 32.0129 8.25455ZM28.4456 14.0726C28.4353 14.104 28.237 14.9297 28.0051 15.9077C27.7731 16.8857 27.5726 17.7002 27.5595 17.7177C27.5349 17.7507 27.3398 17.8105 23.9989 18.8087C22.8022 19.1663 21.9501 19.4441 21.8499 19.5092C21.6278 19.6537 21.3537 19.9922 21.247 20.2538C21.1342 20.5302 21.1282 20.9915 21.2343 21.2193C21.2753 21.307 22.3592 22.5525 23.6431 23.9871C25.1885 25.7137 25.9575 26.6033 25.9184 26.6192C25.8859 26.6323 25.7489 26.6729 25.614 26.7094C25.479 26.7459 24.8259 26.9411 24.1625 27.1433L22.9563 27.5108L18.7772 22.851C16.4787 20.2881 14.6077 18.1801 14.6194 18.1665C14.6374 18.1455 28.3291 14.0352 28.4294 14.0207C28.4486 14.0179 28.456 14.0413 28.4456 14.0726ZM42.6024 17.9936C42.6019 18.0053 41.2199 23.7784 39.7372 29.9621L38.9035 33.4391L38.005 32.4371L37.1064 31.4352L37.9738 27.8149C38.5509 25.4061 38.8409 24.1203 38.8403 23.9722C38.838 23.4071 38.3841 22.9674 37.9045 23.0656C37.8237 23.0821 36.3146 23.5263 34.5508 24.0525L31.344 25.0094L30.0428 23.5589C29.3047 22.7362 28.7637 22.0993 28.7928 22.0873C28.9204 22.0346 42.4678 17.9914 42.5313 17.9871C42.5706 17.9844 42.6026 17.9873 42.6024 17.9936ZM30.8412 32.0176L32.3472 33.6974L31.4202 37.5685C30.9104 39.6977 30.3252 42.1414 30.1199 42.999C29.9145 43.8567 29.742 44.5543 29.7365 44.5492C29.731 44.5441 27.4441 41.9959 24.6546 38.8865C21.8172 35.7237 19.6054 33.2237 19.634 33.2119C19.7782 33.1523 29.1833 30.3471 29.2532 30.3428C29.3095 30.3394 29.8069 30.864 30.8412 32.0176Z" fill="url(#paint0_angular)"/>
-            <defs>
-              <radialGradient id="paint0_angular" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(29.214 30.5304) rotate(164.399) scale(27.9606 32.553)">
-                <stop offset="0.00297156" stop-color="#A960EE"/>
-                <stop offset="0.192708" stop-color="#FF333D"/>
-                <stop offset="0.40625" stop-color="#62D2FD"/>
-                <stop offset="0.604167" stop-color="#FF7D57"/>
-                <stop offset="0.786458" stop-color="#FFCB57"/>
-                <stop offset="0.973958" stop-color="#00B0E3"/>
-              </radialGradient>
-            </defs>
-          </svg>
-          <span>UNITEDBITS</span></p>
+        <p class="new-white-text">
+          ALL-IN-ONE MUSIC STREAMING PLATFORM
+        </p>
+        <p class="juke-text">
+          JUKEBOX
+        </p>
+        <br>
+        <img class="juke-img" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png" alt="logo">
+        <p class="streaming-text">Streaming your music <span class="streaming-text-yellow">exclusively</span> on jukebox. <span class="streaming-text-yellow">Elevate your art</span></p>
       </div>
-      <br>
 
-      <div class="row">
-        <p class="text-color-white text-centered header-p">Connects artists and influencers to break new music</p>
-      </div>
-      <br>
-
-      <div class="row">
-        <p class="text-color-white text-centered text-below-p">unitedbits helps music industry professionals,</p>
-        <p class="text-color-white text-centered text-below-p">and high-velocity influencers to split royalties,</p>
-        <p class="text-color-white text-centered text-below-p">go viral and get paid.</p>
-      </div>
-      <br>
-
-      <div class="row">
+      <div class="row form-enroll">
         <% @user = User.new if @user.blank? %>
         <%= form_with model: @user, url: artist_applications_path(@user), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
-          <br>
-          <div class="form-group" style="text-align: center">
-            <%= f.submit "START NOW", class: "crayons-btn start-now-btn" %>
-          </div>
           <br>
   <!--        <div class="row">-->
   <!--        <div class="col-md-6">-->
           <div class="form-group text-centered">
-              <%= f.text_field :email, class: "form-control signup-field", required: true, placeholder: "Enter email" %>
+              <%= f.text_field :email, class: "form-control signup-field", required: true, placeholder: "Enter your email address" %>
           </div>
   <!--        </div>-->
   <!--        </div>-->
           <div class="form-group text-centered">
-            <input class="form-control signup-field margin-for-password-field" type="password" name='user[password]' required placeholder="Enter password">
+            <input class="form-control signup-field margin-for-password-field" type="password" name='user[password]' required placeholder="Choose a password">
+          </div>
+          <br>
+          <div class="form-group" style="text-align: center">
+            <%= f.submit "JOIN NOW", class: "crayons-btn start-now-btn" %>
           </div>
         <% end %>
+        <p class="btn-below-text">
+          Note: you are not automatically accessing Unitedbits marketplace. If you meet the eligibility requirements, a music director will contact you within a few days to finish onboarding.
+        </p>
       </div>
-      <br>
-      <div class="row" style="margin-bottom: 70px">
-        <p class="text-color-white text-centered footer-p">Note: you are not automatically accessing Unitedbits marketplace. If you meet the</p>
-        <p class="text-color-white text-centered footer-p">eligibility requirements, a music director will contact you within a few</p>
-        <p class="text-color-white text-centered footer-p">days to finish onboarding.</p>
+      <div class="row jukebox-works-container">
+        <p class="jukebox-work-text">
+          HOW JUKEBOX WORKS?: <span class="art-text">ART SCARCITY</span>
+        </p>
+        <br>
+        <p class="jukebox-work-below-text">
+          The jukebox helps independent artists with full ownership of rights over their art, to create artificial scarcity for music, discover culture's true market value, stream, and get paid
+        </p>
       </div>
     <% else %>
       <div class="thank-you-div" style="margin-bottom: 70px">
@@ -157,5 +375,110 @@
         </p>
       </div>
     <% end %>
+  </div>
+  <div style="background: #D7E12B; padding-bottom: 10.2em">
+    <div class="container" style="background: #D7E12B !important;box-shadow: none">
+      <div class="artificial-container">
+        <p class="artificial-work-text">
+          ARTIFICIAL SCARCITY: <span class="artificial-below-work-text">EXCLUSIVITY</span>
+        </p>
+        <br>
+        <p class="artificial-descriptive-text">
+          The jukebox model is the opposite of the streaming economy today. Operating under exclusive licenses creates an artificial scarcity. Your fans will join the platform to discover your music, your content, that can not find anywhere else. Create network effects, elevate your art.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div style="background: #28292D; padding-bottom: 10.2em">
+    <div class="container" style="background: #28292D !important;box-shadow: none">
+      <div class="artificial-container" style="background: #28292D">
+        <p class="artificial-work-text" style="color: white">
+          JOIN WITH YOUR MUSIC: LEARN TO SUCCEED
+        </p>
+        <br>
+        <p class="artificial-descriptive-text" style="color: #FFFFFF;">
+          To join the platform: Full ownership of rights over your music is required for participation. We help you, the musician, build an artificial acarcity around your art
+        </p>
+      </div>
+    </div>
+  </div>
+  <div style="background: #050505; padding-bottom: 10.2em">
+    <div class="container" style="background: #050505 !important;box-shadow: none">
+      <div style="padding-top: 10.2em">
+        <p style="
+          font-family: 'Roboto','sans-serif';
+          font-style: normal;
+          font-weight: bold;
+          font-size: 21px;
+          line-height: 40px;
+          color: #FFFFFF; margin-left: 10px">
+          MUSIC LAUNCHER PLATFORM: TOOLS FOR YOU
+        </p>
+        <br>
+        <p class="juke-text">
+          JUKEBOX
+        </p>
+        <br><br><br><br>
+        <div style="background: #181823; padding: 20px">
+          <p class="break-text">BRAKE NEW MUSIC: <span class="break-white">AUTHENTICALLY ENGAGE</span></p>
+          <br>
+          <p class="text-gray-color">
+            SHARE CULTURE WITH TRUE FANS
+          </p>
+          <br>
+          <p class="text-white-color">
+            Brake new music, monetise “raw n uncut” recordings from the studio, engage your fans to participate in the making of music. Use jukebox and be your own label
+          </p>
+        </div>
+        <br><br>
+        <div style="background: #181823; padding: 20px">
+          <p class="break-text">SPLIT ROYALTIES: <span class="break-white">GROW YOUR TEAM</span></p>
+          <br>
+          <p class="text-gray-color">
+            CONNECT WITH INFLUENCERS, DJ’S, AND A+R
+          </p>
+          <br>
+          <p class="text-white-color">
+            Music rights are you assets. Use them to build collaborations with world-class influencers, DJs, and A+Rs. Split royalties and bring your music to market.
+          </p>
+        </div>
+        <br><br>
+        <div style="background: #181823; padding: 20px">
+          <p class="break-text">SET UP YOUR CAMPAIGNS: <span class="break-white">GO VIRAL</span></p>
+          <br>
+          <p class="text-gray-color">
+            REACH NEW AUDIENCES
+          </p>
+          <br>
+          <p class="text-white-color">
+            Grow your fanbase through DJs and influencer access, take songs viral on social media platforms like Tik Tok and Instagram.
+          </p>
+        </div>
+        <br><br>
+        <div style="background: #181823; padding: 20px">
+          <p class="break-text">GENERATE $: <span class="break-white">STREAMLINE PAYMENTS</span></p>
+          <br>
+          <p class="text-gray-color">
+            STREAMLINE PAYMENTS FLOW
+          </p>
+          <br>
+          <p class="text-white-color">
+            Get paid everytime your music is streamed and purchased.  Revenue generated from streaming and sales is distributed direct from fans, to artists and their teams.
+          </p>
+        </div>
+        <br><br>
+        <div style="background: #181823; padding: 20px">
+          <p class="break-text">OWN YOUR MUSIC RIGHTS: <span class="break-white">CRYPTO JUKEBOX</span></p>
+          <br>
+          <p class="text-gray-color">
+            PRICE DISCOVERY- DIGITAL DROPS
+          </p>
+          <br>
+          <p class="text-white-color">
+            Use digital contracts on Ethereum blockchain to monetise rights ownership, music distribution and broadcasting. Create NFT’S to structure future collaborations. Want to learn more? Join
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
