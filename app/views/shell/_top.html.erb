@@ -25,12 +25,13 @@
           max-width: 1250px;
         }
         .codeland-banner {
-          background: repeating-radial-gradient(#a960ee, #ff333d, #62d2fd, #ff7d57, #ffcb57, #00b0e3);
-          background-size: 1000% 1000%;
-          -webkit-animation: AnimationName 30s ease infinite;
-          -moz-animation: AnimationName 30s ease infinite;
-          -o-animation: AnimationName 30s ease infinite;
-          animation: AnimationName 30s ease infinite;
+          /*background: repeating-radial-gradient(#a960ee, #ff333d, #62d2fd, #ff7d57, #ffcb57, #00b0e3);*/
+          background: #28292D;
+          /*background-size: 1000% 1000%;*/
+          /*-webkit-animation: AnimationName 30s ease infinite;*/
+          /*-moz-animation: AnimationName 30s ease infinite;*/
+          /*-o-animation: AnimationName 30s ease infinite;*/
+          /*animation: AnimationName 30s ease infinite;*/
           color: white !important;
           position: relative;
           box-sizing: border-box;
@@ -129,6 +130,58 @@
           box-sizing: border-box;
           box-shadow: 0px 0px 0px rgba(8, 9, 10, 0.1);
           border-radius: 0px;
+        }
+        .new-white-text-banner{
+          font-family: 'Roboto','sans-serif';
+          font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 40px;
+          color: #FFFFFF;
+        }
+        .juke-text-banner{
+          font-family: 'Sen','sans-serif';
+          font-style: normal;
+          font-weight: normal;
+          font-size: 7.2rem;
+          line-height: 117px;
+          color: #8491A0;
+        }
+        .juke-text-banner-description{
+          font-family: 'Roboto','sans-serif';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 45px;
+          letter-spacing: 1.44px;
+          color: #FFFFFF;
+          width: 45%;
+        }
+        .juke-text-banner-description-yellow{
+          font-family: 'Roboto','sans-serif';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 45px;
+          letter-spacing: 1.44px;
+          color: #FEEF61;
+        }
+        .juke-img-banner{
+          position: absolute;
+          top: 12%;
+          width: 600px;
+          left: 40%;
+        }
+        @media only screen and (max-width: 600px) {
+          .juke-img-banner{
+            position: absolute;
+            top: 15%;
+            width: 200px;
+            left: 50%;
+          }
+          .juke-text-banner{
+            font-size: 4.2rem;
+          }
         }
       </style>
       <% unless user_signed_in? %>
