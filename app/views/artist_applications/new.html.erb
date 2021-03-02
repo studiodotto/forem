@@ -282,9 +282,10 @@
   }
   .juke-img{
     position: absolute;
-    top: 10%;
+    top: -24%;
     width: 600px;
-    left: 55%;
+    left: 60%;
+    z-index: -10;
   }
 
   @media only screen and (max-width: 600px) {
@@ -294,8 +295,8 @@
     .juke-img{
       position: absolute;
       top: 20%;
-      width: 300px;
-      left: 22%;
+      width: 230px;
+      left: 34%;
     }
     .signup-field{
       width: 90%;
@@ -324,7 +325,7 @@
       </div>
     <% end %>
     <% unless flash[:artist_success].present? %>
-      <div class="row">
+      <div class="row" style="position: relative;z-index: 1">
         <p class="new-white-text">
           ALL-IN-ONE MUSIC STREAMING PLATFORM
         </p>
