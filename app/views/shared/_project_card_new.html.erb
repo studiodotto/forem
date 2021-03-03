@@ -16,7 +16,7 @@
     <a href="#" class="crayons-story__hidden-navigation-link">
       <%= music_release.try(:title) %>
     </a>
-    <div class="crayons-layout crayons-layout--2-cols">
+    <div class="crayons-layout pr-main-card">
       <div role="presentation">
         <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover br-0" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 650, height: 650, crop: "pad") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
           <span class="hidden"><%= music_release.try(:title) %></span>
