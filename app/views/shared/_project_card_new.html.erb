@@ -39,6 +39,7 @@
       <% type = project.try(:org_type).present? && project.try(:org_type) == 'uncut' ? 'RAW N UNCUT' : 'NEW RELEASE'  %>
       <div class="project-presentation-text">
         <p class="pr-title-text"><%= music_release.try(:title) %></p>
+        <p class="pr-title-text"><%= project.try(:name) %></p>
         <p class="pr-desc-text"><%= music_release.try(:description) %></p>
         <p class="pr-below-text">
           <%= type %> | <%= duration %> |  <%= release_date %>
@@ -55,15 +56,15 @@
   <div class="crayons-story__bottom" style="padding-right: 2px">
     <div>
       <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/comment.png" alt="">
-      <span class="pr-bottom-bar-text"> Comment</span>
+      <p class="pr-bottom-bar-text"> Comment</p>
     </div>
     <div>
       <img height="33" width="33" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/playlist.png" alt="">
-      <span class="pr-bottom-bar-text"> Playlist</span>
+      <p class="pr-bottom-bar-text"> Playlist</p>
     </div>
     <div>
       <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/add-friend.png" alt="">
-      <span class="pr-bottom-bar-text"> Follow</span>
+      <p class="pr-bottom-bar-text"> Follow</p>
     </div>
   </div>
   <div style="display: none" class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left pr-bottom-bar">
