@@ -8,6 +8,9 @@
   z-index: var(--z-sticky);
   font-family: var(--ff-sans-serif);
   display: block;
+  @media only screen and (max-width: 600px) {
+    bottom: 57px;
+  }
   #progressBar {
     color: #fff;
     width: 100%;
@@ -15,11 +18,14 @@
     margin-top: 100px;
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
     right: 0;
     text-align: left;
     background: rgb(236, 236, 236);
     display: none;
+    @media only screen and (max-width: 600px) {
+      bottom: 57px;
+    }
     &.playing {
       display: block;
     }
@@ -190,6 +196,9 @@
   z-index: var(--z-sticky);
   font-family: var(--ff-sans-serif);
   display: block;
+  @media only screen and (max-width: 600px) {
+    bottom: 57px;
+  }
   #progressBart {
     color: #fff;
     width: 100%;
@@ -197,11 +206,14 @@
     margin-top: 100px;
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
     right: 0;
     text-align: left;
     background: rgb(236, 236, 236);
     display: none;
+    @media only screen and (max-width: 600px) {
+      bottom: 57px;
+    }
     &.playing {
       display: block;
     }

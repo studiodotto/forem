@@ -102,3 +102,12 @@ a {
     display: inline-block;
   }
 }
+#on-page-nav-controls{
+  @media only screen and (max-width: 600px) {
+    position: fixed;
+    top: 0px;
+    background: white;
+    z-index: 100;
+    width: 100%;
+  }
+}

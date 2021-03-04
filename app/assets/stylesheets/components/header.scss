@@ -13,6 +13,10 @@
     top: 0px;
     left: 0px;
     right: 0px;
+    @media only screen and (max-width: 600px) {
+      bottom: 0px;
+      top: unset;
+    }
   }
 
   &__container {
@@ -109,7 +113,7 @@
 
   &__dropdown {
     transform-style: preserve-3d;
-    top: var(--header-height);
+    bottom: var(--header-height);
     transform-origin: top right;
     transition: all var(--transition-props);
     transition-delay: var(--dropdown-delay, 0.25s);
