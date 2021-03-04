@@ -145,11 +145,57 @@
     <!--    </div>-->
   </div>
 </div>
-
-
+<div id="mockup-audios" class="mockup-audios" style="display: none">
+  <div id="audiocontentt" data-podcast="">
+    <audio id="audiot" data-episode="46" data-podcast="m-test-slug46">
+      <source src="https://studioappbucket.s3.amazonaws.com/audio/audio-upload.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div id="progressBart" class="audio-player-display playing">
+      <a href="/m-test-slug46/46">
+        <img id="episode-profile-imaget" alt="fs" width="420" height="420" src="https://res.cloudinary.com/dyzicyjzq/image/fetch/s--xkdBzESk--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png">
+        <img id="animated-barst" src="/assets/animated-bars.gif" alt="animated volume bars" class="">
+      </a>
+      <span id="barPlayPauset" class="">
+      <img class="butt play-butt" alt="play" src="/assets/playbutt.png">
+      <img class="butt pause-butt" alt="pause" src="/assets/pausebutt.png">
+    </span>
+      <span id="volumet">
+      <span id="volumeindicatort" class="volume-icon-wrapper showing">
+        <span id="volbutt"><img alt="volume" class="icon-img" height="16" width="16" src="/assets/volume"></span>
+        <span class="range-wrapper">
+          <input type="range" name="points" id="volumeslider" value="50" min="0" max="100" data-show-value="true">
+        </span>
+      </span>
+      <span id="mutebuttt" class="volume-icon-wrapper hidden"><img alt="volume-mute" class="icon-img" height="16" width="16" src="/assets/volume"></span>
+      <span class="speed" id="speed" data-speed="1">1x</span>
+    </span>
+      <span class="buffer-wrappert" id="bufferwrappert">
+      <p style="color: black; text-align: left; margin-left: 10px; margin-top: 15px">No Audio Selected</p>
+        <!--      <span id="buffer" style="width: 0%;"></span>-->
+        <!--      <span id="progress" style="width: 0%;"></span>-->
+        <!--      <span id="time">00:00 / 00:00</span>-->
+      <span id="closebuttt" onclick="removeElementsByClass('mockup-audios')">×</span>
+    </span>
+    </div>
+  </div>
+</div>
 
 <script>
+  setTimeout(function (){
+    if(document.getElementsByClassName('playing')[0].id == 'progressBar'){
+    }else{
+      document.getElementById('mockup-audios').style.display = 'block';
+    }
+  }, 2000)
+  function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
   function play_music(audio_id){
+    removeElementsByClass('mockup-audios')
     if(document.getElementById("closebutt")){
       document.getElementById("closebutt").click();
     }
