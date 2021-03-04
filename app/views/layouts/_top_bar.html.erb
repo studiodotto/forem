@@ -730,10 +730,19 @@
   }
   @media only screen and (max-width: 600px) {
     .banner-pd-90 {
+      padding-top: 20px;
+      /* padding-bottom: 160px; */
       padding-left: 10px;
+      z-index: -10;
+      padding-bottom: 20px;
     }
+
     .juke-text-banner-description{
       width: 100%;
+      font-size: 18px;
+    }
+    .juke-text-banner-description-yellow{
+      font-size: 18px;
     }
   }
   .top-banner{
@@ -741,11 +750,17 @@
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
-    /*line-height: 40px;*/
+    /* line-height: 40px; */
     text-align: center;
     color: #ffffff;
     background: #5221E6;
     padding: 10px;
+  }
+  @media only screen and (max-width: 600px) {
+    .top-banner{
+      font-weight: 400;
+      font-size: 12px;
+    }
   }
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
