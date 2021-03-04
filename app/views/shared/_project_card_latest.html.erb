@@ -1,0 +1,169 @@
+<style>
+  /*.crayons-story__cover {*/
+  /*  border-radius: 0px !important;*/
+  /*}*/
+  .br-0{
+    border-radius: 0px !important;
+    /*background: black !important;*/
+  }
+  .mb-5{
+    margin-bottom: 5px !important;
+  }
+  .pr-bg-img{
+    height: 130px;
+    width: 130px;
+    padding: 0px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .pr-main-card{
+    /*grid-template-columns: 1fr 1fr !important;*/
+    grid-template-columns: 130px 1fr !important;
+    padding: 0px !important;
+  }
+  .pr-play-icon{
+    width: 52px;
+    height: 52px;
+  }
+  @media only screen and (max-width: 600px) {
+    .pr-main-card{
+      grid-template-columns: 65px 1fr !important;
+      padding: 0px !important;
+    }
+    .pr-bg-img{
+      height: 60px;
+      width: 60px;
+    }
+    .pr-play-icon{
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>
+<!-- Project Card Section -->
+<article class="crayons-story cursor-pointer crayons-story--featured project-card mb-5 br-0" style="background: #000000e6">
+  <% if music_release.present? %>
+    <% if music_release.audios.published.present? %>
+      <% audio = music_release.audios.published.first %>
+      <div id="record-<%= audio.id.to_s %>" class="record-wrapper" data-podcast="<%= audio.slug %>" data-episode="<%= audio.id.to_s %>" style="display: none">
+        <div class="record" id="record">
+          <%= optimized_image_tag('/assets/playbutt.png',
+                                  optimizer_options: { width: 420, height: 420, crop: "fill" },
+                                  image_options: { class: "main-image", id: "main-image-#{audio.id.to_s}", alt: 'test' }) %>
+          <img alt="Play Button" id="hidden-play-<%= audio.id %>" class="butt play-butt" src="<%= image_path("playbutt.png") %>" />
+          <img alt="Pause Button" id="hidden-pause-<%= audio.id %>" class="butt pause-butt" src="<%= image_path("pausebutt.png") %>" />
+          <div class="status-message" id="status-message-<%= audio.id.to_s %>">
+            play
+          </div>
+        </div>
+      </div>
+      <% image = 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--YlfUcTgh--/c_fill,f_auto,fl_progressive,h_420,q_auto,w_420/https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png' %>
+      <% if music_release.try(:header_image_url).present?  %>
+        <% image = music_release.try(:header_image_url) %>
+      <% end %>
+      <%= render partial: "podcast_episodes/audio_podcast_bar", locals: {audio: audio, slug: audio.slug, image: image} %>
+    <% end %>
+    <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+    <a href="#" class="crayons-story__hidden-navigation-link">
+      <%= music_release.try(:title) %>
+    </a>
+    <div class="crayons-layout pr-main-card">
+      <div role="presentation">
+<!--        <a href='<%#= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover br-0 pr-bg-img" title="testtttt" style="background-image: url('<%#= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 130, height: 130, crop: "fill") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/c_fill,h_130,w_130/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">-->
+          <%# if music_release.audios.published.present? && !project_side %>
+<!--              <img alt="test" onclick="play_music(<%#= audio.id %>)" class="pr-play-icon" src="/assets/playbutt.png">-->
+          <%# end %>
+<!--        </a>-->
+        <div class="crayons-story__cover br-0 pr-bg-img" title="testtttt" style="background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 130, height: 130, crop: "fill") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/c_fill,h_130,w_130/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
+          <% if music_release.audios.published.present? && !project_side %>
+              <img alt="test" onclick="play_music(<%= audio.id %>)" class="pr-play-icon" src="/assets/playbutt.png">
+          <% end %>
+        </div>
+        <div class="crayons-story__body pd-b-0 p-l-r-0" style="padding-top: 0px">
+          <div class="crayons-story__top m-b-0">
+          </div>
+        </div>
+      </div>
+      <% length = Time.at(music_release.length).utc.strftime("%M:%S").split(":") %>
+      <% if music_release.length < 60 %>
+        <% duration = "#{length[0]}" %>
+      <% else %>
+        <% duration = "#{length[0]}:#{length[1]}" %>
+      <% end %>
+      <% release_date = '' %>
+      <% if project.try(:release_date).present? %>
+        <% release_date = project.try(:release_date).strftime('%Y %m') %>
+      <% end %>
+      <% type = project.try(:org_type).present? && project.try(:org_type) == 'uncut' ? 'RAW N UNCUT' : 'NEW RELEASE'  %>
+      <div class="project-presentation-text">
+        <p class="pr-title-text"><%= music_release.try(:title).capitalize %></p>
+        <p class="pr-desc-text-new"><%= project.try(:name) %></p>
+        <!--        <p class="pr-desc-text"><%#= music_release.try(:description) %></p>-->
+        <!--        <p class="pr-below-text">-->
+        <!--          <%#= type %> | <%#= duration %> |  <%#= release_date %>-->
+        <!--        </p>-->
+        <!--        <p class="pr-price-text">¢<%#= number_with_precision(music_release.try(:price), precision: 2) %></p>-->
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-danger">No product found against this project</div>
+  <% end %>
+</article>
+<div style="background: white; padding: 10px; display: none" class="margin-bottom-30">
+  <!-- crayons-layout--3-cols crayons-layout--3-cols--drop-right-left -->
+  <div class="crayons-story__bottom" style="padding-right: 2px">
+    <div>
+      <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/comment.png" alt="">
+      <p class="pr-bottom-bar-text"> Comment</p>
+    </div>
+    <div>
+      <img height="33" width="33" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/playlist.png" alt="">
+      <p class="pr-bottom-bar-text"> Playlist</p>
+    </div>
+    <div>
+      <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/add-friend.png" alt="">
+      <p class="pr-bottom-bar-text"> Follow</p>
+    </div>
+  </div>
+  <div style="display: none" class="crayons-layout crayons-layout--3-cols crayons-layout--3-cols--drop-right-left pr-bottom-bar">
+    <div>
+      <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/comment.png" alt="">
+      <span class="pr-bottom-bar-text"> Comment</span>
+    </div>
+    <div>
+      <img height="33" width="33" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/playlist.png" alt="">
+      <span class="pr-bottom-bar-text"> Playlist</span>
+    </div>
+    <div>
+      <img src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/add-friend.png" alt="">
+      <span class="pr-bottom-bar-text"> Follow</span>
+    </div>
+    <!--    <div style="text-align: right">-->
+    <!--      <img height="33" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/uploads/badge-bar.png" alt="">-->
+    <!--      <span class="pr-bottom-bar-text"> Comment</span>-->
+    <!--    </div>-->
+  </div>
+</div>
+
+
+
+<script>
+  function play_music(audio_id){
+    if(document.getElementById("closebutt")){
+      document.getElementById("closebutt").click();
+    }
+    document.getElementById("record-"+audio_id).click();
+    // document.getElementById("play-"+audio_id).style.display = 'none'
+    // document.getElementById("pause-"+audio_id).style.display = 'inline-block'
+  }
+
+  // function addHidden(theForm, key, value) {
+  //   // Create a hidden input element, and append it to the form:
+  //   var input = document.createElement('input');
+  //   input.type = 'hidden';
+  //   input.name = key; // 'the key/name of the attribute/field that is sent to the server
+  //   input.value = value;
+  //   theForm.appendChild(input);
+  // }
+</script>
