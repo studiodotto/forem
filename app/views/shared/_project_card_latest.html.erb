@@ -28,12 +28,12 @@
   }
   @media only screen and (max-width: 600px) {
     .pr-main-card{
-      grid-template-columns: 74px 1fr !important;
+      grid-template-columns: 98px 1fr !important;
       padding: 0px !important;
     }
     .pr-bg-img{
-      height: 69px;
-      width: 69px;
+      height: 93px;
+      width: 93px;
     }
     .pr-play-icon{
       width: 32px;
@@ -42,7 +42,7 @@
   }
 </style>
 <!-- Project Card Section -->
-<article class="crayons-story cursor-pointer crayons-story--featured project-card mb-10 br-0 pd-22" style="background: #000000e6">
+<article class="crayons-story cursor-pointer crayons-story--featured project-card mb-10 br-0 pd-22" style="background: #ffffff">
   <% if music_release.present? %>
     <% if music_release.audios.published.present? %>
       <% audio = music_release.audios.published.first %>
@@ -97,7 +97,8 @@
       <% end %>
       <% type = project.try(:org_type).present? && project.try(:org_type) == 'uncut' ? 'RAW N UNCUT' : 'NEW RELEASE'  %>
       <div class="project-presentation-text">
-        <p class="pr-title-text"><%= music_release.try(:title).capitalize %></p>
+        <span class="pr-title-text-new"><%= music_release.try(:title).capitalize %></span>
+        <span class="pr-price-text-new">¢<%= number_with_precision(music_release.try(:price), precision: 2) %></span>
         <p class="pr-desc-text-new"><%= project.try(:name) %></p>
         <!--        <p class="pr-desc-text"><%#= music_release.try(:description) %></p>-->
         <!--        <p class="pr-below-text">-->

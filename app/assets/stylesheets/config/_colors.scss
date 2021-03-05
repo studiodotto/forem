@@ -68,9 +68,9 @@
   ////////////////////////////////////////////////////////////////////////////////////
 
   // Main colors
-  //--body-bg: var(--base-10);
+  --body-bg: var(--base-10);
   //--body-bg: linear-gradient(90deg, rgba(12,248,135,1) 0%, rgba(12,248,135,1) 2%, rgba(50,0,80,1) 86%);;
-  --body-bg: radial-gradient(circle, rgba(12,248,135,1) 0%, rgba(50,0,80,1) 40%, rgba(50,0,80,1) 70%);
+  //--body-bg: radial-gradient(circle, rgba(12,248,135,1) 0%, rgba(50,0,80,1) 40%, rgba(50,0,80,1) 70%);
   --body-color: var(--base-100);
   --body-color-inverted: var(--base-inverted);
 
