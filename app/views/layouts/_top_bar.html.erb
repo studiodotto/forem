@@ -762,6 +762,14 @@
       font-size: 12px;
     }
   }
+  .mb-10{
+    margin-bottom: 10px !important;
+  }
+  .pd-22{
+    padding: 0px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -822,7 +830,7 @@
         </a>
       <% end %>
       <div class="crayons-header__menu <% unless user_signed_in? %>s:hidden<% end %>" id="crayons-header__menu">
-        <button type="button" class="crayons-header__menu__trigger" id="navigation-butt" aria-label="Navigation menu">
+        <button type="button" class="crayons-header__menu__trigger" id="navigation-butt" aria-label="Navigation menu" style="position: relative; right: 10px">
           <% if user_signed_in? %>
             <span class="crayons-avatar crayons-avatar--l"><img class="crayons-avatar__image" alt="" id="nav-profile-image" width="32" height="32" /></span>
           <% else %>

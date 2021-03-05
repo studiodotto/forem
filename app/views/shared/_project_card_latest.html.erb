@@ -28,12 +28,12 @@
   }
   @media only screen and (max-width: 600px) {
     .pr-main-card{
-      grid-template-columns: 65px 1fr !important;
+      grid-template-columns: 74px 1fr !important;
       padding: 0px !important;
     }
     .pr-bg-img{
-      height: 60px;
-      width: 60px;
+      height: 69px;
+      width: 69px;
     }
     .pr-play-icon{
       width: 32px;
@@ -42,7 +42,7 @@
   }
 </style>
 <!-- Project Card Section -->
-<article class="crayons-story cursor-pointer crayons-story--featured project-card mb-5 br-0" style="background: #000000e6">
+<article class="crayons-story cursor-pointer crayons-story--featured project-card mb-10 br-0 pd-22" style="background: #000000e6">
   <% if music_release.present? %>
     <% if music_release.audios.published.present? %>
       <% audio = music_release.audios.published.first %>
@@ -171,7 +171,7 @@
       <span class="speed" id="speed" data-speed="1">1x</span>
     </span>
       <span class="buffer-wrappert" id="bufferwrappert">
-      <p style="color: black; text-align: left; margin-left: 10px; margin-top: 15px">No Audio Selected</p>
+      <p style="color: black; text-align: left; margin-left: 10px; margin-top: 20px">No Audio Selected</p>
         <!--      <span id="buffer" style="width: 0%;"></span>-->
         <!--      <span id="progress" style="width: 0%;"></span>-->
         <!--      <span id="time">00:00 / 00:00</span>-->
