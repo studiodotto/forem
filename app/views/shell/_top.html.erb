@@ -146,7 +146,7 @@
           /*background-repeat-y: no-repeat;*/
           /*position: relative;*/
           /*padding-bottom: 100px;*/
-          padding-top: 5px;
+          padding-top: 20px;
         }
         .pr-title-text{
           font-family: 'Roboto','sans-serif';
@@ -282,19 +282,40 @@
           color: rgba(0, 0, 0, 0.7);
           float: right;
         }
+        .pt-text-mobile{
+          display: none;
+        }
+        .pr-text-mobile{
+          display: none;
+        }
         @media only screen and (max-width: 600px) {
+          .pr-price-text-new{
+            font-size: 14px;
+          }
           .juke-img-banner{
             position: absolute;
             top: 15%;
             width: 180px;
             left: 50%;
           }
+          .pt-text{
+            display: none;
+          }
+          .pr-text{
+            display: none;
+          }
+          .pr-text-mobile{
+            display: block;
+          }
+          .pt-text-mobile{
+            display: block;
+          }
           .juke-text-banner{
             font-size: 4.2rem;
           }
-          .project-presentation-text{
-            background-size: 200px 200px;
-          }
+          /*.project-presentation-text{*/
+          /*  background-size: 200px 200px;*/
+          /*}*/
           .pr-price-text {
             font-family: 'Roboto','sans-serif';
             font-style: normal;
