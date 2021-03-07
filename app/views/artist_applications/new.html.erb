@@ -11,7 +11,7 @@
   .start-now-btn{
     /*height: 3rem;*/
     width: 54%;
-    background: rgba(254, 216, 83, 0.9);
+    background: rgba(215, 225, 43, 0.9);
     border: 2px solid rgba(254, 216, 83, 0.3);
     box-sizing: border-box;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
@@ -26,7 +26,8 @@
     height: 43px;
   }
   .start-now-btn:hover{
-    background: rgb(255 218 91) !important;
+    background: rgb(242, 255, 26) !important;
+    color: black !important;
   }
   /*.signup-field{*/
   /*  width: 50%;*/
@@ -43,7 +44,7 @@
     border: 0;
     outline: 0;
     background: transparent;
-    border-bottom: 1px solid #FED853;
+    border-bottom: 1px solid rgba(215, 225, 43, 0.9);
     color: white !important;
   }
   .margin-for-password-field{
@@ -101,10 +102,10 @@
     font-size: 18px;
     line-height: 40px;
     color: #FFFFFF;
-    margin-left: 10px;
+    margin-left: 20%;
   }
   .music-container{
-    background: #28292D !important;
+    background: #000000 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     padding-top: 5.2em;
@@ -117,6 +118,7 @@
     line-height: 117px;
     color: #8491A0;
     margin-left: 10px;
+    text-align: center;
   }
   .streaming-text{
     font-family: 'Roboto','sans-serif';
@@ -126,7 +128,7 @@
     line-height: 35px;
     letter-spacing: 1.44px;
     color: #FFFFFF;
-    margin-left: 10px;
+    margin-left: 20%;
   }
   .streaming-text-yellow{
     font-family: 'Roboto','sans-serif';
@@ -179,7 +181,7 @@
     padding-top: 7.2em;
   }
   .jukebox-works-container{
-    background: #28292D;
+    background: #000000;
     border-radius: 0px;
     padding-top: 10.2em;
     padding-bottom: 10.2em;
@@ -206,7 +208,7 @@
     font-family: 'Roboto','sans-serif';
     font-style: normal;
     font-weight: normal;
-    font-size: 21px;
+    font-size: 24px;
     line-height: 40px;
     text-align: center;
     color: #FFFFFF;
@@ -292,6 +294,15 @@
     .juke-text{
       font-size: 4.2em;
     }
+    .new-white-text{
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 40px;
+      color: #FFFFFF;
+      margin-left: 10px;
+    }
     .juke-img{
       position: absolute;
       top: 20%;
@@ -307,6 +318,9 @@
     .btn-below-text{
       width: 100%;
     }
+    .streaming-text{
+      margin-left: 20%;
+    }
   }
 </style>
 <div class="container-fluid">
@@ -314,7 +328,7 @@
     Join now, the private testing mode, and be one of the first to access the future of music streaming
   </div>
 </div>
-<div class="container-fluid" style="background: #28292D; width: 100%;">
+<div class="container-fluid" style="background: #000000; width: 100%;">
   <div class="container music-container">
     <% if flash[:artist_error].present? %>
       <div class="alert alert-danger" style="text-align: center">
@@ -338,8 +352,9 @@
           JUKEBOX
         </p>
         <br>
-        <img class="juke-img" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png" alt="logo">
-        <p class="streaming-text">Streaming your music <span class="streaming-text-yellow">exclusively</span> on jukebox. <span class="streaming-text-yellow">Elevate your art</span></p>
+<!--        <img class="juke-img" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png" alt="logo">-->
+        <p class="streaming-text">new music releases.</p>
+        <p class="streaming-text">raw n uncut studio recordings</p>
       </div>
 
       <div class="row form-enroll">
@@ -366,12 +381,14 @@
         </p>
       </div>
       <div class="row jukebox-works-container">
+        <p class="how-text">HOW IT WORKS?</p>
+        <br>
         <p class="jukebox-work-text">
-          HOW JUKEBOX WORKS?: <span class="art-text">ART SCARCITY</span>
+          INDIE STREAMING PLATFORM: <span class="y-text">50-50 SPLIT</span>
         </p>
         <br>
         <p class="jukebox-work-below-text">
-          The jukebox helps independent artists with full ownership of rights over their art, to create artificial scarcity for music, discover culture's true market value, stream, and get paid
+          Jukebox helps artists access a streaming-as-a-service platform, and offers an alternative to distribution monopolies. Artists set their price, and get paid directly from fans.  Jukebox operates on a 50-50 split.
         </p>
       </div>
     <% else %>
@@ -389,24 +406,39 @@
     <div class="container" style="background: #D7E12B !important;box-shadow: none">
       <div class="artificial-container">
         <p class="artificial-work-text">
-          ARTIFICIAL SCARCITY: <span class="artificial-below-work-text">EXCLUSIVITY</span>
+          BUILD CULTURE: <span class="artificial-below-work-text">MANAGE DIGITAL RIGHTS</span>
         </p>
         <br>
         <p class="artificial-descriptive-text">
-          The jukebox model is the opposite of the streaming economy today. Operating under exclusive licenses creates an artificial scarcity. Your fans will join the platform to discover your music, your content, that can not find anywhere else. Create network effects, elevate your art.
+          Jukebox is open-source built on-blockchain by developers for musicians to:
+          Secure ownership, incentivize collaboration, make licensing easy.
+          Unlock a universe of open financial applications on music.
         </p>
       </div>
     </div>
   </div>
-  <div style="background: #28292D; padding-bottom: 10.2em">
-    <div class="container" style="background: #28292D !important;box-shadow: none">
-      <div class="artificial-container" style="background: #28292D">
+  <div style="background: #000000; padding-bottom: 10.2em">
+    <div class="container" style="background: #000000 !important;box-shadow: none">
+      <div class="artificial-container" style="background: #000000">
         <p class="artificial-work-text" style="color: white">
-          JOIN WITH YOUR MUSIC: LEARN TO SUCCEED
+          LEARN TO SUCCEED: <span class="y-text">OWN YOUR RIGHTS</span>
         </p>
         <br>
         <p class="artificial-descriptive-text" style="color: #FFFFFF;">
-          To join the platform: Full ownership of rights over your music is required for participation. We help you, the musician, build an artificial scarcity around your art
+          To join the platform you need full ownership of rights over your music. Artists that own their rights drive market-defining innovation navigating the complex mesh of the traditional music industry.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div style="background: #000000; padding-bottom: 10.2em">
+    <div class="container" style="background: #000000 !important;box-shadow: none">
+      <div class="artificial-container" style="background: #000000">
+        <p class="artificial-work-text" style="color: white">
+          EXCLUSIVITY: <span class="artificial-below-work-text">CREATE ARTIFICIAL SCARCITY</span>
+        </p>
+        <br>
+        <p class="artificial-descriptive-text" style="color: #FFFFFF;">
+          Artificial scarcity creates the conditions for discovering culture’s true market value, the opposite of the streaming economy today. Streaming a track exclusively on Jukebox helps artists, to create an artificial scarcity around art, and make real money. Join the network.
         </p>
       </div>
     </div>
@@ -424,47 +456,49 @@
           MUSIC LAUNCHER PLATFORM: TOOLS FOR YOU
         </p>
         <br>
-        <p class="juke-text">
+        <p class="juke-text" style="text-align: left">
           JUKEBOX
         </p>
+        <br><br>
+        <p class="j-below-desc-text">Jukebox is a platform that provides the tools to create music, curate or collaborate for a living.</p>
         <br><br><br><br>
         <div style="background: #181823; padding: 20px">
-          <p class="break-text">BREAK NEW MUSIC: <span class="break-white">AUTHENTICALLY ENGAGE</span></p>
+          <p class="break-text">AUTHENTICALLY ENGAGE: <span class="break-white">STREAM EXCLUSIVE CONTENT</span></p>
           <br>
           <p class="text-gray-color">
-            SHARE CULTURE WITH TRUE FANS
+            BUILD YOUR LABEL
           </p>
           <br>
           <p class="text-white-color">
-            Break new music, monetise “raw n uncut” recordings from the studio, engage your fans to participate in the making of music. Use jukebox and be your own label
+            Brake new music, monetise “raw n uncut” recordings from the studio, engage your fans to participate in the making of music. Use jukebox to build your label.
           </p>
         </div>
         <br><br>
         <div style="background: #181823; padding: 20px">
-          <p class="break-text">SPLIT ROYALTIES: <span class="break-white">GROW YOUR TEAM</span></p>
+          <p class="break-text">SPLIT ROYALTIES: <span class="break-white">INCENTIVIZE COLLABORATION</span></p>
           <br>
           <p class="text-gray-color">
-            CONNECT WITH INFLUENCERS, DJ’S, AND A+R
+            GROW YOUR TEAM— INCREASE PRODUCTIVITY
           </p>
           <br>
           <p class="text-white-color">
-            Music rights are you assets. Use them to build collaborations with world-class influencers, DJs, and A+Rs. Split royalties and bring your music to market.
+            Music rights are you assets. Use them to build collaborations with world-class influencers, DJs, and A+Rs. Setup digital campaigns, grow your fanbase, reach new audiences, take songs viral on social media platforms like Tik Tok and Instagram. Bring your music to market.
           </p>
         </div>
         <br><br>
         <div style="background: #181823; padding: 20px">
-          <p class="break-text">SET UP YOUR CAMPAIGNS: <span class="break-white">GO VIRAL</span></p>
+          <p class="break-text">PAYMENTS PLATFORM: <span class="break-white">INCREASE REVENUE</span></p>
           <br>
           <p class="text-gray-color">
-            REACH NEW AUDIENCES
+            STREAMLINE PAYMENTS FLOW
           </p>
           <br>
           <p class="text-white-color">
-            Grow your fanbase through DJs and influencer access, take songs viral on social media platforms like Tik Tok and Instagram.
+            Get paid everytime your music is streamed and purchased.  Revenue generated from streaming and sales is distributed direct from fans, to artists and their teams.
           </p>
         </div>
         <br><br>
-        <div style="background: #181823; padding: 20px">
+        <div style="background: #181823; padding: 20px; display: none">
           <p class="break-text">GENERATE $: <span class="break-white">STREAMLINE PAYMENTS</span></p>
           <br>
           <p class="text-gray-color">
@@ -476,7 +510,7 @@
           </p>
         </div>
         <br><br>
-        <div style="background: #181823; padding: 20px">
+        <div style="background: #181823; padding: 20px; display: none">
           <p class="break-text">OWN YOUR MUSIC RIGHTS: <span class="break-white">CRYPTO JUKEBOX</span></p>
           <br>
           <p class="text-gray-color">
