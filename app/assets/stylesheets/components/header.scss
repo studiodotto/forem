@@ -113,7 +113,7 @@
 
   &__dropdown {
     transform-style: preserve-3d;
-    bottom: var(--header-height);
+    top: var(--header-height);
     transform-origin: top right;
     transition: all var(--transition-props);
     transition-delay: var(--dropdown-delay, 0.25s);
