@@ -796,7 +796,7 @@
       display: none;
     }
     .mobile-header{
-      display: block;
+      display: grid;
     }
     .banner-pd-90 {
       padding-top: 37px;
@@ -851,9 +851,145 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
 <div class="navigation-progress" id="navigation-progress"></div>
-<header class="crayons-header print-hidden desk-header" role="banner">
+<header class="crayons-header print-hidden" role="banner">
   <a href="#articles-list" class="skip-content-link">Skip to content</a>
-  <div class="crayons-header__container">
+  <div class="crayons-layout mobile-header" style="grid-template-columns: 1fr 1fr 1fr 1fr">
+    <%#= render "layouts/logo" %>
+
+    <!--    <div class="crayons-header--search" id="header-search">-->
+    <!--      <form acceptCharset="UTF-8" method="get" action="/search">-->
+    <!--        <input class="crayons-header--search-input crayons-textfield" type="text" name="q" id="nav-search" placeholder="Search..." autoComplete="off" />-->
+    <!--      </form>-->
+    <!--    </div>-->
+    <div style="text-align: center; padding-top: 6px">
+      <a href="<%= root_path %>">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.4167 9.5415V18.7082H11.8333V12.2915H8.16667V18.7082H3.58333V9.5415H1.75L10 1.2915L18.25 9.5415H16.4167Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p style="font-family: 'Roboto','sans-serif';
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          /* identical to box height, or 171% */
+
+
+          color: #000000;">Home</p>
+      </a>
+    </div>
+
+    <div style="text-align: center; padding-top: 6px">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="20px" height="20px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve">
+        <g>
+          <g>
+            <path d="M40,0C17.908,0,0,17.909,0,40c0,22.092,17.908,40,40,40c22.092,0,40-17.908,40-40C80,17.909,62.092,0,40,0z
+			 M57.501,63.879c-0.5,0.318-1.06,0.471-1.61,0.471c-0.99,0-1.959-0.49-2.531-1.387l-8.078-12.664
+			c-0.596-0.936-0.598-2.066-0.125-2.984l-3.547-5.562c-2.217,1.227-4.763,1.928-7.471,1.928c-8.547,0-15.5-6.953-15.5-15.5
+			c0-8.547,6.953-15.5,15.5-15.5s15.5,6.953,15.5,15.5c0,4.763-2.164,9.026-5.555,11.873l3.602,5.647
+			c1.032-0.042,2.06,0.438,2.654,1.372l8.077,12.664C59.309,61.135,58.898,62.988,57.501,63.879z"/>
+            <path d="M34.138,18.68c-5.238,0-9.5,4.262-9.5,9.5c0,5.238,4.262,9.5,9.5,9.5c5.238,0,9.5-4.262,9.5-9.5
+			C43.639,22.942,39.376,18.68,34.138,18.68z"/>
+          </g></g><g></g>
+      </svg>
+      <p style="font-family: 'Roboto','sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        /* identical to box height, or 171% */
+
+
+        color: #000000;">Search</p>
+    </div>
+
+    <div style="text-align: center; padding-top: 6px">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="20px" height="20px" viewBox="0 0 890.5 890.5" style="enable-background:new 0 0 890.5 890.5;" xml:space="preserve"
+      >
+        <g>
+          <g>
+            <path d="M208.1,180.56l355-96.9l-18.8-38c-12.3-24.7-42.3-34.9-67-22.6l-317.8,157.5H208.1z"/>
+            <path d="M673.3,86.46c-4.399,0-8.8,0.6-13.2,1.8l-83.399,22.8L322,180.56h289.1h126l-15.6-57.2
+			C715.5,101.06,695.3,86.46,673.3,86.46z"/>
+            <path d="M789.2,215.56h-11.4h-15.5h-15.5H628.5H193.8h-57h-48h-8.9H50.1c-15.8,0-29.9,7.3-39.1,18.8c-4.2,5.3-7.4,11.4-9.2,18.1
+			c-1.1,4.2-1.8,8.6-1.8,13.1v6v57v494.1c0,27.601,22.4,50,50,50h739.1c27.601,0,50-22.399,50-50v-139.5H542.4
+			c-46.9,0-85-38.1-85-85v-45.8v-15.5v-15.5v-34.4c0-23,9.199-43.899,24.1-59.199c13.2-13.601,30.9-22.801,50.7-25.101
+			c3.3-0.399,6.7-0.6,10.1-0.6h255.2H813h15.5h10.6v-136.5C839.2,237.96,816.8,215.56,789.2,215.56z"/>
+            <path d="M874.2,449.86c-5-4.6-10.9-8.1-17.5-10.4c-5.101-1.699-10.5-2.699-16.2-2.699h-1.3h-1h-15.5h-55.9H542.4
+			c-27.601,0-50,22.399-50,50v24.899v15.5v15.5v55.4c0,27.6,22.399,50,50,50h296.8h1.3c5.7,0,11.1-1,16.2-2.7
+			c6.6-2.2,12.5-5.8,17.5-10.4c10-9.1,16.3-22.3,16.3-36.899v-111.3C890.5,472.16,884.2,458.959,874.2,449.86z M646.8,552.36
+			c0,13.8-11.2,25-25,25h-16.6c-13.8,0-25-11.2-25-25v-16.6c0-8,3.7-15.101,9.6-19.601c4.3-3.3,9.601-5.399,15.4-5.399h4.2H621.8
+			c13.8,0,25,11.199,25,25V552.36L646.8,552.36z"/>
+          </g>
+        </g>
+      </svg>
+
+      <p style="font-family: 'Roboto','sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        /* identical to box height, or 171% */
+
+
+        color: #000000;">Your Wallet</p>
+    </div>
+    <div style="text-align: center; padding-top: 6px">
+      <div class="crayons-header__links" style="display: block">
+        <% if user_signed_in? %>
+          <a href="/new" class="crayons-btn hidden mr-2 whitespace-nowrap s:block">Write a post</a>
+
+          <a id="moderation-link" class="crayons-header__link trusted-visible-block" aria-label="Moderation" href="<%= mod_path %>">
+            <%= inline_svg_tag("mod.svg", aria: true, class: "crayons-icon", title: "Moderation") %>
+          </a>
+        <% else %>
+          <a href="<%= new_artist_application_path %>" class="crayons-btn hidden mr-2 whitespace-nowrap s:block" style="background: #454545; color: white" data-no-instant>
+            Artist Enroll
+          </a>
+
+          <a href="<%= sign_up_path %>" class="crayons-btn crayons-btn--ghost-brand hidden mr-2 whitespace-nowrap s:block" data-no-instant>
+            Log in
+          </a>
+
+          <a href="<%= sign_up_path(state: "new-user") %>" class="crayons-btn hidden mr-2 whitespace-nowrap s:block" data-no-instant>
+            Create account
+          </a>
+        <% end %>
+        <div class="crayons-header__menu <% unless user_signed_in? %>s:hidden<% end %>" id="crayons-header__menuu" style="display: block; text-align: center">
+          <button type="button" id="navigation-buttt" aria-label="Navigation menu" style="all: unset">
+            <% if user_signed_in? %>
+              <span class="crayons-avatar crayons-avatar--l"><img class="crayons-avatar__image" alt="" id="nav-profile-image" width="32" height="32" /></span>
+            <% else %>
+              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   width="20px" height="20px" viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
+                   xml:space="preserve">
+                <g>
+                  <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
+		S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
+		c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
+		c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
+		c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"/></g>
+              </svg>
+              <p style="font-family: 'Roboto','sans-serif';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 24px;
+                /* identical to box height, or 171% */
+
+
+                color: #000000;">Sign up</p>
+              <%= inline_svg_tag("hamburger.svg", aria: true, class: "crayons-icon", title: "Navigation menu") %>
+            <% end %>
+          </button>
+          <%= render "layouts/nav_menu" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="crayons-header__container desk-header">
     <%= render "layouts/logo" %>
 
     <div id="pwa-nav-buttons" class="pwa-nav-buttons">
@@ -990,225 +1126,7 @@
 </header>
 
 <!-- Mobile header -->
-<header class="crayons-header print-hidden mobile-header" role="banner">
+<!--<header class="crayons-header print-hidden mobile-header" role="banner">-->
 <!--  <a href="#articles-list" class="skip-content-link">Skip to content</a>-->
-  <div class="crayons-layout" style="grid-template-columns: 1fr 1fr 1fr 1fr">
-    <%#= render "layouts/logo" %>
 
-<!--    <div class="crayons-header--search" id="header-search">-->
-<!--      <form acceptCharset="UTF-8" method="get" action="/search">-->
-<!--        <input class="crayons-header--search-input crayons-textfield" type="text" name="q" id="nav-search" placeholder="Search..." autoComplete="off" />-->
-<!--      </form>-->
-<!--    </div>-->
-    <div style="text-align: center; padding-top: 6px">
-      <a href="<%= root_path %>">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.4167 9.5415V18.7082H11.8333V12.2915H8.16667V18.7082H3.58333V9.5415H1.75L10 1.2915L18.25 9.5415H16.4167Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p style="font-family: 'Roboto','sans-serif';
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 24px;
-          /* identical to box height, or 171% */
-
-
-          color: #000000;">Home</p>
-      </a>
-    </div>
-
-    <div style="text-align: center; padding-top: 6px">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           width="20px" height="20px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve">
-        <g>
-          <g>
-            <path d="M40,0C17.908,0,0,17.909,0,40c0,22.092,17.908,40,40,40c22.092,0,40-17.908,40-40C80,17.909,62.092,0,40,0z
-			 M57.501,63.879c-0.5,0.318-1.06,0.471-1.61,0.471c-0.99,0-1.959-0.49-2.531-1.387l-8.078-12.664
-			c-0.596-0.936-0.598-2.066-0.125-2.984l-3.547-5.562c-2.217,1.227-4.763,1.928-7.471,1.928c-8.547,0-15.5-6.953-15.5-15.5
-			c0-8.547,6.953-15.5,15.5-15.5s15.5,6.953,15.5,15.5c0,4.763-2.164,9.026-5.555,11.873l3.602,5.647
-			c1.032-0.042,2.06,0.438,2.654,1.372l8.077,12.664C59.309,61.135,58.898,62.988,57.501,63.879z"/>
-            <path d="M34.138,18.68c-5.238,0-9.5,4.262-9.5,9.5c0,5.238,4.262,9.5,9.5,9.5c5.238,0,9.5-4.262,9.5-9.5
-			C43.639,22.942,39.376,18.68,34.138,18.68z"/>
-          </g></g><g></g>
-      </svg>
-      <p style="font-family: 'Roboto','sans-serif';
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
-        /* identical to box height, or 171% */
-
-
-        color: #000000;">Search</p>
-    </div>
-
-    <div style="text-align: center; padding-top: 6px">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           width="20px" height="20px" viewBox="0 0 890.5 890.5" style="enable-background:new 0 0 890.5 890.5;" xml:space="preserve"
-      >
-        <g>
-          <g>
-            <path d="M208.1,180.56l355-96.9l-18.8-38c-12.3-24.7-42.3-34.9-67-22.6l-317.8,157.5H208.1z"/>
-            <path d="M673.3,86.46c-4.399,0-8.8,0.6-13.2,1.8l-83.399,22.8L322,180.56h289.1h126l-15.6-57.2
-			C715.5,101.06,695.3,86.46,673.3,86.46z"/>
-            <path d="M789.2,215.56h-11.4h-15.5h-15.5H628.5H193.8h-57h-48h-8.9H50.1c-15.8,0-29.9,7.3-39.1,18.8c-4.2,5.3-7.4,11.4-9.2,18.1
-			c-1.1,4.2-1.8,8.6-1.8,13.1v6v57v494.1c0,27.601,22.4,50,50,50h739.1c27.601,0,50-22.399,50-50v-139.5H542.4
-			c-46.9,0-85-38.1-85-85v-45.8v-15.5v-15.5v-34.4c0-23,9.199-43.899,24.1-59.199c13.2-13.601,30.9-22.801,50.7-25.101
-			c3.3-0.399,6.7-0.6,10.1-0.6h255.2H813h15.5h10.6v-136.5C839.2,237.96,816.8,215.56,789.2,215.56z"/>
-            <path d="M874.2,449.86c-5-4.6-10.9-8.1-17.5-10.4c-5.101-1.699-10.5-2.699-16.2-2.699h-1.3h-1h-15.5h-55.9H542.4
-			c-27.601,0-50,22.399-50,50v24.899v15.5v15.5v55.4c0,27.6,22.399,50,50,50h296.8h1.3c5.7,0,11.1-1,16.2-2.7
-			c6.6-2.2,12.5-5.8,17.5-10.4c10-9.1,16.3-22.3,16.3-36.899v-111.3C890.5,472.16,884.2,458.959,874.2,449.86z M646.8,552.36
-			c0,13.8-11.2,25-25,25h-16.6c-13.8,0-25-11.2-25-25v-16.6c0-8,3.7-15.101,9.6-19.601c4.3-3.3,9.601-5.399,15.4-5.399h4.2H621.8
-			c13.8,0,25,11.199,25,25V552.36L646.8,552.36z"/>
-          </g>
-        </g>
-      </svg>
-
-      <p style="font-family: 'Roboto','sans-serif';
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
-        /* identical to box height, or 171% */
-
-
-        color: #000000;">Your Wallet</p>
-    </div>
-    <div style="text-align: center; padding-top: 6px">
-      <a href="<%= sign_up_path(state: "new-user") %>">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           width="20px" height="20px" viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
-           xml:space="preserve">
-        <g>
-          <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
-		S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
-		c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
-		c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
-		c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"/></g>
-      </svg>
-      <p style="font-family: 'Roboto','sans-serif';
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
-        /* identical to box height, or 171% */
-
-
-        color: #000000;">Sign up</p>
-      </a>
-    </div>
-
-<!--    <div class="crayons-header__links">-->
-      <%# if user_signed_in? %>
-<!--        <a href="/new" class="crayons-btn hidden mr-2 whitespace-nowrap s:block">Write a post</a>-->
-
-<!--        <a id="moderation-link" class="crayons-header__link trusted-visible-block" aria-label="Moderation" href="<%#= mod_path %>">-->
-          <%#= inline_svg_tag("mod.svg", aria: true, class: "crayons-icon", title: "Moderation") %>
-<!--        </a>-->
-
-<!--        <a href="/connect" id="connect-link" class="crayons-header__link" aria-label="Connect">-->
-          <%#= inline_svg_tag("connect.svg", aria: true, class: "crayons-icon", title: "Connect") %>
-<!--          <span class="crayons-indicator crayons-indicator--accent hidden" id="connect-number"></span>-->
-<!--        </a>-->
-
-<!--        <a href="/notifications" id="notifications-link" class="crayons-header__link" aria-label="Notifications">-->
-          <%#= inline_svg_tag("bell.svg", aria: true, class: "crayons-icon", title: "Notifications") %>
-<!--          <span class="crayons-indicator crayons-indicator--critical hidden" id="notifications-number"></span>-->
-<!--        </a>-->
-      <%# else %>
-<!--        <a href="<%#= new_artist_application_path %>" class="crayons-btn hidden mr-2 whitespace-nowrap s:block" style="background: #454545; color: white" data-no-instant>-->
-<!--          Artist Enroll-->
-<!--        </a>-->
-
-<!--        <a href="<%#= sign_up_path %>" class="crayons-btn crayons-btn--ghost-brand hidden mr-2 whitespace-nowrap s:block" data-no-instant>-->
-<!--          Log in-->
-<!--        </a>-->
-
-<!--        <a href="<%#= sign_up_path(state: "new-user") %>" class="crayons-btn hidden mr-2 whitespace-nowrap s:block" data-no-instant>-->
-<!--          Create account-->
-<!--        </a>-->
-      <%# end %>
-<!--      <div class="crayons-header__menu <%# unless user_signed_in? %>s:hidden<%# end %>" id="crayons-header__menu">-->
-<!--        <button type="button" class="crayons-header__menu__trigger" id="navigation-butt" aria-label="Navigation menu" style="position: relative; right: 10px">-->
-          <%# if user_signed_in? %>
-<!--            <span class="crayons-avatar crayons-avatar--l"><img class="crayons-avatar__image" alt="" id="nav-profile-image" width="32" height="32" /></span>-->
-          <%# else %>
-            <%#= inline_svg_tag("hamburger.svg", aria: true, class: "crayons-icon", title: "Navigation menu") %>
-          <%# end %>
-<!--        </button>-->
-        <%#= render "layouts/nav_menu" %>
-<!--      </div>-->
-<!--    </div>-->
-  </div>
-  <% if user_signed_in? %>
-    <script async>
-      // Here we have some scripts we want to get working on before
-      // waiting for the page to stream in.
-
-      // Load the current user's pic as quickly as it's available
-      var currentUser = localStorage.getItem('current_user')
-      var navProfilePic = document.getElementById('nav-profile-image')
-      if (currentUser && navProfilePic) {
-        navProfilePic.src = JSON.parse(currentUser).profile_image_90;
-      }
-      //showing settings
-      setTimeout(function (){
-        setSettings();
-      }, 1000)
-
-      function setSettings(){
-        var parsedUser = JSON.parse(localStorage.getItem('current_user'));
-        if (parsedUser){
-          if (parsedUser.admin){
-            document.getElementById('user_settings').style.display = 'block'
-            document.getElementById('artist_settings').style.display = 'block'
-            document.getElementById('artist_settings').href = '/artist_settings/profile-and-services'
-            document.getElementById('artist_settings').style.cursor = 'pointer'
-          } else if (parsedUser.customer){
-            document.getElementById('user_settings').style.display = 'block'
-          } else {
-            document.getElementById('reading-list').style.display = 'none'
-            document.getElementById('user_settings').style.display = 'none'
-            document.getElementById('artist_settings').style.display = 'block'
-          }
-        }
-      }
-
-      // Load notifications count as quickly as it's available.
-      // Not if we're on the notifications page itself
-      if (
-        window.location.pathname !== '/notifications'
-      ) {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {
-          xmlhttp = new XMLHttpRequest();
-        } else {
-          xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-        }
-        xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-            var count = xmlhttp.response;
-            if (isNaN(count)) {
-              document
-                .getElementById('notifications-number')
-                .classList.add('hidden');
-            } else if (count != '0' && count != undefined && count != '') {
-              document.getElementById('notifications-number').innerHTML =
-                xmlhttp.response;
-              document
-                .getElementById('notifications-number')
-                .classList.remove('hidden');
-            } else {
-              document
-                .getElementById('notifications-number')
-                .classList.add('hidden');
-            }
-          }
-        };
-
-        xmlhttp.open('GET', '/notifications/counts', true);
-        xmlhttp.send();
-      }
-    </script>
-  <% end %>
-</header>
+<!--</header>-->

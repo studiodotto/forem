@@ -5,7 +5,8 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: var(--z-sticky);
+  //z-index: var(--z-sticky);
+  z-index: 10;
   font-family: var(--ff-sans-serif);
   display: block;
   @media only screen and (max-width: 600px) {
@@ -204,7 +205,8 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: var(--z-sticky);
+  //z-index: var(--z-sticky);
+  z-index: 10;
   font-family: var(--ff-sans-serif);
   display: block;
   @media only screen and (max-width: 600px) {

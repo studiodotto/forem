@@ -114,6 +114,10 @@
   &__dropdown {
     transform-style: preserve-3d;
     top: var(--header-height);
+    @media only screen and (max-width: 600px) {
+      bottom: var(--header-height);
+      top: unset;
+    }
     transform-origin: top right;
     transition: all var(--transition-props);
     transition-delay: var(--dropdown-delay, 0.25s);
