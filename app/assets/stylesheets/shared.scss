@@ -171,7 +171,8 @@
       }
       #time {
         position: absolute;
-        right: calc(50px + 0.1vh + 1.5vw);
+        //right: calc(50px + 0.1vh + 1.5vw);
+        right: calc(0px + 0.1vh + 1.5vw);
         top: calc(16px + 0.1vh);
         color: rgb(161, 161, 161);
         font-size: calc(14px + 0.2vh);
