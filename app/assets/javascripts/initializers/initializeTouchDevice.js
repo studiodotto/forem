@@ -15,11 +15,14 @@ function blur(event, className) {
 
 function removeShowingMenu() {
   getClassList('crayons-header__menu').remove('showing');
+  getClassList('crayons-header__menuu').remove('showing');
   setTimeout(() => {
     getClassList('crayons-header__menu').remove('showing');
+    getClassList('crayons-header__menuu').remove('showing');
   }, 5);
   setTimeout(() => {
     getClassList('crayons-header__menu').remove('showing');
+    getClassList('crayons-header__menuu').remove('showing');
   }, 150);
 }
 
