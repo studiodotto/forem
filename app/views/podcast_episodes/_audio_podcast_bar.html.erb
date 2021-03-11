@@ -12,9 +12,14 @@
     </a>
     <span id="barPlayPause">
       <img class="butt play-butt" alt="play" src="<%= asset_path("playbutt.png") %>">
-      <img class="butt pause-butt" alt="pause" src="<%= asset_path("pausebutt.png") %>">
+<!--      <img class="butt pause-butt" alt="pause" src="<%#= asset_path("pausebutt.png") %>">-->
+      <svg class="butt pause-butt" role="img" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" aria-labelledby="pauseIconTitle" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#FFFFFF" style="
+      top: 5px;
+        position: relative;
+      "> <title id="pauseIconTitle">Pause</title> <rect width="4" height="16" x="5" y="4"></rect> <rect width="4" height="16" x="15" y="4"></rect> </svg>
     </span>
-    <span id="volume">
+
+    <span id="volume" style="display: none">
       <span id="volumeindicator" class="volume-icon-wrapper showing">
         <span id="volbutt"><%= icon("volume", 16) %></span>
         <span class="range-wrapper">
@@ -28,7 +33,12 @@
       <span id="buffer"></span>
       <span id="progress"></span>
       <span id="time">initializing...</span>
-      <span id="closebutt">×</span>
+      <span id="closebutt" style="display: none">×</span>
     </span>
+    <svg class="fvt-icon-player" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="0.6">
+        <path d="M32.6166 9.0665C34.1443 10.6002 35.002 12.6768 35.002 14.8415C35.002 17.0062 34.1443 19.0828 32.6166 20.6165L19.9999 33.3332L7.38327 20.6165C6.24868 19.4742 5.47623 18.0227 5.16262 16.4435C4.84901 14.8644 5.00817 13.2278 5.62019 11.7387C6.23221 10.2496 7.26988 8.97409 8.60331 8.07186C9.93674 7.16964 11.5067 6.68079 13.1166 6.6665C15.2693 6.67957 17.3298 7.5421 18.8499 9.0665C19.2933 9.50521 19.6797 9.99797 19.9999 10.5332C20.3202 9.99797 20.7066 9.50521 21.1499 9.0665C21.8989 8.3066 22.7915 7.70316 23.7757 7.29128C24.76 6.8794 25.8163 6.66729 26.8833 6.66729C27.9502 6.66729 29.0065 6.8794 29.9908 7.29128C30.9751 7.70316 31.8676 8.3066 32.6166 9.0665V9.0665Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
   </div>
 </div>
