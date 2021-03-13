@@ -43,6 +43,9 @@ body {
 
   &.default-header {
     padding-top: var(--header-height);
+    @media only screen and (max-width: 600px) {
+      padding-top: 0px;
+    }
     min-height: calc(100vh - var(--header-height));
   }
 }
