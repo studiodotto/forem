@@ -11,23 +11,35 @@
   .start-now-btn{
     /*height: 3rem;*/
     width: 54%;
-    background: rgba(215, 225, 43, 0.9);
-    border: 2px solid rgba(254, 216, 83, 0.3);
+    /*background: rgba(215, 225, 43, 0.9);*/
+    /*border: 2px solid rgba(254, 216, 83, 0.3);*/
     box-sizing: border-box;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
-    border-radius: 0px;
+    /*box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);*/
+    /*border-radius: 0px;*/
+    background: #5221E6;
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
     font-family: 'Roboto','sans-serif';
     font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 19px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+    /* identical to box height, or 175% */
+
     text-align: center;
-    color: #000000;
+    text-transform: uppercase;
+
+    /*color: #FFFFFF;*/
+    /*font-size: 18px;*/
+    /*line-height: 19px;*/
+    text-align: center;
+    color: #ffffff;
     height: 43px;
   }
   .start-now-btn:hover{
-    background: rgb(242, 255, 26) !important;
-    color: black !important;
+    /*background: rgb(242, 255, 26) !important;*/
+    background: #27009c;
+    color: white !important;
   }
   /*.signup-field{*/
   /*  width: 50%;*/
@@ -44,8 +56,9 @@
     border: 0;
     outline: 0;
     background: transparent;
-    border-bottom: 1px solid rgba(215, 225, 43, 0.9);
-    color: white !important;
+    /*border-bottom: 1px solid rgba(215, 225, 43, 0.9);*/
+    border-bottom: 1px solid rgb(145, 146, 144, 0.9);
+    color: black !important;
   }
   .margin-for-password-field{
     margin-top: 1.8rem;
@@ -145,7 +158,8 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
+    color: rgba(0, 0, 0, 0.54);
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -154,7 +168,8 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
+    color: rgba(0, 0, 0, 0.54);
   }
 
   ::placeholder {
@@ -163,7 +178,8 @@
     font-weight: normal !important;
     font-size: 16px !important;
     line-height: 19px !important;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
+    color: rgba(0, 0, 0, 0.54);
   }
   .btn-below-text{
     font-family: 'Roboto','sans-serif';
@@ -179,6 +195,8 @@
   }
   .form-enroll{
     padding-top: 6.2em;
+    background: #D7E12B;
+    padding-bottom: 6.2em;
   }
   .jukebox-works-container{
     background: #000000;
@@ -350,7 +368,7 @@
     <% end %>
     <% unless flash[:artist_success].present? %>
       <div class="row" style="position: relative;z-index: 1">
-        <div style="padding-left: 20px">
+        <div style="padding-left: 20px; padding-bottom: 6.2em">
           <p class="new-white-text">
             ALL-IN-ONE MUSIC STREAMING PLATFORM
           </p>
@@ -367,6 +385,7 @@
       <div class="row form-enroll m-padding">
         <% @user = User.new if @user.blank? %>
         <%= form_with model: @user, url: artist_applications_path(@user), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
+          <p style="text-align: center;font-size: 19px;line-height: 27px;">Sign up to access Jukebox platform</p>
           <br>
   <!--        <div class="row">-->
   <!--        <div class="col-md-6">-->
@@ -378,14 +397,21 @@
           <div class="form-group text-centered">
             <input class="form-control signup-field margin-for-password-field" type="password" name='user[password]' required placeholder="Choose a password">
           </div>
+          <p class="btn-below-text" style="color: black; font-size: 15px; margin-top: 30px">
+            <!--          Note: you are not automatically accessing Unitedbits marketplace. If you meet the eligibility requirements, a music director will contact you within a few days to finish onboarding.-->
+            if you already have a username and password you can use them here.
+          </p>
           <br>
           <div class="form-group" style="text-align: center">
             <%= f.submit "JOIN NOW", class: "crayons-btn start-now-btn" %>
           </div>
         <% end %>
-        <p class="btn-below-text">
-          Note: you are not automatically accessing Unitedbits marketplace. If you meet the eligibility requirements, a music director will contact you within a few days to finish onboarding.
-        </p>
+        <a href="/users/password/new" style="margin-top: 10px">
+          <p class="btn-below-text" style="color: #7E7E7E; text-align: center; font-size: 14px;margin-top: 10px">
+            <!--          Note: you are not automatically accessing Unitedbits marketplace. If you meet the eligibility requirements, a music director will contact you within a few days to finish onboarding.-->
+            Forgot your username or password?
+          </p>
+        </a>
       </div>
       <div class="row jukebox-works-container" style="padding-bottom: 6.2em">
         <p class="how-text">HOW IT WORKS?</p>
