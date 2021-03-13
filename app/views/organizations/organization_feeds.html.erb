@@ -17,11 +17,19 @@
 <style>
   .w-100{
     width: 100% !important;
-  }
+  }.m-banner{
+    display: none;
+     }
   @media only screen and (max-width: 600px) {
     body {
       background: rgba(220, 220, 220, 0.5);
       /*transform: rotate(-180deg);*/
+    }
+    body.default-header{
+      padding-top: 60px;
+    }
+    .m-banner{
+      display: block;
     }
   }
 </style>
@@ -340,6 +348,12 @@
     </header>
     <!-- Center Content Div -->
     <div style="min-height: 90vh">
+      <div class="container-fluid">
+        <div class="row top-banner m-banner">
+          <!--    Join now, the private testing mode, and be one of the first to access the future of music streaming-->
+          Jukebox is a web music platform to allow indie artists monetise streaming. We are in testing mode. Join now and help us build the future of music
+        </div>
+      </div>
       <% @organizations.each do |project| %>
         <% if project.music_releases.first.present? %>
           <%= render partial: 'shared/project_card_latest', locals: {project: project, music_release: project.music_releases.first, composer: project.composer_id.present? ? @composers[project.composer_id][0] : '', artist_side: false, project_side: false } %>

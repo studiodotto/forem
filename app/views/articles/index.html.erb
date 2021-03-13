@@ -28,6 +28,19 @@
 <% if flash[:error].present? %>
   <p class="alert alert-danger" style="text-align: center"><%= flash[:error].capitalize %></p>
 <% end %>
+<style>
+  .m-banner{
+    display: none;
+  }
+  @media only screen and (max-width: 600px) {
+    body.default-header {
+      padding-top: 60px;
+    }
+    .m-banner{
+      display: block;
+    }
+  }
+</style>
 <!--<div id="hero-html-wrapper" class="codeland-banner-container">-->
 <!--  <section class="crayons-layout">-->
 <!--    <div class="codeland-banner banner-pd-90 h-auto">-->
@@ -200,7 +213,12 @@
 <!--          </div>-->
 <!--        </button>-->
 <!--      </header>-->
-
+      <div class="container-fluid">
+        <div class="row top-banner m-banner">
+          <!--    Join now, the private testing mode, and be one of the first to access the future of music streaming-->
+          Jukebox is a web music platform to allow indie artists monetise streaming. We are in testing mode. Join now and help us build the future of music
+        </div>
+      </div>
       <% if user_signed_in? %>
         <div id="homepage-feed" style="min-height: 90vh"></div>
       <% else %>
