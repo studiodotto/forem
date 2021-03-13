@@ -102,7 +102,7 @@
     font-size: 18px;
     line-height: 40px;
     color: #FFFFFF;
-    margin-left: 20%;
+    /*margin-left: 20%;*/
   }
   .music-container{
     background: #000000 !important;
@@ -117,8 +117,8 @@
     font-size: 7.2em;
     line-height: 117px;
     color: #8491A0;
-    margin-left: 10px;
-    text-align: center;
+    /*margin-left: 10px;*/
+    /*text-align: center;*/
   }
   .streaming-text{
     font-family: 'Roboto','sans-serif';
@@ -128,7 +128,7 @@
     line-height: 35px;
     letter-spacing: 1.44px;
     color: #FFFFFF;
-    margin-left: 20%;
+    /*margin-left: 20%;*/
   }
   .streaming-text-yellow{
     font-family: 'Roboto','sans-serif';
@@ -171,7 +171,7 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    text-align: center;
+    /*text-align: center;*/
     color: #FFFFFF;
     width: 54%;
     margin: auto;
@@ -185,6 +185,7 @@
     border-radius: 0px;
     padding-top: 10.2em;
     padding-bottom: 10.2em;
+    padding-left: 20px;
   }
   .jukebox-work-text{
     font-family: 'Roboto', 'sans-serif';
@@ -192,7 +193,7 @@
     font-weight: bold;
     font-size: 32px;
     line-height: 40px;
-    text-align: center;
+    /*text-align: center;*/
     color: #FFFFFF;
   }
   .art-text{
@@ -210,13 +211,14 @@
     font-weight: normal;
     font-size: 24px;
     line-height: 40px;
-    text-align: center;
+    /*text-align: center;*/
     color: #FFFFFF;
   }
   .artificial-container{
     background: #D7E12B;
     border-radius: 0px;
     padding-top: 10.2em;
+    padding-left: 20px;
   }
   .artificial-work-text{
     font-family: 'Roboto','sans-serif';
@@ -224,7 +226,7 @@
     font-weight: bold;
     font-size: 32px;
     line-height: 40px;
-    text-align: center;
+    /*text-align: center;*/
     color: #000000;
   }
   .artificial-below-work-text{
@@ -233,7 +235,7 @@
     font-weight: bold;
     font-size: 32px;
     line-height: 40px;
-    text-align: center;
+    /*text-align: center;*/
     color: #5221E6;
   }
   .artificial-descriptive-text{
@@ -242,7 +244,7 @@
     font-weight: normal;
     font-size: 24px;
     line-height: 40px;
-    text-align: center;
+    /*text-align: center;*/
     color: #181823;
   }
   .break-text{
@@ -289,7 +291,10 @@
     left: 60%;
     z-index: -10;
   }
-
+  .m-padding{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   @media only screen and (max-width: 600px) {
     .juke-text{
       font-size: 4.2em;
@@ -301,7 +306,7 @@
       font-size: 18px;
       line-height: 40px;
       color: #FFFFFF;
-      margin-left: 10px;
+      /*margin-left: 10px;*/
     }
     .juke-img{
       position: absolute;
@@ -318,9 +323,9 @@
     .btn-below-text{
       width: 100%;
     }
-    .streaming-text{
-      margin-left: 20%;
-    }
+    /*.streaming-text{*/
+    /*  margin-left: 20%;*/
+    /*}*/
   }
 </style>
 <div class="container-fluid">
@@ -345,19 +350,21 @@
     <% end %>
     <% unless flash[:artist_success].present? %>
       <div class="row" style="position: relative;z-index: 1">
-        <p class="new-white-text">
-          ALL-IN-ONE MUSIC STREAMING PLATFORM
-        </p>
-        <p class="juke-text">
-          JUKEBOX
-        </p>
-        <br>
-<!--        <img class="juke-img" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png" alt="logo">-->
-        <p class="streaming-text">new music releases.</p>
-        <p class="streaming-text">raw n uncut studio recordings</p>
+        <div style="padding-left: 20px">
+          <p class="new-white-text">
+            ALL-IN-ONE MUSIC STREAMING PLATFORM
+          </p>
+          <p class="juke-text">
+            JUKEBOX
+          </p>
+          <br>
+          <!--        <img class="juke-img" src="https://studioappbucket.s3.ap-south-1.amazonaws.com/user_uploads/logo-banner.png" alt="logo">-->
+          <p class="streaming-text">new music releases.</p>
+          <p class="streaming-text">raw n uncut studio recordings</p>
+        </div>
       </div>
 
-      <div class="row form-enroll">
+      <div class="row form-enroll m-padding">
         <% @user = User.new if @user.blank? %>
         <%= form_with model: @user, url: artist_applications_path(@user), method: :post, html: { class: "mb-2" }, local: true  do |f| %>
           <br>
@@ -446,22 +453,23 @@
   <div style="background: #050505; padding-bottom: 10.2em">
     <div class="container" style="background: #050505 !important;box-shadow: none">
       <div style="padding-top: 10.2em">
-        <p style="
+        <div style="padding-left: 20px">
+          <p style="
           font-family: 'Roboto','sans-serif';
-          font-style: normal;
-          font-weight: bold;
-          font-size: 21px;
-          line-height: 40px;
-          color: #FFFFFF; margin-left: 10px">
-          MUSIC LAUNCHER PLATFORM: TOOLS FOR YOU
-        </p>
-        <br>
-        <p class="juke-text" style="text-align: left">
-          JUKEBOX
-        </p>
-        <br><br>
-        <p class="j-below-desc-text">Jukebox is a platform that provides the tools to create music, curate or collaborate for a living.</p>
-        <br><br><br><br>
+            font-style: normal;
+            font-weight: bold;
+            font-size: 21px;
+            line-height: 40px;
+            color: #FFFFFF;">
+            MUSIC LAUNCHER PLATFORM: TOOLS FOR YOU
+          </p>
+          <p class="juke-text" style="text-align: left; margin-left: 0px !important;">
+            JUKEBOX
+          </p>
+          <br>
+          <p class="text-white-color">Jukebox is a platform that provides the tools to create music, curate or collaborate for a living.</p>
+          <br><br><br><br>
+        </div>
         <div style="background: #181823; padding: 20px">
           <p class="break-text">AUTHENTICALLY ENGAGE: <span class="break-white">STREAM EXCLUSIVE CONTENT</span></p>
           <br>
@@ -527,14 +535,14 @@
   <div style="background: #D7E12B; padding-bottom: 10.2em">
     <div class="container" style="background: #D7E12B !important;box-shadow: none">
       <div class="artificial-container">
-        <p class="bottom-end-text" style="margin-left: 10px">
+        <p class="bottom-end-text">
           EXECUTING THE VISION— CODE WE BUILD
         </p>
-        <p class="juke-text" style="text-align: left">
+        <p class="juke-text" style="text-align: left;margin-left: 0px">
           JUKEBOX
         </p>
         <br><br><br><br>
-        <div style="margin-top: 20px; margin-left: 32px">
+        <div style="margin-top: 20px;">
           <p class="bottom-end-sub-heading" style="text-align: left">
             NETWORK OF MUSIC COMMUNITIES: <span style="color: #5221E6">SHARE MUSIC ROYALTIES WITH FANS</span>
           </p>
@@ -544,7 +552,7 @@
           </p>
         </div>
         <br><br>
-        <div style="margin-top: 20px; margin-left: 32px">
+        <div style="margin-top: 20px;">
           <p class="bottom-end-sub-heading" style="text-align: left">
             CRYPTO-UNION GOVERNANCE: <span style="color: #5221E6">CONTROL THE PLATFORM</span>
           </p>
@@ -554,7 +562,7 @@
           </p>
         </div>
         <br><br>
-        <div style="margin-top: 20px; margin-left: 32px">
+        <div style="margin-top: 20px;">
           <p class="bottom-end-sub-heading" style="text-align: left">
             CONTROL YOUR CONTENT: <span style="color: #5221E6">ON BLOCKCHAIN MUSIC LIBRARIES</span>
           </p>
