@@ -25,7 +25,7 @@
     <a href="#" class="crayons-story__hidden-navigation-link">
       <%= music_release.try(:title) %>
     </a>
-    <div role="presentation" class="project-presentation">
+    <div role="presentation" class="project-presentation" style="<%= project_side ? 'margin-bottom: 20px' : '' %>">
       <a href='<%= artist_side.present? ? "/organizations/project_edit/#{project.id}" : "/organizations/project_show/#{project.id}" %>' class="crayons-story__cover" title="testtttt" style="height: 0 !important; padding-bottom: 100%;background-image: url('<%= music_release.header_image_url.present? ? Images::Optimizer.call(music_release.header_image_url, width: 650, height: 650, crop: "pad") : 'https://res.cloudinary.com/dyzicyjzq/image/fetch/s--Juz0aGHs--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://studioappbucket.s3.amazonaws.com/i/76nnuqytglg0xahb1k1b.jpg' %>');">
         <span class="hidden"><%= music_release.try(:title) %></span>
       </a>
@@ -54,12 +54,12 @@
               <% end %>
             </div>
           <% else %>
-            <p class="artist-name"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
+            <p class="artist-name" style="font-size: 18px"><%= project.try(:name) %> | <%= music_release.try(:title) %></p>
             <p class="project-date" style="<%= project_side ? 'display: none' : '' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
           <% end %>
           <!--  LIMITED EDITION MP3 -->
 
-          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block; font-size: 17px; line-height: 28px; ' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
+          <p class="project-date" style="<%= !project_side ? 'display: none' : 'margin-bottom: 0px; display: inline-block; font-size: 12px; line-height: 28px; ' %>">Release date <%= music_release.organization.present? && music_release.organization.release_date.present? ?  music_release.organization.release_date.strftime('%Y %B') : '' %> | <%= music_release.copies.to_i %></p>
           <!--          <div class="project-box" style="display: inline-block; width: 100%">-->
 <!--            <h2 style="float:left;">-->
 <!--              <a class="project-title" href="#">-->
@@ -98,10 +98,10 @@
             </div>
           </div>
           <div class="<%= project_side.present? ? 'project-description-project' : 'project-description' %>">
-            <h1>The story of @<%= music_release.try(:title) %></h1>
+            <h1 style="font-weight: normal; font-size: 16px">The story of <%= music_release.try(:title) %></h1>
           </div>
           <% if project_side.present? %>
-            <p style="font-size: 17px; line-height: 28px; font-weight: 300"><%= music_release.try(:description) %></p>
+            <p style="font-size: 16px; line-height: 28px; font-weight: normal"><%= music_release.try(:description) %></p>
           <% end %>
           <!--          <div class="<%#= project_side.present? ? 'copies-project' : 'copies-project' %>"><%#= music_release.copies.to_i %> LIMITED EDITION MP3</div>-->
 
@@ -163,12 +163,12 @@ Z        <button class="price-btn project-font">-->
 <!--            <span class="time-span">Price for <%#= length[0]  %> mins <%#= length[1] %> secs set</span>-->
           <%# end %>
 <!--        </button>-->
-        <button class="<%= project_side ? 'request-btn' : 'request-btn btn-updated-style custom-margins' %>" data-project_id="<%= music_release.id %>" onclick="buy_product(<%= music_release.id %>, <%= number_with_precision(music_release.try(:price), precision: 2) %>, '<%= music_release.title %>')" id="buy-music-btn-<%= project.id %>" style="width: 100%">
+        <button class="<%= project_side ? 'request-btn mt-60' : 'request-btn btn-updated-style custom-margins' %>" data-project_id="<%= music_release.id %>" onclick="buy_product(<%= music_release.id %>, <%= number_with_precision(music_release.try(:price), precision: 2) %>, '<%= music_release.title %>')" id="buy-music-btn-<%= project.id %>" style="width: 100%">
           <span class="request-text project-font">
 <!--            Buy track | 0.01% Royalties— $<%#= number_with_precision(music_release.price, precision: 2) %>-->
 <!--            Buy $<%#= number_with_precision(music_release.price, precision: 2) %> -->
 <!--            <span class="request-span-text pinkish-text">BUY MP3 + Royalties</span>-->
-            <span class="request-span-text pinkish-text">GET THIS TRACK</span>
+            <span class="request-span-text pinkish-text" style="<%= project_side ? 'color: black !important' : '' %>">GET THIS TRACK</span>
           </span>
         </button>
       </div>
