@@ -4,7 +4,7 @@
     Your browser does not support the audio element.
   </audio>
   <div id="progressBar" class="audio-player-display">
-    <a href="/<%= slug %>/<%= audio.id.to_s %>">
+    <a href="/organizations/project_show/<%= audio.try(:music_release).try(:organization).try(:id) %>">
       <%= optimized_image_tag(defined?(image) ? image : 'https://studioappbucket.s3.amazonaws.com/i/dbaz3ch7fhelwlbzsky6.png',
                               optimizer_options: { crop: "fill", width: 420, height: 420 },
                               image_options: { id: "episode-profile-image", alt: 'fs' }) %>
