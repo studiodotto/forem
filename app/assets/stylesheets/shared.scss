@@ -61,8 +61,10 @@
       //background: rgb(32, 32, 32);
       position: absolute;
       //left: 69px;
-      right: 50px;
-      bottom: 10px;
+      //right: 50px;
+      //bottom: 10px;
+      left: 45%;
+      bottom: 15px;
       cursor: pointer;
       .butt {
         width: calc(35px + 0.5vh);
@@ -143,19 +145,56 @@
         }
       }
     }
+    #time {
+      //position: absolute;
+      //right: calc(50px + 0.1vh + 1.5vw);
+      //right: calc(0px + 0.1vh + 1.5vw);
+      //bottom: 10px;
+      top: 10px;
+      position: relative;
+      left: 10px;
+      //top: calc(16px + 0.1vh);
+      color: rgb(161, 161, 161);
+      font-size: calc(14px + 0.2vh);
+      //background: rgba(236, 236, 236, 0.74);
+      padding: 2px;
+      pointer-events: none;
+      color: white;
+    }
+    #time_end {
+      //position: absolute;
+      //right: calc(50px + 0.1vh + 1.5vw);
+      //right: calc(0px + 0.1vh + 1.5vw);
+      //bottom: 10px;
+      bottom: 5px;
+      position: absolute;
+      right: 40px;
+      //top: calc(16px + 0.1vh);
+      color: rgb(161, 161, 161);
+      font-size: calc(14px + 0.2vh);
+      //background: rgba(236, 236, 236, 0.74);
+      padding: 2px;
+      pointer-events: none;
+      color: white;
+    }
     .buffer-wrapper {
-      height: 74px;
+      //height: 74px;
+      height: 4px;
       //height: calc(48px + 1vh);
       position: absolute;
-      left: calc(74px + 1vh);
+      left: calc(134px + 1vh);
+      //left: calc(74px + 1vh);
       //right: 0;
       right: 104px;
+      //right: 104px;
       bottom: 10px;
       cursor: pointer;
       #progress {
         background-color: #00ffa3;
         //height: calc(48px + 1vh);
-        height: 74px;
+        height: 4px;
+        bottom: 14px;
+        //height: 74px;
         display: inline-block;
         position: relative;
         transition: width 0.25s ease-in-out;
@@ -163,23 +202,28 @@
       #buffer {
         background-color: #96ffd9;
         //height: calc(48px + 1vh);
-        height: 74px;
+        //height: 74px;
+        height: 4px;
         display: inline-block;
         position: absolute;
         bottom: 0;
         transition: width 0.15s ease-in-out;
       }
-      #time {
-        position: absolute;
-        //right: calc(50px + 0.1vh + 1.5vw);
-        right: calc(0px + 0.1vh + 1.5vw);
-        top: calc(16px + 0.1vh);
-        color: rgb(161, 161, 161);
-        font-size: calc(14px + 0.2vh);
-        background: rgba(236, 236, 236, 0.74);
-        padding: 2px;
-        pointer-events: none;
-      }
+      //#time {
+      //  //position: absolute;
+      //  //right: calc(50px + 0.1vh + 1.5vw);
+      //  //right: calc(0px + 0.1vh + 1.5vw);
+      //  //bottom: 10px;
+      //  top: 10px;
+      //  position: relative;
+      //  left: 10px;
+      //  //top: calc(16px + 0.1vh);
+      //  color: rgb(161, 161, 161);
+      //  font-size: calc(14px + 0.2vh);
+      //  background: rgba(236, 236, 236, 0.74);
+      //  padding: 2px;
+      //  pointer-events: none;
+      //}
       #closebutt {
         position: absolute;
         user-select: none;

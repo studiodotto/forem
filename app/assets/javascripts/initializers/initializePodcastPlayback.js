@@ -398,6 +398,7 @@ function initializePodcastPlayback() {
     var progress = getById('progress');
     var buffer = getById('buffer');
     var time = getById('time');
+    var timeEnd = getById('time_end');
     var value = 0;
     var firstDecimal = currentTime - Math.floor(currentTime);
     if (currentTime > 0) {
@@ -413,8 +414,11 @@ function initializePodcastPlayback() {
     if (progress && time && currentTime > 0) {
       progress.style.width = value + '%';
       buffer.style.width = bufferValue + '%';
+      // time.innerHTML =
+      //   readableDuration(currentTime) + ' / ' + readableDuration(duration);
       time.innerHTML =
-        readableDuration(currentTime) + ' / ' + readableDuration(duration);
+        readableDuration(currentTime)
+      timeEnd.innerHTML = readableDuration(duration);
     }
   }
 
